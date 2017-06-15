@@ -1,0 +1,27 @@
+{
+  "name": "nodefoo.com",
+  "description": "",
+  "version": "0.0.0",
+  "author": {
+    "name": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "http://feross.org"
+  },
+  "bugs": {
+    "url": "https://github.com/feross/nodefoo.com/issues"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "homepage": "https://nodefoo.com",
+  "license": "-",
+  "main": "server/index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feross/nodefoo.com.git"
+  },
+  "scripts": {
+  }
+}
