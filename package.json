@@ -1,6 +1,6 @@
 {
   "name": "nodefoo.com",
-  "description": "",
+  "description": "Node.js documentation for everyone!",
   "version": "0.0.0",
   "author": {
     "name": "Feross Aboukhadijeh",
@@ -10,9 +10,9 @@
   "bugs": {
     "url": "https://github.com/feross/nodefoo.com/issues"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "git-pull-or-clone": "^1.1.0"
   },
   "homepage": "https://nodefoo.com",
   "license": "-",
@@ -22,6 +22,5 @@
     "type": "git",
     "url": "git://github.com/feross/nodefoo.com.git"
   },
-  "scripts": {
-  }
+  "scripts": {}
 }
