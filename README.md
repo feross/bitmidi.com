@@ -1,4 +1,4 @@
-# [Node Foo](https://nodefoo.com) ([nodefoo.com](https://nodefoo.com))
+# [NodeFoo](https://nodefoo.com) ([nodefoo.com](https://nodefoo.com))
 
 ### Node.js documentation for everyone!
 
