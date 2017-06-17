@@ -12,7 +12,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "git-pull-or-clone": "^1.1.0"
+    "debug": "^2.6.8",
+    "git-pull-or-clone": "^1.1.0",
+    "mkdirp": "^0.5.1",
+    "path-exists": "^3.0.0",
+    "rimraf": "^2.6.1"
   },
   "homepage": "https://nodefoo.com",
   "license": "-",
@@ -22,5 +26,7 @@
     "type": "git",
     "url": "git://github.com/feross/nodefoo.com.git"
   },
-  "scripts": {}
+  "scripts": {
+    "generate": "DEBUG=* ./bin/generate.js"
+  }
 }
