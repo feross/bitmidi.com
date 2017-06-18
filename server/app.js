@@ -45,20 +45,20 @@ function init (server, sessionStore) {
     // page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
-    // if (config.isProd) {
-    //   // Redirect to main site url, over https
-    //   if (req.method === 'GET' &&
-    //       (req.protocol !== 'https' || req.hostname !== config.host)) {
-    //     return res.redirect(301, config.httpOrigin + req.url)
-    //   }
+    if (config.isProd) {
+      // Redirect to main site url, over https
+      if (req.method === 'GET' &&
+          (req.protocol !== 'https' || req.hostname !== config.host)) {
+        return res.redirect(301, config.httpOrigin + req.url)
+      }
 
-    //   // Use HTTP Strict Transport Security
-    //   // Lasts 2 years, incl. subdomains, allow browser preload list
-    //   res.header(
-    //     'Strict-Transport-Security',
-    //     'max-age=63072000; includeSubDomains; preload'
-    //   )
-    // }
+      // Use HTTP Strict Transport Security
+      // Lasts 2 years, incl. subdomains, allow browser preload list
+      res.header(
+        'Strict-Transport-Security',
+        'max-age=63072000; includeSubDomains; preload'
+      )
+    }
 
     next()
   })
