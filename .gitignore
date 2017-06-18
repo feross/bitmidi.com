@@ -1,2 +1,7 @@
+secret/*
+!secret/index-sample.js
+
 tmp/
 node_modules/
+
+static/bundle.js
