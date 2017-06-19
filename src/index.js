@@ -1,6 +1,6 @@
 const html = require('choo/html')
 const choo = require('choo')
-const debug = require('debug')('nodefoo')
+const log = require('nanologger')('nodefoo')
 
 const api = require('./api')
 
@@ -10,34 +10,40 @@ app.use(logger)
 app.use(store)
 
 app.route('/', mainView)
-app.route('/docs/*', apiView)
+app.route('/docs/*', docsView)
 
 function logger (state, emitter) {
   emitter.on('*', function (type, data) {
-    debug('%s %o', type, data)
+    log.info('%s %o', type, data)
   })
 }
 
-function mainView (state, emitter) {
-  // var newRoute = window.location.href
-  // if (newRoute != route) {
-  //   route = newRoute
-  //   emitter.emit('fetchProduct')
-  // }
+function header () {
+  return html`
+    <header>
+      <h1>NodeFoo</h1>
+      <a href='/'>Home</a>
+      <a href='/docs/fs/readfile'>fs.readFile</a>
+    </header>
+  `
+}
 
+function mainView (state, emit) {
   return html`
     <body>
-      <h1>
+      ${header()}
+      <h1>Home Page</h1>
+      <p>
         ${state}
-      </h1>
+      </p>
     </body>
   `
 }
 
 let route = null
 
-function apiView (state, emit) {
-  var newRoute = window.location.pathname
+function docsView (state, emit) {
+  const newRoute = window.location.pathname
   if (newRoute !== route) {
     route = newRoute
     emit('FETCH_DOC')
@@ -45,9 +51,9 @@ function apiView (state, emit) {
 
   return html`
     <body>
-      <h1>
-        ${state.doc}
-      </h1>
+      ${header()}
+      <h1>Doc Page</h1>
+      <p>${state.doc}</p>
     </body>
   `
 }
@@ -56,7 +62,7 @@ function store (state, emitter) {
   window.state = state
 
   emitter.on('FETCH_DOC', function () {
-    const url = window.location.pathname.replace(/^\/docs/, '')
+    const url = '/' + state.params.wildcard
     api.doc({ url }, (err, doc) => {
       if (err) throw err
       state.doc = doc
