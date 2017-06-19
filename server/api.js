@@ -1,3 +1,4 @@
+const assert = require('assert')
 const config = require('../config')
 const fs = require('fs')
 const memo = require('memo-async-lru')
@@ -10,14 +11,15 @@ const MEMO_OPTS = {
 
 const DOCS_PATH = path.join(config.root, 'docs')
 
-function docs (url, cb) {
-  console.log('url', url)
-  const docPath = path.join(DOCS_PATH, url + '.md')
+function doc (opts, cb) {
+  assert(typeof opts.url, 'string')
+
+  const docPath = path.join(DOCS_PATH, opts.url + '.md')
   fs.readFile(docPath, { encoding: 'utf8' }, cb)
 }
 
 const api = {
-  docs: memo(docs, MEMO_OPTS)
+  doc: memo(doc, MEMO_OPTS)
 }
 
 module.exports = api

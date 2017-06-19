@@ -7,7 +7,6 @@ const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const http = require('http')
-const mustache = require('mustache')
 const path = require('path')
 const session = require('express-session')
 
@@ -20,13 +19,8 @@ function init (server, sessionStore) {
   server.on('request', app)
 
   // Set up templating
-  const template = fs.readFileSync(path.join(config.root, 'server', 'index.mustache'), 'utf8')
-  app.set('view engine', 'mustache')
+  app.set('view engine', 'ejs')
   app.set('views', path.join(config.root, 'server'))
-  app.engine('mustache', (templatePath, params, cb) => {
-    const html = mustache.render(template, params)
-    cb(null, html)
-  })
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.use(compress()) // Use gzip
@@ -63,11 +57,12 @@ function init (server, sessionStore) {
     next()
   })
 
+  // Set up static file serving
   const staticOpts = { maxAge: config.maxAge }
-
   app.use(express.static(path.join(config.root, 'static'), staticOpts))
   app.use(express.static(path.dirname(require.resolve('tachyons')), staticOpts))
 
+  // Set up session handling
   app.use(session({
     store: sessionStore,
     secret: secret.cookie,
@@ -88,7 +83,9 @@ function init (server, sessionStore) {
     ? '?h=' + createHash(fs.readFileSync(path.join(config.root, 'static', 'style.css')))
     : ''
 
+  // Add template local variables
   app.use((req, res, next) => {
+    res.locals.config = config
     res.locals.hashes = {
       bundle: bundleHash,
       style: styleHash
@@ -96,20 +93,30 @@ function init (server, sessionStore) {
     next()
   })
 
-  app.use('/api', (req, res, next) => {
-    api.docs(req.url, (err, doc) => {
-      if (err && err.code === 'ENOENT') return next() // 404
-      else if (err) return next(err)
-      res.send(doc)
+  app.get('/', (req, res) => {
+    res.render('index')
+  })
+
+  app.use('/api/:method', (req, res, next) => {
+    const method = api[req.params.method]
+    if (!method) return next()
+    method(req.query, (err, result) => {
+      if (err) {
+        const code = typeof err.code === 'number' ? err.code : 500
+        return res.status(code).json({ error: err.message })
+      }
+      res.json({ result })
     })
   })
 
   app.use('/docs', (req, res, next) => {
-    api.docs(req.url, (err, doc) => {
+    const opts = {
+      url: req.url
+    }
+    api.doc(opts, (err, doc) => {
       if (err && err.code === 'ENOENT') return next() // 404
       else if (err) return next(err)
-      if (err) return next()
-      res.render('index')
+      res.render('index', { content: doc })
     })
   })
 
