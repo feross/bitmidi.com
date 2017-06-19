@@ -28,6 +28,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "memo-async-lru": "^1.0.1",
+    "nanologger": "^1.1.0",
     "opbeat": "^4.14.0",
     "tachyons": "^4.7.4",
     "unlimited": "^1.2.0"
@@ -58,6 +59,7 @@
   },
   "scripts": {
     "build": "npm run build-js && chmod 777 db/",
+    "build-js": "browserify -t babelify -g yo-yoify -g unassertify -p bundle-collapser/plugin src | babili > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",

@@ -13,8 +13,8 @@ app.route('/', mainView)
 app.route('/docs/*', docsView)
 
 function logger (state, emitter) {
-  emitter.on('*', function (type, data) {
-    log.info('%s %o', type, data)
+  emitter.on('*', function (...args) {
+    log.info(...args)
   })
 }
 

@@ -1,5 +1,5 @@
 const config = require('../config')
-const debug = require('debug')('api')
+const log = require('nanologger')('api')
 const fetchConcat = require('./lib/simple-fetch')
 const memo = require('memo-async-lru')
 const querystring = require('querystring')
@@ -10,7 +10,6 @@ const MEMO_OPTS = {
 }
 
 function doc (opts, cb) {
-  debug('doc: %o', opts)
   sendRequest('/api/doc', opts, cb)
 }
 
@@ -26,16 +25,19 @@ function sendRequest (urlBase, params, cb) {
     json: true,
     timeout: config.apiTimeout
   }
+  log.debug('request', opts.url)
 
   fetchConcat(opts, onResponse)
 
   function onResponse (err, res, data) {
-    if (err) return cb(new Error('HTTP request error. ' + err.message))
+    if (err) {
+      return cb(new Error('HTTP request error. ' + err.message))
+    }
     if (res.statusCode !== 200) {
-      return cb(new Error('HTTP Non-200 Response. ' + res.statusCode))
+      return cb(new Error('HTTP non-200 response. ' + res.statusCode))
     }
     if (data.error) {
-      return cb(new Error('Server API Error. ' + data.error))
+      return cb(new Error('Server API error. ' + data.error))
     }
     cb(null, data.result)
   }
