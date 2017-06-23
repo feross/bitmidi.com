@@ -93,10 +93,6 @@ function init (server, sessionStore) {
     next()
   })
 
-  app.get('/', (req, res) => {
-    res.render('index')
-  })
-
   app.use('/api/:method', (req, res, next) => {
     const method = api[req.params.method]
     if (!method) return next()
@@ -116,8 +112,13 @@ function init (server, sessionStore) {
     api.doc(opts, (err, doc) => {
       if (err && err.code === 'ENOENT') return next() // 404
       else if (err) return next(err)
+
       res.render('index', { content: doc })
     })
+  })
+
+  app.get('/', (req, res) => {
+    res.render('index')
   })
 
   app.get('/500', (req, res, next) => {

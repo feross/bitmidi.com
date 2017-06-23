@@ -1,20 +1,23 @@
 const html = require('choo/html')
 const choo = require('choo')
-const log = require('nanologger')('nodefoo')
+const debug = require('debug')('nodefoo')
 
 const api = require('./api')
+const URL = require('./lib/url')
+
+const IS_BROWSER = typeof window !== 'undefined'
 
 const app = choo()
 
-app.use(logger)
-app.use(store)
+if (IS_BROWSER) app.use(logger)
+if (IS_BROWSER) app.use(store)
 
 app.route('/', mainView)
 app.route('/docs/*', docsView)
 
 function logger (state, emitter) {
-  emitter.on('*', function (...args) {
-    log.info(...args)
+  emitter.on('*', (type, data) => {
+    debug('%s %o', type, data)
   })
 }
 
@@ -59,9 +62,15 @@ function docsView (state, emit) {
 }
 
 function store (state, emitter) {
-  window.state = state
+  window.state = state // for debugging
 
-  emitter.on('FETCH_DOC', function () {
+  state.location = new URL(window.location.href)
+
+  emitter.on('pushState', (url) => {
+    state.location = new URL(url)
+  })
+
+  emitter.on('FETCH_DOC', () => {
     const url = '/' + state.params.wildcard
     api.doc({ url }, (err, doc) => {
       if (err) throw err

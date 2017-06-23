@@ -1,5 +1,5 @@
 const config = require('../config')
-const log = require('nanologger')('api')
+const debug = require('debug')('api')
 const fetchConcat = require('./lib/simple-fetch')
 const memo = require('memo-async-lru')
 const querystring = require('querystring')
@@ -25,7 +25,7 @@ function sendRequest (urlBase, params, cb) {
     json: true,
     timeout: config.apiTimeout
   }
-  log.debug('request', opts.url)
+  debug('request %s', opts.url)
 
   fetchConcat(opts, onResponse)
 
