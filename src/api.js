@@ -1,8 +1,9 @@
-const config = require('../config')
 const debug = require('debug')('api')
-const fetchConcat = require('./lib/simple-fetch')
 const memo = require('memo-async-lru')
 const querystring = require('querystring')
+
+const config = require('../config')
+const fetchConcat = require('./lib/simple-fetch')
 
 const MEMO_OPTS = {
   max: 1000,
@@ -12,12 +13,6 @@ const MEMO_OPTS = {
 function doc (opts, cb) {
   sendRequest('/api/doc', opts, cb)
 }
-
-const api = {
-  doc: memo(doc, MEMO_OPTS)
-}
-
-module.exports = api
 
 function sendRequest (urlBase, params, cb) {
   const opts = {
@@ -31,14 +26,18 @@ function sendRequest (urlBase, params, cb) {
 
   function onResponse (err, res, data) {
     if (err) {
-      return cb(new Error('HTTP request error. ' + err.message))
-    }
-    if (res.statusCode !== 200) {
-      return cb(new Error('HTTP non-200 response. ' + res.statusCode))
+      return cb(new Error(`HTTP request error. ${err.message}`))
     }
     if (data.error) {
-      return cb(new Error('Server API error. ' + data.error))
+      return cb(new Error(String(data.error)))
+    }
+    if (res.statusCode !== 200) {
+      return cb(new Error(`HTTP response error. ${res.statusCode}`))
     }
     cb(null, data.result)
   }
+}
+
+module.exports = {
+  doc: memo(doc, MEMO_OPTS)
 }

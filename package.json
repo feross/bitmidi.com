@@ -9,17 +9,30 @@
   },
   "babel": {
     "plugins": [
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "jsx",
+          "useBuiltIns": true
+        }
+      ],
       "transform-object-rest-spread"
     ]
   },
   "browser": {
     "./secret/index.js": false
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/feross/nodefoo.com/issues"
   },
   "dependencies": {
-    "choo": "^5.6.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "connect-sqlite3": "^0.9.9",
     "debug": "^2.6.8",
@@ -29,7 +42,12 @@
     "express-session": "^1.15.3",
     "memo-async-lru": "^1.0.1",
     "opbeat": "^4.14.0",
+    "path-to-regexp": "^1.7.0",
+    "preact": "^8.2.1",
+    "preact-context-provider": "^1.0.0",
+    "preact-render-to-string": "^3.6.3",
     "tachyons": "^4.7.4",
+    "throttleit": "^1.0.0",
     "unlimited": "^1.2.0"
   },
   "devDependencies": {
@@ -44,9 +62,7 @@
     "path-exists": "^3.0.0",
     "rimraf": "^2.6.1",
     "standard": "*",
-    "unassertify": "^2.0.4",
-    "watchify": "^3.9.0",
-    "yo-yoify": "^3.7.3"
+    "watchify": "^3.9.0"
   },
   "homepage": "https://nodefoo.com",
   "license": "-",
@@ -58,7 +74,7 @@
   },
   "scripts": {
     "build": "npm run build-js && chmod 777 db/",
-    "build-js": "browserify -t babelify -g yo-yoify -g unassertify -p bundle-collapser/plugin src | babili > static/bundle.js",
+    "build-js": "browserify -t babelify -p bundle-collapser/plugin src | babili > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
@@ -68,7 +84,7 @@
     "start": "node server",
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-js & npm run watch-server",
-    "watch-js": "watchify src -d -v -o static/bundle.js",
-    "watch-server": "DEBUG=nodefoo* nodemon server -e js,css,ejs -i static/ -i src/"
+    "watch-js": "watchify src -o static/bundle.js -d -v",
+    "watch-server": "DEBUG=nodefoo* nodemon server -e js,css,ejs -i static/"
   }
 }

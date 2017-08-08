@@ -2,17 +2,23 @@ module.exports = {
   init
 }
 
+const { h } = require('preact') /** @jsx h */
+
 const compress = require('compression')
 const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const http = require('http')
 const path = require('path')
+const render = require('preact-render-to-string')
 const session = require('express-session')
 
-const api = require('./api')
 const config = require('../config')
+const routerApi = require('./router-api')
+const routerDocs = require('./router-docs')
 const secret = require('../secret')
+
+const App = require('../src/views/app')
 
 function init (server, sessionStore) {
   const app = express()
@@ -23,15 +29,17 @@ function init (server, sessionStore) {
   app.set('views', path.join(config.root, 'server'))
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
-  app.use(compress()) // Use gzip
+  app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON during development
+
+  app.use(compress()) // Compress http responses with gzip
 
   // Add headers
   app.use((req, res, next) => {
-    // Disable browser mime-type sniffing. Reduces exposure to drive-by download attacks when
-    // serving user uploaded content.
+    // Disable browser mime-type sniffing to reduce exposure to drive-by download attacks when
+    // serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
-    // Prevent rendering of site within a frame.
+    // Prevent rendering of site within a frame
     res.header('X-Frame-Options', 'DENY')
 
     // Enable browser XSS filtering. Usually enabled by default, but this header re-enables it
@@ -46,12 +54,8 @@ function init (server, sessionStore) {
         return res.redirect(301, config.httpOrigin + req.url)
       }
 
-      // Use HTTP Strict Transport Security
-      // Lasts 2 years, incl. subdomains, allow browser preload list
-      res.header(
-        'Strict-Transport-Security',
-        'max-age=63072000; includeSubDomains; preload'
-      )
+      // Use HSTS (cache for 2 years, include subdomains, allow browser preload list)
+      res.header('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')
     }
 
     next()
@@ -93,32 +97,14 @@ function init (server, sessionStore) {
     next()
   })
 
-  app.use('/api/:method', (req, res, next) => {
-    const method = api[req.params.method]
-    if (!method) return next()
-    method(req.query, (err, result) => {
-      if (err) {
-        const code = typeof err.code === 'number' ? err.code : 500
-        return res.status(code).json({ error: err.message })
-      }
-      res.json({ result })
-    })
-  })
-
-  app.use('/docs', (req, res, next) => {
-    const opts = {
-      url: req.url
-    }
-    api.doc(opts, (err, doc) => {
-      if (err && err.code === 'ENOENT') return next() // 404
-      else if (err) return next(err)
-
-      res.render('index', { content: doc })
-    })
-  })
+  app.use('/api', routerApi)
+  app.use('/docs', routerDocs)
 
   app.get('/', (req, res) => {
-    res.render('index')
+    const store = require('../src/store')
+    const jsx = <Provider store={store}><App /></Provider>
+    const content = render(jsx)
+    res.render('index', { content })
   })
 
   app.get('/500', (req, res, next) => {
@@ -126,15 +112,17 @@ function init (server, sessionStore) {
   })
 
   app.get('*', (req, res) => {
-    res.status(404).send({ message: `404: ${http.STATUS_CODES[404]}` })
+    res.status(404).render('index', { content: '404 Not Found' })
   })
 
-  if (global.opbeat) app.use(global.opbeat.middleware.express())
+  if (global.opbeat) {
+    app.use(global.opbeat.middleware.express())
+  }
 
   app.use((err, req, res, next) => {
     console.error(err.stack)
-    const code = typeof err.code === 'number' ? err.code : 500
-    res.status(code).send({ message: `${code}: ${http.STATUS_CODES[code]}` })
+    const status = typeof err.status === 'number' ? err.status : 500
+    res.status(status).render('index', { content: `${status} ${http.STATUS_CODES[status]}` })
   })
 }
 

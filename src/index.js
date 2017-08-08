@@ -1,83 +1,39 @@
-const html = require('choo/html')
-const choo = require('choo')
-const debug = require('debug')('nodefoo')
+const { h, render } = require('preact') /** @jsx h */
+const Provider = require('preact-context-provider')
 
-const api = require('./api')
-const URL = require('./lib/url')
+const App = require('./views/app')
+const Location = require('./lib/location')
+const routes = require('./routes')
+const store = require('./store')
 
-const IS_BROWSER = typeof window !== 'undefined'
-
-const app = choo()
-
-if (IS_BROWSER) app.use(logger)
-if (IS_BROWSER) app.use(store)
-
-app.route('/', mainView)
-app.route('/docs/*', docsView)
-
-function logger (state, emitter) {
-  emitter.on('*', (type, data) => {
-    debug('%s %o', type, data)
-  })
+store.update = function update () {
+  const jsx = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  )
+  render(jsx, document.body, document.getElementById('app'))
 }
 
-function header () {
-  return html`
-    <header>
-      <h1>NodeFoo</h1>
-      <a href='/'>Home</a>
-      <a href='/docs/fs/readfile'>fs.readFile</a>
-    </header>
-  `
-}
+const loc = new Location(routes, (location, source) => {
+  store.dispatch('LOCATION_CHANGE', location)
+  if (source === 'push') window.scroll(0, 0)
+})
 
-function mainView (state, emit) {
-  return html`
-    <body>
-      ${header()}
-      <h1>Home Page</h1>
-      <p>
-        ${state}
-      </p>
-    </body>
-  `
-}
+// Global variables
+window.loc = loc
+window.player = null
 
-let route = null
+/**
+ * DEVELOPMENT
+ */
 
-function docsView (state, emit) {
-  const newRoute = window.location.pathname
-  if (newRoute !== route) {
-    route = newRoute
-    emit('FETCH_DOC')
-  }
+// Debugging aid
+window.store = store
 
-  return html`
-    <body>
-      ${header()}
-      <h1>Doc Page</h1>
-      <p>${state.doc}</p>
-    </body>
-  `
-}
+// Measure page speed
+console.timeEnd('render')
+window.addEventListener('load', () => console.timeEnd('load'))
 
-function store (state, emitter) {
-  window.state = state // for debugging
-
-  state.location = new URL(window.location.href)
-
-  emitter.on('pushState', (url) => {
-    state.location = new URL(url)
-  })
-
-  emitter.on('FETCH_DOC', () => {
-    const url = '/' + state.params.wildcard
-    api.doc({ url }, (err, doc) => {
-      if (err) throw err
-      state.doc = doc
-      emitter.emit('render')
-    })
-  })
-}
-
-app.mount('body')
+// React Developer Tools (Excluded in production)
+require('preact/devtools')

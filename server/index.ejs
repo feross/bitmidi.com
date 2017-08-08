@@ -22,7 +22,7 @@
     <!-- <link rel='search' href='/opensearch.xml' title='<%= config.name %>' type='application/opensearchdescription+xml'> -->
   </head>
 
-  <body class='body-font white f5 fw3 ma0 pa0 overflow-y-scroll'>
+  <body class='body-font f5 fw3 ma0 pa0 overflow-y-scroll'>
     <%- typeof content !== 'undefined' ? content : '' %>
     <script>
       /* global ga */
@@ -30,9 +30,10 @@
         (ga.q = ga.q || []).push(arguments)
       }
       ga.l = Date.now()
+      // TODO
       // ga('create', '', 'auto')
     </script>
-    <script src='/bundle.js<%- hashes.bundle %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script src='/bundle.js<%- hashes.bundle %>'></script>
   </body>
 </html>

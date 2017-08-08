@@ -1,15 +1,23 @@
 const config = require('../config')
+
 if (config.isProd) {
   const secret = require('../secret')
   global.opbeat = require('opbeat').start(secret.opbeat)
 }
 
+const babelRegister = require('babel-register')
 const ConnectSQLite = require('connect-sqlite3')
 const downgrade = require('downgrade')
 const http = require('http')
 const path = require('path')
 const session = require('express-session')
 const unlimited = require('unlimited')
+
+// Automatically compile views (which contain JSX) when required, on the fly.
+babelRegister({
+  // only: /views/,
+  extensions: ['.js']
+})
 
 const app = require('./app')
 

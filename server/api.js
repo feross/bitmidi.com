@@ -9,17 +9,27 @@ const MEMO_OPTS = {
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }
 
+// Regular expression to match a path with a directory up component.
+const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
+
 const DOCS_PATH = path.join(config.root, 'docs')
 
 function doc (opts, cb) {
-  assert(typeof opts.url, 'string')
+  assert(opts != null && typeof opts === 'object', '"opts" must be an object')
+  assert(typeof opts.url === 'string', '"opts.url" must be a string')
 
-  const docPath = path.join(DOCS_PATH, opts.url + '.md')
-  fs.readFile(docPath, { encoding: 'utf8' }, cb)
+  const { url } = opts
+  assert(!UP_PATH_REGEXP.test(url), `Malicious path "${url}" is rejected`)
+
+  const docPath = path.join(DOCS_PATH, url + '.md')
+  fs.readFile(docPath, { encoding: 'utf8' }, (err, data) => {
+    if (err && err.code === 'ENOENT') {
+      err.message = `Doc "${url}" is not found`
+    }
+    cb(err, data)
+  })
 }
 
-const api = {
+module.exports = {
   doc: memo(doc, MEMO_OPTS)
 }
-
-module.exports = api
