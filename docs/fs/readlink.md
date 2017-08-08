@@ -15,7 +15,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `options` {string|Object}
-  * `encoding` {string} default = `'utf8'`
+  * `encoding` {string} **Default:** `'utf8'`
 * `callback` {Function}
 
 Asynchronous readlink(2). The callback gets two arguments `(err,

@@ -10,6 +10,6 @@ changes:
 -->
 
 * `path` {string|Buffer|URL}
-* `mode` {integer}
+* `mode` {integer} **Default:** `0o777`
 
 Synchronous mkdir(2). Returns `undefined`.

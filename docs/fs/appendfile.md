@@ -18,9 +18,9 @@ changes:
 * `file` {string|Buffer|number} filename or file descriptor
 * `data` {string|Buffer}
 * `options` {Object|string}
-  * `encoding` {string|null} default = `'utf8'`
-  * `mode` {integer} default = `0o666`
-  * `flag` {string} default = `'a'`
+  * `encoding` {string|null} **Default:** `'utf8'`
+  * `mode` {integer} **Default:** `0o666`
+  * `flag` {string} **Default:** `'a'`
 * `callback` {Function}
 
 Asynchronously append data to a file, creating the file if it does not yet exist.

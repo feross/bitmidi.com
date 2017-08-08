@@ -11,7 +11,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `options` {string|Object}
-  * `encoding` {string} default = `'utf8'`
+  * `encoding` {string} **Default:** `'utf8'`
 
 Synchronous readdir(3). Returns an array of filenames excluding `'.'` and
 `'..'`.

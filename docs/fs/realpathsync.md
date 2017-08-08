@@ -21,7 +21,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `options` {string|Object}
-  * `encoding` {string} default = `'utf8'`
+  * `encoding` {string} **Default:** `'utf8'`
 
 Synchronous realpath(3). Returns the resolved path.
 

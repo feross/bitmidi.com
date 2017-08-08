@@ -18,9 +18,9 @@ changes:
 * `file` {string|Buffer|integer} filename or file descriptor
 * `data` {string|Buffer|Uint8Array}
 * `options` {Object|string}
-  * `encoding` {string|null} default = `'utf8'`
-  * `mode` {integer} default = `0o666`
-  * `flag` {string} default = `'w'`
+  * `encoding` {string|null} **Default:** `'utf8'`
+  * `mode` {integer} **Default:** `0o666`
+  * `flag` {string} **Default:** `'w'`
 * `callback` {Function}
 
 Asynchronously writes data to a file, replacing the file if it already exists.

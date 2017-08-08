@@ -11,8 +11,8 @@ changes:
 
 * `filename` {string|Buffer|URL}
 * `options` {Object}
-  * `persistent` {boolean}
-  * `interval` {integer}
+  * `persistent` {boolean} **Default:** `true`
+  * `interval` {integer} **Default:** `5007`
 * `listener` {Function}
 
 Watch for changes on `filename`. The callback `listener` will be called each

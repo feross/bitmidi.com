@@ -17,7 +17,7 @@ changes:
 -->
 
 * `path` {string|Buffer|URL}
-* `mode` {integer}
+* `mode` {integer} **Default:** `fs.constants.F_OK`
 * `callback` {Function}
 
 Tests a user's permissions for the file or directory specified by `path`.

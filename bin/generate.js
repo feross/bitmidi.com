@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const assert = require('assert')
-const debug = require('debug')('nodefoo:generate')
 const fs = require('fs')
 const gitPull = require('git-pull-or-clone')
 const mkdirp = require('mkdirp')
@@ -16,14 +15,17 @@ const REPO_PATH = path.join(config.root, 'tmp', 'node')
 const REPO_API_PATH = path.join(REPO_PATH, 'doc', 'api')
 const OUT_PATH = path.join(config.root, 'docs')
 
-rimraf.sync(OUT_PATH)
+run()
 
-pull()
+function run () {
+  rimraf.sync(OUT_PATH)
+  pull()
+}
 
 function pull () {
   gitPull('git@github.com:nodejs/node.git', REPO_PATH, (err) => {
     if (err) throw err
-    debug('fetched nodejs/node repo')
+    console.log('fetched nodejs/node repo')
     getModNames()
   })
 }
@@ -36,8 +38,11 @@ function getModNames () {
     .filter(entry => !['_toc', 'all', 'documentation', 'index'].includes(entry))
     .filter(entry => entry === 'fs') // TODO: remove
 
-  debug('found modules: %o', modNames)
-  modNames.forEach(modName => generateMod(modName))
+  console.log('found modules:')
+  modNames.forEach(modName => {
+    console.log(`- ${modName}`)
+    generateMod(modName)
+  })
 }
 
 // https://nodefoo.com/api/buffer
@@ -48,14 +53,13 @@ function getModNames () {
 
 function generateMod (modName) {
   const mappings = getMappings(modName)
+
   const docPath = path.join(REPO_API_PATH, modName + '.md')
   const doc = fs.readFileSync(docPath, 'utf8')
 
-  let sections = doc.split(/^#+ |\n#+ /)
+  const sections = doc.split(/(?:^|\n)#+ /)
 
-  // sections[0] = sections[0].replace('# ', '')
-
-  sections = sections
+  sections
     .filter(Boolean)
     .map((section, i) => {
       const firstNewlineIndex = section.indexOf('\n')
@@ -67,16 +71,15 @@ function generateMod (modName) {
 
       return { title, body, url }
     })
+    .forEach((section, i) => {
+      const filePath = path.join(OUT_PATH, modName, section.url + '.md')
+      mkdirp.sync(path.dirname(filePath))
 
-  sections.forEach((section, i) => {
-    const filePath = path.join(OUT_PATH, modName, section.url + '.md')
-    mkdirp.sync(path.dirname(filePath))
+      let body = '# ' + section.title + '\n\n' + section.body + '\n'
+      if (pathExists.sync(filePath)) body = '\n' + body
 
-    let body = '# ' + section.title + '\n\n' + section.body + '\n'
-    if (pathExists.sync(filePath)) body = '\n' + body
-
-    fs.appendFileSync(filePath, body)
-  })
+      fs.appendFileSync(filePath, body)
+    })
 }
 
 function getMappings (modName) {

@@ -12,6 +12,6 @@ changes:
 
 * `target` {string|Buffer|URL}
 * `path` {string|Buffer|URL}
-* `type` {string}
+* `type` {string} **Default:** `'file'`
 
 Synchronous symlink(2). Returns `undefined`.

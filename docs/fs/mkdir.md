@@ -14,7 +14,7 @@ changes:
 -->
 
 * `path` {string|Buffer|URL}
-* `mode` {integer}
+* `mode` {integer} **Default:** `0o777`
 * `callback` {Function}
 
 Asynchronous mkdir(2). No arguments other than a possible exception are given

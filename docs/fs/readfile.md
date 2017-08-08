@@ -22,8 +22,8 @@ changes:
 
 * `path` {string|Buffer|URL|integer} filename or file descriptor
 * `options` {Object|string}
-  * `encoding` {string|null} default = `null`
-  * `flag` {string} default = `'r'`
+  * `encoding` {string|null} **Default:** `null`
+  * `flag` {string} **Default:** `'r'`
 * `callback` {Function}
 
 Asynchronously reads the entire contents of a file. Example:

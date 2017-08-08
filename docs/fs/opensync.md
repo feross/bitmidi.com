@@ -11,7 +11,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `flags` {string|number}
-* `mode` {integer}
+* `mode` {integer} **Default:** `0o666`
 
 Synchronous version of [`fs.open()`][]. Returns an integer representing the file
 descriptor.

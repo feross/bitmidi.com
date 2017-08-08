@@ -11,7 +11,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `flags` {string|number}
-* `mode` {integer}
+* `mode` {integer} **Default:** `0o666`
 * `callback` {Function}
 
 Asynchronous file open. See open(2). `flags` can be:
@@ -53,7 +53,7 @@ The file is created if it does not exist.
 * `'ax+'` - Like `'a+'` but fails if `path` exists.
 
 `mode` sets the file mode (permission and sticky bits), but only if the file was
-created. It defaults to `0666`, readable and writable.
+created. It defaults to `0o666`, readable and writable.
 
 The callback gets two arguments `(err, fd)`.
 
@@ -87,3 +87,11 @@ fs.open('<directory>', 'a+', (err, fd) => {
   // => null, <fd>
 });
 ```
+
+Some characters (`< > : " / \ | ? *`) are reserved under Windows as documented
+by [Naming Files, Paths, and Namespaces][]. Under NTFS, if the filename contains
+a colon, Node.js will open a file system stream, as described by
+[this MSDN page][MSDN-Using-Streams].
+
+Functions based on `fs.open()` exhibit this behavior as well. eg.
+`fs.writeFile()`, `fs.readFile()`, etc.

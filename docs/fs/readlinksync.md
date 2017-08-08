@@ -11,7 +11,7 @@ changes:
 
 * `path` {string|Buffer|URL}
 * `options` {string|Object}
-  * `encoding` {string} default = `'utf8'`
+  * `encoding` {string} **Default:** `'utf8'`
 
 Synchronous readlink(2). Returns the symbolic link's string value.
 

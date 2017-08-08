@@ -14,8 +14,8 @@ changes:
 
 * `path` {string|Buffer|URL|integer} filename or file descriptor
 * `options` {Object|string}
-  * `encoding` {string|null} default = `null`
-  * `flag` {string} default = `'r'`
+  * `encoding` {string|null} **Default:** `null`
+  * `flag` {string} **Default:** `'r'`
 
 Synchronous version of [`fs.readFile()`][]. Returns the contents of the `path`.
 

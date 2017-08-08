@@ -1,4 +1,4 @@
-# fs.ftruncate(fd, len, callback)
+# fs.ftruncate(fd[, len], callback)
 
 <!-- YAML
 added: v0.8.6
@@ -10,7 +10,7 @@ changes:
 -->
 
 * `fd` {integer}
-* `len` {integer} default = `0`
+* `len` {integer} **Default:** `0`
 * `callback` {Function}
 
 Asynchronous ftruncate(2). No arguments other than a possible exception are

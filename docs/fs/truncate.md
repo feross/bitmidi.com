@@ -1,4 +1,4 @@
-# fs.truncate(path, len, callback)
+# fs.truncate(path[, len], callback)
 
 <!-- YAML
 added: v0.8.6
@@ -10,7 +10,7 @@ changes:
 -->
 
 * `path` {string|Buffer}
-* `len` {integer} default = `0`
+* `len` {integer} **Default:** `0`
 * `callback` {Function}
 
 Asynchronous truncate(2). No arguments other than a possible exception are

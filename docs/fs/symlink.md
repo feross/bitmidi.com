@@ -12,7 +12,7 @@ changes:
 
 * `target` {string|Buffer|URL}
 * `path` {string|Buffer|URL}
-* `type` {string}
+* `type` {string} **Default:** `'file'`
 * `callback` {Function}
 
 Asynchronous symlink(2). No arguments other than a possible exception are given
