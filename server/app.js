@@ -10,6 +10,7 @@ const express = require('express')
 const fs = require('fs')
 const http = require('http')
 const path = require('path')
+const Provider = require('preact-context-provider')
 const render = require('preact-render-to-string')
 const session = require('express-session')
 
@@ -17,6 +18,7 @@ const config = require('../config')
 const routerApi = require('./router-api')
 const routerDocs = require('./router-docs')
 const secret = require('../secret')
+const store = require('../src/store')
 
 const App = require('../src/views/app')
 
@@ -100,29 +102,29 @@ function init (server, sessionStore) {
   app.use('/api', routerApi)
   app.use('/docs', routerDocs)
 
-  app.get('/', (req, res) => {
-    const store = require('../src/store')
-    const jsx = <Provider store={store}><App /></Provider>
-    const content = render(jsx)
-    res.render('index', { content })
-  })
-
   app.get('/500', (req, res, next) => {
     next(new Error('Manually visited /500'))
   })
 
   app.get('*', (req, res) => {
-    res.status(404).render('index', { content: '404 Not Found' })
+    store.dispatch('LOCATION_REPLACE', req.url)
+
+    const jsx = <Provider store={store}><App /></Provider>
+    const content = render(jsx)
+
+    if (store.location.name === null) res.status(404)
+
+    res.render('index', { content })
   })
 
-  if (global.opbeat) {
-    app.use(global.opbeat.middleware.express())
-  }
+  if (global.opbeat) app.use(global.opbeat.middleware.express())
 
+  // TODO: Use server-side rendering path
   app.use((err, req, res, next) => {
     console.error(err.stack)
-    const status = typeof err.status === 'number' ? err.status : 500
-    res.status(status).render('index', { content: `${status} ${http.STATUS_CODES[status]}` })
+    const status = typeof err.status === 'number' ? err.status : 500 // Internal Server Error
+    res.status(status)
+    res.render('index', { content: `${status} ${http.STATUS_CODES[status]}` })
   })
 }
 

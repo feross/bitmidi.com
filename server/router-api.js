@@ -14,16 +14,16 @@ routerApi.use('/:method', (req, res, next) => {
 })
 
 routerApi.get('*', (req, res) => {
-  res.status(404).json({ error: '404 Not Found' })
+  res.status(404)
+  res.json({ error: '404 Not Found' })
 })
 
-if (global.opbeat) {
-  routerApi.use(global.opbeat.middleware.express())
-}
+if (global.opbeat) routerApi.use(global.opbeat.middleware.express())
 
 routerApi.use((err, req, res, next) => {
-  const status = typeof err.status === 'number' ? err.status : 400 // 'Bad Request'
-  return res.status(status).json({ error: err.message })
+  const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
+  res.status(status)
+  res.json({ error: err.message })
 })
 
 module.exports = routerApi

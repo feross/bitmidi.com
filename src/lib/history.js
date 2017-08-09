@@ -1,38 +1,40 @@
 // TODO: publish to npm
 
+const IS_BROWSER = typeof window !== 'undefined'
+
 class History {
   constructor (onChange) {
     this._onChange = onChange
     this._onPopState = this._onPopState.bind(this)
-    window.addEventListener('popstate', this._onPopState)
+    if (IS_BROWSER) window.addEventListener('popstate', this._onPopState)
   }
 
   push (pathname) {
-    window.history.pushState(undefined, undefined, pathname)
-    this._onChange(window.location.pathname, 'push')
+    if (IS_BROWSER) window.history.pushState(undefined, undefined, pathname)
+    this._onChange(pathname)
   }
 
   replace (pathname) {
-    window.history.replaceState(undefined, undefined, pathname)
-    this._onChange(window.location.pathname, 'replace')
+    if (IS_BROWSER) window.history.replaceState(undefined, undefined, pathname)
+    this._onChange(pathname)
   }
 
   back () {
-    window.history.back()
+    if (IS_BROWSER) window.history.back()
   }
 
   forward () {
-    window.history.forward()
+    if (IS_BROWSER) window.history.forward()
   }
 
   destroy () {
-    window.removeEventListener('popstate', this._onPopState)
     this._onChange = null
     this._onPopState = null
+    if (IS_BROWSER) window.removeEventListener('popstate', this._onPopState)
   }
 
   _onPopState (e) {
-    this._onChange(window.location.pathname, 'popstate')
+    this._onChange(window.location.pathname)
   }
 }
 

@@ -1,6 +1,7 @@
 const debug = require('debug')('store')
 
 // const api = require('./api')
+const config = require('../config')
 
 const store = {
   location: {
@@ -20,6 +21,13 @@ const SKIP_DEBUG = [
   'APP_RESIZE'
 ]
 
+const Location = require('./lib/location')
+const routes = require('./routes')
+
+const loc = new Location(routes, (location, source) => {
+  dispatch('LOCATION_CHANGED', location)
+})
+
 function dispatch (type, data) {
   if (!SKIP_DEBUG.includes(type)) {
     debug('%s %o', type, data)
@@ -32,20 +40,20 @@ function dispatch (type, data) {
 
     case 'LOCATION_PUSH': {
       const pathname = data
-      if (pathname !== store.location.pathname) window.loc.push(pathname)
+      if (pathname !== store.location.pathname) loc.push(pathname)
       return
     }
 
     case 'LOCATION_REPLACE': {
       const pathname = data
-      if (pathname !== store.location.pathname) window.loc.replace(pathname)
+      if (pathname !== store.location.pathname) loc.replace(pathname)
       return
     }
 
-    case 'LOCATION_CHANGE': {
+    case 'LOCATION_CHANGED': {
       const location = data
       store.location = location
-      window.ga('send', 'pageview', location.pathname)
+      if (config.isBrowser) window.ga('send', 'pageview', location.pathname)
       return update()
     }
 
@@ -110,7 +118,7 @@ Object.defineProperty(store, 'update', {
   configurable: false,
   enumerable: false,
   writable: true,
-  value: () => { throw new Error('Missing expected `store.update` function') }
+  value: () => {}
 })
 
 // Prevent unexpected properties from being added to `store`. Also, prevent existing

@@ -1,9 +1,16 @@
-const isProd = typeof window !== 'undefined'
+const isBrowser = typeof window !== 'undefined'
+
+const isProd = isBrowser
   ? window.location.hostname !== 'localhost'
   : require('pro' + 'cess').env.NODE_ENV === 'production'
 
 /**
- * Is site running in production?
+ * Is the javascript environment a browser?
+ */
+exports.isBrowser = isBrowser
+
+/**
+ * Is the site running in production?
  */
 exports.isProd = isProd
 
@@ -57,7 +64,7 @@ exports.maxAge = isProd
 /**
  * Time to wait in milliseconds before an API request is considered timed out.
  */
-// exports.apiTimeout = 30 * 1000
+exports.apiTimeout = 30 * 1000
 
 /**
  * User agent for API requests

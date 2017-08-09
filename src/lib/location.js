@@ -3,6 +3,8 @@
 const History = require('./history')
 const Router = require('./router')
 
+const IS_BROWSER = typeof window !== 'undefined'
+
 class Location {
   constructor (routes, onChange) {
     this._onChange = onChange
@@ -10,13 +12,9 @@ class Location {
     this._onClick = this._onClick.bind(this)
 
     this._router = new Router(routes)
-
     this._history = new History(this._onHistoryChange)
 
-    document.addEventListener('click', this._onClick)
-
-    // Trigger an initial 'change' event
-    this.replace(window.location.pathname)
+    if (IS_BROWSER) document.addEventListener('click', this._onClick)
   }
 
   push (pathname) {
@@ -36,19 +34,19 @@ class Location {
   }
 
   destroy () {
-    this._history.destroy()
-
-    document.removeEventListener('click', this._onClick)
-
     this._onChange = null
     this._onHistoryChange = null
     this._router = null
+
+    this._history.destroy()
     this._history = null
+
+    if (IS_BROWSER) document.removeEventListener('click', this._onClick)
   }
 
-  _onHistoryChange (pathname, source) {
+  _onHistoryChange (pathname) {
     const loc = this._router.match(pathname)
-    this._onChange(loc, source)
+    this._onChange(loc)
   }
 
   _onClick (e) {
