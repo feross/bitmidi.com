@@ -3,5 +3,6 @@
  */
 
 module.exports = [
-  ['home', '/']
+  ['home', '/'],
+  ['doc', '/docs/:url+']
 ]

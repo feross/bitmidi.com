@@ -4,14 +4,13 @@ const throttle = require('throttleit')
 const store = require('../store')
 const config = require('../../config')
 
-const HomePage = require('./home-page')
-const NotFoundPage = require('./not-found-page')
-const Title = require('./title')
 const Link = require('./Link')
+const Title = require('./title')
 
 const PAGES = {
-  'home': HomePage,
-  'not-found': NotFoundPage
+  'doc': require('./doc-page'),
+  'home': require('./home-page'),
+  'not-found': require('./not-found-page')
 }
 
 class App extends Component {

@@ -16,7 +16,6 @@ const session = require('express-session')
 
 const config = require('../config')
 const routerApi = require('./router-api')
-const routerDocs = require('./router-docs')
 const secret = require('../secret')
 const store = require('../src/store')
 
@@ -100,7 +99,6 @@ function init (server, sessionStore) {
   })
 
   app.use('/api', routerApi)
-  app.use('/docs', routerDocs)
 
   app.get('/500', (req, res, next) => {
     next(new Error('Manually visited /500'))
