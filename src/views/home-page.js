@@ -1,13 +1,12 @@
 const { Component, h } = require('preact') /** @jsx h */
 
-const store = require('../store')
-
 class HomePage extends Component {
   componentDidMount () {
-    this._load()
+    this.load()
   }
 
-  _load () {
+  load () {
+    const { store } = this.context
     store.dispatch('APP_TITLE', null)
   }
 

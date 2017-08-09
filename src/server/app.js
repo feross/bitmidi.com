@@ -2,32 +2,26 @@ module.exports = {
   init
 }
 
-const { h } = require('preact') /** @jsx h */
-
 const compress = require('compression')
 const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const http = require('http')
 const path = require('path')
-const Provider = require('preact-context-provider')
-const render = require('preact-render-to-string')
 const session = require('express-session')
 
-const config = require('../config')
+const config = require('../../config')
+const secret = require('../../secret')
+
 const routerApi = require('./router-api')
-const secret = require('../secret')
-const store = require('../src/store')
+const routerRender = require('./router-render')
 
-const App = require('../src/views/app')
-
-function init (server, sessionStore) {
+function init (sessionStore) {
   const app = express()
-  server.on('request', app)
 
   // Set up templating
   app.set('view engine', 'ejs')
-  app.set('views', path.join(config.root, 'server'))
+  app.set('views', path.join(config.root, 'src', 'server'))
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON during development
@@ -98,22 +92,12 @@ function init (server, sessionStore) {
     next()
   })
 
-  app.use('/api', routerApi)
-
   app.get('/500', (req, res, next) => {
     next(new Error('Manually visited /500'))
   })
 
-  app.get('*', (req, res) => {
-    store.dispatch('LOCATION_REPLACE', req.url)
-
-    const jsx = <Provider store={store}><App /></Provider>
-    const content = render(jsx)
-
-    if (store.location.name === null) res.status(404)
-
-    res.render('index', { content })
-  })
+  app.use('/api', routerApi)
+  app.use(routerRender)
 
   if (global.opbeat) app.use(global.opbeat.middleware.express())
 
@@ -124,6 +108,8 @@ function init (server, sessionStore) {
     res.status(status)
     res.render('index', { content: `${status} ${http.STATUS_CODES[status]}` })
   })
+
+  return app
 }
 
 /**

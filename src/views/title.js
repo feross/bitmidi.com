@@ -7,7 +7,8 @@ class Title extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.title !== nextProps.title) this._setTitle(nextProps.title)
+    const { props } = this
+    if (props.title !== nextProps.title) this._setTitle(nextProps.title)
   }
 
   render (props) {

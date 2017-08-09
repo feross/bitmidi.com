@@ -1,41 +1,34 @@
-const debug = require('debug')('api')
+const assert = require('assert')
+const fs = require('fs')
 const memo = require('memo-async-lru')
-const querystring = require('querystring')
+const path = require('path')
 
 const config = require('../config')
-const fetchConcat = require('./lib/simple-fetch')
 
 const MEMO_OPTS = {
-  max: 1000,
-  maxAge: 60 * 60 * 1000 // 1 hour
+  max: 50 * 1000,
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }
+
+// Regular expression to match a path with a directory up component.
+const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
+
+const DOCS_PATH = path.join(config.root, 'docs')
 
 function doc (opts, cb) {
-  sendRequest('/api/doc', opts, cb)
-}
+  assert(opts != null && typeof opts === 'object', '"opts" must be an object')
+  assert(typeof opts.url === 'string', '"opts.url" must be a string')
 
-function sendRequest (urlBase, params, cb) {
-  const opts = {
-    url: urlBase + '?' + querystring.stringify(params),
-    json: true,
-    timeout: config.apiTimeout
-  }
-  debug('request %s', opts.url)
+  const { url } = opts
+  assert(!UP_PATH_REGEXP.test(url), `Malicious path "${url}" is rejected`)
 
-  fetchConcat(opts, onResponse)
-
-  function onResponse (err, res, data) {
-    if (err) {
-      return cb(new Error(`HTTP request error. ${err.message}`))
+  const docPath = path.join(DOCS_PATH, url + '.md')
+  fs.readFile(docPath, { encoding: 'utf8' }, (err, data) => {
+    if (err && err.code === 'ENOENT') {
+      err.message = `Doc "${url}" is not found`
     }
-    if (data.error) {
-      return cb(new Error(String(data.error)))
-    }
-    if (res.statusCode !== 200) {
-      return cb(new Error(`HTTP response error. ${res.statusCode}`))
-    }
-    cb(null, data.result)
-  }
+    cb(err, data)
+  })
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 const express = require('express')
 
-const api = require('./api')
+const api = require('../api')
 
 const routerApi = express.Router()
 

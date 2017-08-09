@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang='en'>
   <head>
-    <title><%= config.name %> – <%= config.description %></title>
+    <title><%= typeof title !== 'undefined' ? title : config.name %></title>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
@@ -24,6 +24,12 @@
 
   <body class='body-font f5 fw3 ma0 pa0 overflow-y-scroll'>
     <%- typeof content !== 'undefined' ? content : '' %>
+    <script>
+      console.time('render')
+      console.time('load')
+      // TODO: prevent redundant API calls on first page load
+      // window.initialStore = {{{ initialStore }}}
+    </script>
     <script>
       /* global ga */
       window.ga = window.ga || function () {

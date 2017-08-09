@@ -1,11 +1,15 @@
-const config = require('../config')
+const config = require('../../config')
+const secret = require('../../secret')
 
 if (config.isProd) {
-  const secret = require('../secret')
   global.opbeat = require('opbeat').start(secret.opbeat)
 }
 
 const babelRegister = require('babel-register')
+
+// Automatically compile views (which contain JSX) when required, on the fly.
+babelRegister({ extensions: ['.js'] })
+
 const ConnectSQLite = require('connect-sqlite3')
 const downgrade = require('downgrade')
 const http = require('http')
@@ -13,20 +17,13 @@ const path = require('path')
 const session = require('express-session')
 const unlimited = require('unlimited')
 
-// Automatically compile views (which contain JSX) when required, on the fly.
-babelRegister({
-  // only: /views/,
-  extensions: ['.js']
-})
-
 const app = require('./app')
 
 unlimited() // Upgrade the max file descriptor limit
 
 const server = http.createServer()
-server.listen(config.port, onListening)
 
-function onListening (err) {
+server.listen(config.port, (err) => {
   if (err) throw err
   console.log('Listening on port %s', server.address().port)
 
@@ -36,5 +33,5 @@ function onListening (err) {
   const SQLiteStore = ConnectSQLite(session)
   const sessionStore = new SQLiteStore({ dir: path.join(config.root, 'db') })
 
-  app.init(server, sessionStore)
-}
+  server.on('request', app.init(sessionStore))
+})

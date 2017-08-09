@@ -1,19 +1,26 @@
 const { Component, h } = require('preact') /** @jsx h */
 
-const store = require('../store')
-
 class DocPage extends Component {
   componentDidMount () {
-    this._load()
+    this.load()
   }
 
-  _load () {
+  load () {
+    const { store } = this.context
+    const { location } = store
+
     store.dispatch('APP_TITLE', 'Doc Page')
+    store.dispatch('FETCH_DOC', location.params)
   }
 
-  render (props) {
+  render (props, state, context) {
+    const { store } = context
+    const { doc } = store
     return (
-      <h1>Doc Page</h1>
+      <div>
+        <h1>Doc Page</h1>
+        <p>{doc}</p>
+      </div>
     )
   }
 }

@@ -1,8 +1,8 @@
 const { h, render } = require('preact') /** @jsx h */
 const Provider = require('preact-context-provider')
 
-const App = require('./views/app')
-const store = require('./store')
+const App = require('../views/app')
+const store = require('../store')
 
 store.update = update
 store.dispatch('LOCATION_REPLACE', window.location.pathname)

@@ -1,6 +1,8 @@
-const debug = require('debug')('store')
+'use strict'
 
-// const api = require('./api')
+const debug = require('debug')('nodefoo:store')
+
+const api = require('./api')
 const config = require('../config')
 
 const store = {
@@ -14,6 +16,7 @@ const store = {
     width: 0,
     height: 0
   },
+  doc: null,
   errors: []
 }
 
@@ -51,9 +54,8 @@ function dispatch (type, data) {
     }
 
     case 'LOCATION_CHANGED': {
-      const location = data
-      store.location = location
-      if (config.isBrowser) window.ga('send', 'pageview', location.pathname)
+      Object.assign(store.location, data)
+      if (config.isBrowser) window.ga('send', 'pageview', data.pathname)
       return update()
     }
 
@@ -62,7 +64,10 @@ function dispatch (type, data) {
      */
 
     case 'APP_TITLE': {
-      store.app.title = data
+      const title = data
+      store.app.title = title
+        ? title + ' – ' + config.name
+        : config.name
       return update()
     }
 
@@ -77,17 +82,21 @@ function dispatch (type, data) {
      */
 
     case 'FETCH_DOC': {
-      // const url = '/' + state.params.wildcard
-      // api.doc({ url }, (err, doc) => {
-      //   if (err) throw err
-      //   state.doc = doc
-      //   emitter.emit('render')
-      // })
+      api.doc(data, (err, doc) => {
+        dispatch('FETCH_DOC_DONE', { err, doc })
+      })
+      return
+    }
+
+    case 'FETCH_DOC_DONE': {
+      const { err, doc } = data
+      if (err) return addError(err)
+      store.doc = doc
       return update()
     }
 
     default: {
-      throw new Error('Unrecognized dispatch type: ' + type)
+      throw new Error(`Unrecognized dispatch type "${type}"`)
     }
   }
 }
@@ -100,8 +109,9 @@ function addError (err) {
 let updating = false
 
 function update () {
+  // Prevent infinite recursion when calling dispatch() during an update()
   if (updating) return
-  // Support calls to dispatch() during an update(), but don't recurse infinitely
+  debug('update')
   updating = true; store.update(); updating = false
 }
 
