@@ -1,39 +1,53 @@
 const express = require('express')
 const { h } = require('preact') /** @jsx h */
 const Provider = require('preact-context-provider')
-const render = require('preact-render-to-string')
+// const render = require('preact-render-to-string')
 
-const routes = require('../routes')
-const store = require('../store')
+const createRenderer = require('../lib/preact-dom-renderer')
+const createStore = require('../store')
 
 const App = require('../views/app')
 
-const routerRender = express.Router()
+const router = express.Router()
 
-routerRender.get('*', (req, res) => {
+router.get('*', (req, res) => {
+  const renderer = createRenderer()
+  const { store, dispatch } = createStore(update, onFetchEnd)
   const { app, location } = store
 
-  store.dispatch('LOCATION_REPLACE', req.url)
-  console.log(req.url, location)
-  const Page = routes.find(route => route[0] === location.name)[2]
-  console.log(Page)
-
-  if (typeof Page.prototype === 'function' &&
-      typeof Page.prototype.load === 'function') {
-    Page.prototype.load.call({ context: { store } })
-  }
-
   const jsx = (
-    <Provider store={store}>
+    <Provider store={store} dispatch={dispatch}>
       <App />
     </Provider>
   )
 
-  const content = render(jsx)
+  dispatch('LOCATION_REPLACE', req.url)
 
-  const status = location.name === 'not-found' ? 404 : 200
-  res.status(status)
-  res.render('index', { content, title: app.title })
+  if (store.fetchCount === 0) done()
+
+  function onFetchEnd () {
+    if (store.fetchCount === 0) process.nextTick(done)
+  }
+
+  function update () {
+    renderer.render(jsx)
+  }
+
+  function done () {
+    const status = location.name === 'not-found' ? 404 : 200
+    res.status(status)
+
+    const content = renderer.html()
+    res.render('index', { content, title: app.title })
+  }
 })
 
-module.exports = routerRender
+// if (global.opbeat) router.use(global.opbeat.middleware.express())
+
+// router.use((err, req, res, next) => {
+//   const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
+//   res.status(status)
+//   res.json({ error: err.message })
+// })
+
+module.exports = router

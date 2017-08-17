@@ -2,9 +2,9 @@ const express = require('express')
 
 const api = require('../api')
 
-const routerApi = express.Router()
+const router = express.Router()
 
-routerApi.use('/:method', (req, res, next) => {
+router.use('/:method', (req, res, next) => {
   const method = api[req.params.method]
   if (typeof method !== 'function') return next()
   method(req.query, (err, result) => {
@@ -13,17 +13,17 @@ routerApi.use('/:method', (req, res, next) => {
   })
 })
 
-routerApi.get('*', (req, res) => {
+router.get('*', (req, res) => {
   res.status(404)
   res.json({ error: '404 Not Found' })
 })
 
-if (global.opbeat) routerApi.use(global.opbeat.middleware.express())
+if (global.opbeat) router.use(global.opbeat.middleware.express())
 
-routerApi.use((err, req, res, next) => {
+router.use((err, req, res, next) => {
   const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
   res.status(status)
   res.json({ error: err.message })
 })
 
-module.exports = routerApi
+module.exports = router

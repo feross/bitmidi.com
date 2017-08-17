@@ -49,6 +49,7 @@
     "preact-render-to-string": "^3.6.3",
     "tachyons": "^4.7.4",
     "throttleit": "^1.0.0",
+    "undom": "^0.3.3",
     "unlimited": "^1.2.0"
   },
   "devDependencies": {

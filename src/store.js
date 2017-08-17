@@ -1,138 +1,137 @@
 'use strict'
 
+module.exports = createStore
+
 const debug = require('debug')('nodefoo:store')
 
 const api = require('./api')
 const config = require('../config')
-
-const store = {
-  location: {
-    name: null,
-    params: {},
-    pathname: null
-  },
-  app: {
-    title: null,
-    width: 0,
-    height: 0
-  },
-  doc: null,
-  errors: []
-}
+const Location = require('./lib/location')
+const routes = require('./routes')
 
 const SKIP_DEBUG = [
   'APP_RESIZE'
 ]
 
-const Location = require('./lib/location')
-const routes = require('./routes')
-
-const loc = new Location(routes, (location, source) => {
-  dispatch('LOCATION_CHANGED', location)
-})
-
-function dispatch (type, data) {
-  if (!SKIP_DEBUG.includes(type)) {
-    debug('%s %o', type, data)
+function createStore (render, onFetchEnd) {
+  const store = {
+    location: {
+      name: null,
+      params: {},
+      pathname: null
+    },
+    app: {
+      title: null,
+      width: 0,
+      height: 0
+    },
+    doc: null,
+    fetchCount: 0,
+    errors: []
   }
 
-  switch (type) {
-    /**
-     * LOCATION
-     */
+  const loc = new Location(routes, (location, source) => {
+    dispatch('LOCATION_CHANGED', location)
+  })
 
-    case 'LOCATION_PUSH': {
-      const pathname = data
-      if (pathname !== store.location.pathname) loc.push(pathname)
-      return
-    }
+  let isUpdating = false
 
-    case 'LOCATION_REPLACE': {
-      const pathname = data
-      if (pathname !== store.location.pathname) loc.replace(pathname)
-      return
-    }
+  return { store, dispatch }
 
-    case 'LOCATION_CHANGED': {
-      Object.assign(store.location, data)
-      if (config.isBrowser) window.ga('send', 'pageview', data.pathname)
-      return update()
-    }
+  function dispatch (type, data) {
+    if (!SKIP_DEBUG.includes(type)) debug('%s %o', type, data)
 
-    /**
-     * APP
-     */
+    switch (type) {
+      /**
+       * LOCATION
+       */
 
-    case 'APP_TITLE': {
-      const title = data
-      store.app.title = title
-        ? title + ' – ' + config.name
-        : config.name
-      return update()
-    }
+      case 'LOCATION_PUSH': {
+        const pathname = data
+        if (pathname !== store.location.pathname) loc.push(pathname)
+        return
+      }
 
-    case 'APP_RESIZE': {
-      store.app.width = data.width
-      store.app.height = data.height
-      return update()
-    }
+      case 'LOCATION_REPLACE': {
+        const pathname = data
+        if (pathname !== store.location.pathname) loc.replace(pathname)
+        return
+      }
 
-    /**
-     * DOC
-     */
+      case 'LOCATION_CHANGED': {
+        Object.assign(store.location, data)
+        if (config.isBrowser) window.ga('send', 'pageview', data.pathname)
+        return update()
+      }
 
-    case 'FETCH_DOC': {
-      api.doc(data, (err, doc) => {
-        dispatch('FETCH_DOC_DONE', { err, doc })
-      })
-      return
-    }
+      /**
+       * APP
+       */
 
-    case 'FETCH_DOC_DONE': {
-      const { err, doc } = data
-      if (err) return addError(err)
-      store.doc = doc
-      return update()
-    }
+      case 'APP_TITLE': {
+        const title = data
+        store.app.title = title
+          ? title + ' – ' + config.name
+          : config.name
+        return update()
+      }
 
-    default: {
-      throw new Error(`Unrecognized dispatch type "${type}"`)
+      case 'APP_RESIZE': {
+        store.app.width = data.width
+        store.app.height = data.height
+        return update()
+      }
+
+      /**
+       * FETCH
+       */
+
+      case 'FETCH_START': {
+        store.fetchCount += 1
+        return
+      }
+
+      case 'FETCH_END': {
+        store.fetchCount -= 1
+        if (typeof onFetchEnd === 'function') onFetchEnd()
+        return
+      }
+
+      /**
+       * DOC
+       */
+
+      case 'FETCH_DOC': {
+        dispatch('FETCH_START')
+        api.doc(data, (err, doc) => {
+          dispatch('FETCH_END')
+          dispatch('FETCH_DOC_DONE', { err, doc })
+        })
+        return
+      }
+
+      case 'FETCH_DOC_DONE': {
+        const { err, doc } = data
+        if (err) return addError(err)
+        store.doc = doc
+        return update()
+      }
+
+      default: {
+        throw new Error(`Unrecognized dispatch type "${type}"`)
+      }
     }
   }
+
+  function addError (err) {
+    store.errors.push(err)
+    update()
+  }
+
+  function update () {
+    // Prevent infinite recursion when calling dispatch() during an update()
+    if (isUpdating) return
+    debug('update')
+    isUpdating = true; render(); isUpdating = false
+  }
 }
-
-function addError (err) {
-  store.errors.push(err)
-  update()
-}
-
-let updating = false
-
-function update () {
-  // Prevent infinite recursion when calling dispatch() during an update()
-  if (updating) return
-  debug('update')
-  updating = true; store.update(); updating = false
-}
-
-// Add `dispatch()` function. Not enumerable (not app data). Not writable (prevent accidents).
-Object.defineProperty(store, 'dispatch', {
-  configurable: false,
-  enumerable: false,
-  writable: false,
-  value: dispatch
-})
-
-// Add `update()` function. Should be overwritten. Not enumerable (not app data).
-Object.defineProperty(store, 'update', {
-  configurable: false,
-  enumerable: false,
-  writable: true,
-  value: () => {}
-})
-
-// Prevent unexpected properties from being added to `store`. Also, prevent existing
-// properties from being "configured" (changed to getter/setter, made non-enumerable, etc.)
-Object.seal(store)
-
-module.exports = store

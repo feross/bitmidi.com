@@ -28,7 +28,7 @@
       console.time('render')
       console.time('load')
       // TODO: prevent redundant API calls on first page load
-      // window.initialStore = {{{ initialStore }}}
+      window.storeInit = <%- typeof store !== 'undefined' ? JSON.stringify(store) : '{}' %>
     </script>
     <script>
       /* global ga */

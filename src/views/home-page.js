@@ -1,18 +1,20 @@
 const { Component, h } = require('preact') /** @jsx h */
 
+const Heading = require('./heading')
+
 class HomePage extends Component {
   componentDidMount () {
     this.load()
   }
 
   load () {
-    const { store } = this.context
-    store.dispatch('APP_TITLE', null)
+    const { dispatch } = this.context
+    dispatch('APP_TITLE', null)
   }
 
   render (props) {
     return (
-      <h1>Home Page</h1>
+      <Heading>Home Page</Heading>
     )
   }
 }

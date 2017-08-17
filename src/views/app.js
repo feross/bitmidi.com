@@ -1,6 +1,7 @@
 const { Component, h } = require('preact') /** @jsx h */
 const throttle = require('throttleit')
 
+const config = require('../../config')
 const routes = require('../routes')
 
 const Link = require('./Link')
@@ -13,8 +14,10 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this._onResize()
-    window.addEventListener('resize', this._onResizeThrottled)
+    if (config.isBrowser) {
+      this._onResize()
+      window.addEventListener('resize', this._onResizeThrottled)
+    }
   }
 
   componentWillUnmount () {
@@ -42,10 +45,10 @@ class App extends Component {
   }
 
   _onResize () {
-    const { store } = this.context
+    const { dispatch } = this.context
     const width = window.innerWidth
     const height = window.innerHeight
-    store.dispatch('APP_RESIZE', { width, height })
+    dispatch('APP_RESIZE', { width, height })
   }
 }
 
