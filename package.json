@@ -56,8 +56,8 @@
     "unlimited": "^1.2.0"
   },
   "devDependencies": {
+    "babel-minify": "^0.2.0",
     "babelify": "^7.3.0",
-    "babili": "^0.1.3",
     "browserify": "^14.4.0",
     "bundle-collapser": "^1.2.1",
     "git-pull-or-clone": "^1.1.0",
@@ -78,7 +78,7 @@
   },
   "scripts": {
     "build": "npm run build-js && chmod 777 db/",
-    "build-js": "browserify -t babelify -p bundle-collapser/plugin src/browser | babili > static/bundle.js",
+    "build-js": "browserify -t babelify -p bundle-collapser/plugin src/browser | minify > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
