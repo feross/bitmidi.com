@@ -1,5 +1,6 @@
 const assert = require('assert')
 const fs = require('fs')
+const markdownIt = require('markdown-it')
 const memo = require('memo-async-lru')
 const path = require('path')
 
@@ -15,6 +16,10 @@ const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
 const DOCS_PATH = path.join(config.root, 'docs')
 
+const markdown = markdownIt({
+  html: true
+})
+
 function doc (opts, cb) {
   assert(opts != null && typeof opts === 'object', '"opts" must be an object')
   assert(typeof opts.url === 'string', '"opts.url" must be a string')
@@ -23,11 +28,12 @@ function doc (opts, cb) {
   assert(!UP_PATH_REGEXP.test(url), `Malicious path "${url}" is rejected`)
 
   const docPath = path.join(DOCS_PATH, url + '.md')
-  fs.readFile(docPath, { encoding: 'utf8' }, (err, data) => {
+  fs.readFile(docPath, { encoding: 'utf8' }, (err, text) => {
     if (err && err.code === 'ENOENT') {
       err.message = `Doc "${url}" is not found`
     }
-    cb(err, data)
+    const html = markdown.render(text)
+    cb(err, html)
   })
 }
 

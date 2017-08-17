@@ -41,6 +41,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
+    "markdown-it": "^8.3.2",
     "memo-async-lru": "^1.0.1",
     "opbeat": "^4.14.0",
     "path-to-regexp": "^1.7.0",

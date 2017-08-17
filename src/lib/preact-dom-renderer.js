@@ -27,12 +27,11 @@ function createRenderer () {
 
 function serializeHtml (el) {
   if (el.nodeType === 3) return enc(el.textContent)
-
   const nodeName = el.nodeName.toLowerCase()
   const attributes = el.attributes.map(attr).join('')
-  const childNodes = el.childNodes.map(serializeHtml).join('')
+  const innerHTML = el.innerHTML || el.childNodes.map(serializeHtml).join('')
 
-  return `<${nodeName}${attributes}>${childNodes}</${nodeName}>`
+  return `<${nodeName}${attributes}>${innerHTML}</${nodeName}>`
 }
 
 let attr = a => ` ${a.name}="${enc(a.value)}"`

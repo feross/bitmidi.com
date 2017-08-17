@@ -42,12 +42,4 @@ router.get('*', (req, res) => {
   }
 })
 
-// if (global.opbeat) router.use(global.opbeat.middleware.express())
-
-// router.use((err, req, res, next) => {
-//   const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
-//   res.status(status)
-//   res.json({ error: err.message })
-// })
-
 module.exports = router

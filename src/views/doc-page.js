@@ -21,7 +21,7 @@ class DocPage extends Component {
     return (
       <div>
         <Heading>Doc Page</Heading>
-        <p>{doc}</p>
+        <p dangerouslySetInnerHTML={{__html: doc}} />
       </div>
     )
   }
