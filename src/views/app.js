@@ -4,7 +4,7 @@ const throttle = require('throttleit')
 const config = require('../../config')
 const routes = require('../routes')
 
-const Link = require('./Link')
+const Link = require('./link')
 const Title = require('./title')
 
 class App extends Component {
