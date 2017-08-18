@@ -49,7 +49,6 @@
     "path-to-regexp": "^1.7.0",
     "preact": "^8.2.1",
     "preact-context-provider": "^1.0.0",
-    "preact-render-to-string": "^3.6.3",
     "tachyons": "^4.7.4",
     "throttleit": "^1.0.0",
     "undom": "^0.3.3",
