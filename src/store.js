@@ -10,9 +10,7 @@ const Location = require('./lib/location')
 const routes = require('./routes')
 
 const SKIP_DEBUG = [
-  'APP_RESIZE',
-  'FETCH_START',
-  'FETCH_END'
+  'APP_RESIZE'
 ]
 
 function createStore (render, onFetchEnd) {
@@ -32,8 +30,10 @@ function createStore (render, onFetchEnd) {
     errors: []
   }
 
-  const loc = new Location(routes, location => dispatch('LOCATION_CHANGED', location))
   let isUpdating = false
+  const loc = new Location(routes, location => {
+    dispatch('LOCATION_CHANGED', location)
+  })
 
   return {
     store,
@@ -83,34 +83,17 @@ function createStore (render, onFetchEnd) {
       }
 
       /**
-       * FETCH
-       */
-
-      case 'FETCH_START': {
-        store.app.fetchCount += 1
-        return
-      }
-
-      case 'FETCH_END': {
-        store.app.fetchCount -= 1
-        if (typeof onFetchEnd === 'function') onFetchEnd()
-        return
-      }
-
-      /**
        * DOC
        */
 
       case 'FETCH_DOC': {
-        dispatch('FETCH_START')
-        api.doc(data, (err, doc) => {
-          dispatch('FETCH_END')
-          dispatch('FETCH_DOC_DONE', { err, doc })
-        })
-        return
+        fetchStart()
+        api.doc(data, (err, doc) => dispatch('FETCH_DOC_DONE', { err, doc }))
+        return update()
       }
 
       case 'FETCH_DOC_DONE': {
+        fetchDone()
         const { err, doc } = data
         if (err) return addError(err)
         store.doc = doc
@@ -123,8 +106,20 @@ function createStore (render, onFetchEnd) {
     }
   }
 
+  // Reference counter for pending fetches
+  function fetchStart () {
+    store.app.fetchCount += 1
+  }
+
+  function fetchDone () {
+    store.app.fetchCount -= 1
+    if (typeof onFetchEnd === 'function') onFetchEnd()
+  }
+
   function addError (err) {
-    store.errors.push(err)
+    const error = err.message
+    store.errors.push(error)
+    if (config.isBrowser) window.alert(error)
     update()
   }
 

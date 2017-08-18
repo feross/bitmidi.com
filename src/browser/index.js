@@ -5,9 +5,13 @@ const App = require('../views/app')
 const createStore = require('../store')
 
 const { store, dispatch } = createStore(update)
+let root = document.getElementById('app')
+
 Object.assign(store, window.storeInit)
 
-let root = document.getElementById('app')
+// Show server-generated errors
+store.errors.map(error => window.alert(error))
+store.errors = []
 
 dispatch('LOCATION_REPLACE', window.location.pathname)
 update()

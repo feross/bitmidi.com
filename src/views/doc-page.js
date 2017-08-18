@@ -7,11 +7,6 @@ class DocPage extends Component {
     this.load()
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { dispatch } = this.context
-    dispatch('APP_TITLE', this.getTitle())
-  }
-
   load () {
     const { store, dispatch } = this.context
     const { doc, location } = store
@@ -23,15 +18,18 @@ class DocPage extends Component {
   getTitle () {
     const { store } = this.context
     const { location } = store
+
     return location.params.url
   }
 
-  render (props, state, context) {
-    const { store } = context
+  render (props) {
+    const { store } = this.context
     const { doc } = store
+
+    const title = this.getTitle()
     return (
       <div>
-        <Heading>Doc Page</Heading>
+        <Heading>{title}</Heading>
         <p dangerouslySetInnerHTML={{__html: doc}} />
       </div>
     )

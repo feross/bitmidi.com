@@ -32,7 +32,10 @@ router.get('*', (req, res) => {
   }
 
   function done () {
-    const status = store.location.name === 'not-found' ? 404 : 200
+    const { location, errors } = store
+    const status = location.name === 'not-found' || errors.length > 0
+      ? 404
+      : 200
     res.status(status)
 
     const content = renderer.html()

@@ -23,8 +23,8 @@ class App extends Component {
     window.removeEventListener('resize', this._onResizeThrottled)
   }
 
-  render (props, state, context) {
-    const { store } = context
+  render (props) {
+    const { store } = this.context
     const { location, errors } = store
 
     const Page = routes.find(route => route[0] === location.name)[2]
