@@ -31,9 +31,10 @@ function doc (opts, cb) {
   fs.readFile(docPath, { encoding: 'utf8' }, (err, text) => {
     if (err && err.code === 'ENOENT') {
       err.message = `Doc "${url}" is not found`
+      return cb(err)
     }
     const html = markdown.render(text)
-    cb(err, html)
+    cb(null, html)
   })
 }
 
