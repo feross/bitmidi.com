@@ -8,7 +8,10 @@ router.use('/:method', (req, res, next) => {
   const method = api[req.params.method]
   if (typeof method !== 'function') return next()
   method(req.query, (err, result) => {
-    if (err) return next(err)
+    if (err) {
+      err.status = 404
+      return next(err)
+    }
     res.json({ result })
   })
 })
