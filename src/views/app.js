@@ -5,7 +5,6 @@ const config = require('../../config')
 const routes = require('../routes')
 
 const Link = require('./link')
-const Title = require('./title')
 
 class App extends Component {
   constructor (props) {
@@ -26,13 +25,12 @@ class App extends Component {
 
   render (props, state, context) {
     const { store } = context
-    const { app, location, errors } = store
+    const { location, errors } = store
 
     const Page = routes.find(route => route[0] === location.name)[2]
 
     return (
       <div id='app'>
-        <Title title={app.title} />
         <header>
           <h1>NodeFoo</h1>
           <Link href='/'>Home</Link>

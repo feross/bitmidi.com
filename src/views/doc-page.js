@@ -7,12 +7,23 @@ class DocPage extends Component {
     this.load()
   }
 
+  componentWillReceiveProps (nextProps) {
+    const { dispatch } = this.context
+    dispatch('APP_TITLE', this.getTitle())
+  }
+
   load () {
     const { store, dispatch } = this.context
-    const { location } = store
+    const { doc, location } = store
 
-    dispatch('APP_TITLE', 'Doc Page')
-    dispatch('FETCH_DOC', location.params)
+    dispatch('APP_TITLE', this.getTitle())
+    if (doc == null) dispatch('FETCH_DOC', location.params)
+  }
+
+  getTitle () {
+    const { store } = this.context
+    const { location } = store
+    return location.params.url
   }
 
   render (props, state, context) {

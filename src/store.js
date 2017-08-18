@@ -10,7 +10,9 @@ const Location = require('./lib/location')
 const routes = require('./routes')
 
 const SKIP_DEBUG = [
-  'APP_RESIZE'
+  'APP_RESIZE',
+  'FETCH_START',
+  'FETCH_END'
 ]
 
 function createStore (render, onFetchEnd) {
@@ -23,20 +25,20 @@ function createStore (render, onFetchEnd) {
     app: {
       title: null,
       width: 0,
-      height: 0
+      height: 0,
+      fetchCount: 0
     },
     doc: null,
-    fetchCount: 0,
     errors: []
   }
 
-  const loc = new Location(routes, (location, source) => {
-    dispatch('LOCATION_CHANGED', location)
-  })
-
+  const loc = new Location(routes, location => dispatch('LOCATION_CHANGED', location))
   let isUpdating = false
 
-  return { store, dispatch }
+  return {
+    store,
+    dispatch
+  }
 
   function dispatch (type, data) {
     if (!SKIP_DEBUG.includes(type)) debug('%s %o', type, data)
@@ -69,10 +71,8 @@ function createStore (render, onFetchEnd) {
        */
 
       case 'APP_TITLE': {
-        const title = data
-        store.app.title = title
-          ? title + ' – ' + config.name
-          : config.name
+        const title = data ? data + ' – ' + config.name : config.name
+        store.app.title = document.title = title
         return update()
       }
 
@@ -87,12 +87,12 @@ function createStore (render, onFetchEnd) {
        */
 
       case 'FETCH_START': {
-        store.fetchCount += 1
+        store.app.fetchCount += 1
         return
       }
 
       case 'FETCH_END': {
-        store.fetchCount -= 1
+        store.app.fetchCount -= 1
         if (typeof onFetchEnd === 'function') onFetchEnd()
         return
       }

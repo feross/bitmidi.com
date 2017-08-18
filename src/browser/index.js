@@ -4,13 +4,13 @@ const Provider = require('preact-context-provider')
 const App = require('../views/app')
 const createStore = require('../store')
 
-let root = document.getElementById('app')
-
 const { store, dispatch } = createStore(update)
-
 Object.assign(store, window.storeInit)
 
+let root = document.getElementById('app')
+
 dispatch('LOCATION_REPLACE', window.location.pathname)
+update()
 
 function update () {
   const jsx = (
