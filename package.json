@@ -59,6 +59,7 @@
     "babel-minify": "^0.2.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
+    "browserify-breakdown": "^1.0.3",
     "bundle-collapser": "^1.2.1",
     "git-pull-or-clone": "^1.1.0",
     "mkdirp": "^0.5.1",
@@ -78,17 +79,19 @@
   },
   "scripts": {
     "build": "npm run build-js && chmod 777 db/",
-    "build-js": "browserify -t babelify -p bundle-collapser/plugin src/browser | minify > static/bundle.js",
+    "build-js": "browserify -p bundle-collapser/plugin src/browser | minify > static/bundle.js",
+    "build-js-debug": "browserify -d --full-paths src/browser > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
-    "size": "npm run size-css && npm run size-js",
+    "size": "npm run size-css && npm run size-js && npm run size-js-breakdown",
     "size-css": "cat node_modules/tachyons/css/tachyons.min.css static/style.css | gzip | wc -c",
     "size-js": "npm run build-js && cat static/bundle.js | gzip | wc -c",
+    "size-js-breakdown": "npm run build-js-debug && cat static/bundle.js | node ./node_modules/.bin/browserify-breakdown",
     "start": "node src/server",
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-js & npm run watch-server",
-    "watch-js": "watchify src/browser -o static/bundle.js -d -v",
+    "watch-js": "watchify src/browser -d -v -o static/bundle.js",
     "watch-server": "DEBUG=nodefoo* nodemon src/server -e js,css,ejs -i static/"
   }
 }
