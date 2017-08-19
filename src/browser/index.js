@@ -29,12 +29,17 @@ function update () {
  * DEVELOPMENT
  */
 
-window.store = store
-window.dispatch = dispatch
-
 // Measure page speed
 console.timeEnd('render')
 window.addEventListener('load', () => console.timeEnd('load'))
 
-// React Developer Tools (Excluded in production)
+function debug (enable, verbose) {
+  window.localStorage.debug = enable && verbose ? '*' : enable ? '*,-*verbose*' : ''
+  window.location.reload()
+}
+
+// Expose important functions for easy debugging from dev tools
+Object.assign(window, { store, dispatch, update, debug })
+
+// Enable react dev tools (excluded in production)
 require('preact/devtools')
