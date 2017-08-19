@@ -31,15 +31,9 @@ function createStore (render, onFetchEnd) {
     errors: []
   }
 
-  let isUpdating = false
   const loc = new Location(routes, location => {
     dispatch('LOCATION_CHANGED', location)
   })
-
-  return {
-    store,
-    dispatch
-  }
 
   function dispatch (type, data) {
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
@@ -134,10 +128,29 @@ function createStore (render, onFetchEnd) {
     update()
   }
 
+  let isRendering = false
+  let isUpdatePending = false
+
   function update () {
-    // Prevent infinite recursion when calling dispatch() during an update()
-    if (isUpdating) return
+    // Prevent infinite recursion when dispatch() is called during an update()
+    if (isRendering) {
+      isUpdatePending = true
+      return
+    }
     debugVerbose('update')
-    isUpdating = true; render(); isUpdating = false
+
+    isRendering = true
+    render()
+    isRendering = false
+
+    if (isUpdatePending) {
+      isUpdatePending = false
+      update()
+    }
+  }
+
+  return {
+    store,
+    dispatch
   }
 }
