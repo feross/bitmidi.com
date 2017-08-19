@@ -3,15 +3,16 @@
 module.exports = createStore
 
 const debug = require('debug')('nodefoo:store')
+const debugVerbose = require('debug')('nodefoo:store:verbose')
 
 const api = require('./api')
 const config = require('../config')
 const Location = require('./lib/location')
 const routes = require('./routes')
 
-const SKIP_DEBUG = [
+const DEBUG_VERBOSE = new Set([
   'APP_RESIZE'
-]
+])
 
 function createStore (render, onFetchEnd) {
   const store = {
@@ -41,7 +42,8 @@ function createStore (render, onFetchEnd) {
   }
 
   function dispatch (type, data) {
-    if (!SKIP_DEBUG.includes(type)) debug('%s %o', type, data)
+    if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
+    else debug('%s %o', type, data)
 
     switch (type) {
       /**
@@ -135,7 +137,7 @@ function createStore (render, onFetchEnd) {
   function update () {
     // Prevent infinite recursion when calling dispatch() during an update()
     if (isUpdating) return
-    debug('update')
+    debugVerbose('update')
     isUpdating = true; render(); isUpdating = false
   }
 }
