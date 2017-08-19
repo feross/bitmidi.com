@@ -74,7 +74,7 @@ function createStore (render, onFetchEnd) {
 
       case 'APP_TITLE': {
         const title = data ? data + ' – ' + config.name : config.name
-        store.app.title = document.title = title
+        store.app.title = title
         return update()
       }
 

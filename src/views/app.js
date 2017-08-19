@@ -5,6 +5,7 @@ const config = require('../../config')
 const routes = require('../routes')
 
 const Header = require('./header')
+const Title = require('./title')
 
 class App extends Component {
   constructor (props) {
@@ -25,12 +26,13 @@ class App extends Component {
 
   render (props) {
     const { store } = this.context
-    const { location, errors } = store
+    const { app, location, errors } = store
 
     const Page = routes.find(route => route[0] === location.name)[2]
 
     return (
       <div id='app'>
+        <Title title={app.title} />
         <Header />
         <div class='mw8 center'>
           <Page />
