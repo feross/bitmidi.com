@@ -60,7 +60,14 @@ function init (sessionStore) {
   // Set up static file serving
   const staticOpts = { maxAge: config.maxAge }
   app.use(express.static(path.join(config.root, 'static'), staticOpts))
-  app.use(express.static(path.dirname(require.resolve('tachyons')), staticOpts))
+
+  const tachyonsPath = path.dirname(require.resolve('tachyons'))
+  app.use(express.static(tachyonsPath, staticOpts))
+
+  const hljsPath = path.join(
+    path.dirname(require.resolve('highlight.js')), '..', 'styles'
+  )
+  app.use(express.static(hljsPath, staticOpts))
 
   // Set up session handling
   app.use(session({

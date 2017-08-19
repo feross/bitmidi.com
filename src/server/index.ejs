@@ -6,8 +6,9 @@
     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
     <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'> -->
-    <!-- <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,600|Sriracha'> -->
+
     <link rel='stylesheet' href='/tachyons.min.css' charset='utf-8' />
+    <link rel='stylesheet' href='/monokai-sublime.css' charset='utf-8' />
     <link rel='stylesheet' href='/style.css<%- hashes.style %>' charset='utf-8' />
 
     <!-- <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png'> -->
@@ -22,7 +23,7 @@
     <!-- <link rel='search' href='/opensearch.xml' title='<%= config.name %>' type='application/opensearchdescription+xml'> -->
   </head>
 
-  <body class='body-font f5 fw3 ma0 pa0 overflow-y-scroll'>
+  <body class='body-font lh-copy f5 fw3 ma0 pa0 overflow-y-scroll'>
     <%- typeof content !== 'undefined' ? content : '' %>
     <script>
       console.time('render')

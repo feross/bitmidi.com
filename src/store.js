@@ -100,6 +100,15 @@ function createStore (render, onFetchEnd) {
         return update()
       }
 
+      /**
+       * SEARCH
+       */
+
+      case 'SEARCH_INPUT': {
+        store.lastSearch = data
+        return update()
+      }
+
       default: {
         throw new Error(`Unrecognized dispatch type "${type}"`)
       }

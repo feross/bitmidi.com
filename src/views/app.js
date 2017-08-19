@@ -4,7 +4,7 @@ const throttle = require('throttleit')
 const config = require('../../config')
 const routes = require('../routes')
 
-const Link = require('./link')
+const Header = require('./header')
 
 class App extends Component {
   constructor (props) {
@@ -31,13 +31,11 @@ class App extends Component {
 
     return (
       <div id='app'>
-        <header>
-          <h1>NodeFoo</h1>
-          <Link href='/'>Home</Link>
-          <Link href='/docs/fs/readfile'>fs.readFile</Link>
-        </header>
+        <Header />
+        <div class='mw8 center'>
+          <Page />
+        </div>
         {errors.map(err => <small>{err}</small>)}
-        <Page />
       </div>
     )
   }
