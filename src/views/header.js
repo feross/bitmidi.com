@@ -3,6 +3,7 @@ const { h } = require('preact') /** @jsx h */
 // const config = require('../../config')
 const detect = require('../lib/detect')
 
+const Button = require('./button')
 const Link = require('./link')
 const Search = require('./search')
 
@@ -30,15 +31,8 @@ const Header = (props) => {
       }}
     >
       <div class='fl w-third v-mid pl1'>
-        <Link
-          class='dib'
-          href='/'
-        >
-          <div
-            class='white f3'
-          >
-            NodeFoo
-          </div>
+        <Link class='dib' href='/'>
+          <div class='white f3'>NodeFoo</div>
         </Link>
       </div>
       <div class='fl w-two-thirds w-third-m w-third-l v-mid pl4 pr1 ph2-m ph0-l'>
@@ -50,8 +44,24 @@ const Header = (props) => {
           marginTop: 2
         }}
       >
-        <Link href='/'>Home</Link>
-        <Link href='/docs/fs/readfile'>fs.readFile</Link>
+        <Button
+          pill
+          color='white'
+          href='/submit'
+          class='mh1'
+          style={{ marginTop: -4 }}
+        >
+          Submit
+        </Button>
+        <Button
+          pill
+          color='white'
+          href='/docs/fs/readfile'
+          class='mh1'
+          style={{ marginTop: -4 }}
+        >
+          Doc Page
+        </Button>
       </nav>
     </header>
   )

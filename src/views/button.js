@@ -17,8 +17,11 @@ const Button = (props) => {
     fill = false,
     pill = false,
     color = 'dark-pink',
-    href,
-    onClick = () => {}
+    href = '#',
+    onClick = () => {},
+    class: className,
+    children,
+    ...rest
   } = props
 
   let cls = ['link pointer bw1 dib ttu fw6 grow']
@@ -35,14 +38,15 @@ const Button = (props) => {
 
   return (
     <a
-      class={c(cls, props.class)}
+      class={c(cls, className)}
       href={href}
       onClick={e => {
         if (href === '#') e.preventDefault()
         onClick()
       }}
+      {...rest}
     >
-      {props.children}
+      {children}
     </a>
   )
 }

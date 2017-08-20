@@ -12,16 +12,16 @@ class SubmitPage extends Component {
 
   load () {
     const { dispatch } = this.context
-    dispatch('APP_TITLE', 'Submit a Recipe')
+    dispatch('APP_TITLE', 'Submit a Code Snippet')
   }
 
   render (props) {
     return (
       <div>
-        <Heading>Submit a Recipe</Heading>
+        <Heading>Submit a Code Snippet</Heading>
         <div>
           <Input
-            placeholder='Recipe Name'
+            placeholder='Snippet Name'
             class='mv3 w-50'
           />
           <CodeEditor

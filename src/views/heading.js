@@ -1,9 +1,11 @@
 const { h } = require('preact') /** @jsx h */
 
 const Heading = (props) => {
+  const { children, ...rest } = props
+
   return (
-    <h2>
-      {props.children}
+    <h2 {...rest}>
+      {children}
     </h2>
   )
 }

@@ -6,7 +6,7 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
-.code-font, .CodeMirror {
+.code-font, .CodeMirror, .hljs, .hljs code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
 
@@ -32,4 +32,13 @@
 
 .CodeMirror-focused {
   border-color: #d5008f;
+}
+
+pre.hljs {
+  margin: 0; /* disable browser default style */
+  padding: 1em; /* increase paddding */
+}
+
+.CodeMirror, .hljs, .hljs code {
+  font-size: 14px;
 }

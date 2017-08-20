@@ -28,7 +28,25 @@ function createStore (render, onFetchEnd) {
       fetchCount: 0
     },
     doc: null,
-    errors: []
+    errors: [],
+    snippets: [
+      {
+        title: 'Asyncronously read the contents of a file',
+        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
+      },
+      {
+        title: 'Asyncronously read the contents of a file',
+        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
+      },
+      {
+        title: 'Asyncronously read the contents of a file',
+        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
+      },
+      {
+        title: 'Asyncronously read the contents of a file',
+        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
+      }
+    ]
   }
 
   const loc = new Location(routes, location => {

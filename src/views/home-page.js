@@ -1,6 +1,7 @@
 const { Component, h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
+const Snippet = require('./snippet')
 
 class HomePage extends Component {
   componentDidMount () {
@@ -13,8 +14,13 @@ class HomePage extends Component {
   }
 
   render (props) {
+    const { store } = this.context
+    const { snippets } = store
     return (
-      <Heading>Home Page</Heading>
+      <div>
+        <Heading class='tc'>Top code snippets</Heading>
+        {snippets.map(snippet => <Snippet snippet={snippet} />)}
+      </div>
     )
   }
 }
