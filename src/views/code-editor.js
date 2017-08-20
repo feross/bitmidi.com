@@ -9,20 +9,16 @@ let CodeMirror
 if (config.isBrowser) {
   CodeMirror = require('codemirror')
 
-  require('codemirror/addon/edit/closebrackets')
+  require('codemirror/addon/comment/comment') // Comment/uncomment keyboard shortcut
   require('codemirror/addon/dialog/dialog')
-  require('codemirror/addon/edit/matchbrackets')
+  require('codemirror/addon/display/placeholder') // Add `placeholder` option
   require('codemirror/addon/edit/closebrackets')
-
-  // Addon for commenting and uncommenting code
-  require('codemirror/addon/comment/comment')
-
-  require('codemirror/addon/wrap/hardwrap')
-  require('codemirror/addon/fold/foldcode')
+  require('codemirror/addon/edit/matchbrackets')
   require('codemirror/addon/fold/brace-fold')
-
+  require('codemirror/addon/fold/foldcode')
+  require('codemirror/addon/wrap/hardwrap')
+  require('codemirror/keymap/sublime') // Sublime keyboard shortcuts
   require('codemirror/mode/javascript/javascript')
-  require('codemirror/keymap/sublime')
 }
 
 class CodeEditor extends Component {
@@ -36,17 +32,21 @@ class CodeEditor extends Component {
   componentDidMount () {
     if (!config.isBrowser) return
 
+    const { placeholder } = this.props
+
     this._codeMirror = CodeMirror.fromTextArea(this._elem, {
-      indentUnit: 2,
-      mode: 'javascript',
-      tabSize: 2,
-      keyMap: 'sublime',
-      viewportMargin: Infinity,
       autoCloseBrackets: true,
+      indentUnit: 2,
+      keyMap: 'sublime',
       lineWrapping: true,
       matchBrackets: true,
+      mode: 'javascript',
+      placeholder: placeholder,
       showCursorWhenSelecting: true,
-      theme: 'monokai'
+      tabIndex: 2,
+      tabSize: 2,
+      theme: 'monokai',
+      viewportMargin: Infinity
     })
 
     this._codeMirror.on('focus', this._onFocus)

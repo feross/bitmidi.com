@@ -20,7 +20,10 @@ class SubmitPage extends Component {
         <Heading>Submit a Recipe</Heading>
         <div>
           <Input placeholder='Recipe Name' class='mv3' />
-          <CodeEditor class='mv3' />
+          <CodeEditor
+            placeholder='// Write code here...'
+            class='mv3'
+          />
         </div>
       </div>
     )
