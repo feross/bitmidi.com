@@ -9,6 +9,7 @@
   },
   "babel": {
     "plugins": [
+      "transform-class-properties",
       [
         "transform-react-jsx",
         {
@@ -32,6 +33,7 @@
     "url": "https://github.com/feross/nodefoo.com/issues"
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-register": "^6.26.0",
@@ -56,6 +58,7 @@
     "unlimited": "^1.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "babel-minify": "^0.2.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
@@ -92,6 +95,5 @@
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-js & npm run watch-server",
     "watch-js": "watchify src/browser -d -v -o static/bundle.js",
-    "watch-server": "DEBUG=nodefoo* nodemon src/server -e js,css,ejs -i static/"
   }
 }
