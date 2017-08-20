@@ -59,15 +59,38 @@ function init (sessionStore) {
 
   // Set up static file serving
   const staticOpts = { maxAge: config.maxAge }
+
   app.use(express.static(path.join(config.root, 'static'), staticOpts))
 
-  const tachyonsPath = path.dirname(require.resolve('tachyons'))
-  app.use(express.static(tachyonsPath, staticOpts))
-
-  const hljsPath = path.join(
-    path.dirname(require.resolve('highlight.js')), '..', 'styles'
+  // serve /tachyons/yachyons.min.css
+  app.use(
+    '/tachyons',
+    express.static(path.dirname(require.resolve('tachyons')), staticOpts)
   )
-  app.use(express.static(hljsPath, staticOpts))
+
+  // serve /highlight/monokai-sublime.css
+  app.use(
+    '/highlight',
+    express.static(
+      path.join(path.dirname(require.resolve('highlight.js')), '..', 'styles'),
+      staticOpts
+    )
+  )
+
+  // serve /codemirror/codemirror.css
+  app.use(
+    '/codemirror',
+    express.static(path.dirname(require.resolve('codemirror')), staticOpts)
+  )
+
+  // serve /codemirror/monokai.css
+  app.use(
+    '/codemirror',
+    express.static(
+      path.join(path.dirname(require.resolve('codemirror')), '..', 'theme'),
+      staticOpts
+    )
+  )
 
   // Set up session handling
   app.use(session({

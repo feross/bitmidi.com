@@ -38,6 +38,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-register": "^6.26.0",
     "classnames": "^2.2.5",
+    "codemirror": "^5.28.0",
     "compression": "^1.6.2",
     "connect-sqlite3": "^0.9.9",
     "debug": "^3.0.0",
@@ -95,5 +96,9 @@
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-js & npm run watch-server",
     "watch-js": "watchify src/browser -d -v -o static/bundle.js",
+    "watch-server": "DEBUG=nodefoo* nodemon src/server -e js,css,ejs -i static/ -i src/views"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

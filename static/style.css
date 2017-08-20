@@ -6,6 +6,30 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
 
-.code-font {
+.code-font, .CodeMirror {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+/**
+ * Code editor
+ */
+
+.CodeMirror {
+  font-size: 14px;
+  border-radius: .25rem;
+  border: .125rem rgba(255, 255, 255, .4) solid;
+  height: 200px;
+}
+
+.CodeMirror-matchingbracket {
+  text-decoration: none !important; /* disable default style */
+  border-bottom: rgba(255, 255, 255, .5) 1px solid;
+}
+
+.CodeMirror-scroll {
+  padding: 1rem;
+}
+
+.CodeMirror-focused {
+  border-color: #d5008f;
 }
