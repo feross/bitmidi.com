@@ -1,12 +1,26 @@
 const express = require('express')
 
-const api = require('../api')
+const apis = require('../api')
 
 const router = express.Router()
 
-router.use('/:method', (req, res, next) => {
+// APIs are mounted as GET endpoints, except for the POST endpoints listed here
+const POST_APIS = new Set([
+  'snippet.add'
+])
+
+router.use('/:api/:method', (req, res, next) => {
+  const api = apis[req.params.api]
+  if (api == null || typeof api !== 'object') return next()
+
   const method = api[req.params.method]
   if (typeof method !== 'function') return next()
+
+  const methodSignature = req.params.api + '.' + req.params.method
+  if (POST_APIS.has(methodSignature) && req.method !== 'POST') {
+    return next(new Error('Route requires a POST request'))
+  }
+
   method(req.query, (err, result) => {
     if (err) {
       err.status = 404
