@@ -7,7 +7,10 @@ const Button = require('./button')
 const Link = require('./link')
 const Search = require('./search')
 
-const Header = (props) => {
+const Header = (props, context) => {
+  const { store } = context
+  const { userName } = store
+
   const statusBarHeight = detect.isSafariHomeApp
     ? 14
     : 0
@@ -61,6 +64,16 @@ const Header = (props) => {
           style={{ marginTop: -4 }}
         >
           Doc Page
+        </Button>
+        <Button
+          pill
+          color='white'
+          href={ userName ? '/auth/twitter/logout' : '/auth/twitter' }
+          class='mh1'
+          rel='external' /* router should not capture click */
+          style={{ marginTop: -4 }}
+        >
+          { userName ? `Logout (${userName})` : 'Login' }
         </Button>
       </nav>
     </header>

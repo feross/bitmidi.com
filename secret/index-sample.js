@@ -5,3 +5,8 @@ exports.opbeat = {
   organizationId: '',
   secretToken: ''
 }
+
+exports.twitter = {
+  consumerKey: '',
+  consumerSecret: ''
+}

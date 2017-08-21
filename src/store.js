@@ -27,6 +27,7 @@ function createStore (render, onFetchEnd) {
       height: 0,
       fetchCount: 0
     },
+    userName: null,
     doc: null,
     errors: [],
     snippets: [

@@ -13,6 +13,8 @@ router.get('*', (req, res) => {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onFetchEnd)
 
+  store.userName = (req.session.user && req.session.user.userName) || null
+
   const jsx = (
     <Provider store={store} dispatch={dispatch}>
       <App />

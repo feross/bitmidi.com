@@ -14,6 +14,7 @@ const config = require('../../config')
 const secret = require('../../secret')
 
 const routerApi = require('./router-api')
+const routerLogin = require('./router-login')
 const routerRender = require('./router-render')
 
 function init (sessionStore) {
@@ -128,6 +129,7 @@ function init (sessionStore) {
   })
 
   app.use('/api', routerApi)
+  app.use('/auth', routerLogin)
   app.use(routerRender)
 
   if (global.opbeat) app.use(global.opbeat.middleware.express())
