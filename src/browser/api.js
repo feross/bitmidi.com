@@ -1,18 +1,14 @@
 const debug = require('debug')('nodefoo:api')
-const memo = require('memo-async-lru')
+// const memo = require('memo-async-lru')
 const querystring = require('querystring')
 
 const config = require('../../config')
 const fetchConcat = require('../lib/simple-fetch')
 
-const MEMO_OPTS = {
-  max: 1000,
-  maxAge: 60 * 60 * 1000 // 1 hour
-}
-
-function doc (opts, cb) {
-  sendRequest('/api/doc', opts, cb)
-}
+// const MEMO_OPTS = {
+//   max: 1000,
+//   maxAge: 60 * 60 * 1000 // 1 hour
+// }
 
 function sendRequest (urlBase, params, cb) {
   const opts = {
@@ -39,5 +35,12 @@ function sendRequest (urlBase, params, cb) {
 }
 
 module.exports = {
-  doc: memo(doc, MEMO_OPTS)
+  doc: {
+    get: (opts, cb) => sendRequest('/api/doc/get', opts, cb)
+  },
+  snippet: {
+    add: (opts, cb) => sendRequest('/api/snippet/add', opts, cb),
+    get: (opts, cb) => sendRequest('/api/snippet/get', opts, cb),
+    all: (opts, cb) => sendRequest('/api/snippet/all', opts, cb)
+  }
 }

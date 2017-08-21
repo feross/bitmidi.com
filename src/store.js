@@ -30,24 +30,9 @@ function createStore (render, onFetchEnd) {
     userName: null,
     doc: null,
     errors: [],
-    snippets: [
-      {
-        title: 'Asyncronously read the contents of a file',
-        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
-      },
-      {
-        title: 'Asyncronously read the contents of a file',
-        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
-      },
-      {
-        title: 'Asyncronously read the contents of a file',
-        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
-      },
-      {
-        title: 'Asyncronously read the contents of a file',
-        code: '<pre class="hljs"><code>fs.readFile(<span class="hljs-string">\'/etc/passwd\'</span>, (err, data) =&gt; {\n  <span class="hljs-keyword">if</span> (err) <span class="hljs-keyword">throw</span> err;\n  <span class="hljs-built_in">console</span>.log(data);\n});\n</code></pre>'
-      }
-    ]
+
+    snippets: {},
+    topSnippetIds: []
   }
 
   const loc = new Location(routes, location => {
@@ -103,7 +88,9 @@ function createStore (render, onFetchEnd) {
 
       case 'FETCH_DOC': {
         fetchStart()
-        api.doc(data, (err, doc) => dispatch('FETCH_DOC_DONE', { err, doc }))
+        api.doc.get(data, (err, doc) => {
+          dispatch('FETCH_DOC_DONE', { err, doc })
+        })
         return update()
       }
 
@@ -112,6 +99,28 @@ function createStore (render, onFetchEnd) {
         const { err, doc } = data
         if (err) return addError(err)
         store.doc = doc
+        return update()
+      }
+
+      /**
+       * SNIPPET
+       */
+
+      case 'FETCH_SNIPPET_ALL': {
+        fetchStart()
+        api.snippet.all(data, (err, snippets) => {
+          dispatch('FETCH_SNIPPET_ALL_DONE', { err, snippets })
+        })
+        return update()
+      }
+
+      case 'FETCH_SNIPPET_ALL_DONE': {
+        fetchDone()
+        const { err, snippets } = data
+        if (err) return addError(err)
+
+        snippets.map(addSnippet)
+        store.topSnippetIds = snippets.map(snippet => snippet.id)
         return update()
       }
 
@@ -145,6 +154,10 @@ function createStore (render, onFetchEnd) {
     store.errors.push(error)
     if (config.isBrowser) window.alert(error)
     update()
+  }
+
+  function addSnippet (snippet) {
+    store.snippets[snippet.id] = snippet
   }
 
   let isRendering = false

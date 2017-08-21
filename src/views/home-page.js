@@ -11,15 +11,19 @@ class HomePage extends Component {
   load () {
     const { dispatch } = this.context
     dispatch('APP_TITLE', null)
+    dispatch('FETCH_SNIPPET_ALL')
   }
 
   render (props) {
     const { store } = this.context
-    const { snippets } = store
+    const { topSnippetIds, snippets } = store
+
+    const topSnippets = topSnippetIds.map(snippetId => snippets[snippetId])
+
     return (
       <div>
         <Heading class='tc'>Top code snippets</Heading>
-        {snippets.map(snippet => <Snippet snippet={snippet} />)}
+        {topSnippets.map(snippet => <Snippet snippet={snippet} />)}
       </div>
     )
   }

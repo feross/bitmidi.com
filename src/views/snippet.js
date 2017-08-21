@@ -29,10 +29,10 @@ class Snippet extends Component {
             backgroundColor: SALMON_COLOR
           }}
         >
-          {snippet.title}
+          {snippet.name}
         </h1>
         <div class='overflow-hidden br3 br--bottom'>
-          <div dangerouslySetInnerHTML={{__html: snippet.code}} />
+          <div dangerouslySetInnerHTML={{__html: snippet.code_html}} />
         </div>
       </article>
     )

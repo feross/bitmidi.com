@@ -3,6 +3,7 @@ const path = require('path')
 const sqlite3 = require('sqlite3')
 
 const config = require('../config')
+const highlight = require('./lib/highlight')
 
 // Enable verbose SQLite logs (disabled in production)
 if (!config.isProd) sqlite3.verbose()
@@ -17,6 +18,7 @@ function init () {
       id INTEGER PRIMARY KEY NOT NULL,
       name TEXT NOT NULL,
       code TEXT NOT NULL,
+      code_html TEXT NOT NULL,
       author TEXT NOT NULL
     );
   `
@@ -26,7 +28,7 @@ function init () {
 function add (snippet, cb) {
   assert(
     snippet != null && typeof snippet === 'object',
-    '"snippet" must be an obejct'
+    '"snippet" must be an object'
   )
   assert(
     typeof snippet.name === 'string',
@@ -42,13 +44,16 @@ function add (snippet, cb) {
   )
 
   const sql = `
-    INSERT INTO snippets (name, code, author)
-    VALUES ($name, $code, $author)
+    INSERT INTO snippets (name, code, code_html, author)
+    VALUES ($name, $code, $code_html, $author)
   `
+
+  const codeHtml = highlight(snippet.code, 'js')
 
   db.run(sql, {
     $name: snippet.name,
     $code: snippet.code,
+    $code_html: codeHtml,
     $author: snippet.author
   }, cb)
 }

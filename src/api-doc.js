@@ -1,6 +1,6 @@
 const assert = require('assert')
 const fs = require('fs')
-const highlight = require('highlight.js')
+const highlight = require('./lib/highlight')
 const markdownIt = require('markdown-it')
 const memo = require('memo-async-lru')
 const path = require('path')
@@ -20,13 +20,8 @@ const DOCS_PATH = path.join(config.root, 'docs')
 const markdown = markdownIt({
   html: true,
   highlight: function (str, lang) {
-    if (lang && highlight.getLanguage(lang)) {
-      try {
-        const html = highlight.highlight(lang, str).value
-        return `<pre class="hljs"><code>${html}</code></pre>`
-      } catch (err) {}
-    }
-    return '' // use external default escaping
+    const html = highlight(str, lang)
+    return html || '' // if null, use external default escaping
   }
 })
 
