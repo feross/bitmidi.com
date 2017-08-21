@@ -51,6 +51,7 @@ class CodeEditor extends Component {
 
     this._codeMirror.on('focus', this._onFocus)
     this._codeMirror.on('blur', this._onBlur)
+    this._codeMirror.on('change', this._onChange)
   }
 
   componentWillUnmount () {
@@ -59,6 +60,7 @@ class CodeEditor extends Component {
     this._codeMirror.toTextArea()
     this._codeMirror.off('focus', this._onFocus)
     this._codeMirror.off('blur', this._onBlur)
+    this._codeMirror.off('change', this._onChange)
 
     this._codeMirror = null
   }
@@ -84,6 +86,12 @@ class CodeEditor extends Component {
 
   _onBlur = () => {
     this.setState({ focused: false })
+  }
+
+  _onChange = () => {
+    const { onChange } = this.props
+    const value = this._codeMirror.getValue()
+    onChange(value)
   }
 }
 

@@ -1,27 +1,49 @@
 const express = require('express')
 
-const apis = require('../api')
+const api = require('../api')
 
 const router = express.Router()
 
-// APIs are mounted as GET endpoints, except for the POST endpoints listed here
-const POST_APIS = new Set([
-  'snippet.add'
-])
+router.get('/doc/get', (req, res, next) => {
+  api.doc.get(req.query, (err, result) => {
+    if (err) {
+      err.status = 404
+      return next(err)
+    }
+    res.json({ result })
+  })
+})
 
-router.use('/:api/:method', (req, res, next) => {
-  const api = apis[req.params.api]
-  if (api == null || typeof api !== 'object') return next()
+router.get('/snippet/get', (req, res, next) => {
+  api.snippet.get(req.query, (err, result) => {
+    if (err) {
+      err.status = 404
+      return next(err)
+    }
+    res.json({ result })
+  })
+})
 
-  const method = api[req.params.method]
-  if (typeof method !== 'function') return next()
+router.get('/snippet/all', (req, res, next) => {
+  api.snippet.all(req.query, (err, result) => {
+    if (err) {
+      err.status = 404
+      return next(err)
+    }
+    res.json({ result })
+  })
+})
 
-  const methodSignature = req.params.api + '.' + req.params.method
-  if (POST_APIS.has(methodSignature) && req.method !== 'POST') {
-    return next(new Error('Route requires a POST request'))
+router.post('/snippet/add', (req, res, next) => {
+  if (!req.session.user) {
+    return next(new Error('Must be logged in to add snippets'))
   }
 
-  method(req.query, (err, result) => {
+  const opts = Object.assign({}, req.query, {
+    author: req.session.user.userName
+  })
+
+  api.snippet.add(opts, (err, result) => {
     if (err) {
       err.status = 404
       return next(err)

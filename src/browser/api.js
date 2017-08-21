@@ -10,10 +10,19 @@ const fetchConcat = require('../lib/simple-fetch')
 //   maxAge: 60 * 60 * 1000 // 1 hour
 // }
 
-function sendRequest (urlBase, params, cb) {
+function sendGet () {
+  sendRequest('GET', ...arguments)
+}
+
+function sendPost () {
+  sendRequest('POST', ...arguments)
+}
+
+function sendRequest (method, urlBase, params, cb) {
   const opts = {
     url: urlBase + '?' + querystring.stringify(params),
     json: true,
+    method: method,
     timeout: config.apiTimeout
   }
   debug('request %s', opts.url)
@@ -36,11 +45,11 @@ function sendRequest (urlBase, params, cb) {
 
 module.exports = {
   doc: {
-    get: (opts, cb) => sendRequest('/api/doc/get', opts, cb)
+    get: (opts, cb) => sendGet('/api/doc/get', opts, cb)
   },
   snippet: {
-    add: (opts, cb) => sendRequest('/api/snippet/add', opts, cb),
-    get: (opts, cb) => sendRequest('/api/snippet/get', opts, cb),
-    all: (opts, cb) => sendRequest('/api/snippet/all', opts, cb)
+    add: (opts, cb) => sendPost('/api/snippet/add', opts, cb),
+    get: (opts, cb) => sendGet('/api/snippet/get', opts, cb),
+    all: (opts, cb) => sendGet('/api/snippet/all', opts, cb)
   }
 }

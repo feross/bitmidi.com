@@ -124,6 +124,23 @@ function createStore (render, onFetchEnd) {
         return update()
       }
 
+      // TODO: rename 'fetch' prefix to something better. 'async'?
+      case 'FETCH_SNIPPET_ADD': {
+        fetchStart()
+        api.snippet.add(data, (err, result) => {
+          dispatch('FETCH_SNIPPET_ADD_DONE', { err, result })
+        })
+        return update()
+      }
+
+      case 'FETCH_SNIPPET_ADD_DONE': {
+        fetchDone()
+        const { err, result } = data
+        if (err) return addError(err)
+
+        return update()
+      }
+
       /**
        * SEARCH
        */
