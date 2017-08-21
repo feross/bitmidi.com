@@ -43,35 +43,29 @@ const Header = (props, context) => {
       </div>
       <nav
         class='fl w-third dn db-m db-l v-mid tr'
-        style={{
-          marginTop: 2
-        }}
       >
         <Button
-          pill
-          color='white'
+          fill
+          color='purple'
           href='/submit'
           class='mh1'
-          style={{ marginTop: -4 }}
         >
           Submit
         </Button>
         <Button
-          pill
-          color='white'
+          fill
+          color='purple'
           href='/docs/fs/readfile'
           class='mh1'
-          style={{ marginTop: -4 }}
         >
           Doc Page
         </Button>
         <Button
-          pill
-          color='white'
-          href={ userName ? '/auth/twitter/logout' : '/auth/twitter' }
+          fill
+          color='purple'
+          href={userName ? '/auth/twitter/logout' : '/auth/twitter'}
           class='mh1'
           rel='external' /* router should not capture click */
-          style={{ marginTop: -4 }}
         >
           { userName ? `Logout (${userName})` : 'Login' }
         </Button>

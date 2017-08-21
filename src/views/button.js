@@ -21,10 +21,11 @@ const Button = (props) => {
     onClick = () => {},
     class: className,
     children,
+    style = {},
     ...rest
   } = props
 
-  let cls = ['link pointer bw1 dib ttu fw6 grow']
+  const cls = ['link pointer dib ttu fw6 grow v-btm']
 
   if (size === 'small') cls.push('f6 ph3 pv2')
   if (size === 'medium') cls.push('f5 ph3 pv2')
@@ -36,9 +37,19 @@ const Button = (props) => {
   if (pill) cls.push('br-pill')
   else cls.push('br3')
 
+  let ButtonElement
+  if (href === '#') {
+    ButtonElement = 'button'
+    cls.push('bn')
+    style['line-height'] = 'inherit'
+  } else {
+    ButtonElement = 'a'
+  }
+
   return (
-    <a
+    <ButtonElement
       class={c(cls, className)}
+      style={style}
       href={href}
       onClick={e => {
         if (href === '#') e.preventDefault()
@@ -47,7 +58,7 @@ const Button = (props) => {
       {...rest}
     >
       {children}
-    </a>
+    </ButtonElement>
   )
 }
 
