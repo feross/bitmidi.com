@@ -11,7 +11,6 @@ Object.assign(store, window.storeInit)
 
 // Show server-generated errors
 store.errors.map(error => window.alert(error))
-store.errors = []
 
 dispatch('LOCATION_REPLACE', window.location.pathname)
 update()
