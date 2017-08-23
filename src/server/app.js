@@ -6,7 +6,6 @@ const compress = require('compression')
 const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
-const http = require('http')
 const path = require('path')
 const session = require('express-session')
 
@@ -131,20 +130,6 @@ function init (sessionStore) {
   app.use('/api', routerApi)
   app.use('/auth', routerLogin)
   app.use(routerRender)
-
-  if (global.opbeat) app.use(global.opbeat.middleware.express())
-
-  app.use((err, req, res, next) => {
-    console.error(err.stack)
-    const status = typeof err.status === 'number' ? err.status : 500 // Internal Server Error
-    res.status(status)
-
-    const message = `${status} ${http.STATUS_CODES[status]}`
-    res.render('index', {
-      content: `<div id='app'>${message}</div>`,
-      store: { errors: [ message ] }
-    })
-  })
 
   return app
 }
