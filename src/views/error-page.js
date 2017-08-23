@@ -2,7 +2,7 @@ const { h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
 
-const NotFoundPage = (props, context) => {
+const ErrorPage = (props, context) => {
   const { store } = context
   const { errors } = store
 
@@ -13,4 +13,4 @@ const NotFoundPage = (props, context) => {
   )
 }
 
-module.exports = NotFoundPage
+module.exports = ErrorPage

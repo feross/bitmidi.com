@@ -179,7 +179,7 @@ function init (sessionStore) {
 
       if (err) {
         status = typeof err.status === 'number' ? err.status : 500 // Internal Server Error
-      } else if (location.name === 'not-found' || errors.length > 0) {
+      } else if (location.name === 'error' || errors.length > 0) {
         status = 404
       }
 
