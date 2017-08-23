@@ -42,8 +42,6 @@ router.get('/twitter/callback', (req, res, next) => {
     // Save the user object in the session object
     req.session.user = user
 
-    console.log(user)
-
     // Redirect user to the homepage
     res.redirect('/')
   })
