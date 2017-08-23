@@ -143,59 +143,59 @@ function init (sessionStore) {
   // Handle errors with the same server-side rendering path
   app.use((err, req, res, next) => handleRender(err, req, res))
 
-  function handleRender (err, req, res) {
-    const renderer = createRenderer()
-    const { store, dispatch } = createStore(update, onFetchEnd)
-
-    if (err) {
-      console.error(err.stack)
-      store.errors.push(err.message)
-    }
-
-    store.userName = (req.session.user && req.session.user.userName) || null
-
-    const jsx = (
-      <Provider store={store} dispatch={dispatch}>
-        <App />
-      </Provider>
-    )
-
-    dispatch('LOCATION_REPLACE', req.url)
-
-    if (store.app.fetchCount === 0) done()
-
-    function onFetchEnd () {
-      if (store.app.fetchCount === 0) process.nextTick(done)
-    }
-
-    function update () {
-      renderer.render(jsx)
-    }
-
-    function done () {
-      const { location, errors } = store
-
-      let status = 200
-
-      if (err) {
-        status = typeof err.status === 'number' ? err.status : 500 // Internal Server Error
-      } else if (location.name === 'error' || errors.length > 0) {
-        status = 404
-      }
-
-      res.status(status)
-
-      const content = renderer.html()
-      res.render('index', { content, store, title: store.app.title })
-    }
-  }
-
   return app
 }
 
-/**
- * Create a cache-busting hash for static assets like `bundle.js` and `style.css`
- */
+function handleRender (err, req, res) {
+  const renderer = createRenderer()
+  const { store, dispatch } = createStore(update, onFetchEnd)
+
+  if (err) {
+    console.error(err.stack)
+    store.errors.push(err.message)
+  }
+
+  store.userName = (req.session.user && req.session.user.userName) || null
+
+  const jsx = (
+    <Provider store={store} dispatch={dispatch}>
+      <App />
+    </Provider>
+  )
+
+  dispatch('LOCATION_REPLACE', req.url)
+
+  if (store.app.fetchCount === 0) done()
+
+  function onFetchEnd () {
+    if (store.app.fetchCount === 0) process.nextTick(done)
+  }
+
+  function update () {
+    renderer.render(jsx)
+  }
+
+  function done () {
+    const { location, errors } = store
+
+    let status = 200
+
+    if (err) {
+      status = typeof err.status === 'number'
+        ? err.status
+        : 500 // Internal Server Error
+    } else if (location.name === 'error' || errors.length > 0) {
+      status = 404
+    }
+
+    res.status(status)
+
+    const content = renderer.html()
+    res.render('index', { content, store, title: store.app.title })
+  }
+}
+
+// Create a cache-busting hash for static assets like `bundle.js` and `style.css`
 function createHash (data) {
   return crypto.createHash('sha256')
     .update(data)
