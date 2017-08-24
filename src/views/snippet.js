@@ -1,6 +1,8 @@
 const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
+const Link = require('./link')
+
 const SALMON_COLOR = '#FF5F4F'
 
 class Snippet extends Component {
@@ -30,6 +32,9 @@ class Snippet extends Component {
           }}
         >
           {snippet.name}
+          <Link href={snippet.author_url} class='fr'>
+            <img src={snippet.author_image} class='br-100' style={{ height: 30 }} />
+          </Link>
         </h1>
         <div class='overflow-hidden br3 br--bottom'>
           <div dangerouslySetInnerHTML={{__html: snippet.code_html}} />

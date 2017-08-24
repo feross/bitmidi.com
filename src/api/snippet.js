@@ -89,6 +89,7 @@ function populateSnippet (snippet, cb) {
   twitter.getUser({ screen_name: snippet.author }, (err, user) => {
     if (err) return cb(err)
     snippet.author_image = user.profile_image_url_https
+    snippet.author_url = `https://twitter.com/${snippet.author}`
     cb(null, snippet)
   })
 }
