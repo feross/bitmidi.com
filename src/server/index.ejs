@@ -34,13 +34,12 @@
       window.storeInit = <%- typeof store !== 'undefined' ? JSON.stringify(store) : '{}' %>
     </script>
     <script>
-      /* global ga */
+      window.GoogleAnalyticsObject = 'ga'
       window.ga = window.ga || function () {
-        (ga.q = ga.q || []).push(arguments)
+        (window.ga.q = window.ga.q || []).push(arguments)
       }
-      ga.l = Date.now()
-      // TODO
-      // ga('create', '', 'auto')
+      window.ga.l = Date.now()
+      window.ga('create', 'UA-3898076-23', 'auto')
     </script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script src='/bundle.js<%- hashes.bundle %>'></script>
