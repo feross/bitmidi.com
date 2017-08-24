@@ -88,7 +88,7 @@
   },
   "scripts": {
     "build": "npm run build-js && chmod 777 db/",
-    "build-js": "browserify -p bundle-collapser/plugin src/browser | minify > static/bundle.js",
+    "build-js": "browserify -p bundle-collapser/plugin -i preact/devtools src/browser | minify > static/bundle.js",
     "build-js-debug": "browserify -d --full-paths src/browser > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
