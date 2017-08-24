@@ -7,7 +7,7 @@ if (config.isProd) {
 
 const babelRegister = require('babel-register')
 
-// Automatically compile views (which contain JSX) when required, on the fly.
+// Automatically compile files which contain JSX when required, on the fly
 babelRegister({ extensions: ['.js'] })
 
 const ConnectSQLite = require('connect-sqlite3')
@@ -19,14 +19,13 @@ const unlimited = require('unlimited')
 
 const app = require('./app')
 
-unlimited() // Upgrade the max file descriptor limit
-
 const server = http.createServer()
 
 server.listen(config.port, (err) => {
   if (err) throw err
   console.log('Listening on port %s', server.address().port)
 
+  unlimited() // Upgrade the max file descriptor limit
   downgrade() // Set the process user identity to 'www-data'
 
   // Open DB as 'www-data' user
