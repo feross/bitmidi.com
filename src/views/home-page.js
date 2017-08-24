@@ -1,6 +1,7 @@
 const { Component, h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
+const Loader = require('./loader')
 const Snippet = require('./snippet')
 
 class HomePage extends Component {
@@ -9,14 +10,19 @@ class HomePage extends Component {
   }
 
   load () {
-    const { dispatch } = this.context
+    const { store, dispatch } = this.context
+    const { topSnippetIds } = store
     dispatch('APP_TITLE', null)
-    dispatch('FETCH_SNIPPET_ALL')
+    if (topSnippetIds == null) dispatch('FETCH_SNIPPET_ALL')
   }
 
   render (props) {
     const { store } = this.context
     const { topSnippetIds, snippets } = store
+
+    if (topSnippetIds == null) {
+      return <Loader center />
+    }
 
     const topSnippets = topSnippetIds.map(snippetId => snippets[snippetId])
 

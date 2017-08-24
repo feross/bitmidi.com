@@ -30,8 +30,8 @@
     <script>
       console.time('render')
       console.time('load')
-      // TODO: prevent redundant API calls on first page load
-      window.storeInit = <%- typeof store !== 'undefined' ? JSON.stringify(store) : '{}' %>
+      window.storeInit =
+        <%- typeof store !== 'undefined' ? JSON.stringify(store) : '{}' %>
     </script>
     <script>
       window.GoogleAnalyticsObject = 'ga'

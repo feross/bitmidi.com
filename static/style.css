@@ -42,3 +42,37 @@ pre.hljs {
 .CodeMirror, .hljs, .hljs code {
   font-size: 14px;
 }
+
+/**
+ * Animations (adapted from animate.css)
+ */
+
+.animate-fade-in {
+  animation-fill-mode: both;
+}
+
+.animate--normal {
+  animation-duration: 0.5s;
+}
+
+.animate--fast {
+  animation-duration: 0.25s;
+}
+
+.animate--delay {
+  animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation-name: fadeIn;
+}
