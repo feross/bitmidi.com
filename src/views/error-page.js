@@ -1,16 +1,31 @@
-const { h } = require('preact') /** @jsx h */
+const { h, Component } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
 
-const ErrorPage = (props, context) => {
-  const { store } = context
-  const { errors } = store
+class ErrorPage extends Component {
+  componentDidMount () {
+    this.load()
+  }
 
-  const firstError = errors[0] || 'Page Not Found'
+  load () {
+    const { dispatch } = this.context
+    const firstError = this.getFirstError()
+    dispatch('APP_TITLE', firstError)
+  }
 
-  return (
-    <Heading>Error – {firstError}</Heading>
-  )
+  render (props) {
+    const firstError = this.getFirstError()
+
+    return (
+      <Heading>Error – {firstError}</Heading>
+    )
+  }
+
+  getFirstError = () => {
+    const { store } = this.context
+    const { errors } = store
+    return errors[0] || 'Page Not Found'
+  }
 }
 
 module.exports = ErrorPage

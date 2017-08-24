@@ -16,13 +16,6 @@ class DocPage extends Component {
     if (doc == null) dispatch('FETCH_DOC', location.params)
   }
 
-  getTitle () {
-    const { store } = this.context
-    const { location } = store
-
-    return location.params.url
-  }
-
   render (props) {
     const { store } = this.context
     const { doc } = store
@@ -38,6 +31,13 @@ class DocPage extends Component {
         <p dangerouslySetInnerHTML={{__html: doc}} />
       </div>
     )
+  }
+
+  getTitle () {
+    const { store } = this.context
+    const { location } = store
+
+    return location.params.url
   }
 }
 

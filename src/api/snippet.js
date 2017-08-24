@@ -2,8 +2,8 @@ const assert = require('assert')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 
-const config = require('../config')
-const highlight = require('./lib/highlight')
+const config = require('../../config')
+const highlight = require('../highlight')
 
 // Enable verbose SQLite logs (disabled in production)
 if (!config.isProd) sqlite3.verbose()

@@ -1,3 +1,5 @@
+// TODO: publish to npm
+
 module.exports = createRenderer
 
 const { render } = require('preact')

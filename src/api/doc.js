@@ -1,11 +1,11 @@
 const assert = require('assert')
 const fs = require('fs')
-const highlight = require('./lib/highlight')
+const highlight = require('../highlight')
 const markdownIt = require('markdown-it')
 const memo = require('memo-async-lru')
 const path = require('path')
 
-const config = require('../config')
+const config = require('../../config')
 
 const MEMO_OPTS = {
   max: 50 * 1000,

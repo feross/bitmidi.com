@@ -2,8 +2,8 @@ const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
 class Input extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.state = {
       focused: false
     }
@@ -24,18 +24,18 @@ class Input extends Component {
           className
         )}
         spellCheck='false'
-        onFocus={this._onFocus}
-        onBlur={this._onBlur}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
         {...rest}
       />
     )
   }
 
-  _onFocus = () => {
+  onFocus = () => {
     this.setState({ focused: true })
   }
 
-  _onBlur = () => {
+  onBlur = () => {
     this.setState({ focused: false })
   }
 }

@@ -27,19 +27,19 @@ class SubmitPage extends Component {
           <Input
             placeholder='Snippet Name'
             class='mv3 w-50'
-            onChange={this._onInputChange}
+            onChange={this.onInputChange}
           />
           <CodeEditor
             placeholder='// Write code here...'
             class='mv3'
-            onChange={this._onCodeEditorChange}
+            onChange={this.onCodeEditorChange}
           />
           <Button
             size='medium'
             color='purple'
             fill
             disabled={isPending}
-            onClick={this._onClick}
+            onClick={this.onClick}
           >
             Submit
           </Button>
@@ -48,22 +48,22 @@ class SubmitPage extends Component {
     )
   }
 
-  _onInputChange = (event) => {
-    this._inputValue = event.target.value
+  onInputChange = (event) => {
+    this.inputValue = event.target.value
   }
 
-  _onCodeEditorChange = (value) => {
-    this._codeEditorValue = value
+  onCodeEditorChange = (value) => {
+    this.codeEditorValue = value
   }
 
-  _onClick = () => {
+  onClick = () => {
     const { dispatch } = this.context
 
     this.setState({ isPending: true })
 
     dispatch('FETCH_SNIPPET_ADD', {
-      name: this._inputValue,
-      code: this._codeEditorValue
+      name: this.inputValue,
+      code: this.codeEditorValue
     })
   }
 }

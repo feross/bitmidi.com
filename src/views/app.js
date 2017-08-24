@@ -8,20 +8,20 @@ const Header = require('./header')
 const Title = require('./title')
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-    this._onResizeThrottled = throttle(this._onResize.bind(this), 500)
+  constructor () {
+    super()
+    this.onResizeThrottled = throttle(this.onResize, 500)
   }
 
   componentDidMount () {
     if (config.isBrowser) {
-      this._onResize()
-      window.addEventListener('resize', this._onResizeThrottled)
+      this.onResize()
+      window.addEventListener('resize', this.onResizeThrottled)
     }
   }
 
   componentWillUnmount () {
-    window.removeEventListener('resize', this._onResizeThrottled)
+    window.removeEventListener('resize', this.onResizeThrottled)
   }
 
   render (props) {
@@ -42,7 +42,7 @@ class App extends Component {
     )
   }
 
-  _onResize () {
+  onResize = () => {
     const { dispatch } = this.context
     const width = window.innerWidth
     const height = window.innerHeight
