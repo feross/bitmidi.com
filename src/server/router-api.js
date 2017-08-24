@@ -45,6 +45,13 @@ router.post('/snippet/add', (req, res, next) => {
   })
 })
 
+router.get('/twitter/getUser', (req, res, next) => {
+  api.twitter.getUser(req.query, (err, result) => {
+    if (err) return sendError(next, err, 404)
+    res.json({ result })
+  })
+})
+
 router.get('*', (req, res, next) => {
   const err = new Error('404 Not Found')
   sendError(next, err, 404)

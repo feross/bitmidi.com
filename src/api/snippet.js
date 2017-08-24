@@ -1,9 +1,11 @@
 const assert = require('assert')
+const parallel = require('run-parallel')
 const path = require('path')
 const sqlite3 = require('sqlite3')
 
 const config = require('../../config')
 const highlight = require('../highlight')
+const twitter = require('./twitter')
 
 // Enable verbose SQLite logs (disabled in production)
 if (!config.isProd) sqlite3.verbose()
@@ -69,12 +71,26 @@ function get (opts, cb) {
   )
 
   const sql = 'SELECT * FROM snippets WHERE id = $id'
-  db.get(sql, { $id: opts.id }, cb)
+  db.get(sql, { $id: opts.id }, (err, snippet) => {
+    if (err) return cb(err)
+    populateSnippet(snippet, cb)
+  })
 }
 
 function all (opts, cb) {
   const sql = 'SELECT * FROM snippets'
-  db.all(sql, cb)
+  db.all(sql, (err, snippets) => {
+    if (err) return cb(err)
+    parallel(snippets.map(snippet => cb => populateSnippet(snippet, cb)), cb)
+  })
+}
+
+function populateSnippet (snippet, cb) {
+  twitter.getUser({ screen_name: snippet.author }, (err, user) => {
+    if (err) return cb(err)
+    snippet.author_image = user.profile_image_url_https
+    cb(null, snippet)
+  })
 }
 
 module.exports = {
