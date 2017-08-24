@@ -52,7 +52,7 @@
     "markdown-it": "^8.3.2",
     "memo-async-lru": "^1.0.1",
     "opbeat": "^4.14.0",
-    "path-to-regexp": "^1.7.0",
+    "path-to-regexp": "^2.0.0",
     "preact": "^8.2.1",
     "preact-context-provider": "^1.0.0",
     "run-parallel": "^1.1.6",
