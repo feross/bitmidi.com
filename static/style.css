@@ -18,7 +18,7 @@
   font-size: 14px;
   border-radius: .25rem;
   border: .125rem rgba(255, 255, 255, .4) solid;
-  height: 200px;
+  height: auto;
 }
 
 .CodeMirror-matchingbracket {
@@ -27,7 +27,11 @@
 }
 
 .CodeMirror-scroll {
-  padding: 1rem;
+  margin-bottom: -20px; /* default: -30px */
+  margin-right: -20px; /* default: -30px */
+  margin-top: 10px; /* default: 0 */
+  margin-left: 10px; /* default: 0 */
+  min-height: 200px;
 }
 
 .CodeMirror-focused {
@@ -37,6 +41,7 @@
 pre.hljs {
   margin: 0; /* disable browser default style */
   padding: 1em; /* increase paddding */
+  white-space: pre-wrap; /* wrap long lines */
 }
 
 .CodeMirror, .hljs, .hljs code {
