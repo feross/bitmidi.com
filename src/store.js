@@ -32,7 +32,7 @@ function createStore (render, onFetchEnd) {
     errors: [],
 
     snippets: {},
-    topSnippetIds: []
+    topSnippetIds: null
   }
 
   const loc = new Location(routes, location => {

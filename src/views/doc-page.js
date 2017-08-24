@@ -1,6 +1,7 @@
 const { Component, h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
+const Loader = require('./loader')
 
 class DocPage extends Component {
   componentDidMount () {
@@ -25,6 +26,10 @@ class DocPage extends Component {
   render (props) {
     const { store } = this.context
     const { doc } = store
+
+    if (doc == null) {
+      return <Loader center />
+    }
 
     const title = this.getTitle()
     return (
