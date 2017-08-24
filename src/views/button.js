@@ -13,14 +13,15 @@ const c = require('classnames')
 
 const Button = (props) => {
   const {
-    size = 'small',
-    fill = false,
-    pill = false,
+    children,
+    class: className,
     color = 'dark-pink',
+    disabled = false,
+    fill = false,
     href = '#',
     onClick = () => {},
-    class: className,
-    children,
+    pill = false,
+    size = 'small',
     style = {},
     ...rest
   } = props
@@ -37,6 +38,8 @@ const Button = (props) => {
   if (pill) cls.push('br-pill')
   else cls.push('br3')
 
+  if (disabled) cls.push('opacity-60')
+
   let ButtonElement
   if (href === '#') {
     ButtonElement = 'button'
@@ -50,6 +53,7 @@ const Button = (props) => {
     <ButtonElement
       class={c(cls, className)}
       style={style}
+      disabled={disabled}
       href={href}
       onClick={e => {
         if (href === '#') e.preventDefault()
