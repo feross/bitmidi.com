@@ -52,9 +52,10 @@ router.post('/snippet/add', (req, res, next) => {
   })
 })
 
-router.get('*', (req, res) => {
-  res.status(404)
-  res.json({ error: '404 Not Found' })
+router.get('*', (req, res, next) => {
+  const err = new Error('404 Not Found')
+  err.status = 404
+  next(err)
 })
 
 if (global.opbeat) router.use(global.opbeat.middleware.express())
