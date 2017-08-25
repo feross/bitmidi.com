@@ -30,7 +30,7 @@ function createRenderer () {
 }
 
 function serializeHtml (el) {
-  if (el.nodeType === 3) return enc(el.textContent)
+  if (el.nodeType === 3) return encXML(el.textContent)
 
   const nodeName = el.nodeName.toLowerCase()
   const attributes = el.attributes.map(attr).join('')
@@ -45,5 +45,14 @@ function serializeHtml (el) {
   return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
 }
 
-let attr = a => ` ${a.name}="${enc(a.value)}"`
-let enc = s => s.replace(/[&'"<>]/g, a => `&#${a};`)
+function encXML (s) {
+  return s.replace(/[&<>]/g, a => `&#${a};`)
+}
+
+function encAttr (s) {
+  return s.replace(/[&'"<>]/g, a => `&#${a};`)
+}
+
+function attr (a) {
+  return ` ${a.name}="${encAttr(a.value)}"`
+}
