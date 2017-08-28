@@ -11,5 +11,5 @@ module.exports = [
   ['home', '/', HomePage],
   ['doc', '/docs/:url+', DocPage],
   ['submit', '/submit', SubmitPage],
-  ['error', '*', ErrorPage]
+  ['error', '(.*)', ErrorPage]
 ]
