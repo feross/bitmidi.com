@@ -64,8 +64,15 @@ class Location {
     while (el && el.nodeName !== 'A') el = el.parentNode
     if (!el || el.nodeName !== 'A') return
 
-    // Ignore if tag has 'download' or rel='external' attribute
-    if (el.hasAttribute('download') || el.getAttribute('rel') === 'external') return
+    // Ignore if tag has 'download' attribute
+    if (el.hasAttribute('download')) return
+
+    // Ignore if tag has rel='external' attribute
+    const rel = el.getAttribute('rel')
+    if (rel && rel.split(' ').includes('external')) return
+
+    // Ignore if link has a 'target' attribute
+    if (el.target) return
 
     // Ignore if link points to current page and uses a hash
     const href = el.getAttribute('href')
@@ -73,9 +80,6 @@ class Location {
 
     // Ignore if link contains 'mailto:'
     if (href && href.indexOf('mailto:') > -1) return
-
-    // Ignore if link has a target
-    if (el.target) return
 
     // Ignore if link is not from the same origin
     if (el.origin !== window.location.origin) return
