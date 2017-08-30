@@ -15,14 +15,14 @@ class SubmitPage extends Component {
 
   load () {
     const { dispatch } = this.context
-    dispatch('APP_TITLE', 'Submit a Code Snippet')
+    dispatch('APP_TITLE', 'Add a Code Snippet')
   }
 
   render (props) {
     const { isPending } = this.state
     return (
       <div>
-        <Heading>Submit a Code Snippet</Heading>
+        <Heading>Add a Code Snippet</Heading>
         <div>
           <Input
             placeholder='Snippet Name'

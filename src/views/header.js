@@ -8,49 +8,51 @@ const Header = (props, context) => {
   const { store } = context
   const { userName } = store
 
+  let $logoutButton
+  if (userName) {
+    $logoutButton = (
+      <Button
+        class='mh1'
+        color='red'
+        href={'/auth/twitter/logout'}
+        pill
+        external
+        size='medium'
+      >
+        Logout ({userName})
+      </Button>
+    )
+  }
+
   return (
     <header
       id='header'
-      class='fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-dark-pink'
+      class='fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-gold h3'
       style={{
-        height: 60,
-        paddingTop: 12
+        height: 48,
+        paddingTop: 6
       }}
     >
-      <div class='fl w-third v-mid pl1'>
-        <Link class='dib' href='/'>
-          <div class='white f3'>NodeFoo</div>
+      <div class='fl w-third'>
+        <Link href='/'>
+          <div class='lh-copy white f3'>NodeFoo</div>
         </Link>
       </div>
-      <div class='fl w-two-thirds w-third-m w-third-l v-mid pl4 pr1 ph2-m ph0-l'>
+      <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
         <Search class='w-100' />
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
         <Button
+          class='mh1'
+          color='red'
           fill
-          color='purple'
           href='/submit'
-          class='mh1'
+          pill
+          size='medium'
         >
-          Submit
+          Add a snippet ✨
         </Button>
-        <Button
-          fill
-          color='purple'
-          href='/docs/fs/readfile'
-          class='mh1'
-        >
-          Doc Page
-        </Button>
-        <Button
-          fill
-          color='purple'
-          href={userName ? '/auth/twitter/logout' : '/auth/twitter'}
-          class='mh1'
-          rel='external' /* router should not capture click */
-        >
-          { userName ? `Logout (${userName})` : 'Login' }
-        </Button>
+        {$logoutButton}
       </nav>
     </header>
   )
