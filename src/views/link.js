@@ -5,8 +5,10 @@ const Link = (props) => {
   const {
     children,
     class: className,
-    href = '#',
-    onClick = () => {},
+    href,
+    onClick,
+    external = false, /* router should not capture click */
+    newtab = false, /* open link in new tab */
     ...rest
   } = props
 
@@ -14,10 +16,9 @@ const Link = (props) => {
     <a
       class={c('link', className)}
       href={href}
-      onClick={e => {
-        if (href === '#') e.preventDefault()
-        onClick(e)
-      }}
+      onClick={onClick}
+      rel={c(external && 'external', newtab && 'noopener')}
+      target={newtab ? '_blank' : null}
       {...rest}
     >
       {children}

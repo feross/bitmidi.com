@@ -1,7 +1,7 @@
 const { h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
-// const Link = require('./Link') // TODO: convert to use Link
+const Link = require('./Link')
 
 /**
  * Basic Button
@@ -18,47 +18,44 @@ const Button = (props) => {
     color = 'dark-pink',
     disabled = false,
     fill = false,
-    href = '#',
-    onClick = () => {},
+    href,
+    onClick,
     pill = false,
     size = 'small',
     style = {},
     ...rest
   } = props
 
-  const cls = ['link pointer dib ttu fw6 grow v-btm']
+  const cls = ['link pointer dib ttu fw6 grow v-mid ba']
 
   if (size === 'small') cls.push('f6 ph3 pv2')
   if (size === 'medium') cls.push('f5 ph3 pv2')
   if (size === 'large') cls.push('f3 ph4 pv3')
 
-  if (fill) cls.push('white', `bg-${color}`)
-  else cls.push('ba', color)
+  if (fill) cls.push('white', `bg-${color}`, `b--${color}`)
+  else cls.push(color)
 
   if (pill) cls.push('br-pill')
   else cls.push('br3')
 
   if (disabled) cls.push('opacity-60')
 
-  let ButtonElement
-  if (href === '#') {
+  let ButtonElement = Link
+
+  if (href == null) {
     ButtonElement = 'button'
     cls.push('bn')
     style['line-height'] = 'inherit'
-  } else {
-    ButtonElement = 'a'
   }
 
   return (
     <ButtonElement
       class={c(cls, className)}
-      style={style}
-      disabled={disabled}
+      disabled={ButtonElement === 'button' && disabled}
       href={href}
-      onClick={e => {
-        if (href === '#') e.preventDefault()
-        onClick()
-      }}
+      onClick={onClick}
+      style={style}
+      type={ButtonElement === 'button' && 'button'}
       {...rest}
     >
       {children}
