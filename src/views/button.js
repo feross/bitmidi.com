@@ -26,11 +26,11 @@ const Button = (props) => {
     ...rest
   } = props
 
-  const cls = ['link pointer dib ttu fw6 grow v-mid ba']
+  const cls = ['link pointer dib ttu fw6 grow v-mid ba sans-serif']
 
   if (size === 'small') cls.push('f6 ph3 pv2')
   if (size === 'medium') cls.push('f5 ph3 pv2')
-  if (size === 'large') cls.push('f3 ph4 pv3')
+  if (size === 'large') cls.push('f4 ph4 pv3')
 
   if (fill) cls.push('white', `bg-${color}`, `b--${color}`)
   else cls.push(color)
@@ -44,7 +44,6 @@ const Button = (props) => {
 
   if (href == null) {
     ButtonElement = 'button'
-    cls.push('bn')
     style['line-height'] = 'inherit'
   }
 
