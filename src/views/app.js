@@ -5,6 +5,7 @@ const config = require('../../config')
 const routes = require('../routes')
 
 const Header = require('./header')
+const Footer = require('./footer')
 const Title = require('./title')
 
 class App extends Component {
@@ -36,8 +37,9 @@ class App extends Component {
         <Header />
         <div class='mt4 pa2 pa3-m pa3-l mw7 center'>
           <Page />
+          {errors.map(err => <small>{err}</small>)}
+          <Footer />
         </div>
-        {errors.map(err => <small>{err}</small>)}
       </div>
     )
   }
