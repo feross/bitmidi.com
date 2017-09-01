@@ -1,12 +1,13 @@
 const { h } = require('preact') /** @jsx h */
+const c = require('classnames')
 
 const Heading = (props) => {
-  const { children, ...rest } = props
+  const { children, class: className, ...rest } = props
 
   return (
-    <h2 {...rest}>
+    <h1 class={c('mv2 f3', className)} {...rest}>
       {children}
-    </h2>
+    </h1>
   )
 }
 

@@ -26,7 +26,7 @@ class SubmitPage extends Component {
         <div>
           <Input
             placeholder='Snippet Name'
-            class='mv3 w-50'
+            class='mv3 w-70'
             onChange={this.onInputChange}
           />
           <CodeEditor
@@ -36,7 +36,8 @@ class SubmitPage extends Component {
           />
           <Button
             size='medium'
-            color='purple'
+            color='red'
+            pill
             fill
             disabled={isPending}
             onClick={this.onClick}
