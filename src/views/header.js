@@ -8,6 +8,22 @@ const Header = (props, context) => {
   const { store } = context
   const { userName } = store
 
+  let $submitButton
+  if (store.location.name !== 'submit') {
+    $submitButton = (
+      <Button
+        class='mh1'
+        color='red'
+        fill
+        href='/submit'
+        pill
+        size='medium'
+      >
+        Add a snippet ✨
+      </Button>
+    )
+  }
+
   let $logoutButton
   if (userName) {
     $logoutButton = (
@@ -42,16 +58,7 @@ const Header = (props, context) => {
         <Search class='w-100' />
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
-        <Button
-          class='mh1'
-          color='red'
-          fill
-          href='/submit'
-          pill
-          size='medium'
-        >
-          Add a snippet ✨
-        </Button>
+        {$submitButton}
         {$logoutButton}
       </nav>
     </header>
