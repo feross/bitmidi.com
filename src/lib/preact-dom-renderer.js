@@ -45,12 +45,20 @@ function serializeHtml (el) {
   return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
 }
 
+const charMap = {
+  '&': '&amp;',
+  '\'': '&apos;',
+  '"': '&quot;',
+  '<': '&lt;',
+  '>': '&gt;'
+}
+
 function encXML (s) {
-  return s.replace(/[&<>]/g, a => `&#${a};`)
+  return s.replace(/[&<>]/g, a => charMap[a])
 }
 
 function encAttr (s) {
-  return s.replace(/[&'"<>]/g, a => `&#${a};`)
+  return s.replace(/[&'"<>]/g, a => charMap[a])
 }
 
 function attr (a) {

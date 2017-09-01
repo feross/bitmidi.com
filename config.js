@@ -24,7 +24,7 @@ exports.port = isProd
 /**
  * Name of the site
  */
-exports.name = 'NodeFoo'
+exports.name = 'Node Foo'
 
 /**
  * Description of the site
