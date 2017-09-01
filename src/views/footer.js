@@ -6,9 +6,9 @@ const Footer = (props, context) => {
   const { store } = context
   const { userName } = store
 
-  let $submitButton
+  let $submitLink
   if (store.location.name !== 'submit') {
-    $submitButton = [
+    $submitLink = [
       <FooterLink href='/submit'>Add a snippet</FooterLink>,
       <FooterDivider />
     ]
@@ -20,7 +20,11 @@ const Footer = (props, context) => {
         Built by <FooterLink href='https://twitter.com/feross'>@feross</FooterLink>
       </span>
       <FooterDivider />
-      {$submitButton}
+      <span>
+        Powered by <FooterLink href='https://github.com/feross/nodefoo.com' newtab>open source</FooterLink>
+      </span>
+      <FooterDivider />
+      {$submitLink}
       <FooterLink href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
         { userName ? `Logout (${userName})` : 'Login with Twitter' }
       </FooterLink>
