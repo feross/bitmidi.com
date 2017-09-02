@@ -22,13 +22,6 @@ if (config.isBrowser) {
 }
 
 class CodeEditor extends Component {
-  constructor () {
-    super()
-    this.state = {
-      focused: false
-    }
-  }
-
   componentDidMount () {
     if (!config.isBrowser) return
 
@@ -49,8 +42,6 @@ class CodeEditor extends Component {
       viewportMargin: Infinity
     })
 
-    this._codeMirror.on('focus', this.onFocus)
-    this._codeMirror.on('blur', this.onBlur)
     this._codeMirror.on('change', this.onChange)
   }
 
@@ -58,19 +49,14 @@ class CodeEditor extends Component {
     if (!config.isBrowser) return
 
     this._codeMirror.toTextArea()
-    this._codeMirror.off('focus', this.onFocus)
-    this._codeMirror.off('blur', this.onBlur)
     this._codeMirror.off('change', this.onChange)
 
     this._codeMirror = null
   }
 
   render (props) {
-    const { focused } = this.state
-    const borderColor = focused ? 'b--dark-pink' : 'b--black-50'
-
     return (
-      <div class={c('br2', borderColor, props.class)}>
+      <div class={props.class}>
         <textarea ref={this.ref} />
       </div>
     )
@@ -78,14 +64,6 @@ class CodeEditor extends Component {
 
   ref = (elem) => {
     this.elem = elem
-  }
-
-  onFocus = () => {
-    this.setState({ focused: true })
-  }
-
-  onBlur = () => {
-    this.setState({ focused: false })
   }
 
   onChange = () => {

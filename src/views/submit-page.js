@@ -6,11 +6,14 @@ const Heading = require('./heading')
 const Input = require('./input')
 
 class SubmitPage extends Component {
-  componentDidMount () {
-    this.load()
+  constructor () {
+    super()
     this.state = {
       isPending: false
     }
+  }
+  componentDidMount () {
+    this.load()
   }
 
   load () {
@@ -22,7 +25,7 @@ class SubmitPage extends Component {
     const { isPending } = this.state
     return (
       <div>
-        <Heading>Add a Code Snippet</Heading>
+        <Heading>Add a Code Snippet ✨</Heading>
         <div>
           <Input
             placeholder='Snippet Name'
@@ -36,13 +39,12 @@ class SubmitPage extends Component {
           />
           <Button
             size='medium'
-            color='red'
             pill
             fill
             disabled={isPending}
             onClick={this.onClick}
           >
-            Submit
+            Submit 🌟
           </Button>
         </div>
       </div>

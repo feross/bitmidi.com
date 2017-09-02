@@ -10,10 +10,10 @@ class DocPage extends Component {
 
   load () {
     const { store, dispatch } = this.context
-    const { doc, location } = store
+    const { location } = store
 
     dispatch('APP_TITLE', this.getTitle())
-    if (doc == null) dispatch('FETCH_DOC', location.params)
+    dispatch('FETCH_DOC', location.params)
   }
 
   render (props) {

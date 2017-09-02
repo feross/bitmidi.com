@@ -1,17 +1,17 @@
 // TODO: publish to npm
 
-/* global fetch */
+/* global fetch, Headers */
 
 module.exports = simpleFetch
 
 function simpleFetch (opts, cb) {
   opts = typeof opts === 'string' ? {url: opts} : Object.assign({}, opts)
 
-  if (opts.headers == null) opts.headers = {}
+  opts.headers = new Headers(opts.headers)
 
-  if (opts.json) opts.headers.accept = 'application/json'
+  if (opts.json) opts.headers.set('accept', 'application/json')
   if (opts.json && opts.body) {
-    opts.headers['content-type'] = 'application/json'
+    opts.headers.set('content-type', 'application/json')
     opts.body = JSON.stringify(opts.body)
   }
   if (opts.body && !opts.method) opts.method = 'POST'

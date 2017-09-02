@@ -5,15 +5,16 @@ const Link = require('./link')
 const Search = require('./search')
 
 const Header = (props, context) => {
-  const { store } = context
-  const { userName } = store
+  const { store, theme } = context
+  const { location, userName } = store
+  const { headerColor, mainColor } = theme
 
   let $submitButton
-  if (store.location.name !== 'submit') {
+  if (location.name !== 'submit') {
     $submitButton = (
       <Button
         class='mh1'
-        color='red'
+        color={mainColor}
         fill
         href='/submit'
         pill
@@ -29,7 +30,7 @@ const Header = (props, context) => {
     $logoutButton = (
       <Button
         class='mh1'
-        color='red'
+        color={mainColor}
         href={'/auth/twitter/logout'}
         pill
         external
@@ -43,9 +44,9 @@ const Header = (props, context) => {
   return (
     <header
       id='header'
-      class='fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-gold h3'
+      class={`fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-${headerColor} h3`}
       style={{
-        height: 48,
+        height: 50,
         paddingTop: 6
       }}
     >

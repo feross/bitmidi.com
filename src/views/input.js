@@ -12,14 +12,15 @@ class Input extends Component {
   render (props) {
     const { class: className, ...rest } = props
     const { focused } = this.state
+    const { mainColor } = this.context.theme
 
-    const borderColor = focused ? 'b--dark-pink' : 'b--black-50'
+    const borderColor = focused ? `b--${mainColor}` : 'b--black-50'
 
     return (
       <input
         type='text'
         class={c(
-          'input-reset ba bw1 ph3 pv2 br2 outline-0 db',
+          'db input-reset ba bw1 ph3 pv2 br2 outline-0',
           borderColor,
           className
         )}

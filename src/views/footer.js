@@ -15,7 +15,7 @@ const Footer = (props, context) => {
   }
 
   return (
-    <footer id='footer' class='gray w-100 cf mv5 tc'>
+    <footer id='footer' class='f6 silver w-100 cf mt5 mb4 tc'>
       <span>
         Built by <FooterLink href='https://twitter.com/feross'>@feross</FooterLink>
       </span>
@@ -32,9 +32,17 @@ const Footer = (props, context) => {
   )
 }
 
-const FooterLink = (props) => {
+const FooterLink = (props, context) => {
   const { children, ...rest } = props
-  return <Link class='light-red hover-dark-red underline-hover' {...rest}>{children}</Link>
+  const { mainColor } = context.theme
+  return (
+    <Link
+      class={`${mainColor} underline-hover`}
+      {...rest}
+    >
+      {children}
+    </Link>
+  )
 }
 
 const FooterDivider = () => {

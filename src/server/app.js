@@ -152,13 +152,13 @@ function handleRender (err, req, res) {
 
   if (err) {
     console.error(err.stack)
-    store.errors.push(err.message)
+    store.errors.push({ message: err.message, code: err.code })
   }
 
   store.userName = (req.session.user && req.session.user.userName) || null
 
   const jsx = (
-    <Provider store={store} dispatch={dispatch}>
+    <Provider store={store} dispatch={dispatch} theme={config.theme}>
       <App />
     </Provider>
   )

@@ -2,8 +2,12 @@
  * Single-purpose classes
  */
 
-.code-font, .CodeMirror, .hljs, .hljs code {
+.code-font, .CodeMirror, .hljs code {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.shadow-6 {
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
 }
 
 /**
@@ -16,7 +20,7 @@
 }
 
 /**
- * Code editor
+ * CodeMirror tweaks
  */
 
 .CodeMirror {
@@ -36,11 +40,11 @@
   margin-right: -18px; /* default: -30px */
   margin-top: 12px; /* default: 0 */
   margin-left: 12px; /* default: 0 */
-  min-height: 200px;
+  min-height: 130px;
 }
 
 .CodeMirror-focused {
-  border-color: #d5008f;
+  border-color: #357edd; /* tachyons: blue */
 }
 
 pre.hljs {

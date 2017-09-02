@@ -3,6 +3,7 @@ const Provider = require('preact-context-provider')
 
 const App = require('../views/app')
 const createStore = require('../store')
+const config = require('../../config')
 
 const { store, dispatch } = createStore(update)
 let root = document.getElementById('app')
@@ -10,14 +11,15 @@ let root = document.getElementById('app')
 Object.assign(store, window.storeInit)
 
 // Show server-generated errors
-store.errors.map(error => window.alert(error))
+store.errors.map(error => window.alert(error.message))
 
 dispatch('LOCATION_REPLACE', window.location.pathname)
+dispatch('RUN_PENDING_DISPATCH')
 update()
 
 function update () {
   const jsx = (
-    <Provider store={store} dispatch={dispatch}>
+    <Provider store={store} dispatch={dispatch} theme={config.theme}>
       <App />
     </Provider>
   )

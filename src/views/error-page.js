@@ -10,21 +10,21 @@ class ErrorPage extends Component {
   load () {
     const { dispatch } = this.context
     const firstError = this.getFirstError()
-    dispatch('APP_TITLE', firstError)
+    dispatch('APP_TITLE', firstError.message)
   }
 
   render (props) {
     const firstError = this.getFirstError()
 
     return (
-      <Heading>Error – {firstError}</Heading>
+      <Heading>Error – {firstError.message}</Heading>
     )
   }
 
   getFirstError = () => {
     const { store } = this.context
     const { errors } = store
-    return errors[0] || 'Page Not Found'
+    return errors[0] || { message: 'Page Not Found' }
   }
 }
 

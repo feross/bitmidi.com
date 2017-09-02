@@ -69,4 +69,9 @@ exports.apiTimeout = 30 * 1000
 /**
  * User agent for API requests
  */
-// exports.apiUserAgent = 'NodeFoo/1.0.0 (https://nodefoo.com)'
+exports.apiUserAgent = 'NodeFoo/1.0.0 (https://nodefoo.com)'
+
+exports.theme = {
+  mainColor: 'blue',
+  headerColor: 'yellow'
+}

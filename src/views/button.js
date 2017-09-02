@@ -11,11 +11,11 @@ const Link = require('./link')
  * http://tachyons.io/components/buttons/pill/index.html
  */
 
-const Button = (props) => {
+const Button = (props, context) => {
   const {
     children,
     class: className,
-    color = 'dark-pink',
+    color = context.theme.mainColor,
     disabled = false,
     fill = false,
     href,
@@ -26,7 +26,7 @@ const Button = (props) => {
     ...rest
   } = props
 
-  const cls = ['link pointer dib ttu fw6 grow v-mid ba sans-serif']
+  const cls = ['link pointer dib ttu fw6 grow v-mid ba bw1 sans-serif']
 
   if (size === 'small') cls.push('f6 ph3 pv2')
   if (size === 'medium') cls.push('f5 ph3 pv2')

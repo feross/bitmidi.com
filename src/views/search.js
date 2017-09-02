@@ -2,16 +2,28 @@ const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
 class Search extends Component {
+  constructor () {
+    super()
+    this.state = {
+      focused: false
+    }
+  }
+
   render (props) {
-    const { store } = this.context
-    const { lastSearch } = store
+    const { class: className, ...rest } = props
+    const { lastSearch } = this.context.store
+    const { mainColor } = this.context.theme
+    const { focused } = this.state
+
+    const borderColor = focused ? `b--${mainColor}` : 'b--black-30'
 
     return (
       <input
         type='text'
         class={c(
-          'input-reset ba b--black-20 ph3 pv2 br-pill outline-0 db',
-          props.class
+          'dib input-reset ba bw1 ph3 pv2 br-pill outline-0 sans-serif',
+          borderColor,
+          className
         )}
         spellCheck='false'
         placeholder='Search'
@@ -19,6 +31,8 @@ class Search extends Component {
         onInput={this.onInput}
         onKeyPress={this.onKeyPress}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        {...rest}
       />
     )
   }
@@ -42,8 +56,13 @@ class Search extends Component {
   }
 
   onFocus = (event) => {
+    this.setState({ focused: true })
     const value = event.target.value
     if (value.trim() !== '') this.dispatch(value)
+  }
+
+  onBlur = () => {
+    this.setState({ focused: false })
   }
 }
 

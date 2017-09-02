@@ -37,6 +37,8 @@ function get (opts, cb) {
     if (err && err.code === 'ENOENT') {
       err.message = `Doc "${url}" is not found`
       return cb(err)
+    } else if (err) {
+      return cb(err)
     }
     const html = markdown.render(text)
     cb(null, html)

@@ -127,6 +127,9 @@ function createStore (render, onFetchEnd) {
       // TODO: rename 'fetch' prefix to something better. 'async'?
       case 'FETCH_SNIPPET_ADD': {
         fetchStart()
+        if (store.userName == null) {
+          return addPendingDispatch(type, data, '/auth/twitter')
+        }
         api.snippet.add(data, (err, result) => {
           dispatch('FETCH_SNIPPET_ADD_DONE', { err, result })
         })
@@ -135,9 +138,8 @@ function createStore (render, onFetchEnd) {
 
       case 'FETCH_SNIPPET_ADD_DONE': {
         fetchDone()
-        const { err, result } = data
+        const { err } = data
         if (err) return addError(err)
-
         return update()
       }
 
@@ -150,10 +152,34 @@ function createStore (render, onFetchEnd) {
         return update()
       }
 
+      /**
+       * PENDING DISPATCH
+       */
+
+      case 'RUN_PENDING_DISPATCH': {
+        console.log(window.localStorage.pendingDispatch)
+        if (window.localStorage.pendingDispatch == null) return
+
+        let event
+        try {
+          event = JSON.parse(window.localStorage.pendingDispatch)
+        } catch (err) {}
+
+        delete window.localStorage.pendingDispatch
+        dispatch(event.type, event.data)
+
+        return update()
+      }
+
       default: {
         throw new Error(`Unrecognized dispatch type "${type}"`)
       }
     }
+  }
+
+  function addPendingDispatch (type, data, href) {
+    window.localStorage.pendingDispatch = JSON.stringify({ type, data })
+    window.location.href = href
   }
 
   // Reference counter for pending fetches
@@ -167,9 +193,8 @@ function createStore (render, onFetchEnd) {
   }
 
   function addError (err) {
-    const error = err.message
-    store.errors.push(error)
-    if (config.isBrowser) window.alert(error)
+    store.errors.push({ message: err.message, code: err.code })
+    if (config.isBrowser) window.alert(err.message)
     update()
   }
 

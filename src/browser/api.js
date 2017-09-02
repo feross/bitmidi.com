@@ -34,7 +34,9 @@ function sendRequest (method, urlBase, params, cb) {
       return cb(new Error(`HTTP request error. ${err.message}`))
     }
     if (data.error) {
-      return cb(new Error(String(data.error)))
+      let err = new Error(data.error.message)
+      if (data.error.code) err.code = data.error.code
+      return cb(err)
     }
     if (res.statusCode !== 200) {
       return cb(new Error(`HTTP response error. ${res.statusCode}`))

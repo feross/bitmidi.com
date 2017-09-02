@@ -10,10 +10,9 @@ class HomePage extends Component {
   }
 
   load () {
-    const { store, dispatch } = this.context
-    const { topSnippetIds } = store
+    const { dispatch } = this.context
     dispatch('APP_TITLE', null)
-    if (topSnippetIds == null) dispatch('FETCH_SNIPPET_ALL')
+    dispatch('FETCH_SNIPPET_ALL')
   }
 
   render (props) {
