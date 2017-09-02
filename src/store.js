@@ -128,7 +128,9 @@ function createStore (render, onFetchEnd) {
       case 'FETCH_SNIPPET_ADD': {
         fetchStart()
         if (store.userName == null) {
-          return addPendingDispatch(type, data, '/auth/twitter')
+          addPendingDispatch(type, data)
+          dispatch('LOCATION_PUSH', '/auth/twitter')
+          return
         }
         api.snippet.add(data, (err, result) => {
           dispatch('FETCH_SNIPPET_ADD_DONE', { err, result })
@@ -177,9 +179,8 @@ function createStore (render, onFetchEnd) {
     }
   }
 
-  function addPendingDispatch (type, data, href) {
+  function addPendingDispatch (type, data) {
     window.localStorage.pendingDispatch = JSON.stringify({ type, data })
-    window.location.href = href
   }
 
   // Reference counter for pending fetches

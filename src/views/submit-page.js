@@ -68,6 +68,8 @@ class SubmitPage extends Component {
       name: this.inputValue,
       code: this.codeEditorValue
     })
+
+    dispatch('LOCATION_PUSH', '/')
   }
 }
 
