@@ -7,6 +7,15 @@
 }
 
 /**
+ * Highlight.js tweaks
+ */
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #66d9ef;
+}
+
+/**
  * Code editor
  */
 

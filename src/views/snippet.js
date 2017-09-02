@@ -28,12 +28,12 @@ class Snippet extends Component {
           class='br3 br--top white pv2 ph3 bg-light-red'
         >
           <h1
-            class='dib f4 lh-copy w-80 mv0 truncate'
+            class='dib f4 lh-copy mv0'
             title={snippet.name}
           >
             {snippet.name}
           </h1>
-          <Link href={snippet.author_url} class='dib white fr tr w-20' external newtab>
+          <Link href={snippet.author_url} class='dib white fr tr' external newtab>
             <span class='v-mid'>@{snippet.author}</span>
             <img src={snippet.author_image} class='dib br-100 shadow3' style={{ height: 32 }} />
           </Link>
