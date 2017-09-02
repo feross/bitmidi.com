@@ -25,17 +25,30 @@ class Snippet extends Component {
           👏
         </a>
         <div
-          class='br3 br--top white pv2 ph3 bg-light-red'
+          class='br3 br--top white pv2 ph3 bg-light-red cf'
         >
           <h1
-            class='dib f4 lh-copy mv0'
+            class='dib f4 lh-copy mv0 fl truncate'
             title={snippet.name}
+            style={{
+              width: 'calc(100% - 45px)'
+            }}
           >
             {snippet.name}
           </h1>
-          <Link href={snippet.author_url} class='dib white fr tr' external newtab>
-            <span class='v-mid'>@{snippet.author}</span>
-            <img src={snippet.author_image} class='dib br-100 shadow3' style={{ height: 32 }} />
+          <Link
+            href={snippet.author_url}
+            class='white fr'
+            style={{ lineHeight: 0 }}
+            title={`@${snippet.author}`}
+            external
+            newtab
+          >
+            <img
+              src={snippet.author_image}
+              class='br-100 shadow-4'
+              style={{ height: 32, width: 32 }}
+            />
           </Link>
         </div>
         <div class='overflow-hidden br3 br--bottom'>

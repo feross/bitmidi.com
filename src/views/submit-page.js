@@ -22,7 +22,7 @@ class SubmitPage extends Component {
     const { isPending } = this.state
     return (
       <div>
-        <Heading class='mv3'>Add a Code Snippet</Heading>
+        <Heading>Add a Code Snippet</Heading>
         <div>
           <Input
             placeholder='Snippet Name'
