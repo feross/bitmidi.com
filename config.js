@@ -71,7 +71,10 @@ exports.apiTimeout = 30 * 1000
  */
 exports.apiUserAgent = 'NodeFoo/1.0.0 (https://nodefoo.com)'
 
+/**
+ * Website theme colors
+ */
 exports.theme = {
   mainColor: 'blue',
-  headerColor: 'yellow'
+  headerColor: 'hot-pink'
 }

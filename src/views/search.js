@@ -15,7 +15,7 @@ class Search extends Component {
     const { mainColor } = this.context.theme
     const { focused } = this.state
 
-    const borderColor = focused ? `b--${mainColor}` : 'b--black-30'
+    const borderColor = focused ? `b--${mainColor}` : 'dark-pink'
 
     return (
       <input
