@@ -37,7 +37,7 @@ class App extends Component {
         <Header />
         <div class='mt5 pa2 pa3-m pa3-l mw7 center'>
           <Page />
-          {errors.map(err => <small>{err}</small>)}
+          {errors.map(err => <small>{err.message}</small>)}
           <Footer />
         </div>
       </div>
