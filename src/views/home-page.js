@@ -12,7 +12,7 @@ class HomePage extends Component {
   load () {
     const { dispatch } = this.context
     dispatch('APP_TITLE', null)
-    dispatch('FETCH_SNIPPET_ALL')
+    dispatch('API_SNIPPET_ALL')
   }
 
   render (props) {

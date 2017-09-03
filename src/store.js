@@ -86,15 +86,15 @@ function createStore (render, onFetchEnd) {
        * DOC
        */
 
-      case 'FETCH_DOC': {
+      case 'API_DOC': {
         fetchStart()
         api.doc.get(data, (err, doc) => {
-          dispatch('FETCH_DOC_DONE', { err, doc })
+          dispatch('API_DOC_DONE', { err, doc })
         })
         return update()
       }
 
-      case 'FETCH_DOC_DONE': {
+      case 'API_DOC_DONE': {
         fetchDone()
         const { err, doc } = data
         if (err) return addError(err)
@@ -106,15 +106,15 @@ function createStore (render, onFetchEnd) {
        * SNIPPET
        */
 
-      case 'FETCH_SNIPPET_ALL': {
+      case 'API_SNIPPET_ALL': {
         fetchStart()
         api.snippet.all(data, (err, snippets) => {
-          dispatch('FETCH_SNIPPET_ALL_DONE', { err, snippets })
+          dispatch('API_SNIPPET_ALL_DONE', { err, snippets })
         })
         return update()
       }
 
-      case 'FETCH_SNIPPET_ALL_DONE': {
+      case 'API_SNIPPET_ALL_DONE': {
         fetchDone()
         const { err, snippets } = data
         if (err) return addError(err)
@@ -125,7 +125,7 @@ function createStore (render, onFetchEnd) {
       }
 
       // TODO: rename 'fetch' prefix to something better. 'async'?
-      case 'FETCH_SNIPPET_ADD': {
+      case 'API_SNIPPET_ADD': {
         fetchStart()
         if (store.userName == null) {
           addPendingDispatch(type, data)
@@ -134,12 +134,12 @@ function createStore (render, onFetchEnd) {
           return
         }
         api.snippet.add(data, (err, result) => {
-          dispatch('FETCH_SNIPPET_ADD_DONE', { err, result })
+          dispatch('API_SNIPPET_ADD_DONE', { err, result })
         })
         return update()
       }
 
-      case 'FETCH_SNIPPET_ADD_DONE': {
+      case 'API_SNIPPET_ADD_DONE': {
         fetchDone()
         const { err } = data
         if (err) return addError(err)
@@ -147,7 +147,7 @@ function createStore (render, onFetchEnd) {
         return update()
       }
 
-      case 'FETCH_SNIPPET_VOTE': {
+      case 'API_SNIPPET_VOTE': {
         fetchStart()
         if (store.userName == null) {
           addPendingDispatch(type, data)
@@ -156,12 +156,12 @@ function createStore (render, onFetchEnd) {
           return
         }
         api.snippet.vote(data, (err, snippet) => {
-          dispatch('FETCH_SNIPPET_VOTE_DONE', { err, snippet })
+          dispatch('API_SNIPPET_VOTE_DONE', { err, snippet })
         })
         return update()
       }
 
-      case 'FETCH_SNIPPET_VOTE_DONE': {
+      case 'API_SNIPPET_VOTE_DONE': {
         fetchDone()
         const { err, snippet } = data
         if (err) return addError(err)

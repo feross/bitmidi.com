@@ -13,7 +13,7 @@ class DocPage extends Component {
     const { location } = store
 
     dispatch('APP_TITLE', this.getTitle())
-    dispatch('FETCH_DOC', location.params)
+    dispatch('API_DOC', location.params)
   }
 
   render (props) {

@@ -63,7 +63,7 @@ class Snippet extends Component {
   onUpvote = () => {
     const { snippet } = this.props
     const { dispatch } = this.context
-    dispatch('FETCH_SNIPPET_VOTE', { id: snippet.id })
+    dispatch('API_SNIPPET_VOTE', { id: snippet.id })
   }
 }
 

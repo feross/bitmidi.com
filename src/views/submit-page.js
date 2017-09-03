@@ -77,7 +77,7 @@ class SubmitPage extends Component {
   onClick = () => {
     const { dispatch } = this.context
 
-    dispatch('FETCH_SNIPPET_ADD', {
+    dispatch('API_SNIPPET_ADD', {
       name: this.state.inputValue,
       code: this.state.codeEditorValue
     })
