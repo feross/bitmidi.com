@@ -30,6 +30,7 @@ class SubmitPage extends Component {
         <Heading>Add a Code Snippet ✨</Heading>
         <div>
           <Input
+            autofocus
             placeholder='Snippet Name'
             class='mv3 w-70'
             onChange={this.onInputChange}
