@@ -160,7 +160,6 @@ function createStore (render, onFetchEnd) {
        */
 
       case 'RUN_PENDING_DISPATCH': {
-        console.log(window.localStorage.pendingDispatch)
         if (window.localStorage.pendingDispatch == null) return
 
         let event
