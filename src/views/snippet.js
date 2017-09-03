@@ -54,7 +54,7 @@ class Snippet extends Component {
           </Link>
         </div>
         <div class='overflow-hidden br3 br--bottom'>
-          <div dangerouslySetInnerHTML={{__html: snippet.code_html}} />
+          <div dangerouslySetInnerHTML={{__html: snippet.html}} />
         </div>
       </article>
     )

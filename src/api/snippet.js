@@ -20,7 +20,7 @@ function init () {
       id INTEGER PRIMARY KEY NOT NULL,
       name TEXT NOT NULL,
       code TEXT NOT NULL,
-      code_html TEXT NOT NULL,
+      html TEXT NOT NULL,
       author TEXT NOT NULL,
       voters TEXT NOT NULL DEFAULT '[]',
       votes INTEGER NOT NULL DEFAULT 0
@@ -60,8 +60,8 @@ function add (snippet, cb) {
   )
 
   const sql = `
-    INSERT INTO snippets (name, code, code_html, author, voters)
-    VALUES ($name, $code, $code_html, $author, $voters)
+    INSERT INTO snippets (name, code, html, author, voters, votes)
+    VALUES ($name, $code, $html, $author, $voters, $votes)
   `
 
   const codeHtml = highlight(snippet.code, 'js')
@@ -69,9 +69,10 @@ function add (snippet, cb) {
   db.run(sql, {
     $name: snippet.name,
     $code: snippet.code,
-    $code_html: codeHtml,
+    $html: codeHtml,
     $author: snippet.author,
-    $voters: JSON.stringify([snippet.author])
+    $voters: JSON.stringify([snippet.author]),
+    $votes: 1
   }, cb)
 }
 
@@ -167,7 +168,7 @@ function populateSnippet (snippet, cb) {
     snippet.author_url = `https://twitter.com/${snippet.author}`
 
     // TODO: Do not send full voter list
-    // delete snippet.voters
+    delete snippet.voters
 
     cb(null, snippet)
   })
