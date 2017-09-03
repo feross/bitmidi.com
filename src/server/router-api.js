@@ -43,7 +43,11 @@ router.post('/snippet/add', (req, res, next) => {
   })
 
   api.snippet.add(snippet, (err, result) => {
-    if (err) return sendError(next, err, { status: 404 })
+    if (err) return sendError(next, err)
+    res.json({ result })
+  })
+})
+
     res.json({ result })
   })
 })

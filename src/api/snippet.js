@@ -30,19 +30,31 @@ function init () {
 function add (snippet, cb) {
   assert(
     snippet != null && typeof snippet === 'object',
-    '"snippet" must be an object'
+    'Snippet must be an object'
   )
   assert(
     typeof snippet.name === 'string',
-    '"snippet.name" must be a string'
+    'Snippet name must be a string'
+  )
+  assert(
+    snippet.name.length > 0,
+    'Snippet name must not be empty'
   )
   assert(
     typeof snippet.code === 'string',
-    '"snippet.code" must be a string'
+    'Code must be a string'
+  )
+  assert(
+    snippet.code.length > 0,
+    'Code must not be empty'
   )
   assert(
     typeof snippet.author === 'string',
-    '"snippet.author" must be a string'
+    'Author must be a string'
+  )
+  assert(
+    snippet.author.length > 0,
+    'Author must not be empty'
   )
 
   const sql = `
@@ -63,16 +75,21 @@ function add (snippet, cb) {
 function get (opts, cb) {
   assert(
     opts != null && typeof opts === 'object',
-    '"opts" must be an object'
+    'Opts must be an object'
   )
   assert(
     typeof opts.id === 'string',
-    '"opts.id" must be a string'
+    'Snippet id must be a string'
+  )
+  assert(
+    opts.id.length > 0,
+    'Snippet id must not be empty'
   )
 
   const sql = 'SELECT * FROM snippets WHERE id = $id'
   db.get(sql, { $id: opts.id }, (err, snippet) => {
     if (err) return cb(err)
+    if (snippet == null) return cb(new Error('No snippet with that id'))
     populateSnippet(snippet, cb)
   })
 }
