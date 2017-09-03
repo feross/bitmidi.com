@@ -21,7 +21,9 @@ function init () {
       name TEXT NOT NULL,
       code TEXT NOT NULL,
       code_html TEXT NOT NULL,
-      author TEXT NOT NULL
+      author TEXT NOT NULL,
+      voters TEXT NOT NULL DEFAULT '[]',
+      votes INTEGER NOT NULL DEFAULT 0
     );
   `
   db.run(sql)
@@ -58,8 +60,8 @@ function add (snippet, cb) {
   )
 
   const sql = `
-    INSERT INTO snippets (name, code, code_html, author)
-    VALUES ($name, $code, $code_html, $author)
+    INSERT INTO snippets (name, code, code_html, author, voters)
+    VALUES ($name, $code, $code_html, $author, $voters)
   `
 
   const codeHtml = highlight(snippet.code, 'js')
@@ -68,8 +70,64 @@ function add (snippet, cb) {
     $name: snippet.name,
     $code: snippet.code,
     $code_html: codeHtml,
-    $author: snippet.author
+    $author: snippet.author,
+    $voters: JSON.stringify([snippet.author])
   }, cb)
+}
+
+function vote (opts, cb) {
+  assert(
+    opts != null && typeof opts === 'object',
+    'Opts must be an object'
+  )
+  assert(
+    typeof opts.id === 'string',
+    'Snippet id must be a string'
+  )
+  assert(
+    opts.id.length > 0,
+    'Snippet id must not be empty'
+  )
+  assert(
+    typeof opts.voter === 'string',
+    'Voter must be a string'
+  )
+  assert(
+    opts.voter.length > 0,
+    'Voter must not be empty'
+  )
+
+  const sql = 'SELECT * FROM snippets WHERE id = $id'
+  db.get(sql, { $id: opts.id }, (err, snippet) => {
+    if (err) return cb(err)
+    if (snippet == null) return cb(new Error('No snippet with that id'))
+
+    try {
+      snippet.voters = JSON.parse(snippet.voters)
+    } catch (err) {
+      return cb(err)
+    }
+    snippet.voters.push(opts.voter)
+    snippet.voters = Array.from(new Set(snippet.voters))
+
+    snippet.votes = snippet.voters.length
+    snippet.voters = JSON.stringify(snippet.voters)
+
+    const sql = `
+      UPDATE snippets
+      SET voters = $voters, votes = $votes
+      WHERE id = $id
+    `
+
+    db.run(sql, {
+      $voters: snippet.voters,
+      $votes: snippet.votes,
+      $id: snippet.id
+    }, (err) => {
+      if (err) return cb(err)
+      populateSnippet(snippet, cb)
+    })
+  })
 }
 
 function get (opts, cb) {
@@ -107,12 +165,17 @@ function populateSnippet (snippet, cb) {
     if (err) return cb(err)
     snippet.author_image = user.profile_image_url_https
     snippet.author_url = `https://twitter.com/${snippet.author}`
+
+    // Do not send full voter list
+    delete snippet.voters
+
     cb(null, snippet)
   })
 }
 
 module.exports = {
   add,
+  vote,
   get,
   all
 }

@@ -51,6 +51,7 @@ module.exports = {
   },
   snippet: {
     add: (opts, cb) => sendPost('/api/snippet/add', opts, cb),
+    vote: (opts, cb) => sendPost('/api/snippet/vote', opts, cb),
     get: (opts, cb) => sendGet('/api/snippet/get', opts, cb),
     all: (opts, cb) => sendGet('/api/snippet/all', opts, cb)
   }

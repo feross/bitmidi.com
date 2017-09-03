@@ -129,7 +129,8 @@ function createStore (render, onFetchEnd) {
         fetchStart()
         if (store.userName == null) {
           addPendingDispatch(type, data)
-          dispatch('LOCATION_PUSH', '/auth/twitter')
+          addError(new Error('Last step! Log in to get credit for your contribution.'))
+          window.location.href = '/auth/twitter'
           return
         }
         api.snippet.add(data, (err, result) => {
@@ -143,6 +144,28 @@ function createStore (render, onFetchEnd) {
         const { err } = data
         if (err) return addError(err)
         dispatch('LOCATION_PUSH', '/')
+        return update()
+      }
+
+      case 'FETCH_SNIPPET_VOTE': {
+        fetchStart()
+        if (store.userName == null) {
+          addPendingDispatch(type, data)
+          addError(new Error('Log in with Twitter to vote!'))
+          window.location.href = '/auth/twitter'
+          return
+        }
+        api.snippet.vote(data, (err, snippet) => {
+          dispatch('FETCH_SNIPPET_VOTE_DONE', { err, snippet })
+        })
+        return update()
+      }
+
+      case 'FETCH_SNIPPET_VOTE_DONE': {
+        fetchDone()
+        const { err, snippet } = data
+        if (err) return addError(err)
+        addSnippet(snippet)
         return update()
       }
 

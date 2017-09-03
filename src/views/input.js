@@ -1,6 +1,8 @@
 const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
+const config = require('../../config')
+
 class Input extends Component {
   constructor () {
     super()
@@ -11,7 +13,7 @@ class Input extends Component {
 
   componentDidMount () {
     const { autofocus } = this.props
-    if (autofocus) this.elem.focus()
+    if (config.isBrowser && autofocus) this.elem.focus()
   }
 
   render (props) {

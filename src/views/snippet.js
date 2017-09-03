@@ -22,14 +22,15 @@ class Snippet extends Component {
             height: 62,
             lineHeight: 1.15
           }}
+          onClick={this.onUpvote}
         >
-          👏
+          👏 {snippet.votes}
         </a>
         <div
-          class={`br3 br--top white pv2 ph3 bg-${mainColor} cf`}
+          class={`cf br3 br--top white pv2 ph3 bg-${mainColor}`}
         >
           <h1
-            class='dib f4 lh-copy mv0 fl truncate'
+            class='dib fl f4 lh-copy mv0 truncate'
             title={snippet.name}
             style={{
               width: 'calc(100% - 45px)'
@@ -39,7 +40,7 @@ class Snippet extends Component {
           </h1>
           <Link
             href={snippet.author_url}
-            class='white fr grow'
+            class='fr white grow'
             style={{ lineHeight: 0 }}
             title={`@${snippet.author}`}
             external
@@ -57,6 +58,12 @@ class Snippet extends Component {
         </div>
       </article>
     )
+  }
+
+  onUpvote = () => {
+    const { snippet } = this.props
+    const { dispatch } = this.context
+    dispatch('FETCH_SNIPPET_VOTE', { id: snippet.id })
   }
 }
 
