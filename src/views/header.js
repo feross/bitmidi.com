@@ -5,9 +5,8 @@ const Link = require('./link')
 const Search = require('./search')
 
 const Header = (props, context) => {
-  const { store, theme } = context
-  const { location, userName } = store
-  const { headerColor, mainColor } = theme
+  const { location } = context.store
+  const { headerColor, mainColor } = context.theme
 
   let $submitButton
   if (location.name !== 'submit') {
@@ -25,26 +24,12 @@ const Header = (props, context) => {
     )
   }
 
-  let $logoutButton
-  if (userName) {
-    $logoutButton = (
-      <Button
-        class='mh1'
-        color={mainColor}
-        href={'/auth/twitter/logout'}
-        pill
-        external
-        size='medium'
-      >
-        Logout ({userName})
-      </Button>
-    )
-  }
-
   return (
     <header
       id='header'
-      class={`fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-${headerColor} h3`}
+      class={
+        `fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-${headerColor} h3`
+      }
       style={{
         height: 50,
         paddingTop: 6
@@ -60,7 +45,6 @@ const Header = (props, context) => {
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
         {$submitButton}
-        {$logoutButton}
       </nav>
     </header>
   )
