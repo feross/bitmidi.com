@@ -104,7 +104,7 @@ function init (sessionStore) {
     saveUninitialized: false,
     unset: 'destroy',
     cookie: {
-      maxAge: 90 * 24 * 60 * 60 * 1000, // 90 days
+      maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
       secure: config.isProd
     }
   }))
