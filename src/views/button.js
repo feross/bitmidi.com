@@ -38,7 +38,7 @@ const Button = (props, context) => {
   if (pill) cls.push('br-pill')
   else cls.push('br3')
 
-  if (disabled) cls.push('opacity-60')
+  if (disabled) cls.push('o-60')
 
   let ButtonElement = Link
 
