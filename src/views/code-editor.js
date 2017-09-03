@@ -45,12 +45,20 @@ class CodeEditor extends Component {
     this._codeMirror.on('change', this.onChange)
   }
 
+  componentWillReceiveProps (nextProps) {
+    const { value } = this.props
+    if (nextProps.value !== value &&
+        nextProps.value !== this._codeMirror.getValue()) {
+      this._codeMirror.setValue(nextProps.value)
+    }
+  }
+
   componentWillUnmount () {
     if (!config.isBrowser) return
 
+    this._codeMirror.setValue('')
     this._codeMirror.toTextArea()
     this._codeMirror.off('change', this.onChange)
-
     this._codeMirror = null
   }
 

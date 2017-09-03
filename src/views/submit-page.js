@@ -9,7 +9,9 @@ class SubmitPage extends Component {
   constructor () {
     super()
     this.state = {
-      isPending: false
+      isPending: false,
+      inputValue: '',
+      codeEditorValue: ''
     }
   }
   componentDidMount () {
@@ -22,7 +24,7 @@ class SubmitPage extends Component {
   }
 
   render (props) {
-    const { isPending } = this.state
+    const { isPending, inputValue, codeEditorValue } = this.state
     return (
       <div>
         <Heading>Add a Code Snippet ✨</Heading>
@@ -31,11 +33,15 @@ class SubmitPage extends Component {
             placeholder='Snippet Name'
             class='mv3 w-70'
             onChange={this.onInputChange}
+            value={inputValue}
+            ref={this.inputRef}
           />
           <CodeEditor
             placeholder='// Write code here...'
             class='mv3'
             onChange={this.onCodeEditorChange}
+            value={codeEditorValue}
+            ref={this.codeEditorRef}
           />
           <Button
             size='medium'
@@ -51,25 +57,35 @@ class SubmitPage extends Component {
     )
   }
 
+  inputRef = (elem) => {
+    this.inputElem = elem
+  }
+
+  codeEditorRef = (elem) => {
+    this.codeEditorElem = elem
+  }
+
   onInputChange = (event) => {
-    this.inputValue = event.target.value
+    this.setState({ inputValue: event.target.value })
   }
 
   onCodeEditorChange = (value) => {
-    this.codeEditorValue = value
+    this.setState({ codeEditorValue: value })
   }
 
   onClick = () => {
     const { dispatch } = this.context
 
-    this.setState({ isPending: true })
-
     dispatch('FETCH_SNIPPET_ADD', {
-      name: this.inputValue,
-      code: this.codeEditorValue
+      name: this.state.inputValue,
+      code: this.state.codeEditorValue
     })
 
-    dispatch('LOCATION_PUSH', '/')
+    this.setState({
+      isPending: true,
+      inputValue: '',
+      codeEditorValue: ''
+    })
   }
 }
 

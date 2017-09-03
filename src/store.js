@@ -142,6 +142,7 @@ function createStore (render, onFetchEnd) {
         fetchDone()
         const { err } = data
         if (err) return addError(err)
+        dispatch('LOCATION_PUSH', '/')
         return update()
       }
 
