@@ -166,8 +166,8 @@ function populateSnippet (snippet, cb) {
     snippet.author_image = user.profile_image_url_https
     snippet.author_url = `https://twitter.com/${snippet.author}`
 
-    // Do not send full voter list
-    delete snippet.voters
+    // TODO: Do not send full voter list
+    // delete snippet.voters
 
     cb(null, snippet)
   })
