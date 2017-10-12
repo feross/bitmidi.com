@@ -4,10 +4,12 @@ const Provider = require('preact-context-provider')
 const App = require('../views/app')
 const createStore = require('../store')
 const config = require('../../config')
+const debugHelper = require('../lib/debug-helper')
 
-const { store, dispatch } = createStore(update)
 let root = document.getElementById('app')
+const { store, dispatch } = createStore(update)
 
+// Use server-initialized store values
 Object.assign(store, window.storeInit)
 
 // Show server-generated errors
@@ -30,17 +32,12 @@ function update () {
  * DEVELOPMENT
  */
 
+// Expose important functions for dev tools debugging
+Object.assign(window, { store, dispatch, update, debug: debugHelper })
+
 // Measure page speed
 console.timeEnd('render')
 window.addEventListener('load', () => console.timeEnd('load'))
-
-function debug (enable, verbose) {
-  window.localStorage.debug = enable && verbose ? '*' : enable ? '*,-*verbose*' : ''
-  window.location.reload()
-}
-
-// Expose important functions for easy debugging from dev tools
-Object.assign(window, { store, dispatch, update, debug })
 
 // Enable react dev tools (excluded in production)
 require('preact/devtools')
