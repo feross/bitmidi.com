@@ -2,6 +2,7 @@
 
 module.exports = createStore
 
+const copy = require('clipboard-copy')
 const debug = require('debug')('nodefoo:store')
 const debugVerbose = require('debug')('nodefoo:store:verbose')
 
@@ -178,6 +179,15 @@ function createStore (render, onFetchEnd) {
       case 'SEARCH_INPUT': {
         store.lastSearch = data
         return update()
+      }
+
+      /**
+       * CLIPBOARD
+       */
+
+      case 'CLIPBOARD_COPY': {
+        copy(data)
+        return
       }
 
       /**

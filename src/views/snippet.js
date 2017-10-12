@@ -2,6 +2,7 @@ const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
 const Link = require('./link')
+const IconContentCopy = require('./icon-content-copy')
 
 class Snippet extends Component {
   render (props) {
@@ -12,20 +13,34 @@ class Snippet extends Component {
       <article
         class={c('relative br3 center hidden mv4 shadow-6', props.class)}
       >
-        <a
-          class='upvote pointer ba b--black-20 br-100 pa3 absolute top-0 o-80 glow grow'
+        <div
+          class='absolute top-0'
           style={{
-            userSelect: 'none',
-            fontSize: '1.8rem',
             left: '-5rem',
             width: 62,
-            height: 62,
-            lineHeight: 1.15
+            height: 62
           }}
-          onClick={this.onUpvote}
         >
-          👏 {snippet.votes}
-        </a>
+          <a
+            class='pointer db ba b--moon-gray br-100 pa3 o-80 glow grow'
+            title='Copy to clipboard'
+            style={{
+              userSelect: 'none',
+              width: 62,
+              height: 62,
+              lineHeight: 1.15
+            }}
+            onClick={this.onUpvote}
+          >
+            <IconContentCopy fill='#555' size={29} />
+          </a>
+          <div
+            class='f5 gray mt1 tc'
+            title={`${snippet.votes} copies`}
+          >
+            {snippet.votes}
+          </div>
+        </div>
         <div
           class={`cf br3 br--top white pv2 ph3 bg-${mainColor}`}
         >
@@ -64,6 +79,7 @@ class Snippet extends Component {
     const { snippet } = this.props
     const { dispatch } = this.context
     dispatch('API_SNIPPET_VOTE', { id: snippet.id })
+    dispatch('CLIPBOARD_COPY', snippet.code)
   }
 }
 

@@ -27,7 +27,7 @@ class HomePage extends Component {
 
     return (
       <div>
-        <Heading class='tc'>Most loved code snippets</Heading>
+        <Heading class='tc'>Most copied code snippets</Heading>
         {topSnippets.map(snippet => <Snippet snippet={snippet} />)}
       </div>
     )

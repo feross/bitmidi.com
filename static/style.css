@@ -57,14 +57,6 @@ pre.hljs {
   font-size: 14px;
 }
 
-.upvote {
-  filter: grayscale(30%);
-}
-
-.upvote:hover, .upvote:active {
-  filter: none;
-}
-
 /**
  * Animations (adapted from animate.css)
  */

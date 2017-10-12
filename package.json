@@ -38,6 +38,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-register": "^6.26.0",
     "classnames": "^2.2.5",
+    "clipboard-copy": "^1.2.0",
     "codemirror": "^5.28.0",
     "compression": "^1.6.2",
     "connect-sqlite3": "^0.9.9",
