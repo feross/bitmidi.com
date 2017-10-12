@@ -36,6 +36,7 @@ class Search extends Component {
   }
 
   onKeyPress = (event) => {
+    window.alert('Search is not implemented yet. Coming soon!')
     event.stopPropagation()
     if (event.key === 'Enter') {
       const value = event.target.value
