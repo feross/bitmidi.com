@@ -3,6 +3,7 @@ const c = require('classnames')
 
 const Link = require('./link')
 const IconContentCopy = require('./icon-content-copy')
+const Image = require('./image')
 
 class Snippet extends Component {
   render (props) {
@@ -57,12 +58,13 @@ class Snippet extends Component {
             href={snippet.author_url}
             class='fr white grow'
             style={{ lineHeight: 0 }}
-            title={`@${snippet.author}`}
+            title={`Snippet submitted by @${snippet.author}`}
             external
             newtab
           >
-            <img
+            <Image
               src={snippet.author_image}
+              alt={`@${snippet.author}`}
               class='br-100 shadow-6'
               style={{ height: 30, width: 30 }}
             />

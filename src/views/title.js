@@ -1,4 +1,4 @@
-const { Component } = require('preact') /** @jsx h */
+const { Component } = require('preact')
 
 class Title extends Component {
   componentDidMount () {

@@ -1,6 +1,8 @@
 const { h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
+const Image = require('./image')
+
 const Loader = (props) => {
   let { center, style } = props
 
@@ -15,7 +17,7 @@ const Loader = (props) => {
       class={c('tc mt3', props.class)}
       style={style}
     >
-      <img
+      <Image
         src='/img/triangle.svg'
         class='rotate-180 animate-fade-in animate--delay animate--fast'
         alt='Loading...'
