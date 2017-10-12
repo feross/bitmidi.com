@@ -1,27 +1,23 @@
 const { h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
-const Image = require('./image')
+const IconLoader = require('./icon-loader')
 
 const Loader = (props) => {
   let { center, style } = props
 
   if (center) {
     style = Object.assign({
-      marginTop: 'calc(50vh - 105px)'
+      marginTop: 'calc(50vh - 120px)'
     }, style)
   }
 
   return (
     <div
-      class={c('tc mt3', props.class)}
+      class={c('tc animate-fade-in animate--delay animate--fast', props.class)}
       style={style}
     >
-      <Image
-        src='/img/triangle.svg'
-        class='rotate-180 animate-fade-in animate--delay animate--fast'
-        alt='Loading...'
-      />
+      <IconLoader size={120} fill='#ff41b4' />
     </div>
   )
 }
