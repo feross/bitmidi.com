@@ -3,11 +3,10 @@ const { h } = require('preact') /** @jsx h */
 const Link = require('./link')
 
 const Footer = (props, context) => {
-  const { store } = context
-  const { userName } = store
+  const { location, userName } = context.store
 
   let $submitLink
-  if (store.location.name !== 'submit') {
+  if (location.name !== 'submit') {
     $submitLink = [
       <FooterLink href='/submit'>Add a snippet</FooterLink>,
       <FooterDivider />

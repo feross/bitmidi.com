@@ -2,10 +2,12 @@ const { h } = require('preact') /** @jsx h */
 
 const IconContentCopy = ({
   size = 24,
-  fill = '#000000'
+  fill = '#000'
 }) => {
   return (
     <svg
+      role='img'
+      aria-label='content copy'
       fill={fill}
       height={size}
       viewBox='0 0 24 24'

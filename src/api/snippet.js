@@ -1,3 +1,10 @@
+module.exports = {
+  add,
+  vote,
+  get,
+  all
+}
+
 const assert = require('assert')
 const parallel = require('run-parallel')
 const path = require('path')
@@ -172,11 +179,4 @@ function populateSnippet (snippet, cb) {
 
     cb(null, snippet)
   })
-}
-
-module.exports = {
-  add,
-  vote,
-  get,
-  all
 }

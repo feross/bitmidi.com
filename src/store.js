@@ -32,7 +32,7 @@ function createStore (render, onFetchEnd) {
     doc: null,
     errors: [],
 
-    snippets: {},
+    snippets: {}, // snippet.id -> snippet
     topSnippetIds: null
   }
 
@@ -107,24 +107,6 @@ function createStore (render, onFetchEnd) {
        * SNIPPET
        */
 
-      case 'API_SNIPPET_ALL': {
-        fetchStart()
-        api.snippet.all(data, (err, snippets) => {
-          dispatch('API_SNIPPET_ALL_DONE', { err, snippets })
-        })
-        return update()
-      }
-
-      case 'API_SNIPPET_ALL_DONE': {
-        fetchDone()
-        const { err, snippets } = data
-        if (err) return addError(err)
-
-        snippets.map(addSnippet)
-        store.topSnippetIds = snippets.map(snippet => snippet.id)
-        return update()
-      }
-
       // TODO: rename 'fetch' prefix to something better. 'async'?
       case 'API_SNIPPET_ADD': {
         fetchStart()
@@ -169,6 +151,24 @@ function createStore (render, onFetchEnd) {
         const { err, snippet } = data
         if (err) return addError(err)
         addSnippet(snippet)
+        return update()
+      }
+
+      case 'API_SNIPPET_ALL': {
+        fetchStart()
+        api.snippet.all(data, (err, snippets) => {
+          dispatch('API_SNIPPET_ALL_DONE', { err, snippets })
+        })
+        return update()
+      }
+
+      case 'API_SNIPPET_ALL_DONE': {
+        fetchDone()
+        const { err, snippets } = data
+        if (err) return addError(err)
+
+        snippets.map(addSnippet)
+        store.topSnippetIds = snippets.map(snippet => snippet.id)
         return update()
       }
 
