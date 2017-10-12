@@ -64,7 +64,7 @@
     "unlimited": "^1.2.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-minify": "^0.2.0",
     "babelify": "^7.3.0",
     "browserify": "^14.4.0",
