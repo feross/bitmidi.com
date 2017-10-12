@@ -26,8 +26,7 @@ class App extends Component {
   }
 
   render (props) {
-    const { store } = this.context
-    const { app, location, errors } = store
+    const { app, location, errors } = this.context.store
 
     const Page = routes.find(route => route[0] === location.name)[2]
 
