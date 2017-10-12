@@ -72,9 +72,9 @@ function init (sessionStore) {
     express.static(path.dirname(require.resolve('tachyons')), staticOpts)
   )
 
-  // serve /highlight/monokai-sublime.css
+  // serve /highlight.js/monokai-sublime.css
   app.use(
-    '/highlight',
+    '/highlight.js',
     express.static(
       path.join(path.dirname(require.resolve('highlight.js')), '..', 'styles'),
       staticOpts
