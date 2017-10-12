@@ -16,20 +16,16 @@ class HomePage extends Component {
   }
 
   render (props) {
-    const { store } = this.context
-    const { topSnippetIds, snippets } = store
+    const { topSnippetIds, snippets } = this.context.store
 
-    if (topSnippetIds == null) {
-      return <Loader center />
-    }
-
-    const topSnippets = topSnippetIds.map(snippetId => snippets[snippetId])
+    const topSnippets = topSnippetIds &&
+      topSnippetIds.map(snippetId => snippets[snippetId])
 
     return (
-      <div>
+      <Loader show={topSnippetIds == null} center>
         <Heading class='tc'>Most copied code snippets</Heading>
-        {topSnippets.map(snippet => <Snippet snippet={snippet} />)}
-      </div>
+        {topSnippets && topSnippets.map(snippet => <Snippet snippet={snippet} />)}
+      </Loader>
     )
   }
 }

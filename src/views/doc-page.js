@@ -9,33 +9,28 @@ class DocPage extends Component {
   }
 
   load () {
-    const { store, dispatch } = this.context
-    const { location } = store
+    const { dispatch } = this.context
+    const { location } = this.context.store
 
     dispatch('APP_TITLE', this.getTitle())
     dispatch('API_DOC', location.params)
   }
 
   render (props) {
-    const { store } = this.context
-    const { doc } = store
-
-    if (doc == null) {
-      return <Loader center />
-    }
+    const { doc } = this.context.store
 
     const title = this.getTitle()
+
     return (
-      <div>
+      <Loader show={doc == null} center>
         <Heading>{title}</Heading>
         <p dangerouslySetInnerHTML={{__html: doc}} />
-      </div>
+      </Loader>
     )
   }
 
   getTitle () {
-    const { store } = this.context
-    const { location } = store
+    const { location } = this.context.store
 
     return location.params.url
   }
