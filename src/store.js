@@ -154,6 +154,23 @@ function createStore (render, onFetchEnd) {
         return update()
       }
 
+      case 'API_SNIPPET_GET': {
+        fetchStart()
+        api.snippet.get(data, (err, snippet) => {
+          dispatch('API_SNIPPET_GET_DONE', { err, snippet })
+        })
+        return update()
+      }
+
+      case 'API_SNIPPET_GET_DONE': {
+        fetchDone()
+        const { err, snippet } = data
+        if (err) return addError(err)
+
+        addSnippet(snippet)
+        return update()
+      }
+
       case 'API_SNIPPET_ALL': {
         fetchStart()
         api.snippet.all(data, (err, snippets) => {
