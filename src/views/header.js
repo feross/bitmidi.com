@@ -41,7 +41,7 @@ const Header = (props, context) => {
         </Link>
       </div>
       <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
-        <Search autofocus class='w-100' />
+        <Search class='w-100' />
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
         {$submitButton}
