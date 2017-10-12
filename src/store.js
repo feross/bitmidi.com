@@ -129,7 +129,9 @@ function createStore (render, onFetchEnd) {
         fetchStart()
         if (store.userName == null) {
           addPendingDispatch(type, data)
-          addError(new Error('Last step! Log in to get credit for your contribution.'))
+          addError(
+            new Error('Last step! Log in to get credit for your contribution.')
+          )
           window.location.href = '/auth/twitter'
           return
         }
@@ -191,8 +193,8 @@ function createStore (render, onFetchEnd) {
         } catch (err) {}
 
         delete window.localStorage.pendingDispatch
-        dispatch(event.type, event.data)
 
+        dispatch(event.type, event.data)
         return update()
       }
 
