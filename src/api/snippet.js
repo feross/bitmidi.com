@@ -12,6 +12,7 @@ const sqlite3 = require('sqlite3')
 
 const config = require('../../config')
 const highlight = require('../highlight')
+const slug = require('../lib/slug')
 const twitter = require('./twitter')
 
 // Enable verbose SQLite logs (disabled in production)
@@ -24,7 +25,8 @@ init()
 function init () {
   const sql = `
     CREATE TABLE IF NOT EXISTS snippets(
-      id INTEGER PRIMARY KEY NOT NULL,
+      rowid INTEGER PRIMARY KEY NOT NULL,
+      id TEXT UNIQUE NOT NULL,
       name TEXT NOT NULL,
       code TEXT NOT NULL,
       html TEXT NOT NULL,
@@ -67,13 +69,14 @@ function add (snippet, cb) {
   )
 
   const sql = `
-    INSERT INTO snippets (name, code, html, author, voters, votes)
-    VALUES ($name, $code, $html, $author, $voters, $votes)
+    INSERT INTO snippets (id, name, code, html, author, voters, votes)
+    VALUES ($id, $name, $code, $html, $author, $voters, $votes)
   `
 
   const codeHtml = highlight(snippet.code, 'js')
 
   db.run(sql, {
+    $id: slug(snippet.name),
     $name: snippet.name,
     $code: snippet.code,
     $html: codeHtml,
@@ -108,7 +111,7 @@ function vote (opts, cb) {
   const sql = 'SELECT * FROM snippets WHERE id = $id'
   db.get(sql, { $id: opts.id }, (err, snippet) => {
     if (err) return cb(err)
-    if (snippet == null) return cb(new Error('No snippet with that id'))
+    if (snippet == null) return cb(new Error('No snippet found'))
 
     try {
       snippet.voters = JSON.parse(snippet.voters)
@@ -155,7 +158,7 @@ function get (opts, cb) {
   const sql = 'SELECT * FROM snippets WHERE id = $id'
   db.get(sql, { $id: opts.id }, (err, snippet) => {
     if (err) return cb(err)
-    if (snippet == null) return cb(new Error('No snippet with that id'))
+    if (snippet == null) return cb(new Error('No snippet found'))
     populateSnippet(snippet, cb)
   })
 }
