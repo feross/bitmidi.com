@@ -1,7 +1,5 @@
 const { Component, h } = require('preact') /** @jsx h */
 
-const c = require('classnames')
-
 const config = require('../../config')
 
 let CodeMirror
