@@ -142,12 +142,6 @@ function createStore (render, onFetchDone) {
 
       case 'API_SNIPPET_VOTE': {
         fetchStart()
-        if (store.userName == null) {
-          addPendingDispatch(type, data)
-          addError(new Error('Log in with Twitter to vote!'))
-          window.location.href = '/auth/twitter'
-          return
-        }
         api.snippet.vote(data, (err, snippet) => {
           dispatch('API_SNIPPET_VOTE_DONE', { err, snippet })
         })

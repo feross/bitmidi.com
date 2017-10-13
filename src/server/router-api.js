@@ -49,18 +49,13 @@ router.post('/snippet/add', (req, res, next) => {
 })
 
 router.post('/snippet/vote', (req, res, next) => {
-  if (!req.session.user) {
-    return sendError(next, new Error('Must be logged in to vote on snippets'), {
-      code: 'LOGGED_OUT',
-      status: 403 // Forbidden
-    })
-  }
+  const voter = req.session.user
+    ? req.session.user.userName
+    : req.ip
 
-  const snippet = Object.assign({}, req.query, {
-    voter: req.session.user.userName
-  })
+  const opts = Object.assign({}, req.query, { voter })
 
-  api.snippet.vote(snippet, (err, result) => {
+  api.snippet.vote(opts, (err, result) => {
     if (err) return sendError(next, err)
     res.json({ result })
   })
