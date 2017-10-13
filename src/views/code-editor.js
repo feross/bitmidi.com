@@ -63,8 +63,9 @@ class CodeEditor extends Component {
   }
 
   render (props) {
+    const { placeholder: _, value: _2, onChange: _3, ...rest } = props
     return (
-      <div class={props.class}>
+      <div {...rest}>
         <textarea ref={this.ref} />
       </div>
     )
