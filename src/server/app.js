@@ -35,16 +35,16 @@ function init (sessionStore) {
 
   // Add headers
   app.use((req, res, next) => {
-    // Disable browser mime-type sniffing to reduce exposure to drive-by download attacks when
-    // serving user uploaded content
+    // Disable browser mime-type sniffing to reduce exposure to drive-by download
+    // attacks when serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
     // Prevent rendering of site within a frame
     res.header('X-Frame-Options', 'DENY')
 
-    // Enable browser XSS filtering. Usually enabled by default, but this header re-enables it
-    // if it was disabled by the user, and asks the the browser to prevent rendering of the
-    // page if an attack is detected.
+    // Enable browser XSS filtering. Usually enabled by default, but this header re-
+    // enables it if it was disabled by the user, and asks the the browser to prevent
+    // rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
     if (config.isProd) {
@@ -55,7 +55,10 @@ function init (sessionStore) {
       }
 
       // Use HSTS (cache for 2 years, include subdomains, allow browser preload list)
-      res.header('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload')
+      res.header(
+        'Strict-Transport-Security',
+        'max-age=63072000; includeSubDomains; preload'
+      )
     }
 
     next()
@@ -66,13 +69,13 @@ function init (sessionStore) {
 
   app.use(express.static(path.join(config.root, 'static'), staticOpts))
 
-  // serve /tachyons/yachyons.min.css
+  // Serve `/tachyons/yachyons.min.css`
   app.use(
     '/tachyons',
     express.static(path.dirname(require.resolve('tachyons')), staticOpts)
   )
 
-  // serve /highlight.js/monokai-sublime.css
+  // Serve `/highlight.js/monokai-sublime.css`
   app.use(
     '/highlight.js',
     express.static(
@@ -81,13 +84,13 @@ function init (sessionStore) {
     )
   )
 
-  // serve /codemirror/codemirror.css
+  // Serve `/codemirror/codemirror.css`
   app.use(
     '/codemirror',
     express.static(path.dirname(require.resolve('codemirror')), staticOpts)
   )
 
-  // serve /codemirror/monokai.css
+  // Serve `/codemirror/monokai.css`
   app.use(
     '/codemirror',
     express.static(
@@ -109,20 +112,15 @@ function init (sessionStore) {
     }
   }))
 
-  const bundleHash = config.isProd
-    ? '?h=' + createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.js')))
-    : ''
-
-  const styleHash = config.isProd
-    ? '?h=' + createHash(fs.readFileSync(path.join(config.root, 'static', 'style.css')))
-    : ''
+  const bundle = fs.readFileSync(path.join(config.root, 'static', 'bundle.js'))
+  const style = fs.readFileSync(path.join(config.root, 'static', 'style.css'))
 
   // Add template local variables
   app.use((req, res, next) => {
     res.locals.config = config
     res.locals.hashes = {
-      bundle: bundleHash,
-      style: styleHash
+      bundle: config.isProd ? '?h=' + createHash(bundle) : '',
+      style: config.isProd ? '?h=' + createHash(style) : ''
     }
     next()
   })
@@ -148,7 +146,7 @@ function init (sessionStore) {
 
 function handleRender (err, req, res) {
   const renderer = createRenderer()
-  const { store, dispatch } = createStore(update, onFetchEnd)
+  const { store, dispatch } = createStore(update, onFetchDone)
 
   if (err) {
     console.error(err.stack)
@@ -167,7 +165,7 @@ function handleRender (err, req, res) {
 
   if (store.app.fetchCount === 0) done()
 
-  function onFetchEnd () {
+  function onFetchDone () {
     if (store.app.fetchCount === 0) process.nextTick(done)
   }
 

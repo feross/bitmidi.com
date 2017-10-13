@@ -15,7 +15,7 @@ const DEBUG_VERBOSE = new Set([
   'APP_RESIZE'
 ])
 
-function createStore (render, onFetchEnd) {
+function createStore (render, onFetchDone) {
   const store = {
     location: {
       name: null,
@@ -242,7 +242,7 @@ function createStore (render, onFetchEnd) {
 
   function fetchDone () {
     store.app.fetchCount -= 1
-    if (typeof onFetchEnd === 'function') onFetchEnd()
+    if (typeof onFetchDone === 'function') onFetchDone()
   }
 
   function addError (err) {
