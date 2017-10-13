@@ -11,7 +11,6 @@ class SubmitPage extends PageComponent {
   constructor () {
     super()
     this.state = {
-      isPending: false,
       inputValue: '',
       codeEditorValue: ''
     }
@@ -23,7 +22,8 @@ class SubmitPage extends PageComponent {
   }
 
   render (props) {
-    const { isPending, inputValue, codeEditorValue } = this.state
+    const { inputValue, codeEditorValue } = this.state
+    const { fetchCount } = this.context.store.app
     return (
       <Loader>
         <Heading>Add a Code Snippet ✨</Heading>
@@ -47,7 +47,7 @@ class SubmitPage extends PageComponent {
             size='medium'
             pill
             fill
-            disabled={isPending}
+            disabled={fetchCount > 0}
             onClick={this.onClick}
           >
             Submit 🌟
@@ -79,12 +79,6 @@ class SubmitPage extends PageComponent {
     dispatch('API_SNIPPET_ADD', {
       name: this.state.inputValue,
       code: this.state.codeEditorValue
-    })
-
-    this.setState({
-      isPending: true,
-      inputValue: '',
-      codeEditorValue: ''
     })
   }
 }
