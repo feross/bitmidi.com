@@ -15,13 +15,13 @@ const Loader = (props) => {
 
   if (!show) {
     return (
-      <div
+      <main
         class={c('animate-fade-in animate--fast', className)}
         style={style}
         {...rest}
       >
         {children}
-      </div>
+      </main>
     )
   }
 
