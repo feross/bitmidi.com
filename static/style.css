@@ -33,7 +33,7 @@
 
 .CodeMirror {
   font-size: 15px;
-  border-radius: .5rem;
+  border-radius: .25rem;
   border: .125rem #272822 solid; /* codemirror monokai background color */
   height: auto;
 }
@@ -41,6 +41,10 @@
 .CodeMirror-matchingbracket {
   text-decoration: none !important; /* disable default style */
   border-bottom: rgba(255, 255, 255, .5) 1px solid;
+}
+
+.CodeMirror-placeholder {
+  color: #75715e !important; /* codemirror monokai comment color */
 }
 
 .CodeMirror-scroll {
