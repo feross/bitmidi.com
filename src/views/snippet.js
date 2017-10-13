@@ -45,15 +45,17 @@ class Snippet extends Component {
         <div
           class={`cf br3 br--top white pv2 ph3 bg-${mainColor}`}
         >
-          <h1
-            class='dib fl f4 lh-copy mv0 truncate'
+          <Link
+            color='white'
+            class='dib fl f4 lh-copy truncate'
             title={snippet.name}
+            href={`/${snippet.id}`}
             style={{
               width: 'calc(100% - 45px)'
             }}
           >
-            {snippet.name}
-          </h1>
+            <h2 class='f4 mv0'>{snippet.name}</h2>
+          </Link>
           <Link
             href={snippet.author_url}
             class='fr white grow'
