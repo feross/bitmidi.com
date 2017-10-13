@@ -6,22 +6,22 @@ const PageComponent = require('./page-component')
 class ErrorPage extends PageComponent {
   load () {
     const { dispatch } = this.context
-    const firstError = this.getFirstError()
+    const firstError = this.getError()
     dispatch('APP_TITLE', firstError.message)
   }
 
   render (props) {
-    const firstError = this.getFirstError()
+    const firstError = this.getError()
 
     return (
       <Heading>Error – {firstError.message}</Heading>
     )
   }
 
-  getFirstError = () => {
+  getError = () => {
     const { store } = this.context
-    const { errors } = store
-    return errors[0] || { message: 'Page Not Found' }
+    const { fatalError, errors } = store
+    return fatalError || errors[0] || { message: 'Page Not Found' }
   }
 }
 

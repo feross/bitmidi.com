@@ -10,8 +10,8 @@ const SubmitPage = require('./views/submit-page')
 
 module.exports = [
   ['home', '/', HomePage],
-  ['submit', '/submit', SubmitPage],
   ['doc', '/docs/:url+', DocPage],
+  ['submit', '/submit', SubmitPage],
   ['snippet', '/:snippetId', SnippetPage],
   ['error', '(.*)', ErrorPage]
 ]

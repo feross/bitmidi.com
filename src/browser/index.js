@@ -12,11 +12,9 @@ const { store, dispatch } = createStore(update)
 // Use server-initialized store values
 Object.assign(store, window.storeInit)
 
-// Show server-generated errors
-store.errors.map(error => window.alert(error.message))
-
 dispatch('LOCATION_REPLACE', window.location.pathname)
 dispatch('RUN_PENDING_DISPATCH')
+
 update()
 
 function update () {

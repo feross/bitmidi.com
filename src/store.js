@@ -22,18 +22,23 @@ function createStore (render, onFetchDone) {
       params: {},
       pathname: null
     },
+
     app: {
       title: null,
       width: 0,
       height: 0,
       fetchCount: 0
     },
-    userName: null,
-    doc: null,
+
+    fatalError: null,
     errors: [],
 
+    userName: null,
     snippets: {}, // snippet.id -> snippet
-    topSnippetIds: null
+    topSnippetIds: null,
+
+    // TODO
+    doc: null
   }
 
   const loc = new Location(routes, location => {
@@ -63,7 +68,10 @@ function createStore (render, onFetchDone) {
 
       case 'LOCATION_CHANGED': {
         Object.assign(store.location, data)
-        if (config.isBrowser) window.ga('send', 'pageview', data.pathname)
+        store.fatalError = null
+        if (config.isBrowser) {
+          window.ga('send', 'pageview', data.pathname)
+        }
         return update()
       }
 
@@ -246,8 +254,9 @@ function createStore (render, onFetchDone) {
   }
 
   function addError (err) {
-    store.errors.push({ message: err.message, code: err.code })
-    if (config.isBrowser) window.alert(err.message)
+    const { message, code = null, stack } = err
+    store.errors.push({ message, code })
+    console.error(stack)
     update()
   }
 

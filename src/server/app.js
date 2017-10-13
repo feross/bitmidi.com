@@ -147,22 +147,15 @@ function init (sessionStore) {
 function handleRender (err, req, res) {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onFetchDone)
-
-  if (err) {
-    console.error(err.stack)
-    store.errors.push({ message: err.message, code: err.code })
-  }
-
-  store.userName = (req.session.user && req.session.user.userName) || null
-
   const jsx = (
     <Provider store={store} dispatch={dispatch} theme={config.theme}>
       <App />
     </Provider>
   )
 
-  dispatch('LOCATION_REPLACE', req.url)
+  store.userName = (req.session.user && req.session.user.userName) || null
 
+  dispatch('LOCATION_REPLACE', req.url)
   if (store.app.fetchCount === 0) done()
 
   function onFetchDone () {
@@ -174,15 +167,25 @@ function handleRender (err, req, res) {
   }
 
   function done () {
-    const { location, errors } = store
+    if (err) {
+      const { message, code = null, status = 500, stack } = err
+      store.fatalError = { message, code, status }
+      console.error(stack)
+      update()
+    } else if (store.errors.length > 0) {
+      // When an error occurs during server rendering, treat it as a fatal error
+      const { message, code = null, status = 404 } = store.errors.shift()
+      store.fatalError = { message, code, status }
+      update()
+    }
 
     let status = 200
 
-    if (err) {
-      status = typeof err.status === 'number'
-        ? err.status
-        : 500 // Internal Server Error
-    } else if (location.name === 'error' || errors.length > 0) {
+    if (store.fatalError) {
+      status = typeof store.fatalError.status === 'number'
+        ? store.fatalError.status
+        : 500
+    } else if (store.location.name === 'error') {
       status = 404
     }
 
