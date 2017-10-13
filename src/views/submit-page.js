@@ -1,9 +1,10 @@
 const { Component, h } = require('preact') /** @jsx h */
 
-const CodeEditor = require('./code-editor')
 const Button = require('./button')
+const CodeEditor = require('./code-editor')
 const Heading = require('./heading')
 const Input = require('./input')
+const Loader = require('./loader')
 
 class SubmitPage extends Component {
   constructor () {
@@ -26,7 +27,7 @@ class SubmitPage extends Component {
   render (props) {
     const { isPending, inputValue, codeEditorValue } = this.state
     return (
-      <div>
+      <Loader show={false}>
         <Heading>Add a Code Snippet ✨</Heading>
         <div>
           <Input
@@ -54,7 +55,7 @@ class SubmitPage extends Component {
             Submit 🌟
           </Button>
         </div>
-      </div>
+      </Loader >
     )
   }
 
