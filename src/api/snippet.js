@@ -73,17 +73,29 @@ function add (snippet, cb) {
     VALUES ($id, $name, $code, $html, $author, $voters, $votes)
   `
 
+  const id = slug(snippet.name)
   const codeHtml = highlight(snippet.code, 'js')
 
-  db.run(sql, {
-    $id: slug(snippet.name),
-    $name: snippet.name,
-    $code: snippet.code,
-    $html: codeHtml,
-    $author: snippet.author,
-    $voters: JSON.stringify([snippet.author]),
-    $votes: 1
-  }, cb)
+  tryInsert(1)
+
+  function tryInsert (num) {
+    db.run(sql, {
+      $id: id + (num === 1 ? '' : `-${num}`),
+      $name: snippet.name,
+      $code: snippet.code,
+      $html: codeHtml,
+      $author: snippet.author,
+      $voters: JSON.stringify([snippet.author]),
+      $votes: 1
+    }, (err) => {
+      if (err && err.code === 'SQLITE_CONSTRAINT') {
+        // Snippet id is already taken
+        tryInsert(num + 1)
+        return
+      }
+      cb(err)
+    })
+  }
 }
 
 function vote (opts, cb) {
