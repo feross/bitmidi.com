@@ -1,14 +1,11 @@
-const { Component, h } = require('preact') /** @jsx h */
+const { h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
 const Loader = require('./loader')
 const Snippet = require('./snippet')
+const PageComponent = require('./page-component')
 
-class HomePage extends Component {
-  componentDidMount () {
-    this.load()
-  }
-
+class HomePage extends PageComponent {
   load () {
     const { dispatch } = this.context
     dispatch('APP_TITLE', null)

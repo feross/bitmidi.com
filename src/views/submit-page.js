@@ -1,12 +1,13 @@
-const { Component, h } = require('preact') /** @jsx h */
+const { h } = require('preact') /** @jsx h */
 
 const Button = require('./button')
 const CodeEditor = require('./code-editor')
 const Heading = require('./heading')
 const Input = require('./input')
 const Loader = require('./loader')
+const PageComponent = require('./page-component')
 
-class SubmitPage extends Component {
+class SubmitPage extends PageComponent {
   constructor () {
     super()
     this.state = {
@@ -14,9 +15,6 @@ class SubmitPage extends Component {
       inputValue: '',
       codeEditorValue: ''
     }
-  }
-  componentDidMount () {
-    this.load()
   }
 
   load () {

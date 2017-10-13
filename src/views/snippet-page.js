@@ -1,18 +1,11 @@
-const { h, Component } = require('preact') /** @jsx h */
+const { h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
 const Loader = require('./loader')
 const Snippet = require('./snippet')
+const PageComponent = require('./page-component')
 
-class SnippetPage extends Component {
-  componentDidMount () {
-    this.load()
-  }
-
-  componentWillReceiveProps () {
-    // this.load()
-  }
-
+class SnippetPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const { location } = this.context.store

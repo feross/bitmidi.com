@@ -1,12 +1,9 @@
-const { h, Component } = require('preact') /** @jsx h */
+const { h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
+const PageComponent = require('./page-component')
 
-class ErrorPage extends Component {
-  componentDidMount () {
-    this.load()
-  }
-
+class ErrorPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const firstError = this.getFirstError()
