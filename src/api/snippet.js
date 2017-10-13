@@ -176,7 +176,7 @@ function get (opts, cb) {
 }
 
 function all (opts, cb) {
-  const sql = 'SELECT * FROM snippets'
+  const sql = 'SELECT * FROM snippets ORDER BY votes DESC'
   db.all(sql, (err, snippets) => {
     if (err) return cb(err)
     parallel(snippets.map(snippet => cb => populateSnippet(snippet, cb)), cb)
