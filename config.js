@@ -29,7 +29,7 @@ exports.name = 'Node Foo'
 /**
  * Description of the site
  */
-exports.description = 'Node.js documentation for everyone!'
+exports.description = 'Node.js examples and code snippets'
 
 /**
  * Website hostname + port

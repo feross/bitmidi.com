@@ -1,6 +1,20 @@
-# [NodeFoo](https://nodefoo.com) ([nodefoo.com](https://nodefoo.com))
+<h1 align="center">
+  <br>
+  <a href="https://webtorrent.io"><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png" alt="Node Foo" width="200"></a>
+  <br>
+  Node Foo
+  <br>
+  <br>
+</h1>
 
-### Node.js documentation for everyone!
+<h4 align="center">Node.js examples and code snippets</h4>
+
+<p align="center">
+  <a href="https://travis-ci.org/feross/nodefoo.com"><img src="https://img.shields.io/travis/feross/nodefoo.com/master.svg" alt="travis"></a>
+  <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
+</p>
+<br>
+
 
 ### Live site: [https://nodefoo.com](https://nodefoo.com)
 
