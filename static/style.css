@@ -11,6 +11,14 @@
 }
 
 /**
+ * Tachyons tweaks
+ */
+
+.link:focus {
+  outline: none;
+}
+
+/**
  * Highlight.js tweaks
  */
 
