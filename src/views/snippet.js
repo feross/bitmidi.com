@@ -37,7 +37,9 @@ class Snippet extends Component {
           </a>
           <div
             class='f5 gray mt1 tc'
-            title={`${snippet.votes} copies`}
+            title={
+              `${snippet.votes} copy-and-paste${snippet.votes !== 1 ? 's' : ''}`
+            }
           >
             {snippet.votes}
           </div>
