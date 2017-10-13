@@ -40,21 +40,30 @@ const Button = (props, context) => {
 
   if (disabled) cls.push('o-60')
 
-  let ButtonElement = Link
+  let ButtonElement, elemProps
 
   if (href == null) {
     ButtonElement = 'button'
+    elemProps = {
+      disabled,
+      type: 'button'
+    }
     style['line-height'] = 'inherit'
+  } else {
+    ButtonElement = Link
+    elemProps = {
+      color: 'white',
+      underlineHover: false
+    }
   }
 
   return (
     <ButtonElement
       class={c(cls, className)}
-      disabled={ButtonElement === 'button' && disabled}
       href={href}
       onClick={onClick}
       style={style}
-      type={ButtonElement === 'button' && 'button'}
+      {...elemProps}
       {...rest}
     >
       {children}

@@ -36,7 +36,7 @@ const Header = (props, context) => {
       }}
     >
       <div class='fl w-third'>
-        <Link class='lh-copy white f3' href='/'>
+        <Link color='white' class='lh-copy white f3' href='/'>
           Node Foo
         </Link>
       </div>

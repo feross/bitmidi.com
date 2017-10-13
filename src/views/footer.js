@@ -8,7 +8,7 @@ const Footer = (props, context) => {
   let $submitLink
   if (location.name !== 'submit') {
     $submitLink = [
-      <FooterLink href='/submit'>Add a snippet</FooterLink>,
+      <Link href='/submit'>Add a snippet</Link>,
       <FooterDivider />
     ]
   }
@@ -16,31 +16,18 @@ const Footer = (props, context) => {
   return (
     <footer id='footer' class='f6 silver w-100 cf mt5 mb4 tc'>
       <span>
-        Built by <FooterLink href='https://twitter.com/feross'>@feross</FooterLink>
+        Built by <Link href='https://twitter.com/feross'>@feross</Link>
       </span>
       <FooterDivider />
       <span>
-        Powered by <FooterLink href='https://github.com/feross/nodefoo.com' newtab>open source</FooterLink>
+        Powered by <Link href='https://github.com/feross/nodefoo.com' newtab>open source</Link>
       </span>
       <FooterDivider />
       {$submitLink}
-      <FooterLink href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
+      <Link href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
         { userName ? `Logout (${userName})` : 'Login with Twitter' }
-      </FooterLink>
+      </Link>
     </footer>
-  )
-}
-
-const FooterLink = (props, context) => {
-  const { children, ...rest } = props
-  const { mainColor } = context.theme
-  return (
-    <Link
-      class={`${mainColor} underline-hover`}
-      {...rest}
-    >
-      {children}
-    </Link>
   )
 }
 
