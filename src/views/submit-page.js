@@ -27,7 +27,7 @@ class SubmitPage extends Component {
   render (props) {
     const { isPending, inputValue, codeEditorValue } = this.state
     return (
-      <Loader show={false}>
+      <Loader>
         <Heading>Add a Code Snippet ✨</Heading>
         <div>
           <Input
