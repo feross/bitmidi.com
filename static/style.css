@@ -25,8 +25,8 @@
 
 .CodeMirror {
   font-size: 15px;
-  border-radius: .25rem;
-  border: .125rem rgba(255, 255, 255, .4) solid;
+  border-radius: .5rem;
+  border: .125rem #272822 solid; /* codemirror monokai background color */
   height: auto;
 }
 
@@ -45,6 +45,7 @@
 
 .CodeMirror-focused {
   border-color: #357edd; /* tachyons: blue */
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.2); /* tachyons: shadow-4 */
 }
 
 pre.hljs {
