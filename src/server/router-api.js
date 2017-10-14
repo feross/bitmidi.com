@@ -61,6 +61,13 @@ router.post('/snippet/vote', (req, res, next) => {
   })
 })
 
+router.get('/snippet/search', (req, res, next) => {
+  api.snippet.search(req.query, (err, result) => {
+    if (err) return sendError(next, err, { status: 404 })
+    res.json({ result })
+  })
+})
+
 router.get('/twitter/getUser', (req, res, next) => {
   api.twitter.getUser(req.query, (err, result) => {
     if (err) return sendError(next, err, { status: 404 })

@@ -2,10 +2,12 @@ module.exports = {
   add,
   vote,
   get,
-  all
+  all,
+  search
 }
 
 const assert = require('assert')
+const debug = require('debug')('nodefoo:api:snippet')
 const parallel = require('run-parallel')
 const path = require('path')
 const sqlite3 = require('sqlite3')
@@ -15,30 +17,71 @@ const highlight = require('../highlight')
 const slug = require('../lib/slug')
 const twitter = require('./twitter')
 
+const DB_PATH = path.join(config.root, 'db', 'snippets')
+
 // Enable verbose SQLite logs (disabled in production)
 if (!config.isProd) sqlite3.verbose()
 
-const db = new sqlite3.Database(path.join(config.root, 'db', 'snippets'))
+const db = new sqlite3.Database(DB_PATH)
 
 init()
 
 function init () {
-  const sql = `
-    CREATE TABLE IF NOT EXISTS snippets(
-      rowid INTEGER PRIMARY KEY NOT NULL,
-      id TEXT UNIQUE NOT NULL,
-      name TEXT NOT NULL,
-      code TEXT NOT NULL,
-      html TEXT NOT NULL,
-      author TEXT NOT NULL,
-      voters TEXT NOT NULL DEFAULT '[]',
-      votes INTEGER NOT NULL DEFAULT 0
-    );
-  `
-  db.run(sql)
+  debug('init')
+  const sqls = [
+    `
+      CREATE TABLE IF NOT EXISTS snippets(
+        rowid INTEGER PRIMARY KEY NOT NULL,
+        id TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL,
+        code TEXT NOT NULL,
+        html TEXT NOT NULL,
+        author TEXT NOT NULL,
+        voters TEXT NOT NULL DEFAULT '[]',
+        votes INTEGER NOT NULL DEFAULT 0
+      )
+    `,
+    `
+      CREATE VIRTUAL TABLE IF NOT EXISTS snippets_search USING fts4(
+        content='snippets',
+        id,
+        name
+      )
+    `,
+    `
+      CREATE TRIGGER IF NOT EXISTS snippets_bu BEFORE UPDATE ON snippets BEGIN
+        DELETE FROM snippets_search WHERE docid=OLD.rowid;
+      END
+    `,
+    `
+      CREATE TRIGGER IF NOT EXISTS snippets_bd BEFORE DELETE ON snippets BEGIN
+        DELETE FROM snippets_search WHERE docid=OLD.rowid;
+      END
+    `,
+    `
+      CREATE TRIGGER IF NOT EXISTS snippets_au AFTER UPDATE ON snippets BEGIN
+        INSERT INTO snippets_search(docid, id, name)
+        VALUES(NEW.rowid, NEW.id, NEW.name);
+      END
+    `,
+    `
+      CREATE TRIGGER IF NOT EXISTS snippets_ai AFTER INSERT ON snippets BEGIN
+        INSERT INTO snippets_search(docid, id, name)
+        VALUES(NEW.rowid, NEW.id, NEW.name);
+      END
+    `,
+    `
+      INSERT INTO snippets_search(snippets_search) VALUES('optimize')
+    `
+  ]
+
+  db.serialize(() => {
+    sqls.map((sql) => db.run(sql))
+  })
 }
 
 function add (snippet, cb) {
+  debug('add %o', snippet)
   assert(
     snippet != null && typeof snippet === 'object',
     'Snippet must be an object'
@@ -53,19 +96,19 @@ function add (snippet, cb) {
   )
   assert(
     typeof snippet.code === 'string',
-    'Code must be a string'
+    'Snippet code must be a string'
   )
   assert(
     snippet.code.length > 0,
-    'Code must not be empty'
+    'Snippet code must not be empty'
   )
   assert(
     typeof snippet.author === 'string',
-    'Author must be a string'
+    'Snippet author must be a string'
   )
   assert(
     snippet.author.length > 0,
-    'Author must not be empty'
+    'Snippet author must not be empty'
   )
 
   const sql = `
@@ -73,14 +116,15 @@ function add (snippet, cb) {
     VALUES ($id, $name, $code, $html, $author, $voters, $votes)
   `
 
-  const id = slug(snippet.name)
+  const idBase = slug(snippet.name)
   const codeHtml = highlight(snippet.code, 'js')
 
   tryInsert(1)
 
   function tryInsert (num) {
+    const id = idBase + (num === 1 ? '' : `-${num}`)
     db.run(sql, {
-      $id: id + (num === 1 ? '' : `-${num}`),
+      $id: id,
       $name: snippet.name,
       $code: snippet.code,
       $html: codeHtml,
@@ -99,6 +143,7 @@ function add (snippet, cb) {
 }
 
 function vote (opts, cb) {
+  debug('vote %o', opts)
   assert(
     opts != null && typeof opts === 'object',
     'Opts must be an object'
@@ -154,6 +199,7 @@ function vote (opts, cb) {
 }
 
 function get (opts, cb) {
+  debug('get %o', opts)
   assert(
     opts != null && typeof opts === 'object',
     'Opts must be an object'
@@ -176,11 +222,26 @@ function get (opts, cb) {
 }
 
 function all (opts, cb) {
+  debug('all %o', opts)
   const sql = 'SELECT * FROM snippets ORDER BY votes DESC'
   db.all(sql, (err, snippets) => {
     if (err) return cb(err)
     parallel(snippets.map(snippet => cb => populateSnippet(snippet, cb)), cb)
   })
+}
+
+function search (opts, cb) {
+  debug('search %o', opts)
+  assert(
+    opts != null && typeof opts === 'object',
+    'Opts must be an object'
+  )
+  assert(
+    typeof opts.q === 'string',
+    'Search query must be a string'
+  )
+  const sql = 'SELECT * FROM snippets_search WHERE name MATCH $q'
+  db.get(sql, { $q: opts.q }, cb)
 }
 
 function populateSnippet (snippet, cb) {

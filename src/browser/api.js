@@ -1,12 +1,13 @@
 module.exports = {
   doc: {
-    get: (opts, cb) => sendGet('/api/doc/get', opts, cb)
+    get: (opts, cb) => sendGet('/doc/get', opts, cb)
   },
   snippet: {
-    add: (opts, cb) => sendPost('/api/snippet/add', opts, cb),
-    vote: (opts, cb) => sendPost('/api/snippet/vote', opts, cb),
-    get: (opts, cb) => sendGet('/api/snippet/get', opts, cb),
-    all: (opts, cb) => sendGet('/api/snippet/all', opts, cb)
+    add: (opts, cb) => sendPost('/snippet/add', opts, cb),
+    vote: (opts, cb) => sendPost('/snippet/vote', opts, cb),
+    get: (opts, cb) => sendGet('/snippet/get', opts, cb),
+    all: (opts, cb) => sendGet('/snippet/all', opts, cb),
+    search: (opts, cb) => sendGet('/snippet/search', opts, cb)
   }
 }
 
@@ -26,7 +27,7 @@ function sendPost () {
 
 function sendRequest (method, urlBase, params, cb) {
   const opts = {
-    url: urlBase + '?' + querystring.stringify(params),
+    url: '/api' + urlBase + '?' + querystring.stringify(params),
     json: true,
     method: method,
     timeout: config.apiTimeout
