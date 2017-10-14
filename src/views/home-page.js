@@ -20,7 +20,7 @@ class HomePage extends PageComponent {
 
     return (
       <Loader show={topSnippetIds == null} center>
-        <Heading class='tc'>Most copied code snippets</Heading>
+        <Heading class='tc'>Most copied snippets</Heading>
         {topSnippets && topSnippets.map(snippet => <Snippet snippet={snippet} />)}
       </Loader>
     )
