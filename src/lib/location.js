@@ -75,7 +75,8 @@ class Location {
 
     // Ignore if link points to current page and uses a hash
     const href = el.getAttribute('href')
-    if (el.pathname === window.location.pathname && (el.hash || href === '#')) return
+    if (el.pathname === window.location.pathname &&
+        el.search === window.location.search && (el.hash || href === '#')) return
 
     // Ignore if link contains 'mailto:'
     if (href && href.indexOf('mailto:') > -1) return
