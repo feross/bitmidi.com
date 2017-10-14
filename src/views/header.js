@@ -36,7 +36,7 @@ const Header = (props, context) => {
   let logoCls = ''
 
   if (isPageLoading) {
-    headerCls = 'animate-bg-rainbow animate--slow animate--infinite'
+    headerCls = 'animate-bg-rainbow'
     logoCls = 'animate-pulse animate--normal animate--infinite'
   } else {
     headerCls = `bg-${headerColor}`

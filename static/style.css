@@ -105,13 +105,8 @@ pre.hljs {
 
 .animate-fade-in,
 .animate-pulse,
-.animate-bounce-in,
-.animate-bg-rainbow {
+.animate-bounce-in {
   animation-fill-mode: both;
-}
-
-.animate--slow {
-  animation-duration: 2s;
 }
 
 .animate--normal {
@@ -209,16 +204,16 @@ pre.hljs {
   }
 
   100% {
-    background-position: 200% 0%
+    background-position: 400% 0%
   }
 }
 
 .animate-bg-rainbow {
-  animation-name: bgRainbow;
-  animation-timing-function: linear;
+  animation: bgRainbow 6s linear infinite;
+
   background: linear-gradient(
     to right,
     #ff4136, #ff6300, #ffb700, gold, #19a974, #357edd, #a463f2, #ff80cc, #ff4136
   );
-  background-size: 200% 200%;
+  background-size: 400% 400%;
 }
