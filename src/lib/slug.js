@@ -1,3 +1,5 @@
+// TODO: publish to npm
+
 module.exports = makeSlug
 
 const mollusc = require('mollusc')
