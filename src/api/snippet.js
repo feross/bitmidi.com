@@ -247,6 +247,7 @@ function search (opts, cb) {
     parallel(results.map(result => cb => {
       get({ id: result.id }, cb)
     }), (err, snippets) => {
+      if (err) return cb(err)
       cb(null, {
         q: opts.q,
         snippets
