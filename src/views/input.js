@@ -39,7 +39,7 @@ class Input extends Component {
     return (
       <input
         class={c(
-          'db input-reset ba bw1 ph3 pv2 outline-0 sans-serif',
+          'db input-reset ba bw1 ph3 pv2 outline-0 sans-serif grow-subtle',
           focusClass,
           pillClass,
           className

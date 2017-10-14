@@ -18,7 +18,7 @@ const Link = (props, context) => {
 
   return (
     <a
-      class={c('link', color, cls, className)}
+      class={c('no-underline', color, cls, className)}
       href={href}
       onClick={onClick}
       rel={c(external && 'external', newtab && 'noopener')}

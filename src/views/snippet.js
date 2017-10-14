@@ -22,8 +22,8 @@ class Snippet extends Component {
             height: 62
           }}
         >
-          <a
-            class='pointer db ba b--moon-gray br-100 pa3 o-80 glow grow'
+          <Link
+            class='pointer db ba b--moon-gray br-100 pa3 grow'
             title='Copy to clipboard'
             style={{
               userSelect: 'none',
@@ -34,7 +34,7 @@ class Snippet extends Component {
             onClick={this.onUpvote}
           >
             <IconContentCopy fill='#555' size={29} />
-          </a>
+          </Link>
           <div
             class='f5 gray mt1 tc'
             title={

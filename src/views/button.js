@@ -26,7 +26,7 @@ const Button = (props, context) => {
     ...rest
   } = props
 
-  const cls = ['link pointer dib ttu fw6 grow v-mid ba bw1 sans-serif']
+  const cls = ['pointer dib ttu fw6 v-mid ba bw1 sans-serif grow']
 
   if (size === 'small') cls.push('f6 ph3 pv2')
   if (size === 'medium') cls.push('f5 ph3 pv2')
