@@ -15,12 +15,12 @@ class Location {
     if (IS_BROWSER) document.addEventListener('click', this._onClick)
   }
 
-  push (pathname) {
-    this._history.push(pathname)
+  push (url) {
+    this._history.push(url)
   }
 
-  replace (pathname) {
-    this._history.replace(pathname)
+  replace (url) {
+    this._history.replace(url)
   }
 
   back () {
@@ -44,12 +44,7 @@ class Location {
   }
 
   _onHistoryChange = (url) => {
-    const index = url.indexOf('?')
-    const pathname = index >= 0
-      ? url.slice(0, index)
-      : url
-
-    const loc = this._router.match(pathname)
+    const loc = this._router.match(url)
     this._onChange(loc)
   }
 
@@ -90,8 +85,8 @@ class Location {
 
     e.preventDefault()
 
-    const pathname = el.pathname + el.search + (el.hash || '')
-    this.push(pathname)
+    const url = el.pathname + el.search + (el.hash || '')
+    this.push(url)
   }
 }
 

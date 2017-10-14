@@ -1,6 +1,7 @@
 // TODO: publish to npm
 
 const pathToRegexp = require('path-to-regexp')
+const querystring = require('querystring')
 
 class Router {
   constructor (routes) {
@@ -18,11 +19,21 @@ class Router {
     })
   }
 
-  match (pathname) {
+  match (url) {
+    const index = url.indexOf('?')
+    const pathname = index >= 0
+      ? url.slice(0, index)
+      : url
+    const query = index >= 0
+      ? querystring.decode(url.slice(index + 1))
+      : {}
+
     const ret = {
       name: null,
       params: {},
-      pathname
+      url,
+      pathname,
+      query
     }
     for (const route of this._routes) {
       const matches = route.regexp.exec(pathname)
