@@ -8,14 +8,14 @@ class History {
     if (IS_BROWSER) window.addEventListener('popstate', this._onPopState)
   }
 
-  push (pathname) {
-    if (IS_BROWSER) window.history.pushState(undefined, undefined, pathname)
-    this._onChange(pathname)
+  push (url) {
+    if (IS_BROWSER) window.history.pushState(undefined, undefined, url)
+    this._onChange(url)
   }
 
-  replace (pathname) {
-    if (IS_BROWSER) window.history.replaceState(undefined, undefined, pathname)
-    this._onChange(pathname)
+  replace (url) {
+    if (IS_BROWSER) window.history.replaceState(undefined, undefined, url)
+    this._onChange(url)
   }
 
   back () {

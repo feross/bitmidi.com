@@ -12,7 +12,8 @@ const { store, dispatch } = createStore(update)
 // Use server-initialized store values
 Object.assign(store, window.storeInit)
 
-dispatch('LOCATION_REPLACE', window.location.pathname)
+const url = window.location.pathname + window.location.search
+dispatch('LOCATION_REPLACE', url)
 dispatch('RUN_PENDING_DISPATCH')
 
 update()

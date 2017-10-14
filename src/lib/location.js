@@ -8,8 +8,6 @@ const IS_BROWSER = typeof window !== 'undefined'
 class Location {
   constructor (routes, onChange) {
     this._onChange = onChange
-    this._onHistoryChange = this._onHistoryChange.bind(this)
-    this._onClick = this._onClick.bind(this)
 
     this._router = new Router(routes)
     this._history = new History(this._onHistoryChange)
@@ -42,14 +40,20 @@ class Location {
     this._history = null
 
     if (IS_BROWSER) document.removeEventListener('click', this._onClick)
+    this._onClick = null
   }
 
-  _onHistoryChange (pathname) {
+  _onHistoryChange = (url) => {
+    const index = url.indexOf('?')
+    const pathname = index >= 0
+      ? url.slice(0, index)
+      : url
+
     const loc = this._router.match(pathname)
     this._onChange(loc)
   }
 
-  _onClick (e) {
+  _onClick = (e) => {
     // Ignore if click was not left mouse button
     if (e.button !== 0) return
 
