@@ -5,7 +5,6 @@ const IS_BROWSER = typeof window !== 'undefined'
 class History {
   constructor (onChange) {
     this._onChange = onChange
-    this._onPopState = this._onPopState.bind(this)
     if (IS_BROWSER) window.addEventListener('popstate', this._onPopState)
   }
 
@@ -29,12 +28,14 @@ class History {
 
   destroy () {
     this._onChange = null
-    this._onPopState = null
+
     if (IS_BROWSER) window.removeEventListener('popstate', this._onPopState)
+    this._onPopState = null
   }
 
-  _onPopState (e) {
-    this._onChange(window.location.pathname)
+  _onPopState = (e) => {
+    const url = window.location.pathname + window.location.search
+    this._onChange(url)
   }
 }
 
