@@ -73,11 +73,6 @@ function createStore (render, onFetchDone) {
         return
       }
 
-      case 'LOCATION_BACK': {
-        loc.back()
-        return
-      }
-
       case 'LOCATION_CHANGED': {
         store.location = data
         store.fatalError = null
@@ -224,7 +219,7 @@ function createStore (render, onFetchDone) {
         store.lastSearch = data
 
         if (data === '') {
-          dispatch('LOCATION_BACK')
+          dispatch('LOCATION_REPLACE', '/')
         } else {
           const url = '/search?' + querystring.encode({ q: data })
           dispatch(
