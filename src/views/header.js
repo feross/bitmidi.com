@@ -1,4 +1,7 @@
 const { h } = require('preact') /** @jsx h */
+const c = require('classnames')
+
+const config = require('../../config')
 
 const Button = require('./button')
 const Image = require('./image')
@@ -6,7 +9,7 @@ const Link = require('./link')
 const Search = require('./search')
 
 const Header = (props, context) => {
-  const { location } = context.store
+  const { app, location } = context.store
   const { headerColor, mainColor } = context.theme
 
   let $submitButton
@@ -25,12 +28,25 @@ const Header = (props, context) => {
     )
   }
 
+  const isPageLoading = !config.isBrowser || // initial server render
+      app.fetchCount > 0 || // fetching async data
+      !app.isLoaded // window.onload() has not fired yet
+
+  let headerCls = ''
+  let logoCls = ''
+
+  if (isPageLoading) {
+    headerCls = 'animate-bg-rainbow animate--slow animate--infinite'
+    logoCls = 'animate-pulse animate--normal animate--infinite'
+  } else {
+    headerCls = `bg-${headerColor}`
+    logoCls = 'animate-bounce-in animate--normal'
+  }
+
   return (
     <header
       id='header'
-      class={
-        `fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-${headerColor} h3`
-      }
+      class={c(headerCls, 'fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l h3')}
       style={{
         height: 50,
         paddingTop: 6
@@ -39,7 +55,7 @@ const Header = (props, context) => {
       <div class='fl w-third'>
         <Link
           color='white'
-          class='dib lh-copy white f3 grow'
+          class={c(logoCls, 'dib lh-copy white f3')}
           href='/'
         >
           <Image

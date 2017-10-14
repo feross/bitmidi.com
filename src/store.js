@@ -30,6 +30,7 @@ function createStore (render, onFetchDone) {
       title: null,
       width: 0,
       height: 0,
+      isLoaded: false, // did window.onload() fire?
       fetchCount: 0
     },
 
@@ -100,6 +101,11 @@ function createStore (render, onFetchDone) {
       case 'APP_RESIZE': {
         store.app.width = data.width
         store.app.height = data.height
+        return update()
+      }
+
+      case 'APP_IS_LOADED': {
+        store.app.isLoaded = true
         return update()
       }
 
