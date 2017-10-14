@@ -241,7 +241,18 @@ function search (opts, cb) {
     'Search query must be a string'
   )
   const sql = 'SELECT * FROM snippets_search WHERE name MATCH $q'
-  db.get(sql, { $q: opts.q }, cb)
+  db.all(sql, { $q: opts.q }, (err, results) => {
+    if (err) return cb(err)
+
+    parallel(results.map(result => cb => {
+      get({ id: result.id }, cb)
+    }), (err, snippets) => {
+      cb(null, {
+        q: opts.q,
+        snippets
+      })
+    })
+  })
 }
 
 function populateSnippet (snippet, cb) {
