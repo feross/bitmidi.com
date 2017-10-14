@@ -5,6 +5,7 @@ module.exports = createStore
 const copy = require('clipboard-copy')
 const debug = require('debug')('nodefoo:store')
 const debugVerbose = require('debug')('nodefoo:store:verbose')
+const querystring = require('querystring')
 
 const api = require('./api')
 const config = require('../config')
@@ -32,10 +33,14 @@ function createStore (render, onFetchDone) {
 
     fatalError: null,
     errors: [],
-
     userName: null,
+
+    // local database
     snippets: {}, // snippet.id -> snippet
-    topSnippetIds: null,
+    searches: {}, // search.q -> search
+
+    // data references
+    topSnippetIds: null, // [ snippet.id ]
 
     // TODO
     doc: null
@@ -55,23 +60,26 @@ function createStore (render, onFetchDone) {
        */
 
       case 'LOCATION_PUSH': {
-        const pathname = data
-        if (pathname !== store.location.pathname) loc.push(pathname)
+        const url = data
+        if (url !== store.location.url) loc.push(url)
         return
       }
 
       case 'LOCATION_REPLACE': {
-        const pathname = data
-        if (pathname !== store.location.pathname) loc.replace(pathname)
+        const url = data
+        if (url !== store.location.url) loc.replace(url)
+        return
+      }
+
+      case 'LOCATION_BACK': {
+        loc.back()
         return
       }
 
       case 'LOCATION_CHANGED': {
-        Object.assign(store.location, data)
+        store.location = data
         store.fatalError = null
-        if (config.isBrowser) {
-          window.ga('send', 'pageview', data.pathname)
-        }
+        if (config.isBrowser) window.ga('send', 'pageview', store.location.url)
         return update()
       }
 
@@ -115,7 +123,6 @@ function createStore (render, onFetchDone) {
        * SNIPPET
        */
 
-      // TODO: rename 'fetch' prefix to something better. 'async'?
       case 'API_SNIPPET_ADD': {
         fetchStart()
         if (store.userName == null) {
@@ -191,13 +198,39 @@ function createStore (render, onFetchDone) {
         return update()
       }
 
+      case 'API_SNIPPET_SEARCH': {
+        fetchStart()
+        api.snippet.search(data, (err, search) => {
+          dispatch('API_SNIPPET_SEARCH_DONE', { err, search })
+        })
+        return update()
+      }
+
+      case 'API_SNIPPET_SEARCH_DONE': {
+        fetchDone()
+        const { err, search } = data
+        if (err) return addError(err)
+        addSearch(search)
+        return update()
+      }
+
       /**
        * SEARCH
        */
 
       case 'SEARCH_INPUT': {
         store.lastSearch = data
-        return update()
+
+        if (data === '') {
+          dispatch('LOCATION_BACK')
+        } else {
+          const url = '/search?' + querystring.encode({ q: data })
+          dispatch(
+            store.location.name === 'search' ? 'LOCATION_REPLACE' : 'LOCATION_PUSH',
+            url
+          )
+        }
+        return
       }
 
       /**
@@ -256,6 +289,10 @@ function createStore (render, onFetchDone) {
 
   function addSnippet (snippet) {
     store.snippets[snippet.id] = snippet
+  }
+
+  function addSearch (search) {
+    store.searches[search.q] = search
   }
 
   let isRendering = false
