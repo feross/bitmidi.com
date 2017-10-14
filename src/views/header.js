@@ -32,8 +32,8 @@ const Header = (props, context) => {
         `fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l bg-${headerColor} h3`
       }
       style={{
-        height: 54,
-        paddingTop: 8
+        height: 50,
+        paddingTop: 6
       }}
     >
       <div class='fl w-third'>
