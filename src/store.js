@@ -48,8 +48,8 @@ function createStore (render, onFetchDone) {
     doc: null
   }
 
-  const loc = new Location(routes, location => {
-    dispatch('LOCATION_CHANGED', location)
+  const loc = new Location(routes, (location, source) => {
+    dispatch('LOCATION_CHANGED', { location, source })
   })
 
   function dispatch (type, data) {
@@ -74,9 +74,16 @@ function createStore (render, onFetchDone) {
       }
 
       case 'LOCATION_CHANGED': {
-        store.location = data
+        const { location, source } = data
+        store.location = location
+
+        // Clear fatal errors on page navigation
         store.fatalError = null
-        if (config.isBrowser) window.ga('send', 'pageview', store.location.url)
+
+        if (config.isBrowser) {
+          if (source === 'push') window.scroll(0, 0)
+          window.ga('send', 'pageview', location.url)
+        }
         return update()
       }
 

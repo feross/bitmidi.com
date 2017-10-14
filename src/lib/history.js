@@ -10,12 +10,12 @@ class History {
 
   push (url) {
     if (IS_BROWSER) window.history.pushState(undefined, undefined, url)
-    this._onChange(url)
+    this._onChange(url, 'push')
   }
 
   replace (url) {
     if (IS_BROWSER) window.history.replaceState(undefined, undefined, url)
-    this._onChange(url)
+    this._onChange(url, 'replace')
   }
 
   back () {
@@ -36,7 +36,7 @@ class History {
   _onPopState = (e) => {
     const loc = window.location
     const url = loc.pathname + loc.search + loc.hash
-    this._onChange(url)
+    this._onChange(url, 'popstate')
   }
 }
 

@@ -43,9 +43,9 @@ class Location {
     this._onClick = null
   }
 
-  _onHistoryChange = (url) => {
+  _onHistoryChange = (url, source) => {
     const loc = this._router.match(url)
-    this._onChange(loc)
+    this._onChange(loc, source)
   }
 
   _onClick = (e) => {
