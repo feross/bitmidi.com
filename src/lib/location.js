@@ -79,7 +79,7 @@ class Location {
         el.search === window.location.search && (el.hash || href === '#')) return
 
     // Ignore if link contains 'mailto:'
-    if (href && href.indexOf('mailto:') > -1) return
+    if (href && href.indexOf('mailto:') >= 0) return
 
     // Ignore if link is not from the same origin
     if (el.origin !== window.location.origin) return

@@ -21,6 +21,8 @@ function createStore (render, onFetchDone) {
     location: {
       name: null,
       params: {},
+      url: null,
+      query: {},
       pathname: null
     },
 

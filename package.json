@@ -22,7 +22,8 @@
   },
   "browser": {
     "./src/api/index.js": "./src/browser/api.js",
-    "./secret/index.js": false
+    "./secret/index.js": false,
+    "url": false
   },
   "browserify": {
     "transform": [

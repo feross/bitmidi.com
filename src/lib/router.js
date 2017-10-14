@@ -2,6 +2,7 @@
 
 const pathToRegexp = require('path-to-regexp')
 const querystring = require('querystring')
+const URL = require('url').URL || window.URL
 
 class Router {
   constructor (routes) {
@@ -20,21 +21,19 @@ class Router {
   }
 
   match (url) {
-    const index = url.indexOf('?')
-    const pathname = index >= 0
-      ? url.slice(0, index)
-      : url
-    const query = index >= 0
-      ? querystring.decode(url.slice(index + 1))
+    const { pathname, search } = new URL(url, 'http://example.com')
+    const query = search.length > 0
+      ? querystring.decode(search.slice(1))
       : {}
 
     const ret = {
       name: null,
       params: {},
-      url,
+      url: pathname + search,
       pathname,
       query
     }
+
     for (const route of this._routes) {
       const matches = route.regexp.exec(pathname)
       if (!matches) continue
