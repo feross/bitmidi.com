@@ -33,7 +33,7 @@ class App extends Component {
     const Page = routes.find(route => route[0] === location.name)[2]
 
     return (
-      <div id='app'>
+      <div id='root'>
         <Title title={app.title} />
         <Header />
         <div class='mt5 pa2 pa3-m pa3-l mw7 center'>

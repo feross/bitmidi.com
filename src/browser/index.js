@@ -6,7 +6,7 @@ const createStore = require('../store')
 const config = require('../../config')
 const debugHelper = require('../lib/debug-helper')
 
-let root = document.getElementById('app')
+let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
 
 // Use server-initialized store values
