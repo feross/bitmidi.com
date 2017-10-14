@@ -34,7 +34,8 @@ class History {
   }
 
   _onPopState = (e) => {
-    const url = window.location.pathname + window.location.search
+    const loc = window.location
+    const url = loc.pathname + loc.search + loc.hash
     this._onChange(url)
   }
 }
