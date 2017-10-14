@@ -8,31 +8,43 @@ const Footer = (props, context) => {
   let $submitLink
   if (location.name !== 'submit') {
     $submitLink = [
-      <Link href='/submit'>Add a snippet</Link>,
+      <FooterItem>
+        <Link href='/submit'>Add a snippet</Link>
+      </FooterItem>,
       <FooterDivider />
     ]
   }
 
   return (
-    <footer id='footer' class='f6 silver w-100 cf mt5 mb4 tc'>
-      <span>
-        Built by <Link href='https://twitter.com/feross'>@feross</Link>
-      </span>
+    <footer id='footer' class='f6 lh-copy silver w-100 mt5 mb4 tc'>
+      <FooterItem>
+        Built by <Link href='https://twitter.com/feross' newtab>@feross</Link>
+      </FooterItem>
       <FooterDivider />
-      <span>
+
+      <FooterItem>
         Powered by <Link href='https://github.com/feross/nodefoo.com' newtab>open source</Link>
-      </span>
+      </FooterItem>
       <FooterDivider />
+
       {$submitLink}
-      <Link href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
-        { userName ? `Logout (${userName})` : 'Login with Twitter' }
-      </Link>
+
+      <FooterItem>
+        <Link href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
+          { userName ? `Logout (${userName})` : 'Login with Twitter' }
+        </Link>
+      </FooterItem>
+
     </footer>
   )
 }
 
+const FooterItem = ({ children }) => {
+  return <div class='dib nowrap mh2'>{children}</div>
+}
+
 const FooterDivider = () => {
-  return <span class='mh2'>•</span>
+  return <span class='mh1'>•</span>
 }
 
 module.exports = Footer
