@@ -1,6 +1,7 @@
 const { h } = require('preact') /** @jsx h */
 
 const Button = require('./button')
+const Image = require('./image')
 const Link = require('./link')
 const Search = require('./search')
 
@@ -37,7 +38,14 @@ const Header = (props, context) => {
     >
       <div class='fl w-third'>
         <Link color='white' class='lh-copy white f3' href='/'>
-          Node Foo
+          <Image
+            src='/img/nodefoo.svg'
+            alt='Node Foo'
+            style={{
+              marginTop: 2,
+              height: 36
+            }}
+          />
         </Link>
       </div>
       <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
