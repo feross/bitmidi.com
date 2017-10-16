@@ -5,7 +5,7 @@ module.exports = makeSlug
 const mollusc = require('mollusc')
 
 const MOLLUSC_OPTS = {
-  limit: 12, // limit slug to 12 words
+  limit: 15, // limit slug to this many words
   charmap: Object.assign({ '.': '-' }, mollusc.charmap)
 }
 

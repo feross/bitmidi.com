@@ -10,8 +10,8 @@ test('slug', (t) => {
 
   // Too many words
   t.equal(
-    slug('one two three four five six seven eight nine ten eleven twelve thirteen'),
-    'one-two-three-four-five-six-seven-eight-nine-ten-eleven-twelve'
+    slug('a b c d e f g h i j k l m n o p'),
+    'a-b-c-d-e-f-g-h-i-j-k-l-m-n-o'
   )
 
   // Too many characters
