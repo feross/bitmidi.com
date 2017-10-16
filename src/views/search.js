@@ -13,7 +13,7 @@ class Search extends Component {
       <Input
         borderColor={headerColor}
         borderFocusColor={mainColor}
-        class={c(className)}
+        class={c(className, 'grow-subtle')}
         pill
         onInput={this.onInput}
         onKeyPress={this.onKeyPress}

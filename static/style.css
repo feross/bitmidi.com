@@ -51,25 +51,11 @@
   border-radius: .25rem;
   border: .125rem #272822 solid; /* codemirror monokai background color */
   height: auto;
-
-  /* grow */
-  -moz-osx-font-smoothing: grayscale;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: transform 0.25s ease-out;
-}
-
-.CodeMirror:hover {
-  /* grow */
-  transform: scale(1.02);
 }
 
 .CodeMirror-focused {
   border-color: #357edd; /* tachyons: blue */
   box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.2); /* tachyons: shadow-4 */
-
-  /* grow */
-  transform: scale(1.05) !important;
 }
 
 .CodeMirror-matchingbracket {
