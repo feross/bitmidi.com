@@ -11,13 +11,15 @@
     <link rel='stylesheet' href='/codemirror/monokai.css' />
     <link rel='stylesheet' href='/style.css<%- hashes.style %>' charset='utf-8' />
 
-    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <link rel='preload' href='/bundle.js<%- hashes.bundle %>' as='script'>
 
+    <meta name='apple-mobile-web-app-capable' content='yes' />
     <!-- <link rel='search' href='/opensearch.xml' title='<%= config.name %>' type='application/opensearchdescription+xml'> -->
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>
     <%- typeof content !== 'undefined' ? content : '' %>
+
     <script>
       console.time('render')
       console.time('load')
@@ -35,7 +37,8 @@
       window.ga.l = Date.now()
       window.ga('create', 'UA-3898076-23', 'auto')
     </script>
+
+    <script async src='/bundle.js<%- hashes.bundle %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <script src='/bundle.js<%- hashes.bundle %>'></script>
   </body>
 </html>
