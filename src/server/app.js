@@ -69,36 +69,6 @@ function init (sessionStore) {
 
   app.use(express.static(path.join(config.root, 'static'), staticOpts))
 
-  // Serve `/tachyons/yachyons.min.css`
-  app.use(
-    '/tachyons',
-    express.static(path.dirname(require.resolve('tachyons')), staticOpts)
-  )
-
-  // Serve `/highlight.js/monokai-sublime.css`
-  app.use(
-    '/highlight.js',
-    express.static(
-      path.join(path.dirname(require.resolve('highlight.js')), '..', 'styles'),
-      staticOpts
-    )
-  )
-
-  // Serve `/codemirror/codemirror.css`
-  app.use(
-    '/codemirror',
-    express.static(path.dirname(require.resolve('codemirror')), staticOpts)
-  )
-
-  // Serve `/codemirror/monokai.css`
-  app.use(
-    '/codemirror',
-    express.static(
-      path.join(path.dirname(require.resolve('codemirror')), '..', 'theme'),
-      staticOpts
-    )
-  )
-
   // Set up session handling
   app.use(session({
     store: sessionStore,
@@ -112,15 +82,20 @@ function init (sessionStore) {
     }
   }))
 
-  const bundle = fs.readFileSync(path.join(config.root, 'static', 'bundle.js'))
-  const style = fs.readFileSync(path.join(config.root, 'static', 'style.css'))
+  const bundleHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.js')))
+    : 'development'
+
+  const styleHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'style.css')))
+    : 'development'
 
   // Add template local variables
   app.use((req, res, next) => {
     res.locals.config = config
     res.locals.hashes = {
-      bundle: config.isProd ? '?h=' + createHash(bundle) : '',
-      style: config.isProd ? '?h=' + createHash(style) : ''
+      bundle: `?c=${bundleHash}`,
+      style: `?c=${styleHash}`
     }
     next()
   })

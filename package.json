@@ -78,7 +78,8 @@
     "mkdirp": "^0.5.1",
     "nodemon": "^1.11.0",
     "path-exists": "^3.0.0",
-    "rimraf": "^2.6.1",
+    "purify-css": "^1.2.5",
+    "rimraf": "^2.6.2",
     "standard": "*",
     "tape": "^4.8.0",
     "watchify": "^3.9.0"
@@ -92,7 +93,8 @@
     "url": "git://github.com/feross/nodefoo.com.git"
   },
   "scripts": {
-    "build": "npm run build-js && chmod 777 db/",
+    "build": "npm run build-css && npm run build-js && chmod 777 db/",
+    "build-css": "node ./bin/purify-css.js",
     "build-js": "browserify -i preact/devtools -p common-shakeify -p browser-pack-flat/plugin src/browser | minify > static/bundle.js",
     "build-js-debug": "browserify -d --full-paths src/browser > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
@@ -102,9 +104,10 @@
     "size-breakdown": "npm run build-js-debug && cat static/bundle.js | node ./node_modules/.bin/browserify-breakdown",
     "start": "node src/server",
     "test": "standard && tape test/*.js",
-    "watch": "npm run watch-js & npm run watch-server",
+    "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
+    "watch-css": "DEBUG=nodefoo* nodemon -V -x 'npm run build-css' -w src/server -e css",
     "watch-js": "watchify src/browser -d -v -o static/bundle.js",
-    "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon src/server -e js,css,ejs -i static/ -i src/views"
+    "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon -V src/server -e js,css,ejs -i static/ -i src/views -i tmp/"
   },
   "standard": {
     "parser": "babel-eslint"
