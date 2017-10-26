@@ -7,7 +7,7 @@ module.exports = simpleFetch
 function simpleFetch (opts, cb) {
   opts = typeof opts === 'string' ? {url: opts} : Object.assign({}, opts)
 
-  opts.headers = new Headers(opts.headers)
+  opts.headers = new Headers(opts.headers || {})
 
   if (opts.json) opts.headers.set('accept', 'application/json')
   if (opts.json && opts.body) {
