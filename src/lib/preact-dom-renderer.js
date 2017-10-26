@@ -36,7 +36,7 @@ function serializeHtml (el) {
   const attributes = el.attributes.map(attr).join('')
   const innerHTML = el.innerHTML || el.childNodes.map(serializeHtml).join('')
 
-  const styleProps = Object.keys(el.style)
+  const styleProps = Object.keys(el.style).filter(k => !!el.style[k])
 
   const style = styleProps.length
     ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${el.style[k]}`).join('; ')}"`
