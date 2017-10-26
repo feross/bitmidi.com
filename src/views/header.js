@@ -63,7 +63,8 @@ const Header = (props, context) => {
             alt='Node Foo'
             style={{
               marginTop: 2,
-              height: 36
+              height: 36,
+              width: 132
             }}
           />
         </Link>
