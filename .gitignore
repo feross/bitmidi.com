@@ -5,4 +5,4 @@ tmp/
 node_modules/
 
 static/bundle.js
-static/style.js
+static/style.css
