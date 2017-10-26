@@ -5,9 +5,9 @@
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-    <link rel='stylesheet' href='/style.css<%- hashes.style %>' />
+    <link rel='preload' href='/bundle.js?c=<%- bundleHash %>' as='script' />
 
-    <link rel='preload' href='/bundle.js<%- hashes.bundle %>' as='script' />
+    <%- typeof styleTag !== 'undefined' ? styleTag : '' %>
 
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
@@ -42,7 +42,7 @@
       window.ga('create', 'UA-3898076-23', 'auto')
     </script>
 
-    <script async src='/bundle.js<%- hashes.bundle %>'></script>
+    <script async src='/bundle.js?c=<%- bundleHash %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
   </body>
 </html>
