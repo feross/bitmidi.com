@@ -2,7 +2,7 @@ const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
 const Link = require('./link')
-const IconContentCopy = require('./icon-content-copy')
+const Icon = require('./icon')
 const Image = require('./image')
 
 class Snippet extends Component {
@@ -33,7 +33,7 @@ class Snippet extends Component {
             }}
             onClick={this.onUpvote}
           >
-            <IconContentCopy fill='#555' size={29} />
+            <Icon name='content-copy' alt='Copy to clipboard' />
           </Link>
           <div
             class='f5 gray mt1 tc'

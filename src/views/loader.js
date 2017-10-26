@@ -1,7 +1,7 @@
 const { h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
-const IconLoader = require('./icon-loader')
+const Icon = require('./icon')
 
 const Loader = (props) => {
   let {
@@ -23,7 +23,7 @@ const Loader = (props) => {
         style={style}
         {...rest}
       >
-        <IconLoader size={120} fill='#ff41b4' />
+        <Icon name='loader' alt='Loading...' />
       </div>
     )
   }
