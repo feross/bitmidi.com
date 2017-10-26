@@ -9,17 +9,13 @@ const Loader = (props) => {
     children,
     class: className,
     show = false,
-    style,
+    style = {},
     ...rest
   } = props
 
   // Show loader
   if (show) {
-    if (center) {
-      style = Object.assign({
-        marginTop: 'calc(50vh - 120px)'
-      }, style)
-    }
+    if (center) style.marginTop = 'calc(50vh - 120px)'
 
     return (
       <div
