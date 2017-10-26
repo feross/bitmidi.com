@@ -82,10 +82,9 @@ function init (sessionStore) {
     }
   }))
 
-  const stylePath = path.join(config.root, 'static', 'style.css')
-  const styleTag = config.isProd
-    ? `<style>${fs.readFileSync(stylePath, 'utf8')}</style>`
-    : `<link rel='stylesheet' href='/style.css' />`
+  const styleHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'style.css')))
+    : 'development'
 
   const bundleHash = config.isProd
     ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.js')))
@@ -94,7 +93,7 @@ function init (sessionStore) {
   // Add template local variables
   app.use((req, res, next) => {
     res.locals.config = config
-    res.locals.styleTag = styleTag
+    res.locals.styleHash = styleHash
     res.locals.bundleHash = bundleHash
     next()
   })
