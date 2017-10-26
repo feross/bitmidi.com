@@ -26,6 +26,7 @@ class Input extends Component {
       pill = false,
       onFocus: _,
       onBlur: _2,
+      placeholder,
       ...rest
     } = props
     const { focused } = this.state
@@ -49,6 +50,8 @@ class Input extends Component {
         type={type}
         onFocus={this.onFocus}
         onBlur={this.onBlur}
+        placeholder={placeholder}
+        aria-label={placeholder}
         {...rest}
       />
     )
