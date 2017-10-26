@@ -42,7 +42,7 @@ function serializeHtml (el) {
     ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${el.style[k]}`).join('; ')}"`
     : ''
 
-  if (innerHTML === '') { // Self-closing tag
+  if (innerHTML === '') {
     return `<${nodeName}${attributes}${style} />`
   } else {
     return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
@@ -66,5 +66,6 @@ function encAttr (s) {
 }
 
 function attr (a) {
+  if (a.value === '') return ''
   return ` ${a.name}="${encAttr(a.value)}"`
 }

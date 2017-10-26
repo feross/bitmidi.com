@@ -21,7 +21,7 @@ const Link = (props, context) => {
       class={c('no-underline', color, cls, className)}
       href={href}
       onClick={onClick}
-      rel={c(external && 'external', newtab && 'noopener')}
+      rel={c(external && 'external', newtab && 'noopener') || null}
       target={newtab ? '_blank' : null}
       {...rest}
     >
