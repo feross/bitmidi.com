@@ -42,7 +42,11 @@ function serializeHtml (el) {
     ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${el.style[k]}`).join('; ')}"`
     : ''
 
-  return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
+  if (innerHTML === '') { // Self-closing tag
+    return `<${nodeName}${attributes}${style} />`
+  } else {
+    return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
+  }
 }
 
 const charMap = {
