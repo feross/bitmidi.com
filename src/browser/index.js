@@ -15,6 +15,7 @@ Object.assign(store, window.storeInit)
 const loc = window.location
 dispatch('LOCATION_REPLACE', loc.pathname + loc.search + loc.hash)
 dispatch('RUN_PENDING_DISPATCH')
+window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 
 update()
 
@@ -40,11 +41,8 @@ if ('serviceWorker' in navigator) {
 // Expose important functions for dev tools debugging
 Object.assign(window, { store, dispatch, update, debug: debugHelper })
 
-// Measure page speed
+// Measure time to first render
 console.timeEnd('render')
-window.addEventListener('load', () => {
-  dispatch('APP_IS_LOADED')
-})
 
 // Enable react dev tools (excluded in production)
 require('preact/devtools')
