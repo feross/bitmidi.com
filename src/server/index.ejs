@@ -22,7 +22,6 @@
 
     <script>
       console.time('render')
-      console.time('load')
       window.storeInit =
         <%- typeof store !== 'undefined'
           ? JSON.stringify(store).replace(/<\//ig, '<\\/') // Prevent XSS

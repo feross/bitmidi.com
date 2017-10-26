@@ -43,7 +43,6 @@ Object.assign(window, { store, dispatch, update, debug: debugHelper })
 // Measure page speed
 console.timeEnd('render')
 window.addEventListener('load', () => {
-  console.timeEnd('load')
   dispatch('APP_IS_LOADED')
 })
 
