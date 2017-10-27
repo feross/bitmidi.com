@@ -6,7 +6,6 @@
     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
     <link rel='preload' href='/bundle.js?c=<%- bundleHash %>' as='script' />
-
     <link rel='stylesheet' href='/style.css?c=<%- styleHash %>' />
 
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
@@ -18,8 +17,7 @@
     <meta name='application-name' content='Node Foo' />
     <meta name='theme-color' content='#ff41b4' />
     <meta name='apple-mobile-web-app-capable' content='yes' />
-
-    <!-- <link rel='search' href='/opensearch.xml' title='<%= config.name %>' type='application/opensearchdescription+xml'> -->
+    <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.name %>'>
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>
