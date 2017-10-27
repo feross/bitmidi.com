@@ -25,7 +25,7 @@ function init (sessionStore) {
 
   // Set up templating
   app.set('view engine', 'ejs')
-  app.set('views', path.join(config.root, 'src', 'server'))
+  app.set('views', path.join(config.root, 'src'))
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
@@ -83,10 +83,10 @@ function init (sessionStore) {
   }))
 
   const styleHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'style.css')))
+    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.css')))
     : 'development'
 
-  const bundleHash = config.isProd
+  const scriptHash = config.isProd
     ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.js')))
     : 'development'
 
@@ -94,7 +94,7 @@ function init (sessionStore) {
   app.use((req, res, next) => {
     res.locals.config = config
     res.locals.styleHash = styleHash
-    res.locals.bundleHash = bundleHash
+    res.locals.scriptHash = scriptHash
     next()
   })
 
@@ -169,7 +169,7 @@ function handleRender (err, req, res) {
   }
 }
 
-// Create a cache-busting hash for static assets like `bundle.js` and `style.css`
+// Create a cache-busting hash for static assets like `bundle.js` and `bundle.css`
 function createHash (data) {
   return crypto.createHash('sha256')
     .update(data)

@@ -7,11 +7,11 @@ const rimraf = require('rimraf')
 
 const config = require('../config')
 
-const outputPath = path.join(config.root, './static/style.css')
+const outputPath = path.join(config.root, './static/bundle.css')
 
 const content = [
   './src/views/*.js',
-  './src/server/index.ejs'
+  './src/index.ejs'
 ]
 
 const css = [
@@ -19,7 +19,7 @@ const css = [
   './node_modules/highlight.js/styles/monokai-sublime.css',
   './node_modules/codemirror/lib/codemirror.css',
   './node_modules/codemirror/theme/monokai.css',
-  './src/server/style.css'
+  './src/index.css'
 ]
 
 const whitelist = [
