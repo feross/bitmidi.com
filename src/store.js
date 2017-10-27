@@ -42,7 +42,7 @@ function createStore (render, onFetchDone) {
     snippets: {}, // snippet.id -> snippet
     searches: {}, // search.q -> search
 
-    // data references
+    // data views
     topSnippetIds: null, // [ snippet.id ]
 
     // TODO
@@ -56,6 +56,16 @@ function createStore (render, onFetchDone) {
   function dispatch (type, data) {
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
     else debug('%s %o', type, data)
+
+    // Reference counter for pending fetches
+    if (type.startsWith('API_')) {
+      if (type.endsWith('_DONE')) {
+        store.app.fetchCount -= 1
+        if (typeof onFetchDone === 'function') onFetchDone()
+      } else {
+        store.app.fetchCount += 1
+      }
+    }
 
     switch (type) {
       /**
@@ -114,7 +124,6 @@ function createStore (render, onFetchDone) {
        */
 
       case 'API_DOC': {
-        fetchStart()
         api.doc.get(data, (err, doc) => {
           dispatch('API_DOC_DONE', { err, doc })
         })
@@ -122,7 +131,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_DOC_DONE': {
-        fetchDone()
         const { err, doc } = data
         if (err) return addError(err)
         store.doc = doc
@@ -134,7 +142,6 @@ function createStore (render, onFetchDone) {
        */
 
       case 'API_SNIPPET_ADD': {
-        fetchStart()
         if (store.userName == null) {
           addPendingDispatch(type, data)
           addError(
@@ -150,7 +157,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_ADD_DONE': {
-        fetchDone()
         const { err } = data
         if (err) return addError(err)
         dispatch('LOCATION_PUSH', '/')
@@ -158,7 +164,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_VOTE': {
-        fetchStart()
         api.snippet.vote(data, (err, snippet) => {
           dispatch('API_SNIPPET_VOTE_DONE', { err, snippet })
         })
@@ -166,7 +171,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_VOTE_DONE': {
-        fetchDone()
         const { err, snippet } = data
         if (err) return addError(err)
         addSnippet(snippet)
@@ -174,7 +178,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_GET': {
-        fetchStart()
         api.snippet.get(data, (err, snippet) => {
           dispatch('API_SNIPPET_GET_DONE', { err, snippet })
         })
@@ -182,7 +185,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_GET_DONE': {
-        fetchDone()
         const { err, snippet } = data
         if (err) return addError(err)
 
@@ -191,7 +193,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_ALL': {
-        fetchStart()
         api.snippet.all(data, (err, snippets) => {
           dispatch('API_SNIPPET_ALL_DONE', { err, snippets })
         })
@@ -199,7 +200,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_ALL_DONE': {
-        fetchDone()
         const { err, snippets } = data
         if (err) return addError(err)
 
@@ -209,7 +209,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_SEARCH': {
-        fetchStart()
         api.snippet.search(data, (err, search) => {
           dispatch('API_SNIPPET_SEARCH_DONE', { err, search })
         })
@@ -217,7 +216,6 @@ function createStore (render, onFetchDone) {
       }
 
       case 'API_SNIPPET_SEARCH_DONE': {
-        fetchDone()
         const { err, search } = data
         if (err) return addError(err)
         addSearch(search)
@@ -278,16 +276,6 @@ function createStore (render, onFetchDone) {
 
   function addPendingDispatch (type, data) {
     window.localStorage.pendingDispatch = JSON.stringify({ type, data })
-  }
-
-  // Reference counter for pending fetches
-  function fetchStart () {
-    store.app.fetchCount += 1
-  }
-
-  function fetchDone () {
-    store.app.fetchCount -= 1
-    if (typeof onFetchDone === 'function') onFetchDone()
   }
 
   function addError (err) {
