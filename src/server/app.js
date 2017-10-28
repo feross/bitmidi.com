@@ -25,7 +25,7 @@ function init (sessionStore) {
 
   // Set up templating
   app.set('view engine', 'ejs')
-  app.set('views', path.join(config.root, 'src'))
+  app.set('views', path.join(config.rootPath, 'src'))
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
@@ -67,7 +67,7 @@ function init (sessionStore) {
   // Set up static file serving
   const staticOpts = { maxAge: config.maxAge }
 
-  app.use(express.static(path.join(config.root, 'static'), staticOpts))
+  app.use(express.static(path.join(config.rootPath, 'static'), staticOpts))
 
   // Set up session handling
   app.use(session({
@@ -83,11 +83,11 @@ function init (sessionStore) {
   }))
 
   const styleHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.css')))
+    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css')))
     : 'development'
 
   const scriptHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.root, 'static', 'bundle.js')))
+    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
     : 'development'
 
   // Add template local variables

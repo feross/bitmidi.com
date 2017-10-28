@@ -17,7 +17,7 @@ const highlight = require('../highlight')
 const slug = require('../lib/slug')
 const twitter = require('./twitter')
 
-const DB_PATH = path.join(config.root, 'db', 'snippets')
+const DB_PATH = path.join(config.rootPath, 'db', 'snippets')
 
 // Enable verbose SQLite logs (disabled in production)
 if (!config.isProd) sqlite3.verbose()

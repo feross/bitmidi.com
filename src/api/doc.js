@@ -15,7 +15,7 @@ const MEMO_OPTS = {
 // Regular expression to match a path with a directory up component.
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
-const DOCS_PATH = path.join(config.root, 'docs')
+const DOCS_PATH = path.join(config.rootPath, 'docs')
 
 const markdown = markdownIt({
   html: true,

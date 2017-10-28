@@ -30,7 +30,7 @@ server.listen(config.port, (err) => {
 
   // Open DB as 'www-data' user
   const SQLiteStore = ConnectSQLite(session)
-  const sessionStore = new SQLiteStore({ dir: path.join(config.root, 'db') })
+  const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
 
   server.on('request', app.init(sessionStore))
 })

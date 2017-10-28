@@ -10,10 +10,10 @@ const rimraf = require('rimraf')
 
 const config = require('../config')
 
-const BIN_PATH = path.join(config.root, 'bin')
-const REPO_PATH = path.join(config.root, 'tmp', 'node')
+const BIN_PATH = path.join(config.rootPath, 'bin')
+const REPO_PATH = path.join(config.rootPath, 'tmp', 'node')
 const REPO_API_PATH = path.join(REPO_PATH, 'doc', 'api')
-const OUT_PATH = path.join(config.root, 'docs')
+const OUT_PATH = path.join(config.rootPath, 'docs')
 
 run()
 

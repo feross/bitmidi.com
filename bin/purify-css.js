@@ -8,7 +8,7 @@ const config = require('../config')
 
 const DEBUG = !!process.env.DEBUG
 
-const outputPath = path.join(config.root, './static/bundle.css')
+const outputPath = path.join(config.rootPath, './static/bundle.css')
 
 const content = [
   './src/views/*.js',
