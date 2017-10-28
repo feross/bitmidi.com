@@ -1,23 +1,27 @@
-const config = require('../../config')
-const secret = require('../../secret')
+/* eslint-disable import/first */
+
+import config from '../../config'
+import secret from '../../secret'
+
+import Opbeat from 'opbeat'
 
 if (config.isProd) {
-  global.opbeat = require('opbeat').start(secret.opbeat)
+  global.opbeat = Opbeat.start(secret.opbeat)
 }
 
-const babelRegister = require('babel-register')
+import babelRegister from 'babel-register'
 
 // Automatically compile JS files with babel when required
 babelRegister({ extensions: ['.js'] })
 
-const ConnectSQLite = require('connect-sqlite3')
-const downgrade = require('downgrade')
-const http = require('http')
-const path = require('path')
-const session = require('express-session')
-const unlimited = require('unlimited')
+import ConnectSQLite from 'connect-sqlite3'
+import downgrade from 'downgrade'
+import http from 'http'
+import path from 'path'
+import session from 'express-session'
+import unlimited from 'unlimited'
 
-const app = require('./app')
+import app from './app'
 
 const server = http.createServer()
 

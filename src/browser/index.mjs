@@ -1,12 +1,12 @@
-require('./babel-helpers')
+import './babel-helpers'
 
-const { h, render } = require('preact') /** @jsx h */
-const Provider = require('preact-context-provider')
+import { h, render } from 'preact' /** @jsx h */
+import Provider from 'preact-context-provider'
 
-const App = require('../views/app')
-const createStore = require('../store')
-const config = require('../../config')
-const debugHelper = require('../lib/debug-helper')
+import App from '../views/app'
+import createStore from '../store'
+import config from '../../config'
+import debugHelper from '../lib/debug-helper'
 
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)

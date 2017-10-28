@@ -1,4 +1,12 @@
-module.exports = {
+import Debug from 'debug'
+import querystring from 'querystring'
+
+import config from '../../config'
+import fetchConcat from '../lib/simple-fetch'
+
+const debug = Debug('nodefoo:api')
+
+export default {
   doc: {
     get: (opts, cb) => sendGet('/doc/get', opts, cb)
   },
@@ -10,12 +18,6 @@ module.exports = {
     search: (opts, cb) => sendGet('/snippet/search', opts, cb)
   }
 }
-
-const debug = require('debug')('nodefoo:api')
-const querystring = require('querystring')
-
-const config = require('../../config')
-const fetchConcat = require('../lib/simple-fetch')
 
 function sendGet () {
   sendRequest('GET', ...arguments)

@@ -1,7 +1,7 @@
-const babel = require('rollup-plugin-babel')
-const commonjs = require('rollup-plugin-commonjs')
-const nodeBuiltins = require('rollup-plugin-node-builtins')
-const nodeResolve = require('rollup-plugin-node-resolve')
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+import nodeBuiltins from 'rollup-plugin-node-builtins'
+import nodeResolve from 'rollup-plugin-node-resolve'
 
 const config = require('./config')
 const pkg = require('./package.json')
@@ -9,7 +9,7 @@ const pkg = require('./package.json')
 const DEBUG = !!process.env.DEBUG
 
 module.exports = {
-  input: 'src/browser/index.js',
+  input: 'src/browser/index.mjs',
   output: {
     file: DEBUG ? 'static/bundle.js' : undefined,
     format: 'iife',
