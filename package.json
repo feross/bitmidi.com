@@ -78,7 +78,7 @@
     "mkdirp": "^0.5.1",
     "nodemon": "^1.11.0",
     "path-exists": "^3.0.0",
-    "purify-css": "^1.2.5",
+    "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
     "standard": "*",
     "tape": "^4.8.0",
