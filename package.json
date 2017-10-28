@@ -105,9 +105,9 @@
     "start": "node src/server",
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
-    "watch-css": "DEBUG=nodefoo* nodemon -V -x 'npm run build-css' -w src/server -e css",
     "watch-js": "watchify src/browser -d -v -o static/bundle.js",
     "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon -V src/server -e js,css,ejs -i static/ -i src/views -i tmp/"
+    "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
   },
   "standard": {
     "parser": "babel-eslint"

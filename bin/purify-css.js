@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-const debug = require('debug')('nodefoo:purify-css')
 const path = require('path')
 const purify = require('purify-css')
 const rimraf = require('rimraf')
 
 const config = require('../config')
+
+const DEBUG = !!process.env.DEBUG
 
 const outputPath = path.join(config.root, './static/bundle.css')
 
@@ -104,14 +105,13 @@ const opts = {
   whitelist,
 
   // Minify the CSS
-  minify: !debug.enabled,
+  minify: !DEBUG,
 
   // Logs stats on how much CSS was removed
   info: true,
 
   // Logs which CSS rules were removed
-  rejected: debug.enabled
-
+  rejected: DEBUG
 }
 
 rimraf.sync(outputPath)
