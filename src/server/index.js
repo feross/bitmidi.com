@@ -7,7 +7,7 @@ if (config.isProd) {
 
 const babelRegister = require('babel-register')
 
-// Automatically compile files which contain JSX when required, on the fly
+// Automatically compile JS files with babel when required
 babelRegister({ extensions: ['.js'] })
 
 const ConnectSQLite = require('connect-sqlite3')
