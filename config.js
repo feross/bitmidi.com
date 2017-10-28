@@ -51,7 +51,7 @@ exports.httpOrigin = (isProd ? 'https' : 'http') + '://' + exports.host
 /**
  * Root path of project
  */
-exports.root = __dirname
+exports.root = isBrowser ? '/' : __dirname
 
 /**
  * Maximum time to cache static resources (in milliseconds). This value is sent in the HTTP
