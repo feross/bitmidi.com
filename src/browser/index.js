@@ -1,3 +1,5 @@
+require('./babel-helpers')
+
 const { h, render } = require('preact') /** @jsx h */
 const Provider = require('preact-context-provider')
 
@@ -45,4 +47,4 @@ Object.assign(window, { store, dispatch, update, debug: debugHelper })
 console.timeEnd('render')
 
 // Enable react dev tools (excluded in production)
-require('preact/devtools')
+// require('preact/devtools')

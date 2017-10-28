@@ -25,11 +25,6 @@
     "./secret/index.js": false,
     "url": false
   },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
-  },
   "bugs": {
     "url": "https://github.com/feross/nodefoo.com/issues"
   },
@@ -67,22 +62,23 @@
     "unlimited": "^1.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "babel-minify": "^0.2.0",
-    "babelify": "^7.3.0",
-    "browser-pack-flat": "^3.0.1",
-    "browserify": "^14.5.0",
-    "browserify-breakdown": "^1.0.3",
-    "common-shakeify": "^0.4.4",
+    "babel-plugin-external-helpers": "^6.22.0",
     "git-pull-or-clone": "^1.1.0",
     "mkdirp": "^0.5.1",
     "nodemon": "^1.11.0",
     "path-exists": "^3.0.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.5",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "standard": "*",
-    "tape": "^4.8.0",
-    "watchify": "^3.9.0"
+    "tape": "^4.8.0"
   },
   "homepage": "https://nodefoo.com",
   "license": "-",
@@ -93,20 +89,19 @@
     "url": "git://github.com/feross/nodefoo.com.git"
   },
   "scripts": {
+    "babel-helpers": "babel-external-helpers -l objectWithoutProperties > src/browser/babel-helpers.js",
     "build": "npm run build-css && npm run build-js && chmod 777 db/",
     "build-css": "node ./bin/purify-css.js",
-    "build-js": "browserify -i preact/devtools -p common-shakeify -p browser-pack-flat/plugin src/browser | minify > static/bundle.js",
-    "build-js-debug": "browserify -d --full-paths src/browser > static/bundle.js",
+    "build-js": "rollup -c | minify > static/bundle.js",
     "generate": "DEBUG=* node ./bin/generate.js",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/nodefoo.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
     "size": "npm run build-js && cat static/bundle.js | gzip | wc -c",
-    "size-breakdown": "npm run build-js-debug && cat static/bundle.js | node ./node_modules/.bin/browserify-breakdown",
     "start": "node src/server",
     "test": "standard && tape test/*.js",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
-    "watch-js": "watchify src/browser -d -v -o static/bundle.js",
     "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
+    "watch-js": "DEBUG=true rollup -c --watch",
     "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon src/server -e js,json,ejs -i src/browser -i src/views -i static/ -i tmp/"
   },
   "standard": {
