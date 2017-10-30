@@ -21,7 +21,7 @@
     ]
   },
   "browser": {
-    "./src/api/index.js": "./src/browser/api.js",
+    "./src/api/index.js": "./src/browser/api.mjs",
     "./secret/index.js": false,
     "url": false
   },
