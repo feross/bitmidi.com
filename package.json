@@ -13,7 +13,7 @@
       [
         "transform-react-jsx",
         {
-          "pragma": "jsx",
+          "pragma": "h",
           "useBuiltIns": true
         }
       ],
