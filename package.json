@@ -29,10 +29,10 @@
     "url": "https://github.com/feross/nodefoo.com/issues"
   },
   "dependencies": {
+    "@babel/register": "^7.0.0-beta.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-register": "^6.26.0",
     "classnames": "^2.2.5",
     "clipboard-copy": "^1.2.0",
     "codemirror": "^5.31.0",

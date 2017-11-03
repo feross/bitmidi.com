@@ -9,7 +9,7 @@ if (config.isProd) {
   global.opbeat = Opbeat.start(secret.opbeat)
 }
 
-import babelRegister from 'babel-register'
+import babelRegister from '@babel/register'
 
 // Automatically compile JS files with babel when required
 babelRegister({ extensions: ['.js'] })
