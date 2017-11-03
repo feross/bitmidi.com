@@ -107,6 +107,9 @@
     "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon -x 'node --experimental-modules' src/server/index.mjs -e js,json,ejs -i src/browser -i src/views -i static/ -i tmp/"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "/tmp/"
+    ]
   }
 }
