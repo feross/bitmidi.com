@@ -100,7 +100,7 @@
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
     "size": "npm run build-js && cat static/bundle.js | gzip | wc -c",
     "start": "node --experimental-modules src/server/index.mjs",
-    "test": "standard && tape test/*.js",
+    "test": "standard '**/*.js' '**/*.mjs' && node --experimental-modules test/index.mjs",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
     "watch-js": "DEBUG=true rollup -c --watch",
