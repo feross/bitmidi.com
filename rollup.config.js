@@ -18,14 +18,19 @@ module.exports = {
   sourcemap: DEBUG ? 'inline' : false,
   plugins: [
     nodeResolve({
-      browser: true, // use package.json browser field
-      preferBuiltins: true // prefer node.js built-ins instead of npm packages
+      // Use the `package.json` "browser" field
+      browser: true,
+      // Prefer node.js built-ins instead of npm packages
+      preferBuiltins: true
     }),
     nodeBuiltins(),
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers'], // do not repeatedly inline babel helpers
-      externalHelpers: true // instead, babel will reference `global.babelHelpers`
+      // Disable babel automatically repeatedly inlining babel helper functions
+      plugins: ['external-helpers'],
+      // Disable rollup-plugin-babel automatically inlining top-level babel helper
+      // functions (buggy) and instead keep references to `global.babelHelpers.*`
+      externalHelpers: true
     }),
     commonjs()
   ],
