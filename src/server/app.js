@@ -2,20 +2,17 @@ module.exports = {
   init
 }
 
-const { h } = require('preact') /** @jsx h */
-
 const compress = require('compression')
 const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const Provider = require('preact-context-provider')
 const session = require('express-session')
 
-const App = require('../views/app')
 const config = require('../../config')
 const createRenderer = require('../lib/preact-dom-renderer')
 const createStore = require('../store')
+const getProvider = require('../views/provider')
 const routerApi = require('./router-api')
 const routerLogin = require('./router-login')
 const secret = require('../../secret')
@@ -120,11 +117,7 @@ function init (sessionStore) {
 function handleRender (err, req, res) {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onFetchDone)
-  const jsx = (
-    <Provider store={store} dispatch={dispatch} theme={config.theme}>
-      <App />
-    </Provider>
-  )
+  const jsx = getProvider(store, dispatch)
 
   store.userName = (req.session.user && req.session.user.userName) || null
 

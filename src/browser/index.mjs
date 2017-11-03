@@ -1,12 +1,10 @@
 import './babel-helpers'
 
-import { h, render } from 'preact' /** @jsx h */
-import Provider from 'preact-context-provider'
+import { render } from 'preact'
 
-import App from '../views/app'
 import createStore from '../store'
-import config from '../../config'
 import debugHelper from '../lib/debug-helper'
+import getProvider from '../views/provider'
 
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
@@ -22,11 +20,7 @@ window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 update()
 
 function update () {
-  const jsx = (
-    <Provider store={store} dispatch={dispatch} theme={config.theme}>
-      <App />
-    </Provider>
-  )
+  const jsx = getProvider(store, dispatch)
   root = render(jsx, document.body, root)
 }
 
