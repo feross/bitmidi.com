@@ -11,8 +11,8 @@ if (config.isProd) {
 
 import babelRegister from '@babel/register'
 
-// Automatically compile JS files with babel when required
-babelRegister({ extensions: ['.js'] })
+// Automatically compile view files with babel (for JSX)
+babelRegister({ only: [/src\/views/], extensions: ['.js', '.jsm'] })
 
 import ConnectSQLite from 'connect-sqlite3'
 import downgrade from 'downgrade'
