@@ -9,10 +9,12 @@ if (config.isProd) {
   global.opbeat = Opbeat.start(secret.opbeat)
 }
 
-import babelRegister from '@babel/register'
+import '@babel/register'
 
+// TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
 // Automatically compile view files with babel (for JSX)
-babelRegister({ only: [/src\/views/], extensions: ['.js', '.jsm'] })
+// import babelRegister from '@babel/register'
+// babelRegister({ only: [/views/], extensions: ['.js', '.jsm'] })
 
 import ConnectSQLite from 'connect-sqlite3'
 import downgrade from 'downgrade'
