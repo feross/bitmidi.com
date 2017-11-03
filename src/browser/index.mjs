@@ -35,7 +35,7 @@ if ('serviceWorker' in navigator) {
  */
 
 // Expose important functions for dev tools debugging
-Object.assign(window, { store, dispatch, update, debug: debugHelper })
+export { store, dispatch, update, debugHelper as debug }
 
 // Measure time to first render
 console.timeEnd('render')
