@@ -5,12 +5,12 @@ import puppeteer from 'puppeteer'
 // helper to add async-await support to tape
 const helper = fn => t => fn(t).catch(err => { throw err })
 
-test('Start server', t => {
+test('start server', t => {
   t.plan(1)
   serverInit(0, err => t.error(err))
 })
 
-test('Home page loads', helper(async t => {
+test('home page loads', helper(async t => {
   t.plan(2)
 
   const browser = await puppeteer.launch()
@@ -29,7 +29,7 @@ test('Home page loads', helper(async t => {
   await browser.close()
 }))
 
-test('Stop server', t => {
+test('stop server', t => {
   t.plan(1)
   server.close(err => t.error(err))
 })
