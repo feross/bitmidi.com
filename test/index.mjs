@@ -1,2 +1,2 @@
 import './slug'
-// import './integration'
+import './integration'

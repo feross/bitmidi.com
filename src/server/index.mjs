@@ -27,16 +27,22 @@ import app from './app'
 
 const server = http.createServer()
 
-server.listen(config.port, (err) => {
-  if (err) throw err
-  console.log('Listening on port %s', server.address().port)
+export { init, server }
 
-  unlimited() // Upgrade the max file descriptor limit
-  downgrade() // Set the process user identity to 'www-data'
+function init (port = config.port, cb = (err) => { if (err) throw err }) {
+  server.listen(port, (err) => {
+    if (err) cb(err)
+    console.log('Listening on port %s', server.address().port)
 
-  // Open DB as 'www-data' user
-  const SQLiteStore = ConnectSQLite(session)
-  const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
+    unlimited() // Upgrade the max file descriptor limit
+    downgrade() // Set the process user identity to 'www-data'
 
-  server.on('request', app.init(sessionStore))
-})
+    // Open DB as 'www-data' user
+    const SQLiteStore = ConnectSQLite(session)
+    const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
+
+    server.on('request', app.init(sessionStore))
+
+    cb(null)
+  })
+}
