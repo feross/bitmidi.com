@@ -22,9 +22,9 @@ exports.port = isProd
   : 4000
 
 /**
- * Name of the site
+ * Title of the site
  */
-exports.name = 'Node Foo'
+exports.title = 'Node Foo'
 
 /**
  * Description of the site

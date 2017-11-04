@@ -36,7 +36,7 @@ module.exports = {
   ],
   banner: `
     /*!
-     * ${config.name} - ${config.description}
+     * ${config.title} - ${config.description}
      * Homepage: ${config.httpOrigin}
      * Author: ${pkg.author.name} <${pkg.author.url}>
      */
