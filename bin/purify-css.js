@@ -111,7 +111,7 @@ const opts = {
   info: true,
 
   // Logs which CSS rules were removed
-  rejected: DEBUG
+  rejected: false
 }
 
 rimraf.sync(outputPath)
