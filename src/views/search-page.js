@@ -12,7 +12,10 @@ class SearchPage extends PageComponent {
     const { location } = this.context.store
     const q = location.query.q
 
-    dispatch('APP_TITLE', `Snippets containing '${q}'`)
+    dispatch('APP_META', {
+      title: `Snippets containing '${q}'`,
+      description: `Search results page for code snippets that contain '${q}'`
+    })
     dispatch('API_SNIPPET_SEARCH', { q })
   }
 

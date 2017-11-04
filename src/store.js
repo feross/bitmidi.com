@@ -27,10 +27,11 @@ function createStore (render, onFetchDone) {
     },
 
     app: {
-      title: null,
+      title: null, // Page title
+      description: null, // Page meta description
       width: 0,
       height: 0,
-      isLoaded: false, // did window.onload() fire?
+      isLoaded: false, // Did window.onload() fire?
       fetchCount: 0
     },
 
@@ -102,9 +103,17 @@ function createStore (render, onFetchDone) {
        * APP
        */
 
-      case 'APP_TITLE': {
-        const title = data ? data + ' – ' + config.name : config.name
+      case 'APP_META': {
+        const title = data.title != null
+          ? data.title.trim() + ' – ' + config.title
+          : config.title
+
+        const description = data.description != null
+          ? data.description.trim()
+          : config.description
+
         store.app.title = title
+        store.app.description = description
         return update()
       }
 

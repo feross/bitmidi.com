@@ -156,9 +156,12 @@ function handleRender (err, req, res) {
     }
 
     res.status(status)
-
-    const content = renderer.html()
-    res.render('index', { content, store, title: store.app.title })
+    res.render('index', {
+      content: renderer.html(),
+      store,
+      title: store.app.title,
+      description: store.app.description
+    })
   }
 }
 

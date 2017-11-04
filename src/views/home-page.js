@@ -8,7 +8,7 @@ const PageComponent = require('./page-component')
 class HomePage extends PageComponent {
   load () {
     const { dispatch } = this.context
-    dispatch('APP_TITLE', null)
+    dispatch('APP_META', { title: null, description: null })
     dispatch('API_SNIPPET_ALL')
   }
 

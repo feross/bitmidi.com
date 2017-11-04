@@ -7,7 +7,7 @@ class ErrorPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const firstError = this.getError()
-    dispatch('APP_TITLE', firstError.message)
+    dispatch('APP_META', { title: firstError.message })
   }
 
   render (props) {

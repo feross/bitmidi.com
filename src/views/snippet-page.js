@@ -12,7 +12,7 @@ class SnippetPage extends PageComponent {
     const { snippetId } = location.params
 
     dispatch('API_SNIPPET_GET', { id: snippetId })
-    dispatch('APP_TITLE', 'Snippet Page')
+    dispatch('APP_META', { title: 'TODO', description: 'TODO' })
   }
 
   render (props) {

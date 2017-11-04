@@ -5,6 +5,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1' />
 
     <title><%= title %></title>
+    <meta name='description' content='<%= description %>'>
+
     <link rel='preload' href='/bundle.js?c=<%- scriptHash %>' as='script' />
     <link rel='stylesheet' href='/bundle.css?c=<%- styleHash %>' />
 
@@ -21,7 +23,7 @@
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>
-    <%- typeof content !== 'undefined' ? content : '' %>
+    <%- content %>
 
     <script>
       console.time('render')
@@ -39,7 +41,6 @@
       window.ga.l = Date.now()
       window.ga('create', 'UA-3898076-23', 'auto')
     </script>
-
     <script async src='/bundle.js?c=<%- scriptHash %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
   </body>

@@ -18,7 +18,13 @@ class SubmitPage extends PageComponent {
 
   load () {
     const { dispatch } = this.context
-    dispatch('APP_TITLE', 'Add a Code Snippet')
+    dispatch('APP_META', {
+      title: 'Add a Code Snippet',
+      description: `
+        Add a code snippet to NodeFoo, a code sharing site devoted to sharing
+        Node.js examples and code snippets.
+      `
+    })
   }
 
   render (props) {

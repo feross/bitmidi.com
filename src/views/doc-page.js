@@ -9,7 +9,7 @@ class DocPage extends PageComponent {
     const { dispatch } = this.context
     const { location } = this.context.store
 
-    dispatch('APP_TITLE', this.getTitle())
+    dispatch('APP_META', { title: this.getTitle() })
     dispatch('API_DOC', location.params)
   }
 
