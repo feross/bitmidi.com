@@ -6,6 +6,7 @@ const Heading = require('./heading')
 const Input = require('./input')
 const Loader = require('./loader')
 const PageComponent = require('./page-component')
+const { oneLine } = require('common-tags')
 
 class SubmitPage extends PageComponent {
   constructor () {
@@ -20,9 +21,9 @@ class SubmitPage extends PageComponent {
     const { dispatch } = this.context
     dispatch('APP_META', {
       title: 'Add a Code Snippet',
-      description: `
-        Add a code snippet to NodeFoo, a code sharing site devoted to sharing
-        Node.js examples and code snippets.
+      description: oneLine`
+        Add a code snippet to NodeFoo, a site devoted to sharing the best Node.js
+        examples and code snippets.
       `
     })
   }
