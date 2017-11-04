@@ -6,6 +6,8 @@ const Heading = require('./heading')
 const Input = require('./input')
 const Loader = require('./loader')
 const PageComponent = require('./page-component')
+
+// TODO: port to ESM so this is tree-shaken
 const { oneLine } = require('common-tags')
 
 class SubmitPage extends PageComponent {
