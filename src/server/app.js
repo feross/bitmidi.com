@@ -65,7 +65,6 @@ function init (sessionStore) {
     ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
     : 'dev'
 
-  // Add template variables and headers for dynamic content
   app.use((req, res, next) => {
     // Add template local variables
     res.locals.config = config
@@ -73,6 +72,27 @@ function init (sessionStore) {
     res.locals.scriptHash = scriptHash
     res.locals.nonce = uuid()
 
+    next()
+  })
+
+  // Set up session handling
+  app.use(session({
+    store: sessionStore,
+    secret: secret.cookie,
+    resave: false,
+    saveUninitialized: false,
+    unset: 'destroy',
+    cookie: {
+      maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
+      secure: config.isProd
+    }
+  }))
+
+  app.use('/api', routerApi)
+  app.use('/auth', routerAuth)
+  app.use(routerFeed)
+
+  app.use((req, res, next) => {
     // Prevent rendering of site within a frame
     res.header('X-Frame-Options', 'DENY')
 
@@ -109,26 +129,9 @@ function init (sessionStore) {
     next()
   })
 
-  // Set up session handling
-  app.use(session({
-    store: sessionStore,
-    secret: secret.cookie,
-    resave: false,
-    saveUninitialized: false,
-    unset: 'destroy',
-    cookie: {
-      maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
-      secure: config.isProd
-    }
-  }))
-
   app.get('/500', (req, res, next) => {
     next(new Error('Manually visited /500'))
   })
-
-  app.use('/api', routerApi)
-  app.use('/auth', routerAuth)
-  app.use(routerFeed)
 
   // Render all routes on the server
   app.get('*', (req, res) => renderApp(null, req, res))
