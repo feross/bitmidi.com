@@ -102,8 +102,9 @@ function init (sessionStore) {
     }
   }))
 
-  const styleInline =
-    fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css'), 'utf8')
+  const styleHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css')))
+    : 'development'
 
   const scriptHash = config.isProd
     ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
@@ -112,7 +113,7 @@ function init (sessionStore) {
   // Add template local variables
   app.use((req, res, next) => {
     res.locals.config = config
-    res.locals.styleInline = styleInline
+    res.locals.styleHash = styleHash
     res.locals.scriptHash = scriptHash
     next()
   })
