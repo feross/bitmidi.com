@@ -32,6 +32,16 @@ exports.title = 'Node Foo'
 exports.description = 'Node.js examples and code snippets'
 
 /**
+ * Keywords of the site
+ */
+exports.keywords = [
+  'programming',
+  'coding',
+  'code',
+  'node.js'
+]
+
+/**
  * Website hostname + port
  */
 exports.host = isProd

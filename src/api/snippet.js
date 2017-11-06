@@ -261,6 +261,7 @@ function populateSnippet (snippet, cb) {
     if (err) return cb(err)
     snippet.author_image = user.profile_image_url_https
     snippet.author_url = `https://twitter.com/${snippet.author}`
+    snippet.url = `${config.httpOrigin}/${snippet.id}`
 
     // TODO: Do not send full voter list
     delete snippet.voters

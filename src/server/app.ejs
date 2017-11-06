@@ -21,7 +21,10 @@
     <meta name='application-name' content='<%= config.title %>' />
     <meta name='theme-color' content='#ff41b4' />
     <meta name='apple-mobile-web-app-capable' content='yes' />
+
     <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.title %>'>
+    <link rel='alternate' href='/feed.json' type='application/json' title='<%= config.title %>' />
+    <link rel='alternate' href='/feed.xml' type='application/atom+xml' title='<%= config.title %>' />
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>

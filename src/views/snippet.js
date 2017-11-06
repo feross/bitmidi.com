@@ -51,7 +51,7 @@ class Snippet extends Component {
             color='white'
             class='dib fl f4 lh-copy truncate'
             title={snippet.name}
-            href={`/${snippet.id}`}
+            href={snippet.url}
             style={{
               width: 'calc(100% - 45px)'
             }}

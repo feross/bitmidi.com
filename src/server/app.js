@@ -17,6 +17,7 @@ const secret = require('../../secret')
 
 const routerApi = require('./router-api')
 const routerAuth = require('./router-auth')
+const routerFeed = require('./router-feed')
 
 function init (sessionStore) {
   const app = express()
@@ -101,6 +102,7 @@ function init (sessionStore) {
 
   app.use('/api', routerApi)
   app.use('/auth', routerAuth)
+  app.use(routerFeed)
 
   // Render all routes on the server
   app.get('*', (req, res) => renderApp(null, req, res))
