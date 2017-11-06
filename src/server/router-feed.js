@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.get('/feed.xml', (req, res, next) => {
   api.snippet.all(req.query, (err, snippets) => {
-    if (err) return res.status(500).send('Internal Server Error')
+    if (err) return res.sendStatus(500)
 
     res.status(200)
     res.render('feed', {
@@ -19,7 +19,7 @@ router.get('/feed.xml', (req, res, next) => {
 
 router.get('/feed.json', (req, res, next) => {
   api.snippet.all(req.query, (err, snippets) => {
-    if (err) return res.status(500).send('Internal Server Error')
+    if (err) return res.sendStatus(500)
 
     const feed = {
       version: 'https://jsonfeed.org/version/1',
