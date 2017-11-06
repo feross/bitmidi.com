@@ -14,6 +14,7 @@ const createRenderer = require('../lib/preact-dom-renderer')
 const createStore = require('../store')
 const getProvider = require('../views/provider')
 const secret = require('../../secret')
+const { oneLine } = require('common-tags')
 
 const routerApi = require('./router-api')
 const routerAuth = require('./router-auth')
@@ -44,6 +45,30 @@ function init (sessionStore) {
     // enables it if it was disabled by the user, and asks the the browser to prevent
     // rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
+
+    res.header('Content-Security-Policy', oneLine`
+      default-src
+        'none'
+      ;
+      connect-src
+        'self'
+      ;
+      img-src
+        'self'
+        https://pbs.twimg.com
+        https://www.google-analytics.com
+      ;
+      script-src
+        'self'
+        'unsafe-inline'
+        data:
+        https://www.google-analytics.com
+      ;
+      style-src
+        'self'
+        'unsafe-inline'
+      ;
+    `)
 
     if (config.isProd) {
       // Redirect to main site url, over https
