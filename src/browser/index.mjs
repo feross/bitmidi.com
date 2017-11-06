@@ -24,11 +24,11 @@ function update () {
   root = render(jsx, document.body, root)
 }
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/sw.js')
-    .catch(err => console.error('Unable to register service worker.', err))
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker
+//     .register('/sw.js')
+//     .catch(err => console.error('Unable to register service worker.', err))
+// }
 
 /**
  * DEVELOPMENT
