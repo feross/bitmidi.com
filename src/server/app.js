@@ -159,8 +159,6 @@ function handleRender (err, req, res) {
     res.render('index', {
       content: renderer.html(),
       store,
-      title: store.app.title,
-      description: store.app.description
     })
   }
 }
