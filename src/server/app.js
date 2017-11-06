@@ -16,7 +16,7 @@ const getProvider = require('../views/provider')
 const secret = require('../../secret')
 
 const routerApi = require('./router-api')
-const routerLogin = require('./router-login')
+const routerAuth = require('./router-auth')
 
 function init (sessionStore) {
   const app = express()
@@ -100,7 +100,7 @@ function init (sessionStore) {
   })
 
   app.use('/api', routerApi)
-  app.use('/auth', routerLogin)
+  app.use('/auth', routerAuth)
 
   // Render all routes on the server
   app.get('*', (req, res) => renderApp(null, req, res))
