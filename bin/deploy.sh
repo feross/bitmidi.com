@@ -3,7 +3,12 @@
 set -e
 
 if [ -d "/home/feross/www/nodefoo.com-build" ]; then
-  echo "ERROR: Build folder already exists. Is another build in progress?"
+  echo "ERROR: Build folder exists. Is another build in progress?"
+  exit 1
+fi
+
+if [ -d "/home/feross/www/nodefoo.com-old" ]; then
+  echo "ERROR: Old folder exists. Did a previous build crash?"
   exit 1
 fi
 
