@@ -29,45 +29,19 @@ function init (sessionStore) {
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
   app.set('x-powered-by', false) // Prevent server fingerprinting
 
-  // Add headers for *all* content (static and dynamic)
   app.use((req, res, next) => {
+    // Redirect to canonical origin, over https
+    if (config.isProd && req.method === 'GET' &&
+        (req.protocol !== 'https' || req.hostname !== config.host)) {
+      return res.redirect(301, config.httpOrigin + req.url)
+    }
+
     // Disable browser mime-type sniffing to reduce exposure to drive-by download
     // attacks when serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
-    // Add CSP headers to mitigate XSS attacks
-    res.header('Content-Security-Policy', oneLine`
-      default-src
-        'none'
-      ;
-      connect-src
-        'self'
-      ;
-      img-src
-        'self'
-        https://pbs.twimg.com
-        https://www.google-analytics.com
-      ;
-      script-src
-        'self'
-        'unsafe-inline'
-        data:
-        https://www.google-analytics.com
-      ;
-      style-src
-        'self'
-        'unsafe-inline'
-      ;
-    `)
-
+    // Use HSTS (cache for 2 years, include subdomains, allow browser preload)
     if (config.isProd) {
-      // Redirect to main site url, over https
-      if (req.method === 'GET' &&
-          (req.protocol !== 'https' || req.hostname !== config.host)) {
-        return res.redirect(301, config.httpOrigin + req.url)
-      }
-
-      // Use HSTS (cache for 2 years, include subdomains, allow browser preload)
       res.header(
         'Strict-Transport-Security',
         'max-age=63072000; includeSubDomains; preload'
@@ -104,6 +78,31 @@ function init (sessionStore) {
     // enables it if it was disabled by the user, and asks the the browser to prevent
     // rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
+
+    // Prevent XSS attacks by specifying valid sources of executable scripts, etc.
+    res.header('Content-Security-Policy', oneLine`
+      default-src
+        'none'
+      ;
+      connect-src
+        'self'
+      ;
+      img-src
+        'self'
+        https://pbs.twimg.com
+        https://www.google-analytics.com
+      ;
+      script-src
+        'self'
+        'unsafe-inline'
+        data:
+        https://www.google-analytics.com
+      ;
+      style-src
+        'self'
+        'unsafe-inline'
+      ;
+    `)
 
     next()
   })
