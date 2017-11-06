@@ -7,7 +7,7 @@ if (config.isProd) {
   global.opbeat = Opbeat.start(secret.opbeat)
 }
 
-require('@babel/register')
+require('babel-register')
 
 // TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
 // Automatically compile view files with babel (for JSX)
