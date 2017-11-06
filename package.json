@@ -38,7 +38,6 @@
     "clipboard-copy": "^1.2.0",
     "codemirror": "^5.31.0",
     "common-tags": "^1.4.0",
-    "compression": "^1.6.2",
     "connect-sqlite3": "^0.9.9",
     "debug": "^3.0.0",
     "downgrade": "^1.1.1",

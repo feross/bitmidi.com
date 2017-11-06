@@ -2,7 +2,6 @@ module.exports = {
   init
 }
 
-const compress = require('compression')
 const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
@@ -29,8 +28,6 @@ function init (sessionStore) {
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
   app.set('x-powered-by', false) // Prevent server fingerprinting
-
-  app.use(compress()) // Compress http responses with gzip
 
   // Add headers
   app.use((req, res, next) => {
