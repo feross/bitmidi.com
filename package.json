@@ -60,7 +60,8 @@
     "throttleit": "^1.0.0",
     "twit": "^2.2.9",
     "undom": "^0.3.3",
-    "unlimited": "^1.2.0"
+    "unlimited": "^1.2.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

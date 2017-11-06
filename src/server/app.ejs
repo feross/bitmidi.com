@@ -30,7 +30,7 @@
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>
     <%- content %>
 
-    <script>
+    <script nonce='<%= nonce %>'>
       console.time('render')
       window.storeInit =
         <%- typeof store !== 'undefined'
@@ -38,7 +38,7 @@
           : '{}'
         %>
     </script>
-    <script>
+    <script nonce='<%= nonce %>'>
       window.GoogleAnalyticsObject = 'ga'
       window.ga = window.ga || function () {
         (window.ga.q = window.ga.q || []).push(arguments)

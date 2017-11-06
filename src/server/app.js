@@ -7,6 +7,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const session = require('express-session')
+const uuid = require('uuid/v4')
 
 const config = require('../../config')
 const createRenderer = require('../lib/preact-dom-renderer')
@@ -70,6 +71,7 @@ function init (sessionStore) {
     res.locals.config = config
     res.locals.styleHash = styleHash
     res.locals.scriptHash = scriptHash
+    res.locals.nonce = uuid()
 
     // Prevent rendering of site within a frame
     res.header('X-Frame-Options', 'DENY')
@@ -94,9 +96,9 @@ function init (sessionStore) {
       ;
       script-src
         'self'
-        'unsafe-inline'
-        data:
+        'nonce-${res.locals.nonce}'
         https://www.google-analytics.com
+        data:
       ;
       style-src
         'self'
