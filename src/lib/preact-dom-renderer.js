@@ -29,6 +29,26 @@ function createRenderer () {
   }
 }
 
+// List of elements which must always be self-closing
+// See https://www.w3.org/TR/html5/syntax.html#void-elements
+const selfClosingTags = [
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'keygen',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr'
+]
+
 function serializeHtml (el) {
   if (el.nodeType === 3) return encXML(el.textContent)
 
@@ -42,7 +62,7 @@ function serializeHtml (el) {
     ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${el.style[k]}`).join('; ')}"`
     : ''
 
-  if (innerHTML === '') {
+  if (innerHTML === '' && selfClosingTags.includes(nodeName)) {
     return `<${nodeName}${attributes}${style} />`
   } else {
     return `<${nodeName}${attributes}${style}>${innerHTML}</${nodeName}>`
