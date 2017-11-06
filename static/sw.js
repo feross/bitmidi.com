@@ -9,7 +9,7 @@ const CACHE_VERSION = 1
 const CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 }
-const START_URL = './'
+const START_URL = '/'
 const OFFLINE_URL = './offline.html'
 
 function createCacheBustingRequest (url) {

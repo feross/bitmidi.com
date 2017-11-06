@@ -15,6 +15,6 @@
   ],
   "name": "Node Foo",
   "short_name": "Node Foo",
-  "start_url": ".",
+  "start_url": "/",
   "theme_color": "#ff41b4"
 }
