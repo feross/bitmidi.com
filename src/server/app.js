@@ -159,6 +159,7 @@ function handleRender (err, req, res) {
     res.render('index', {
       content: renderer.html(),
       store,
+      url: req.url
     })
   }
 }
