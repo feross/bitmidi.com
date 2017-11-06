@@ -20,15 +20,18 @@ cd /home/feross/www/nodefoo.com-build && npm install
 cd /home/feross/www/nodefoo.com-build && npm run build
 cd /home/feross/www/nodefoo.com-build && npm prune --production
 
+cd /home/feross/www && rm -rf nodefoo.com-build/db
+
 sudo supervisorctl stop nodefoo
 
 # Move database files (while app is stopped)
-cd /home/feross/www && rm -rf nodefoo.com-build/db
 cd /home/feross/www && mv nodefoo.com/db nodefoo.com-build/db
 
+# Move build folder into place (while app is stopped)
 cd /home/feross/www && mv nodefoo.com nodefoo.com-old
 cd /home/feross/www && mv nodefoo.com-build nodefoo.com
 
 sudo supervisorctl start nodefoo
 
+# Remove old files (after app has started)
 cd /home/feross/www && rm -rf nodefoo.com-old
