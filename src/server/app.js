@@ -103,18 +103,18 @@ function init (sessionStore) {
   app.use('/auth', routerLogin)
 
   // Render all routes on the server
-  app.get('*', (req, res) => handleRender(null, req, res))
+  app.get('*', (req, res) => renderApp(null, req, res))
 
   // Log errors to Opbeat
   if (global.opbeat) app.use(global.opbeat.middleware.express())
 
   // Handle errors with the same server-side rendering path
-  app.use((err, req, res, next) => handleRender(err, req, res))
+  app.use(renderApp)
 
   return app
 }
 
-function handleRender (err, req, res) {
+function renderApp (err, req, res) {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onFetchDone)
   const jsx = getProvider(store, dispatch)
@@ -156,7 +156,7 @@ function handleRender (err, req, res) {
     }
 
     res.status(status)
-    res.render('index', {
+    res.render('app', {
       content: renderer.html(),
       store,
       url: req.url

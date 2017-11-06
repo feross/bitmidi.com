@@ -20,7 +20,7 @@ const css = [
   './node_modules/highlight.js/styles/monokai-sublime.css',
   './node_modules/codemirror/lib/codemirror.css',
   './node_modules/codemirror/theme/monokai.css',
-  './src/index.css'
+  './src/server/index.css'
 ]
 
 const whitelist = [
