@@ -87,5 +87,6 @@ function encAttr (s) {
 
 function attr (a) {
   if (a.value === '') return ''
+  if (a.value === 'true') return ` ${a.name}` // boolean attribute
   return ` ${a.name}="${encAttr(a.value)}"`
 }
