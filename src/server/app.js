@@ -29,20 +29,13 @@ function init (sessionStore) {
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
   app.set('x-powered-by', false) // Prevent server fingerprinting
 
-  // Add headers
+  // Add headers for *all* content (static and dynamic)
   app.use((req, res, next) => {
     // Disable browser mime-type sniffing to reduce exposure to drive-by download
     // attacks when serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
-    // Prevent rendering of site within a frame
-    res.header('X-Frame-Options', 'DENY')
-
-    // Enable browser XSS filtering. Usually enabled by default, but this header re-
-    // enables it if it was disabled by the user, and asks the the browser to prevent
-    // rendering of the page if an attack is detected.
-    res.header('X-XSS-Protection', '1; mode=block')
-
+    // Add CSP headers to mitigate XSS attacks
     res.header('Content-Security-Policy', oneLine`
       default-src
         'none'
@@ -85,9 +78,35 @@ function init (sessionStore) {
   })
 
   // Set up static file serving
-  const staticOpts = { maxAge: config.maxAge }
+  app.use(
+    express.static(path.join(config.rootPath, 'static'), { maxAge: config.maxAge })
+  )
 
-  app.use(express.static(path.join(config.rootPath, 'static'), staticOpts))
+  const styleHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css')))
+    : 'dev'
+
+  const scriptHash = config.isProd
+    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
+    : 'dev'
+
+  // Add template variables and headers for dynamic content
+  app.use((req, res, next) => {
+    // Add template local variables
+    res.locals.config = config
+    res.locals.styleHash = styleHash
+    res.locals.scriptHash = scriptHash
+
+    // Prevent rendering of site within a frame
+    res.header('X-Frame-Options', 'DENY')
+
+    // Enable browser XSS filtering. Usually enabled by default, but this header re-
+    // enables it if it was disabled by the user, and asks the the browser to prevent
+    // rendering of the page if an attack is detected.
+    res.header('X-XSS-Protection', '1; mode=block')
+
+    next()
+  })
 
   // Set up session handling
   app.use(session({
@@ -101,22 +120,6 @@ function init (sessionStore) {
       secure: config.isProd
     }
   }))
-
-  const styleHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css')))
-    : 'development'
-
-  const scriptHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
-    : 'development'
-
-  // Add template local variables
-  app.use((req, res, next) => {
-    res.locals.config = config
-    res.locals.styleHash = styleHash
-    res.locals.scriptHash = scriptHash
-    next()
-  })
 
   app.get('/500', (req, res, next) => {
     next(new Error('Manually visited /500'))
