@@ -1,2 +1,0 @@
-import './slug'
-import './integration'

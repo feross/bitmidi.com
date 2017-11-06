@@ -1,33 +1,28 @@
-/* eslint-disable import/first */
+const config = require('../../config')
+const secret = require('../../secret')
 
-import config from '../../config'
-import secret from '../../secret'
-
-import Opbeat from 'opbeat'
+const Opbeat = require('opbeat')
 
 if (config.isProd) {
   global.opbeat = Opbeat.start(secret.opbeat)
 }
 
-import '@babel/register'
+require('@babel/register')
 
 // TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
 // Automatically compile view files with babel (for JSX)
-// import babelRegister from '@babel/register'
 // babelRegister({ only: [/views/], extensions: ['.js', '.jsm'] })
 
-import ConnectSQLite from 'connect-sqlite3'
-import downgrade from 'downgrade'
-import http from 'http'
-import path from 'path'
-import session from 'express-session'
-import unlimited from 'unlimited'
+const ConnectSQLite = require('connect-sqlite3')
+const downgrade = require('downgrade')
+const http = require('http')
+const path = require('path')
+const session = require('express-session')
+const unlimited = require('unlimited')
 
-import app from './app'
+const app = require('./app')
 
 const server = http.createServer()
-
-export { init, server }
 
 function init (port = config.port, cb = (err) => { if (err) throw err }) {
   server.listen(port, (err) => {
@@ -46,3 +41,8 @@ function init (port = config.port, cb = (err) => { if (err) throw err }) {
     cb(null)
   })
 }
+
+// If this module is run from the command line, init the server immediately
+if (!module.parent) init()
+
+module.exports = { init, server }
