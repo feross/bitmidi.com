@@ -13,16 +13,16 @@ const config = require('../../config')
 const createRenderer = require('../lib/preact-dom-renderer')
 const createStore = require('../store')
 const getProvider = require('../views/provider')
+const secret = require('../../secret')
+
 const routerApi = require('./router-api')
 const routerLogin = require('./router-login')
-const secret = require('../../secret')
 
 function init (sessionStore) {
   const app = express()
 
-  // Set up templating
-  app.set('view engine', 'ejs')
-  app.set('views', path.join(config.rootPath, 'src'))
+  app.set('view engine', 'ejs') // Use EJS for server-side templating
+  app.set('views', path.join(config.rootPath, 'src', 'server')) // Template folder
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
@@ -51,7 +51,7 @@ function init (sessionStore) {
         return res.redirect(301, config.httpOrigin + req.url)
       }
 
-      // Use HSTS (cache for 2 years, include subdomains, allow browser preload list)
+      // Use HSTS (cache for 2 years, include subdomains, allow browser preload)
       res.header(
         'Strict-Transport-Security',
         'max-age=63072000; includeSubDomains; preload'
