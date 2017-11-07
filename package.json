@@ -76,7 +76,6 @@
   "license": "-",
   "main": "src/server/index.js",
   "optionalDependencies": {
-    "@sonarwhal/sonar": "^0.14.1",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.1",
     "git-pull-or-clone": "^1.1.0",
