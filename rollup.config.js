@@ -2,6 +2,7 @@ import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeBuiltins from 'rollup-plugin-node-builtins'
 import nodeResolve from 'rollup-plugin-node-resolve'
+import { stripIndent } from 'common-tags'
 
 const config = require('./config')
 const pkg = require('./package.json')
@@ -34,7 +35,7 @@ module.exports = {
     }),
     commonjs()
   ],
-  banner: `
+  banner: stripIndent`
     /*!
      * ${config.title} - ${config.description}
      * Homepage: ${config.httpOrigin}
