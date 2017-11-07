@@ -9,7 +9,7 @@
 
     <link rel='canonical' href='<%= config.httpOrigin %><%= url %>' />
 
-    <link rel='preload' href='/bundle.js?c=<%- scriptHash %>' as='script' />
+    <link rel='preload' href='/bundle.js?c=<%- scriptHash %>' as='script' nonce='<%= nonce %>' />
     <link rel='stylesheet' href='/bundle.css?c=<%- styleHash %>' />
 
     <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
@@ -46,7 +46,7 @@
       window.ga.l = Date.now()
       window.ga('create', 'UA-3898076-23', 'auto')
     </script>
-    <script async src='/bundle.js?c=<%- scriptHash %>'></script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
+    <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
 </html>

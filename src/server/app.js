@@ -129,9 +129,8 @@ function init (sessionStore) {
         'self'
       ;
       script-src
-        'self'
         'nonce-${res.locals.nonce}'
-        https://www.google-analytics.com
+        'strict-dynamic' https:
       ;
       style-src
         'self'
