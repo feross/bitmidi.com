@@ -39,7 +39,7 @@ module.exports = {
     /*!
      * ${config.title} - ${config.description}
      * Homepage: ${config.httpOrigin}
-     * Author: ${pkg.author.name} <${pkg.author.url}>
+     * License: Copyright (c) ${pkg.author.name} <${pkg.author.url}>
      */
   `
 }
