@@ -9,22 +9,22 @@ module.exports = {
 const assert = require('assert')
 const debug = require('debug')('nodefoo:api:snippet')
 const parallel = require('run-parallel')
-// const path = require('path')
-// const sqlite3 = require('sqlite3')
+const path = require('path')
+const sqlite3 = require('sqlite3')
 
 const config = require('../../config')
 const highlight = require('../highlight')
 const slug = require('../lib/slug')
 const twitter = require('./twitter')
 
-// const DB_PATH = path.join(config.rootPath, 'db', 'snippets')
+const DB_PATH = path.join(config.rootPath, 'db', 'snippets')
 
 // Enable verbose SQLite logs (disabled in production)
-// if (!config.isProd) sqlite3.verbose()
+if (!config.isProd) sqlite3.verbose()
 
-// const db = new sqlite3.Database(DB_PATH)
+const db = new sqlite3.Database(DB_PATH)
 
-// init()
+init()
 
 function init () {
   debug('init')
