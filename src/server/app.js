@@ -132,7 +132,6 @@ function init (sessionStore) {
         'self'
         'nonce-${res.locals.nonce}'
         https://www.google-analytics.com
-        data:
       ;
       style-src
         'self'
