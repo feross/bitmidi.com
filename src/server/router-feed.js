@@ -2,7 +2,7 @@ const express = require('express')
 
 const api = require('../api')
 const config = require('../../config')
-const { oneLine } = require('common-tags')
+const oneLine = require('common-tags/lib/oneLine')
 
 const router = express.Router()
 

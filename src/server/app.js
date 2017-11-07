@@ -14,7 +14,7 @@ const createRenderer = require('../lib/preact-dom-renderer')
 const createStore = require('../store')
 const getProvider = require('../views/provider')
 const secret = require('../../secret')
-const { oneLine } = require('common-tags')
+const oneLine = require('common-tags/lib/oneLine')
 
 const routerApi = require('./router-api')
 const routerAuth = require('./router-auth')
