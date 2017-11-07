@@ -41,6 +41,11 @@ function init (sessionStore) {
     // attacks when serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
+    // Prevent information leaks through the 'Referer' header. Only send a full URL
+    // for same-origin requests, only send the document origin when navigating
+    // HTTPS->HTTPS, and send no header when navigating HTTPS->HTTP.
+    res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
+
     // Use HSTS (cache for 2 years, include subdomains, allow browser preload)
     if (config.isProd) {
       res.header(
