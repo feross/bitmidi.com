@@ -108,6 +108,9 @@ function init (sessionStore) {
 
     // Prevent XSS attacks by specifying valid sources of executable scripts, etc.
     res.header('Content-Security-Policy', oneLine`
+      base-uri
+        'none'
+      ;
       default-src
         'none'
       ;
