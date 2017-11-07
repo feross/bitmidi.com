@@ -15,13 +15,6 @@ exports.isBrowser = isBrowser
 exports.isProd = isProd
 
 /**
- * Server listening port
- */
-exports.port = isProd
-  ? 7800
-  : 4000
-
-/**
  * Title of the site
  */
 exports.title = 'Node Foo'
@@ -46,7 +39,7 @@ exports.keywords = [
  */
 exports.host = isProd
   ? 'nodefoo.com'
-  : 'localhost:' + exports.port
+  : 'localhost:4000'
 
 /**
  * HTTP origin

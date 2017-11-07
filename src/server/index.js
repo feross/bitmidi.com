@@ -24,7 +24,7 @@ const app = require('./app')
 
 const server = http.createServer()
 
-function init (port = config.port, cb = (err) => { if (err) throw err }) {
+function init (port = 4000, cb = (err) => { if (err) throw err }) {
   server.listen(port, (err) => {
     if (err) cb(err)
     console.log('Listening on port %s', server.address().port)
@@ -43,6 +43,6 @@ function init (port = config.port, cb = (err) => { if (err) throw err }) {
 }
 
 // If this module is run from the command line, init the server immediately
-if (!module.parent) init()
+if (!module.parent) init(process.argv[2])
 
 module.exports = { init, server }
