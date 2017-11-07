@@ -75,7 +75,7 @@ function init (sessionStore) {
     res.locals.config = config
     res.locals.styleHash = styleHash
     res.locals.scriptHash = scriptHash
-    res.locals.nonce = uuid()
+    res.locals.nonce = Buffer.from(uuid()).toString('base64')
 
     next()
   })
