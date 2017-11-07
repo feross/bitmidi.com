@@ -111,6 +111,9 @@ function init (sessionStore) {
       base-uri
         'none'
       ;
+      frame-ancestors
+        'none'
+      ;
       default-src
         'none'
       ;
