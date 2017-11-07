@@ -45,8 +45,8 @@ const Header = (props, context) => {
 
   return (
     <header
-      id='header'
       class={c(headerCls, 'fixed z-2 top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l h3')}
+      role='banner'
       style={{
         height: 50,
         paddingTop: 6
@@ -72,7 +72,10 @@ const Header = (props, context) => {
       <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
         <Search class='w-100' />
       </div>
-      <nav class='fl w-third dn db-m db-l v-mid tr'>
+      <nav
+        class='fl w-third dn db-m db-l v-mid tr'
+        role='navigation'
+      >
         {$submitButton}
       </nav>
     </header>

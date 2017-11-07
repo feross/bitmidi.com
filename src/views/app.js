@@ -37,8 +37,10 @@ class App extends Component {
         <Title title={app.title} />
         <Header />
         <div class='mt5 pa2 pa3-m pa3-l mw7 center'>
-          <Page url={location.url} />
-          {errors.map(err => <small>{err.message}</small>)}
+          <main role='main'>
+            <Page url={location.url} />
+            {errors.map(err => <small>{err.message}</small>)}
+          </main>
           <Footer />
         </div>
       </div>

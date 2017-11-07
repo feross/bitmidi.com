@@ -16,7 +16,10 @@ const Footer = (props, context) => {
   }
 
   return (
-    <footer id='footer' class='f6 lh-copy silver w-100 mt5 mb4 tc'>
+    <footer
+      class='f6 lh-copy silver w-100 mt5 mb4 tc'
+      role='navigation'
+    >
       <FooterItem>
         Built by <Link href='https://twitter.com/feross' newtab>@feross</Link>
       </FooterItem>
