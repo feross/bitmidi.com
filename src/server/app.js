@@ -129,8 +129,8 @@ function init (sessionStore) {
         'self'
       ;
       script-src
-        'nonce-${res.locals.nonce}'
         'strict-dynamic' https:
+        'nonce-${res.locals.nonce}' 'unsafe-inline'
       ;
       style-src
         'self'
