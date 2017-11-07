@@ -73,7 +73,8 @@ self.addEventListener('fetch', event => {
         // most likely happen due to the server being unreachable. If fetch() returns
         // a valid HTTP response with an response code in the 4xx or 5xx range, the
         // catch() will NOT be called.
-        console.log('Fetch failed, returning offline page.', error)
+        const { url } = event.request
+        console.log(`Fetch of ${url} failed, returning offline page.`, error)
         return caches.match(OFFLINE_URL)
       })
     )
