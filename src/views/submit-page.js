@@ -61,7 +61,7 @@ class SubmitPage extends PageComponent {
             Submit 🌟
           </Button>
         </div>
-      </Loader >
+      </Loader>
     )
   }
 
