@@ -114,6 +114,9 @@ function init (sessionStore) {
         https://pbs.twimg.com
         https://www.google-analytics.com
       ;
+      manifest-src
+        'self'
+      ;
       script-src
         'self'
         'nonce-${res.locals.nonce}'
