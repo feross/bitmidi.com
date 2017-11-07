@@ -40,7 +40,6 @@
     "common-tags": "^1.4.0",
     "connect-sqlite3": "^0.9.9",
     "debug": "^3.0.0",
-    "downgrade": "^1.1.1",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
@@ -60,7 +59,6 @@
     "throttleit": "^1.0.0",
     "twit": "^2.2.9",
     "undom": "^0.3.3",
-    "unlimited": "^1.2.0",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

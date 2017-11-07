@@ -7,6 +7,8 @@ if (config.isProd) {
   global.opbeat = Opbeat.start(secret.opbeat)
 }
 
+// Server should be running as www-data by the time babel-register runs, since it
+// reads/writes a .cache folder and it should be deleteable.
 require('babel-register')
 
 // TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
@@ -14,11 +16,9 @@ require('babel-register')
 // babelRegister({ only: [/views/], extensions: ['.js', '.jsm'] })
 
 const ConnectSQLite = require('connect-sqlite3')
-const downgrade = require('downgrade')
 const http = require('http')
 const path = require('path')
 const session = require('express-session')
-const unlimited = require('unlimited')
 
 const app = require('./app')
 
@@ -28,9 +28,6 @@ function init (port = 4000, cb = (err) => { if (err) throw err }) {
   server.listen(port, (err) => {
     if (err) cb(err)
     console.log('Listening on port %s', server.address().port)
-
-    unlimited() // Upgrade the max file descriptor limit
-    downgrade() // Set the process user identity to 'www-data'
 
     // Open DB as 'www-data' user
     const SQLiteStore = ConnectSQLite(session)
