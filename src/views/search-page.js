@@ -7,7 +7,6 @@ const Snippet = require('./snippet')
 
 class SearchPage extends PageComponent {
   load () {
-    console.log('load')
     const { dispatch } = this.context
     const { location } = this.context.store
     const q = location.query.q
