@@ -32,7 +32,7 @@
 
     <script nonce='<%= nonce %>'>
       console.time('render')
-      window.storeInit =
+      window.initStore =
         <%- typeof store !== 'undefined'
           ? JSON.stringify(store).replace(/<\//ig, '<\\/') // Prevent XSS
           : '{}'

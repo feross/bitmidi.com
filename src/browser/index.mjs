@@ -10,7 +10,7 @@ let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
 
 // Use server-initialized store values
-Object.assign(store, window.storeInit)
+Object.assign(store, window.initStore)
 
 const loc = window.location
 dispatch('LOCATION_REPLACE', loc.pathname + loc.search + loc.hash)
