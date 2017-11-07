@@ -136,6 +136,9 @@ function init (sessionStore) {
         'self'
         'unsafe-inline'
       ;
+      worker-src
+        'self'
+      ;
     `)
 
     next()
