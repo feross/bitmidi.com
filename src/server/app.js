@@ -77,7 +77,7 @@ function init (sessionStore) {
 
   // Set up session handling
   app.use(session({
-    store: sessionStore,
+    // store: sessionStore,
     secret: secret.cookie,
     resave: false,
     saveUninitialized: false,
