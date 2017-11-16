@@ -1,5 +1,5 @@
-const test = require('tape')
-const slug = require('../src/lib/slug')
+import test from 'tape'
+import slug from '../src/lib/slug'
 
 test('slug', t => {
   // Simple case

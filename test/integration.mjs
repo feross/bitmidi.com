@@ -1,7 +1,7 @@
-const test = require('tape')
-const puppeteer = require('puppeteer')
+import test from 'tape'
+import puppeteer from 'puppeteer'
 
-const { init: serverInit, server } = require('../src/server')
+import { init as serverInit, server } from '../src/server'
 
 // helper to add async-await support to tape
 const helper = fn => t => fn(t).catch(err => { throw err })
