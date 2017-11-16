@@ -1,26 +1,22 @@
-module.exports = {
-  init
-}
+import crypto from 'crypto'
+import express from 'express'
+import fs from 'fs'
+import path from 'path'
+import session from 'express-session'
+import uuid from 'uuid/v4'
 
-const crypto = require('crypto')
-const express = require('express')
-const fs = require('fs')
-const path = require('path')
-const session = require('express-session')
-const uuid = require('uuid/v4')
+import config from '../../config'
+import createRenderer from '../lib/preact-dom-renderer'
+import createStore from '../store'
+import getProvider from '../views/provider'
+import secret from '../../secret'
+import oneLine from 'common-tags/lib/oneLine'
 
-const config = require('../../config')
-const createRenderer = require('../lib/preact-dom-renderer')
-const createStore = require('../store')
-const getProvider = require('../views/provider')
-const secret = require('../../secret')
-const oneLine = require('common-tags/lib/oneLine')
+import routerApi from './router-api'
+import routerAuth from './router-auth'
+import routerFeed from './router-feed'
 
-const routerApi = require('./router-api')
-const routerAuth = require('./router-auth')
-const routerFeed = require('./router-feed')
-
-function init (sessionStore) {
+export function init (sessionStore) {
   const app = express()
 
   app.set('view engine', 'ejs') // Use EJS for server-side templating
@@ -160,6 +156,7 @@ function init (sessionStore) {
   return app
 }
 
+// TODO: consider moving to its own file: router-app.mjs
 function renderApp (err, req, res) {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onFetchDone)

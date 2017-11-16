@@ -1,8 +1,8 @@
-const express = require('express')
+import express from 'express'
 
-const api = require('../api')
-const config = require('../../config')
-const oneLine = require('common-tags/lib/oneLine')
+import api from '../api'
+import config from '../../config'
+import oneLine from 'common-tags/lib/oneLine'
 
 const router = express.Router()
 
@@ -64,4 +64,4 @@ router.get('/feed.json', (req, res, next) => {
   })
 })
 
-module.exports = router
+export default router

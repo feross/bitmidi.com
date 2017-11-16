@@ -1,26 +1,20 @@
-const config = require('../../config')
-const secret = require('../../secret')
-
-const Opbeat = require('opbeat')
-
-if (config.isProd) {
-  global.opbeat = Opbeat.start(secret.opbeat)
-}
+import './opbeat'
 
 // Server should be running as www-data by the time babel-register runs, since it
 // reads/writes a .cache folder and it should be deleteable.
-require('babel-register')
+import 'babel-register'
 
 // TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
 // Automatically compile view files with babel (for JSX)
 // babelRegister({ only: [/views/], extensions: ['.js', '.jsm'] })
 
-const ConnectSQLite = require('connect-sqlite3')
-const http = require('http')
-const path = require('path')
-const session = require('express-session')
+import ConnectSQLite from 'connect-sqlite3'
+import http from 'http'
+import path from 'path'
+import session from 'express-session'
 
-const app = require('./app')
+import config from '../../config'
+import { init as appInit } from './app'
 
 const server = http.createServer()
 
@@ -33,13 +27,10 @@ function init (port = 4000, cb = (err) => { if (err) throw err }) {
     const SQLiteStore = ConnectSQLite(session)
     const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
 
-    server.on('request', app.init(sessionStore))
+    server.on('request', appInit(sessionStore))
 
     cb(null)
   })
 }
 
-// If this module is run from the command line, init the server immediately
-if (!module.parent) init(process.argv[2])
-
-module.exports = { init, server }
+export { init, server }
