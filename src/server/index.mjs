@@ -1,12 +1,5 @@
 import './opbeat'
-
-// Server should be running as www-data by the time babel-register runs, since it
-// reads/writes a .cache folder and it should be deleteable.
-import '@babel/register'
-
-// TODO: uncomment when https://github.com/babel/babel/issues/6737 is fixed
-// Automatically compile view files with babel (for JSX)
-// babelRegister({ only: [/views/], extensions: ['.js', '.jsm'] })
+import './babel-register'
 
 import ConnectSQLite from 'connect-sqlite3'
 import http from 'http'
