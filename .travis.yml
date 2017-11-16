@@ -3,11 +3,3 @@ node_js:
   - lts/*
 before_script:
   - cp secret/index-sample.js secret/index.js
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
