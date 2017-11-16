@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - node
+before_script:
+  - cp secret/index-sample.js secret/index.js
 env:
   - CXX=g++-4.8
 addons:
