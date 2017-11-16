@@ -1,12 +1,12 @@
-exports.cookie = ''
+exports.cookie = 'TODO'
 
 exports.opbeat = {
-  appId: '',
-  organizationId: '',
-  secretToken: ''
+  appId: 'TODO',
+  organizationId: 'TODO',
+  secretToken: 'TODO'
 }
 
 exports.twitter = {
-  consumerKey: '',
-  consumerSecret: ''
+  consumerKey: 'TODO',
+  consumerSecret: 'TODO'
 }
