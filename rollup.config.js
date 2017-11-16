@@ -21,6 +21,8 @@ module.exports = {
     nodeResolve({
       // Use the `package.json` "browser" field
       browser: true,
+      // Resolve .mjs and .js files
+      extensions: ['.mjs', '.js'],
       // Prefer node.js built-ins instead of npm packages
       preferBuiltins: true
     }),
