@@ -68,7 +68,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
-    "rollup": "^0.50.0",
+    "rollup": "^0.51.7",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-builtins": "^2.1.2",
