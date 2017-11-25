@@ -3,4 +3,7 @@
 import babelRegister from '@babel/register'
 
 // Automatically compile view files with babel (for JSX)
-babelRegister({ only: [/views/, /lib/], extensions: ['.js', '.mjs'], cache: false })
+babelRegister({
+  only: [/views/, /lib/],
+  extensions: ['.js', '.mjs']
+})
