@@ -1,2 +1,2 @@
 import { init } from './index'
-init(process.argv[2])
+init(Number(process.argv[2]) || 4000)

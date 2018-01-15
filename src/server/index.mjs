@@ -5,25 +5,22 @@ import ConnectSQLite from 'connect-sqlite3'
 import http from 'http'
 import path from 'path'
 import session from 'express-session'
+import util from 'util'
 
 import config from '../../config'
 import { init as appInit } from './app'
 
 const server = http.createServer()
 
-function init (port = 4000, cb = (err) => { if (err) throw err }) {
-  server.listen(port, (err) => {
-    if (err) cb(err)
-    console.log('Listening on port %s', server.address().port)
+async function init (port) {
+  const listen = util.promisify(server.listen.bind(server))
+  await listen(port)
+  console.log('Listening on port %s', server.address().port)
 
-    // Open DB as 'www-data' user
-    const SQLiteStore = ConnectSQLite(session)
-    const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
+  const SQLiteStore = ConnectSQLite(session)
+  const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
 
-    server.on('request', appInit(sessionStore))
-
-    cb(null)
-  })
+  server.on('request', appInit(sessionStore))
 }
 
 export { init, server }
