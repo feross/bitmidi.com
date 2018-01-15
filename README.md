@@ -43,4 +43,4 @@ npm run watch
 
 ## License
 
-Copyright (c) Feross Aboukhadijeh
+Copyright (c) [Feross Aboukhadijeh](https://feross.org)
