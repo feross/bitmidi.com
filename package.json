@@ -79,12 +79,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-resolve": "3.0.0"
-  },
-  "homepage": "https://nodefoo.com",
-  "license": "-",
-  "main": "src/server/index.js",
-  "optionalDependencies": {
+    "rollup-plugin-node-resolve": "3.0.0",
     "babel-eslint": "^8.0.1",
     "git-pull-or-clone": "^1.1.0",
     "husky": "^0.14.3",
@@ -94,6 +89,9 @@
     "puppeteer": "^0.12.0",
     "standard": "*"
   },
+  "homepage": "https://nodefoo.com",
+  "license": "-",
+  "main": "src/server/index.js",
   "private": true,
   "repository": {
     "type": "git",
