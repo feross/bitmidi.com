@@ -2,10 +2,16 @@
   "name": "nodefoo.com",
   "description": "Node.js examples and code snippets",
   "version": "1.0.0",
+  "@std/esm": "cjs",
   "author": {
     "name": "Feross Aboukhadijeh",
     "email": "feross@feross.org",
     "url": "https://feross.org"
+  },
+  "ava": {
+    "require": [
+      "@std/esm"
+    ]
   },
   "babel": {
     "plugins": [
@@ -64,6 +70,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.32",
+    "ava": "^0.24.0",
     "babel-minify": "^0.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "purify-css": "^1.2.6",
@@ -85,8 +92,7 @@
     "nodemon": "^1.11.0",
     "path-exists": "^3.0.0",
     "puppeteer": "^0.12.0",
-    "standard": "*",
-    "tape": "^4.8.0"
+    "standard": "*"
   },
   "private": true,
   "repository": {
@@ -104,7 +110,9 @@
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/nodefoo.com/secret/\"",
     "size": "npm run build-js && cat static/bundle.js | gzip | wc -c",
     "start": "node -r @std/esm src/server/start",
-    "test": "standard '**/*.js' '**/*.mjs' && npm run build && tape -r @std/esm 'test/**/*.mjs'",
+    "test": "npm run test-lint && npm run test-ava && npm run test-sonar",
+    "test-ava": "npm run build && ava 'test/**/*.js'",
+    "test-lint": "standard '**/*.js' '**/*.mjs'",
     "test-sonar": "npm run build && (npm start & (sleep 5 && sonar http://localhost:4000))",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
