@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://webtorrent.io"><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png" alt="Node Foo" width="200"></a>
+  <a href="https://nodefoo.com"><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png" alt="Node Foo" width="200"></a>
   <br>
   Node Foo
   <br>
