@@ -55,16 +55,16 @@ export function init (sessionStore) {
   })
 
   // Set up static file serving
-  app.use(
-    express.static(path.join(config.rootPath, 'static'), { maxAge: config.maxAge })
-  )
+  const staticPath = path.join(config.rootPath, 'static')
+  app.use(express.static(staticPath, { maxAge: config.maxAgeStatic }))
 
+  // Compute hashes for built resources
   const styleHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.css')))
+    ? createHash(fs.readFileSync(path.join(staticPath, 'bundle.css')))
     : 'dev'
 
   const scriptHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(config.rootPath, 'static', 'bundle.js')))
+    ? createHash(fs.readFileSync(path.join(staticPath, 'bundle.js')))
     : 'dev'
 
   app.use((req, res, next) => {

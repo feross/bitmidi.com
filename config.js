@@ -57,11 +57,11 @@ exports.httpOrigin = (isProd ? 'https' : 'http') + '://' + exports.host
 exports.rootPath = isBrowser ? '/' : __dirname
 
 /**
- * Maximum time to cache static resources (in milliseconds). This value is sent in the HTTP
- * cache-control header.
+ * Time (in milliseconds) to cache static resources. This value is sent in
+ * the HTTP "Cache-Control" header.
  */
-exports.maxAge = isProd
-  ? 7 * 24 * 3600000 // 7 days
+exports.maxAgeStatic = isProd
+  ? 7 * 24 * 60 * 60 * 1000 // 7 days
   : 0
 
 /**
