@@ -13,29 +13,6 @@
       "@std/esm"
     ]
   },
-  "babel": {
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
-      ],
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          "pragma": "h",
-          "useBuiltIns": true
-        }
-      ],
-      [
-        "@babel/plugin-proposal-object-rest-spread",
-        {
-          "useBuiltIns": true
-        }
-      ]
-    ]
-  },
   "browser": {
     "./src/api/index.js": "./src/browser/api.mjs",
     "./secret/index.js": false,
