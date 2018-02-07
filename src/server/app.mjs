@@ -85,9 +85,9 @@ export function init (sessionStore) {
     saveUninitialized: false,
     unset: 'destroy',
     cookie: {
-      maxAge: config.maxAgeCookie,
-      // Only send cookie over HTTPS
-      secure: config.isProd
+      maxAge: config.maxAgeCookie, // Time to keep cookies before deletion
+      sameSite: 'lax', // Prevent cookies from being sent with cross-site requests
+      secure: config.isProd // Prevent cookies from being sent over insecure HTTP
     }
   }))
 
