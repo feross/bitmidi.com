@@ -1,5 +1,3 @@
-import './babel-helpers'
-
 import { render } from 'preact'
 
 import createStore from '../store'

@@ -85,7 +85,6 @@
     "url": "git://github.com/feross/nodefoo.com.git"
   },
   "scripts": {
-    "babel-helpers": "babel-external-helpers -l objectWithoutProperties > src/browser/babel-helpers.js",
     "build": "npm run build-css && npm run build-js && chmod 777 db/",
     "build-css": "node ./bin/purify-css.js",
     "build-js": "rollup -c | minify > static/bundle.js",
