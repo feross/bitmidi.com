@@ -1,7 +1,8 @@
 {
   "browserslist": [
     "last 1 version",
-    "not IE <= 12"
+    "not IE <= 12",
+    "not Edge <= 17"
   ],
   "connector": {
     "name": "chrome",
