@@ -17,13 +17,18 @@
     "plugins": [
       "transform-class-properties",
       [
-        "@babel/transform-react-jsx",
+        "@babel/plugin-transform-react-jsx",
         {
           "pragma": "h",
           "useBuiltIns": true
         }
       ],
-      "transform-object-rest-spread"
+      [
+        "@babel/plugin-proposal-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
+      ]
     ]
   },
   "browser": {
@@ -36,11 +41,11 @@
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.39",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.39",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.39",
     "@babel/register": "^7.0.0-beta.39",
     "@std/esm": "0.19.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "classnames": "^2.2.5",
     "clipboard-copy": "^1.4.1",
     "codemirror": "^5.34.0",
