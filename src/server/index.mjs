@@ -1,5 +1,5 @@
-import './opbeat'
 import './babel-register'
+import './opbeat'
 
 import ConnectSQLite from 'connect-sqlite3'
 import http from 'http'
