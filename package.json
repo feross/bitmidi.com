@@ -10,8 +10,11 @@
   "@std/esm": "cjs",
   "ava": {
     "require": [
-      "@std/esm"
-    ]
+      "@std/esm",
+      "@babel/register"
+    ],
+    "babel": false,
+    "compileEnhancements": false
   },
   "browser": {
     "./src/api/index.js": "./src/browser/api.mjs",
@@ -57,7 +60,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.39",
-    "ava": "^0.24.0",
+    "ava": "^1.0.0-beta.1",
     "babel-eslint": "^8.0.1",
     "babel-minify": "^0.3.0",
     "git-pull-or-clone": "^1.1.0",
