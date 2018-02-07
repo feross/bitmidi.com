@@ -65,7 +65,12 @@ exports.maxAgeStatic = isProd
   : 0
 
 /**
- * Time to wait in milliseconds before an API request is considered timed out.
+ * Time (in milliseconds) to keep cookies before deletion. This value is sent in
+ * the HTTP "Set-Cookie" header as the "Expires" attribute.
+ */
+exports.maxAgeCookie = isProd
+  ? 365 * 24 * 60 * 60 * 1000 // 1 year
+  : 0
 
 /**
  * Time (in milliseconds) to cache the HTTP Strict Transport Security (HSTS)
@@ -73,6 +78,9 @@ exports.maxAgeStatic = isProd
  * the "max-age" attribute.
  */
 exports.maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
+
+/**
+ * Time (in milliseconds) to wait before an API request is considered timed out.
  */
 exports.apiTimeout = 30 * 1000
 

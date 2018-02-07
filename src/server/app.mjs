@@ -85,7 +85,8 @@ export function init (sessionStore) {
     saveUninitialized: false,
     unset: 'destroy',
     cookie: {
-      maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
+      maxAge: config.maxAgeCookie,
+      // Only send cookie over HTTPS
       secure: config.isProd
     }
   }))
