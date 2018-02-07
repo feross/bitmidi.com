@@ -2,12 +2,12 @@
   "name": "nodefoo.com",
   "description": "Node.js examples and code snippets",
   "version": "1.0.0",
-  "@std/esm": "cjs",
   "author": {
     "name": "Feross Aboukhadijeh",
     "email": "feross@feross.org",
     "url": "https://feross.org"
   },
+  "@std/esm": "cjs",
   "ava": {
     "require": [
       "@std/esm"
