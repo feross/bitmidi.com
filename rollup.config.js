@@ -35,12 +35,7 @@ module.exports = {
     }),
     nodeBuiltins(),
     babel({
-      exclude: 'node_modules/**',
-      // Disable babel automatically repeatedly inlining babel helper functions
-      plugins: ['external-helpers'],
-      // Disable rollup-plugin-babel automatically inlining top-level babel helper
-      // functions (buggy) and instead keep references to `global.babelHelpers.*`
-      externalHelpers: true
+      exclude: 'node_modules/**'
     }),
     commonjs()
   ]
