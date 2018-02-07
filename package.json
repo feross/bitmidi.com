@@ -15,7 +15,12 @@
   },
   "babel": {
     "plugins": [
-      "transform-class-properties",
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ],
       [
         "@babel/plugin-transform-react-jsx",
         {
@@ -41,11 +46,11 @@
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.39",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.39",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.39",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.39",
     "@babel/register": "^7.0.0-beta.39",
     "@std/esm": "0.19.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "classnames": "^2.2.5",
     "clipboard-copy": "^1.4.1",
     "codemirror": "^5.34.0",
