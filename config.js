@@ -66,6 +66,13 @@ exports.maxAge = isProd
 
 /**
  * Time to wait in milliseconds before an API request is considered timed out.
+
+/**
+ * Time (in milliseconds) to cache the HTTP Strict Transport Security (HSTS)
+ * setting. This value is sent in the HTTP "Strict-Transport-Security" header as
+ * the "max-age" attribute.
+ */
+exports.maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
  */
 exports.apiTimeout = 30 * 1000
 

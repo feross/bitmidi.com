@@ -42,11 +42,12 @@ export function init (sessionStore) {
     // HTTPS->HTTPS, and send no header when navigating HTTPS->HTTP.
     res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
 
-    // Use HSTS (cache for 2 years, include subdomains, allow browser preload)
+    // Use HTTP Strict Transport Security (HSTS), cached for 2 years, including on
+    // subdomains, and allow browser preload.
     if (config.isProd) {
       res.header(
         'Strict-Transport-Security',
-        'max-age=63072000; includeSubDomains; preload'
+        `max-age=${config.maxAgeHSTS / 1000}; includeSubDomains; preload`
       )
     }
 
