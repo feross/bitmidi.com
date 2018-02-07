@@ -85,6 +85,7 @@ export function init (sessionStore) {
     saveUninitialized: false,
     unset: 'destroy',
     cookie: {
+      httpOnly: true, // Prevent cookies from being accessed by client JavaScript
       maxAge: config.maxAgeCookie, // Time to keep cookies before deletion
       sameSite: 'lax', // Prevent cookies from being sent with cross-site requests
       secure: config.isProd // Prevent cookies from being sent over insecure HTTP
