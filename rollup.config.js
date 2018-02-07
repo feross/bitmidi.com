@@ -12,11 +12,18 @@ const DEBUG = !!process.env.DEBUG
 module.exports = {
   input: 'src/browser/index.mjs',
   output: {
+    banner: stripIndent`
+      /*!
+       * ${config.title} - ${config.description}
+       * Homepage: ${config.httpOrigin}
+       * License: Copyright (c) ${pkg.author.name} <${pkg.author.url}>
+       */
+    `,
     file: DEBUG ? 'static/bundle.js' : undefined,
     format: 'iife',
-    name: 'NodeFoo'
+    name: 'NodeFoo',
+    sourcemap: DEBUG ? 'inline' : false
   },
-  sourcemap: DEBUG ? 'inline' : false,
   plugins: [
     nodeResolve({
       // Use the `package.json` "browser" field
@@ -36,12 +43,5 @@ module.exports = {
       externalHelpers: true
     }),
     commonjs()
-  ],
-  banner: stripIndent`
-    /*!
-     * ${config.title} - ${config.description}
-     * Homepage: ${config.httpOrigin}
-     * License: Copyright (c) ${pkg.author.name} <${pkg.author.url}>
-     */
-  `
+  ]
 }
