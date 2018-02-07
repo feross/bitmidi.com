@@ -7,10 +7,11 @@ const Image = (props) => {
     throw new Error('"props.alt" must be a string of non-zero length')
   }
 
-  // Experimental async attribute, see: https://github.com/whatwg/html/issues/1920
+  // Experimental decoding='async' attribute
+  // See: https://github.com/whatwg/html/issues/1920
   return (
     <img
-      async
+      decoding='async'
       alt={alt}
       {...rest}
     />
