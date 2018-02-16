@@ -20,7 +20,7 @@ test('home page loads', async t => {
   const page = await browser.newPage()
 
   const port = server.address().port
-  await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle' })
+  await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle2' })
 
   const store = await page.evaluate(() => {
     return window.NodeFoo.store
