@@ -18,8 +18,6 @@
 
 ### Live site: [https://nodefoo.com](https://nodefoo.com)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/feross/nodefoo.com.svg)](https://greenkeeper.io/)
-
 ## Contributing
 
 It's easy to run the code!
