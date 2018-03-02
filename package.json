@@ -30,7 +30,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.40",
     "@babel/register": "^7.0.0-beta.40",
-    "@std/esm": "0.22.0",
+    "@std/esm": "0.19.4",
     "classnames": "^2.2.5",
     "clipboard-copy": "^1.4.2",
     "codemirror": "^5.34.0",
