@@ -99,7 +99,7 @@
     "test": "npm run test-lint && npm run test-ava && npm run test-sonar",
     "test-ava": "npm run build && ava 'test/**/*.js'",
     "test-lint": "standard '**/*.js' '**/*.mjs'",
-    "test-sonar": "npm run build && (npm start & (sleep 5 && sonar http://localhost:4000))",
+    "test-sonar": "npm run build && (npm start & (sleep 5 && sonar http://localhost:4000 || exit 0))",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
     "watch-js": "DEBUG=true rollup -c --watch",
