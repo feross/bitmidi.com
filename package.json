@@ -51,7 +51,7 @@
     "preact": "^8.2.1",
     "preact-context-provider": "^1.1.1",
     "run-parallel": "^1.1.7",
-    "sqlite3": "^3.1.9",
+    "sqlite3": "^4.0.0",
     "tachyons": "^4.7.4",
     "throttleit": "^1.0.0",
     "twit": "^2.2.9",
