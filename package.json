@@ -32,7 +32,7 @@
     "@babel/register": "^7.0.0-beta.40",
     "@std/esm": "0.19.4",
     "classnames": "^2.2.5",
-    "clipboard-copy": "^1.4.2",
+    "clipboard-copy": "^2.0.0",
     "codemirror": "^5.35.0",
     "common-tags": "^1.4.0",
     "connect-sqlite3": "^0.9.9",
