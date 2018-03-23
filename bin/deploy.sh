@@ -15,8 +15,7 @@ fi
 cp -R /home/feross/www/nodefoo.com /home/feross/www/nodefoo.com-build
 
 cd /home/feross/www/nodefoo.com-build && git pull
-cd /home/feross/www/nodefoo.com-build && rm -rf node_modules
-cd /home/feross/www/nodefoo.com-build && npm install
+cd /home/feross/www/nodefoo.com-build && npm ci
 cd /home/feross/www/nodefoo.com-build && npm run build
 cd /home/feross/www/nodefoo.com-build && npm prune --production
 
