@@ -19,6 +19,11 @@ cd /home/feross/www/nodefoo.com-build && npm ci
 cd /home/feross/www/nodefoo.com-build && npm run build
 cd /home/feross/www/nodefoo.com-build && npm prune --production
 
+# HACK HACK HACK HACK HACK - fix package-lock.json getting updated when 'npm install'
+# is run. This happens when package.json and package-lock.json are out of sync,
+# and happens anytime a Greenkeeper PR is merged, for instance.
+cd /home/feross/www/nodefoo.com-build && git checkout .
+
 cd /home/feross/www && rm -rf nodefoo.com-build/db
 
 sudo supervisorctl stop nodefoo
