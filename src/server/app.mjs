@@ -97,9 +97,6 @@ export function init (sessionStore) {
   app.use(routerFeed)
 
   app.use((req, res, next) => {
-    // Prevent rendering of site within a frame
-    res.header('X-Frame-Options', 'DENY')
-
     // Enable browser XSS filtering. Usually enabled by default, but this header re-
     // enables it if it was disabled by the user, and asks the the browser to prevent
     // rendering of the page if an attack is detected.
