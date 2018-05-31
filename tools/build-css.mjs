@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const purifyCss = require('purify-css')
-const rimraf = require('rimraf')
+import path from 'path'
+import purifyCss from 'purify-css'
+import rimraf from 'rimraf'
 
-const config = require('../config')
+import config from '../config'
 
 const DEBUG = !!process.env.DEBUG
 
@@ -32,10 +32,10 @@ const opts = {
   whitelist,
 
   // Minify the CSS
-  minify: !DEBUG,
+  minify: config.isProd,
 
   // Logs stats on how much CSS was removed
-  info: false,
+  info: DEBUG,
 
   // Logs which CSS rules were removed
   rejected: false
