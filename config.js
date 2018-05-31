@@ -22,7 +22,7 @@ exports.title = 'BitMidi'
 /**
  * Description of the site
  */
-exports.description = 'Node.js examples and code snippets'
+exports.description = 'Wayback machine for old-school MIDI files'
 
 /**
  * Keywords of the site
