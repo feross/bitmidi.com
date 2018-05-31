@@ -1,4 +1,3 @@
-import './babel-register'
 import './opbeat'
 
 import ConnectSQLite from 'connect-sqlite3'
