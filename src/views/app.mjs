@@ -1,14 +1,14 @@
-const { Component, h } = require('preact') /** @jsx h */
-const throttle = require('throttleit')
+import { Component, h } from 'preact' /** @jsx h */
+import throttle from 'throttleit'
 
-const config = require('../../config')
-const routes = require('../routes')
+import config from '../../config'
+import routes from '../routes'
 
-const Header = require('./header')
-const Footer = require('./footer')
-const Title = require('./title')
+import Header from './header'
+import Footer from './footer'
+import Title from './title'
 
-class App extends Component {
+export default class App extends Component {
   constructor () {
     super()
     this.onResizeThrottled = throttle(this.onResize, 500)
@@ -54,5 +54,3 @@ class App extends Component {
     dispatch('APP_RESIZE', { width, height })
   }
 }
-
-module.exports = App
