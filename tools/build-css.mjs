@@ -18,8 +18,9 @@ const outputPath = path.join(config.rootPath, './static/bundle.css')
 rimraf.sync(outputPath)
 
 const content = [
-  './src/views/*.js',
-  './src/index.ejs'
+  './src/views/*.js', // TODO: remove when all views are converted to .mjs
+  './src/views/*.mjs',
+  './src/server/*.ejs'
 ]
 
 const css = [
