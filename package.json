@@ -98,7 +98,7 @@
     "test-lint": "standard '**/*.js' '**/*.mjs'",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "nodemon --exec 'npm run build-css -- --verbose' --watch src/server --ext css",
-    "watch-js": "watchify --no-detect-globals --extension mjs . --debug --verbose --outfile static/bundle.js",
+    "watch-js": "watchify --extension mjs . --debug --verbose --outfile static/bundle.js",
     "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,mjs,json,ejs --ignore static --ignore src/browser"
   },
   "standard": {
