@@ -1,12 +1,12 @@
-const { h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const config = require('../../config')
+import config from '../../config'
 
-const Button = require('./button')
-const Image = require('./image')
-const Link = require('./link')
-const Search = require('./search')
+import Button from './button'
+import Image from './image'
+import Link from './link'
+import Search from './search'
 
 const Header = (props, context) => {
   const { app, location } = context.store
@@ -78,4 +78,4 @@ const Header = (props, context) => {
   )
 }
 
-module.exports = Header
+export default Header
