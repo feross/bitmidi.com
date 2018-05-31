@@ -1,9 +1,5 @@
 <h1 align="center">
-  <br>
-  <br>
   BitMidi
-  <br>
-  <br>
 </h1>
 
 <h4 align="center">Wayback machine for old-school MIDI files</h4>
