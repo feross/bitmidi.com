@@ -21,7 +21,7 @@ module.exports = {
     `,
     file: DEBUG ? 'static/bundle.js' : undefined,
     format: 'iife',
-    name: 'NodeFoo',
+    name: config.title,
     sourcemap: DEBUG ? 'inline' : false
   },
   watch: {

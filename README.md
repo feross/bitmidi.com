@@ -1,8 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="https://nodefoo.com"><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png" alt="Node Foo" width="200"></a>
+  <a href="https://bitmidi.com"><img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-black.png" alt="BitMidi" width="200"></a>
   <br>
-  Node Foo
+  BitMidi
   <br>
   <br>
 </h1>
@@ -10,21 +10,21 @@
 <h4 align="center">Node.js examples and code snippets</h4>
 
 <p align="center">
-  <a href="https://travis-ci.org/feross/nodefoo.com"><img src="https://img.shields.io/travis/feross/nodefoo.com/master.svg" alt="travis"></a>
+  <a href="https://travis-ci.org/feross/bitmidi.com"><img src="https://img.shields.io/travis/feross/bitmidi.com/master.svg" alt="travis"></a>
   <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
 </p>
 <br>
 
 
-### Live site: [https://nodefoo.com](https://nodefoo.com)
+### Live site: [https://bitmidi.com](https://bitmidi.com)
 
 ## Contributing
 
 It's easy to run the code!
 
 ```bash
-git clone git@github.com:feross/nodefoo.com.git
-cd nodefoo.com/
+git clone git@github.com:feross/bitmidi.com.git
+cd bitmidi.com/
 npm install
 ```
 

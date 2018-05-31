@@ -1,6 +1,6 @@
 {
   "name": "bitmidi.com",
-  "description": "Node.js examples and code snippets",
+  "description": "Wayback machine for old-school MIDI files",
   "version": "1.0.0",
   "author": {
     "name": "Feross Aboukhadijeh",
@@ -101,7 +101,7 @@
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "DEBUG=true nodemon -x 'npm run build-css' -w src/server -e css",
     "watch-js": "DEBUG=true rollup -c --watch",
-    "watch-server": "DEBUG=nodefoo* DEBUG_DEPTH=1 nodemon -x 'node --experimental-modules' src/server/start -e js,json,ejs -i src/browser -i src/views -i static/ -i tmp/"
+    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -x 'node --experimental-modules' src/server/start -e js,json,ejs -i src/browser -i src/views -i static/ -i tmp/"
   },
   "standard": {
     "parser": "babel-eslint",

@@ -17,7 +17,7 @@ exports.isProd = isProd
 /**
  * Title of the site
  */
-exports.title = 'Node Foo'
+exports.title = 'BitMidi'
 
 /**
  * Description of the site
@@ -38,7 +38,7 @@ exports.keywords = [
  * Website hostname + port
  */
 exports.host = isProd
-  ? 'nodefoo.com'
+  ? 'bitmidi.com'
   : 'localhost:4000'
 
 /**
@@ -87,7 +87,7 @@ exports.apiTimeout = 30 * 1000
 /**
  * User agent for API requests
  */
-exports.apiUserAgent = 'NodeFoo/1.0.0 (https://nodefoo.com)'
+exports.apiUserAgent = 'BitMidi/1.0.0 (https://bitmidi.com)'
 
 /**
  * Website theme colors
