@@ -24,6 +24,9 @@ module.exports = {
     name: 'NodeFoo',
     sourcemap: DEBUG ? 'inline' : false
   },
+  watch: {
+    clearScreen: false
+  },
   plugins: [
     nodeResolve({
       // Use the `package.json` "browser" field
