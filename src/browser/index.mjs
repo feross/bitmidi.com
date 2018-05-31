@@ -32,11 +32,11 @@ if ('serviceWorker' in navigator) {
  * DEVELOPMENT
  */
 
-// Expose important functions for dev tools debugging
-export { store, dispatch, update, debugHelper as debug }
-
 // Measure time to first render
 console.timeEnd('render')
 
 // Enable react dev tools (excluded in production)
 // require('preact/devtools')
+// Expose important functions for dev tools debugging
+window.App = { store, dispatch, update, debug: debugHelper }
+
