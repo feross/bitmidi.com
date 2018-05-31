@@ -1,22 +1,22 @@
 'use strict'
 
-module.exports = createStore
+import copy from 'clipboard-copy'
+import Debug from 'debug'
+import querystring from 'querystring'
 
-const copy = require('clipboard-copy')
-const debug = require('debug')('bitmidi:store')
-const debugVerbose = require('debug')('bitmidi:store:verbose')
-const querystring = require('querystring')
+import api from './api'
+import config from '../config'
+import Location from './lib/location'
+import routes from './routes'
 
-const api = require('./api')
-const config = require('../config')
-const Location = require('./lib/location')
-const routes = require('./routes')
+const debug = Debug('bitmidi:store')
+const debugVerbose = Debug('bitmidi:store:verbose')
 
 const DEBUG_VERBOSE = new Set([
   'APP_RESIZE'
 ])
 
-function createStore (render, onFetchDone) {
+export default function createStore (render, onFetchDone) {
   const store = {
     location: {
       name: null,
