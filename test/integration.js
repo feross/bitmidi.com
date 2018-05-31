@@ -23,7 +23,7 @@ test('home page loads', async t => {
   await page.goto(`http://localhost:${port}`, { waitUntil: 'networkidle2' })
 
   const store = await page.evaluate(() => {
-    return window.NodeFoo.store
+    return window.App.store
   })
 
   t.is(store.app.fetchCount, 0, 'app.fetchCount = 0 (after network idle)')
