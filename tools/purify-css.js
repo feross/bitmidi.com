@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const path = require('path')
-const purify = require('purify-css')
+const purifyCss = require('purify-css')
 const rimraf = require('rimraf')
 
 const config = require('../config')
@@ -108,7 +108,7 @@ const opts = {
   minify: !DEBUG,
 
   // Logs stats on how much CSS was removed
-  info: true,
+  info: false,
 
   // Logs which CSS rules were removed
   rejected: false
@@ -116,4 +116,4 @@ const opts = {
 
 rimraf.sync(outputPath)
 
-purify(content, css, opts)
+purifyCss(content, css, opts)
