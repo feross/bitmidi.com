@@ -56,7 +56,6 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
-    "ava": "^1.0.0-beta.3",
     "babel-eslint": "^8.2.2",
     "babel-minify": "^0.4.0",
     "git-pull-or-clone": "^1.2.0",
