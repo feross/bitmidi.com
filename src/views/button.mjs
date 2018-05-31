@@ -1,15 +1,7 @@
-const { h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const Link = require('./link')
-
-/**
- * Basic Button
- * http://tachyons.io/components/buttons/basic/index.html
- *
- * Pill Button
- * http://tachyons.io/components/buttons/pill/index.html
- */
+import Link from './link'
 
 const Button = (props, context) => {
   const {
@@ -71,4 +63,4 @@ const Button = (props, context) => {
   )
 }
 
-module.exports = Button
+export default Button
