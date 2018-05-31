@@ -1,8 +1,8 @@
-import Opbeat from 'opbeat'
+// import Opbeat from 'opbeat'
 
-import config from '../../config'
-import secret from '../../secret'
+// import config from '../../config'
+// import secret from '../../secret'
 
-if (config.isProd) {
-  global.opbeat = Opbeat.start(secret.opbeat)
-}
+// if (config.isProd) {
+//   global.opbeat = Opbeat.start(secret.opbeat)
+// }

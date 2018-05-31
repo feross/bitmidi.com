@@ -43,7 +43,6 @@
     "markdown-it": "^8.4.1",
     "memo-async-lru": "^1.0.1",
     "mollusc": "^2.0.0",
-    "opbeat": "^4.17.0",
     "path-to-regexp": "^2.1.0",
     "preact": "^8.2.1",
     "preact-context-provider": "^1.1.1",
