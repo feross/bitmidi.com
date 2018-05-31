@@ -96,9 +96,6 @@
     "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -x 'node --experimental-modules' src/server/start -e js,json,ejs -i src/browser -i src/views -i static/ -i tmp/"
   },
   "standard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "/tmp/"
-    ]
+    "parser": "babel-eslint"
   }
 }
