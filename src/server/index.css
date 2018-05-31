@@ -34,58 +34,6 @@
 }
 
 /**
- * Highlight.js tweaks
- */
-
-.hljs-built_in,
-.hljs-builtin-name {
-  color: #66d9ef;
-}
-
-/**
- * CodeMirror tweaks
- */
-
-.CodeMirror {
-  font-size: 15px;
-  border-radius: .25rem;
-  border: .125rem #272822 solid; /* codemirror monokai background color */
-  height: auto;
-}
-
-.CodeMirror-focused {
-  border-color: #357edd; /* tachyons: blue */
-  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.2); /* tachyons: shadow-4 */
-}
-
-.CodeMirror-matchingbracket {
-  text-decoration: none !important; /* disable default style */
-  border-bottom: rgba(255, 255, 255, .5) 1px solid;
-}
-
-.CodeMirror-placeholder {
-  color: #75715e !important; /* codemirror monokai comment color */
-}
-
-.CodeMirror-scroll {
-  margin-bottom: -18px; /* default: -30px */
-  margin-right: -18px; /* default: -30px */
-  margin-top: 12px; /* default: 0 */
-  margin-left: 12px; /* default: 0 */
-  min-height: 130px;
-}
-
-pre.hljs {
-  margin: 0; /* disable browser default style */
-  padding: 1em; /* increase paddding */
-  white-space: pre-wrap; /* wrap long lines */
-}
-
-.CodeMirror, .hljs, .hljs code {
-  font-size: 14px;
-}
-
-/**
  * Animations (adapted from animate.css)
  */
 

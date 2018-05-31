@@ -44,10 +44,7 @@ export default function createStore (render, onFetchDone) {
     searches: {}, // search.q -> search
 
     // data views
-    topSnippetIds: null, // [ snippet.id ]
-
-    // TODO
-    doc: null
+    topSnippetIds: null // [ snippet.id ]
   }
 
   const loc = new Location(routes, (location, source) => {

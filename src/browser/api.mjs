@@ -7,9 +7,6 @@ import fetchConcat from '../lib/simple-fetch'
 const debug = Debug('bitmidi:api')
 
 export default {
-  doc: {
-    get: (opts, cb) => sendGet('/doc/get', opts, cb)
-  },
   snippet: {
     add: (opts, cb) => sendPost('/snippet/add', opts, cb),
     vote: (opts, cb) => sendPost('/snippet/vote', opts, cb),
