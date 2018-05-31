@@ -28,14 +28,6 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.error('Unable to register service worker.', err))
 }
 
-// Log runtime browser errors
-window.addEventListener('error', err => {
-  window.gtag('event', 'exception', {
-    'description': err,
-    'fatal': false
-  })
-})
-
 /**
  * DEVELOPMENT
  */

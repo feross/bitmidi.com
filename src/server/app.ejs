@@ -39,12 +39,14 @@
         %>
     </script>
     <script nonce='<%= nonce %>'>
-      window.dataLayer = window.dataLayer || []
-      function gtag () { dataLayer.push(arguments) }
-      gtag('js', new Date())
-      gtag('config', '<%= config.analyticsId %>')
+      window.GoogleAnalyticsObject = 'ga'
+      function ga () { window.ga.q.push(arguments) }
+      window.ga.q = window.ga.q || []
+      window.ga.l = Date.now()
+      window.ga('create', '<%= config.analyticsId %>', 'auto')
+      window.ga('send', 'pageview')
     </script>
     <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
-    <script async src='https://www.googletagmanager.com/gtag/js?id=<%= config.analyticsId %>' nonce='<%= nonce %>'></script>
+    <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
 </html>

@@ -91,7 +91,7 @@ export default function createStore (render, onFetchDone) {
 
         if (config.isBrowser) {
           if (source === 'push') window.scroll(0, 0)
-          window.gtag('event', 'page_view')
+          window.ga('send', 'pageview', location.url)
         }
         return update()
       }
