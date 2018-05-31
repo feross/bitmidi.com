@@ -58,8 +58,8 @@ const Header = (props, context) => {
           href='/'
         >
           <Image
-            src='/img/nodefoo.svg'
-            alt='Node Foo'
+            src='/img/bitmidi.svg'
+            alt={config.title}
             style={{
               marginTop: 2,
               height: 36,

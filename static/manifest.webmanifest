@@ -13,8 +13,8 @@
       "type": "image/png"
     }
   ],
-  "name": "Node Foo",
-  "short_name": "Node Foo",
+  "name": "BitMidi",
+  "short_name": "BitMidi",
   "start_url": "/",
   "theme_color": "#ff41b4"
 }

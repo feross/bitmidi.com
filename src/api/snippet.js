@@ -7,7 +7,7 @@ module.exports = {
 }
 
 const assert = require('assert')
-const debug = require('debug')('nodefoo:api:snippet')
+const debug = require('debug')('bitmidi:api:snippet')
 const parallel = require('run-parallel')
 const path = require('path')
 const sqlite3 = require('sqlite3')

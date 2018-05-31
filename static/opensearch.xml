@@ -1,9 +1,9 @@
 <OpenSearchDescription xmlns:moz='http://www.mozilla.org/2006/browser/search/' xmlns='http://a9.com/-/spec/opensearch/1.1/'>
-  <ShortName>Node Foo</ShortName>
-  <Description>Node.js examples and code snippets</Description>
+  <ShortName>BitMidi</ShortName>
+  <Description>Wayback machine for old-school MIDI files</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image height='48' width='48' type='image/x-icon'>https://nodefoo.com/favicon.ico</Image>
-  <Url type='text/html' method='GET' template='https://nodefoo.com/search?q={searchTerms}'/>
-  <Url type='application/opensearchdescription+xml' rel='self' template='https://nodefoo.com/opensearch.xml' />
-  <moz:SearchForm>https://nodefoo.com</moz:SearchForm>
+  <Image height='48' width='48' type='image/x-icon'>https://bitmidi.com/favicon.ico</Image>
+  <Url type='text/html' method='GET' template='https://bitmidi.com/search?q={searchTerms}'/>
+  <Url type='application/opensearchdescription+xml' rel='self' template='https://bitmidi.com/opensearch.xml' />
+  <moz:SearchForm>https://bitmidi.com</moz:SearchForm>
 </OpenSearchDescription>

@@ -4,7 +4,7 @@ import querystring from 'querystring'
 import config from '../../config'
 import fetchConcat from '../lib/simple-fetch'
 
-const debug = Debug('nodefoo:api')
+const debug = Debug('bitmidi:api')
 
 export default {
   doc: {

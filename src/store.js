@@ -3,8 +3,8 @@
 module.exports = createStore
 
 const copy = require('clipboard-copy')
-const debug = require('debug')('nodefoo:store')
-const debugVerbose = require('debug')('nodefoo:store:verbose')
+const debug = require('debug')('bitmidi:store')
+const debugVerbose = require('debug')('bitmidi:store:verbose')
 const querystring = require('querystring')
 
 const api = require('./api')
