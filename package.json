@@ -82,7 +82,7 @@
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/bitmidi.com/secret/\"",
     "size": "npm run build-js && cat static/bundle.js | gzip | wc -c",
-    "start": "node --experimental-modules src/server/start",
+    "start": "node src/server/start",
     "test": "npm run test-lint && npm run test-ava",
     "test-ava": "echo \"skipping ava tests -- npm run build && ava 'test/**/*.js'\"",
     "test-lint": "standard '**/*.js' '**/*.mjs'",
