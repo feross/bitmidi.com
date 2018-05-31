@@ -35,8 +35,8 @@ if ('serviceWorker' in navigator) {
 // Measure time to first render
 console.timeEnd('render')
 
-// Expose important functions for dev tools debugging
-window.App = { store, dispatch, update, debug: debugHelper }
+// Expose functions for debugging
+Object.assign(window, { store, dispatch, update, debug: debugHelper })
 
 if (process.env.NODE_ENV !== 'production') {
   // Enable react dev tools
