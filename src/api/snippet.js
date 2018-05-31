@@ -116,7 +116,7 @@ function add (snippet, cb) {
   `
 
   const idBase = slug(snippet.name)
-  const codeHtml = highlight(snippet.code, 'js')
+  const codeHtml = '' // TODO highlight(snippet.code, 'js')
 
   tryInsert(1)
 
