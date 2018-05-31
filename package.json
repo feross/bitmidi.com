@@ -86,9 +86,8 @@
   },
   "scripts": {
     "build": "npm run build-css && npm run build-js && chmod 777 db/",
-    "build-css": "node ./bin/purify-css.js",
+    "build-css": "node ./tools/purify-css.js",
     "build-js": "rollup -c | minify > static/bundle.js",
-    "generate": "DEBUG=* node ./bin/generate.js",
     "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/bitmidi.com/secret/\"",
