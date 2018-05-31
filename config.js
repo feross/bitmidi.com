@@ -2,7 +2,7 @@ const isBrowser = typeof window !== 'undefined'
 
 const isProd = isBrowser
   ? window.location.hostname !== 'localhost'
-  : require('pro' + 'cess').env.NODE_ENV === 'production'
+  : process.env.NODE_ENV === 'production'
 
 /**
  * Is the javascript environment a browser?

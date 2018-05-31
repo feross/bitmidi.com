@@ -85,7 +85,7 @@
   "scripts": {
     "build": "npm run build-css && npm run build-js && chmod 777 db/",
     "build-css": "node -r @babel/register ./tools/build-css",
-    "build-js": "browserify --extension mjs --plugin tinyify . > static/bundle.js",
+    "build-js": "browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
     "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/bitmidi.com/secret/\"",
@@ -98,7 +98,7 @@
     "test-lint": "standard '**/*.js' '**/*.mjs'",
     "watch": "npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "DEBUG=true nodemon --exec 'npm run build-css' --watch src/server --ext css",
-    "watch-js": "watchify --extension mjs . --debug --verbose --outfile static/bundle.js",
+    "watch-js": "watchify --no-detect-globals --extension mjs . --debug --verbose --outfile static/bundle.js",
     "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,mjs,json,ejs --ignore src/browser,src/views,static"
   },
   "standard": {
