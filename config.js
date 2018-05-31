@@ -25,6 +25,11 @@ exports.title = 'BitMidi'
 exports.description = 'Wayback machine for old-school MIDI files'
 
 /**
+ * Google Analytics tracking ID
+ */
+exports.analyticsId = 'UA-3898076-25'
+
+/**
  * Keywords of the site
  */
 exports.keywords = [
