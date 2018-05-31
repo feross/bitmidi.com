@@ -35,8 +35,10 @@ if ('serviceWorker' in navigator) {
 // Measure time to first render
 console.timeEnd('render')
 
-// Enable react dev tools (excluded in production)
-// require('preact/devtools')
 // Expose important functions for dev tools debugging
 window.App = { store, dispatch, update, debug: debugHelper }
 
+if (process.env.NODE_ENV !== 'production') {
+  // Enable react dev tools
+  require('preact/devtools')
+}
