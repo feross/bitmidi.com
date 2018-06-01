@@ -86,7 +86,7 @@
     "url": "git://github.com/feross/bitmidi.com.git"
   },
   "scripts": {
-    "build": "npm run build-css && npm run build-js && npm run build-js-legacy && npm run size chmod 777 db/",
+    "build": "npm run build-css && npm run build-js && npm run build-js-legacy && chmod 777 db/",
     "build-css": "node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
     "build-js-legacy": "NODE_ENV=production BABEL_ENV=legacy browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.legacy.js",
