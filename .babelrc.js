@@ -22,19 +22,6 @@ const plugins = [
   ]
 ]
 
-const legacyConfig = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        useBuiltIns: 'usage',
-        loose: true
-      }
-    ]
-  ].concat(presets),
-  plugins
-}
-
 const modernConfig = {
   presets,
   plugins: [
@@ -48,6 +35,19 @@ const modernConfig = {
       }
     ]
   ].concat(plugins)
+}
+
+const legacyConfig = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        useBuiltIns: 'usage',
+        loose: true
+      }
+    ]
+  ].concat(presets),
+  plugins
 }
 
 module.exports = BABEL_ENV === 'modern'
