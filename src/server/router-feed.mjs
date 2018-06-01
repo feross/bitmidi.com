@@ -2,7 +2,7 @@ import express from 'express'
 
 import api from '../api'
 import config from '../../config'
-import oneLine from 'common-tags/lib/oneLine'
+import { oneLine } from 'common-tags'
 
 const router = express.Router()
 
