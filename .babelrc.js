@@ -1,6 +1,28 @@
-const env = process.env.BABEL_ENV || process.env.NODE_ENV || 'development'
+const { isProd } = require('./config')
+const BABEL_ENV = process.env.BABEL_ENV || 'modern'
 
-module.exports = {
+const presets = [
+  [
+    '@babel/preset-react',
+    {
+      pragma: 'h',
+      pragmaFrag: '"span"', // see: https://github.com/developit/preact/issues/946
+      development: !isProd,
+      useBuiltIns: true
+    }
+  ]
+]
+
+const plugins = [
+  [
+    '@babel/plugin-proposal-class-properties',
+    {
+      loose: true
+    }
+  ]
+]
+
+const legacyConfig = {
   presets: [
     [
       '@babel/preset-env',
@@ -8,23 +30,26 @@ module.exports = {
         useBuiltIns: 'usage',
         loose: true
       }
+    ]
+  ].concat(presets),
+  plugins
+}
+
+const modernConfig = {
+  presets,
+  plugins: [
+    [
+      '@babel/plugin-transform-modules-commonjs'
     ],
     [
-      '@babel/preset-react',
+      '@babel/plugin-proposal-object-rest-spread',
       {
-        pragma: 'h',
-        pragmaFrag: '"span"', // see: https://github.com/developit/preact/issues/946
-        development: env === 'development',
         useBuiltIns: true
       }
     ]
-  ],
-  plugins: [
-    [
-      '@babel/plugin-proposal-class-properties',
-      {
-        loose: true
-      }
-    ]
-  ]
+  ].concat(plugins)
 }
+
+module.exports = BABEL_ENV === 'modern'
+  ? modernConfig
+  : legacyConfig
