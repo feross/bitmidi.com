@@ -46,7 +46,7 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
+    <script async type="module" src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
     <script async nomodule src='/bundle.legacy.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
