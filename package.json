@@ -89,7 +89,7 @@
     "build": "npm run build-css && npm run build-js && npm run build-js-legacy && chmod 777 db/",
     "build-css": "node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
-    "build-js-legacy": "NODE_ENV=production BABEL_ENV=legacy browserify --no-detect-globals --extension mjs . > static/bundle.legacy.js",
+    "build-js-legacy": "NODE_ENV=production BABEL_ENV=legacy browserify --extension mjs . > static/bundle.legacy.js",
     "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/bitmidi.com/secret/\"",
