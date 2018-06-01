@@ -15,6 +15,8 @@
 
 ## Usage
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/feross/bitmidi.com.svg)](https://greenkeeper.io/)
+
 Visit the live site at **[bitmidi.com](https://bitmidi.com)**!
 
 ## Contributing
