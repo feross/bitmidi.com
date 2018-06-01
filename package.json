@@ -25,15 +25,19 @@
       "babelify"
     ]
   },
+  "browserslist": [
+    "> 1%",
+    "Chrome 41",
+    "Firefox ESR"
+  ],
   "bugs": {
     "url": "https://github.com/feross/bitmidi.com/issues"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.49",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.49",
-    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
+    "@babel/preset-react": "^7.0.0-beta.49",
     "@babel/register": "^7.0.0-beta.49",
     "classnames": "^2.2.5",
     "clipboard-copy": "^2.0.0",
