@@ -57,6 +57,33 @@ exports.httpOrigin = (isProd ? 'https' : 'http') + '://' + exports.host
 // exports.wsOrigin = (isProd ? 'wss' : 'ws') + '://' + exports.host
 
 /**
+ * Database connection information
+ */
+exports.db = isProd
+  ? {
+    // client: 'postgresql',
+    // connection: {
+    //   database: 'my_db',
+    //   user: 'username',
+    //   password: 'password'
+    // },
+    // pool: {
+    //   min: 2,
+    //   max: 10
+    // },
+    // migrations: {
+    //   tableName: 'knex_migrations'
+    // }
+  }
+  : {
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './db/development'
+    }
+  }
+
+/**
  * Root path of project
  */
 exports.rootPath = isBrowser ? '/' : __dirname
