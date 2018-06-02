@@ -43,7 +43,7 @@
   },
   "browser": {
     "./secret/index.js": false,
-    "./src/api/index.js": "./src/browser/api.mjs",
+    "./src/api/index.mjs": "./src/browser/api.mjs",
     "./src/server/start.mjs": "./src/browser/index.mjs",
     "url": false
   },
