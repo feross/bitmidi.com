@@ -9,7 +9,7 @@
 
     <link rel='canonical' href='<%= config.httpOrigin %><%= url %>' />
 
-    <link rel='modulepreload' href='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>' />
+    <link rel='preload' as='script' href='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>' />
     <link rel='stylesheet' href='/bundle.css?c=<%- styleHash %>' />
 
     <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
@@ -46,8 +46,7 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script async type="module" src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
-    <script async nomodule src='/bundle.legacy.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
+    <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
 </html>

@@ -14,6 +14,33 @@
     "babel": false,
     "compileEnhancements": false
   },
+  "babel": {
+    "plugins": [
+      [
+        "@babel/plugin-transform-modules-commonjs"
+      ],
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragma": "h",
+          "pragmaFrag": "\"span\"",
+          "useBuiltIns": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-object-rest-spread",
+        {
+          "useBuiltIns": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
+        }
+      ]
+    ]
+  },
   "browser": {
     "./secret/index.js": false,
     "./src/api/index.js": "./src/browser/api.mjs",
@@ -25,19 +52,15 @@
       "babelify"
     ]
   },
-  "browserslist": [
-    "> 1%",
-    "Chrome 41",
-    "Firefox ESR"
-  ],
   "bugs": {
     "url": "https://github.com/feross/bitmidi.com/issues"
   },
   "dependencies": {
     "@babel/core": "^7.0.0-beta.49",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.49",
-    "@babel/preset-react": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.49",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.49",
     "@babel/register": "^7.0.0-beta.49",
     "classnames": "^2.2.5",
     "clipboard-copy": "^2.0.0",
@@ -86,10 +109,9 @@
     "url": "git://github.com/feross/bitmidi.com.git"
   },
   "scripts": {
-    "build": "npm run build-css && npm run build-js && npm run build-js-legacy && chmod 777 db/",
+    "build": "npm run build-css && npm run build-js && chmod 777 db/",
     "build-css": "node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
-    "build-js-legacy": "NODE_ENV=production BABEL_ENV=legacy browserify --extension mjs . > static/bundle.legacy.js",
     "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
     "secret-upload": "rsync -a -O -v --delete -e \"ssh -p 44444\" secret/ feross@future:\"/home/feross/www/bitmidi.com/secret/\"",

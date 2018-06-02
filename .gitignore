@@ -4,5 +4,4 @@ secret/*
 node_modules/
 
 static/bundle.js
-static/bundle.legacy.js
 static/bundle.css
