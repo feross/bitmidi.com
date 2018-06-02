@@ -13,7 +13,6 @@ import secret from '../../secret'
 import oneLine from 'common-tags/lib/oneLine'
 
 import routerApi from './router-api'
-import routerAuth from './router-auth'
 import routerFeed from './router-feed'
 
 export function init (sessionStore) {
@@ -93,7 +92,6 @@ export function init (sessionStore) {
   }))
 
   app.use('/api', routerApi)
-  app.use('/auth', routerAuth)
   app.use(routerFeed)
 
   app.use((req, res, next) => {
