@@ -1,7 +1,7 @@
 import { render } from 'preact'
 
 import createStore from '../store'
-import debugHelper from '../lib/debug-helper'
+import debug from '../lib/debug-helper'
 import getProvider from '../views/provider'
 
 let root = document.getElementById('root')
@@ -15,12 +15,13 @@ dispatch('LOCATION_REPLACE', loc.pathname + loc.search + loc.hash)
 dispatch('RUN_PENDING_DISPATCH')
 window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 
+// Debugging
+Object.assign(window, { store, dispatch, update, debug })
+if (process.env.NODE_ENV !== 'production') require('preact/devtools')
+
 update()
 
-function update () {
-  const jsx = getProvider(store, dispatch)
-  root = render(jsx, document.body, root)
-}
+console.timeEnd('render') // Measure time to first render
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
@@ -28,17 +29,7 @@ if ('serviceWorker' in navigator) {
     .catch(err => console.error('Unable to register service worker.', err))
 }
 
-/**
- * DEVELOPMENT
- */
-
-// Measure time to first render
-console.timeEnd('render')
-
-// Expose functions for debugging
-Object.assign(window, { store, dispatch, update, debug: debugHelper })
-
-if (process.env.NODE_ENV !== 'production') {
-  // Enable react dev tools
-  require('preact/devtools')
+function update () {
+  const jsx = getProvider(store, dispatch)
+  root = render(jsx, document.body, root)
 }
