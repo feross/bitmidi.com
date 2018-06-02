@@ -47,7 +47,7 @@ exports.host = isProd
   : 'localhost:4000'
 
 /**
- * HTTP origin
+ * Website origin (scheme + hostname + port)
  */
 exports.httpOrigin = (isProd ? 'https' : 'http') + '://' + exports.host
 
@@ -78,9 +78,8 @@ exports.maxAgeCookie = isProd
   : 0
 
 /**
- * Time (in milliseconds) to cache the HTTP Strict Transport Security (HSTS)
- * setting. This value is sent in the HTTP "Strict-Transport-Security" header as
- * the "max-age" attribute.
+ * Time (in milliseconds) to cache the HTTP "Strict-Transport-Security" (HSTS)
+ * setting. This value is sent as the "max-age" attribute in the header.
  */
 exports.maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
 
@@ -92,7 +91,7 @@ exports.apiTimeout = 30 * 1000
 /**
  * User agent for API requests
  */
-exports.apiUserAgent = 'BitMidi/1.0.0 (https://bitmidi.com)'
+exports.apiUserAgent = `${exports.title}/1.0.0 (${exports.httpOrigin})`
 
 /**
  * Website theme colors
