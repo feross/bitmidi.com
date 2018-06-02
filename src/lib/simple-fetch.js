@@ -4,7 +4,7 @@
 
 module.exports = simpleFetch
 
-function simpleFetch (opts, cb) {
+async function simpleFetch (opts) {
   opts = typeof opts === 'string' ? {url: opts} : Object.assign({}, opts)
 
   opts.headers = new Headers(opts.headers || {})
@@ -25,43 +25,27 @@ function simpleFetch (opts, cb) {
     rawHeaders: []
   }
 
-  fetch(opts.url, opts)
-    .then(onResponse)
-    .then(onText, onError)
+  const response = await fetch(opts.url, opts)
 
-  function onResponse (response) {
-    res.url = response.url
-    res.statusCode = response.status
-    res.statusMessage = response.statusText
-    response.headers.forEach(function (header, key) {
-      res.headers[key.toLowerCase()] = header
-      res.rawHeaders.push(key, header)
-    })
-    return response.text()
-  }
+  res.url = response.url
+  res.statusCode = response.status
+  res.statusMessage = response.statusText
+  response.headers.forEach(function (header, key) {
+    res.headers[key.toLowerCase()] = header
+    res.rawHeaders.push(key, header)
+  })
 
-  function onText (text) {
-    if (opts.json) {
-      try {
-        text = JSON.parse(text)
-      } catch (err) {
-        return onError(err)
-      }
-    }
-    if (cb) cb(null, res, text)
-    cb = null
-  }
+  res.body = opts.json
+    ? await response.json()
+    : await response.text()
 
-  function onError (err) {
-    if (cb) cb(err)
-    cb = null
-  }
+  return res
 }
 
 ;['get', 'post', 'put', 'patch', 'head', 'delete'].forEach(function (method) {
-  simpleFetch[method] = function (opts, cb) {
+  simpleFetch[method] = function (opts) {
     if (typeof opts === 'string') opts = {url: opts}
     opts.method = method.toUpperCase()
-    return simpleFetch(opts, cb)
+    return simpleFetch(opts)
   }
 })
