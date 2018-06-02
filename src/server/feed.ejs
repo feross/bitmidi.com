@@ -21,22 +21,22 @@
     <uri><%= config.httpOrigin %>/</uri>
   </author>
 
-  <% for (let i = 0; i < snippets.length; i++) { %>
-    <% let snippet = snippets[i] %>
+  <% for (let i = 0; i < midis.length; i++) { %>
+    <% let midi = midis[i] %>
     <entry>
-      <id><%= snippet.url %></id>
-      <title><%= snippet.name %></title>
+      <id><%= midi.url %></id>
+      <title><%= midi.name %></title>
       <updated></updated>
 
-      <link rel='alternate' type='text/html' href='<%= snippet.url %>' />
+      <link rel='alternate' type='text/html' href='<%= midi.url %>' />
 
       <author>
-        <name>@<%= snippet.author %></name>
-        <uri><%= snippet.author_url %></uri>
+        <name>@<%= midi.author %></name>
+        <uri><%= midi.author_url %></uri>
       </author>
 
-      <summary type='text'><%= snippet.name %></summary>
-      <content type='html'><%= snippet.html %></content>
+      <summary type='text'><%= midi.name %></summary>
+      <content type='html'><%= midi.html %></content>
     </entry>
   <% } %>
 
