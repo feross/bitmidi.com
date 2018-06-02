@@ -160,6 +160,10 @@ function renderApp (err, req, res) {
   const { store, dispatch } = createStore(update, onFetchDone)
   const jsx = getProvider(store, dispatch)
 
+  if (req.query.ssr === '0') {
+    return res.render('app', { content: '', store, url: req.url })
+  }
+
   store.userName = (req.session.user && req.session.user.userName) || null
 
   dispatch('LOCATION_REPLACE', req.url)
