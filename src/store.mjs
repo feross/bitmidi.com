@@ -3,7 +3,7 @@
 import Debug from 'debug'
 import querystring from 'querystring'
 
-import api from './api'
+import * as api from './api'
 import config from '../config'
 import Location from './lib/location'
 import routes from './routes'
@@ -38,19 +38,27 @@ export default function createStore (render, onFetchDone) {
     errors: [],
     userName: null,
 
-    // local database
-    snippets: {}, // snippet.id -> snippet
+    // local data
+    midis: {}, // midi.id -> midi
     searches: {}, // search.q -> search
 
-    // data views
-    topSnippetIds: null // [ snippet.id ]
+    // local data views
+    topMidiIds: [] // [ midi.id ]
   }
 
   const loc = new Location(routes, (location, source) => {
     dispatch('LOCATION_CHANGED', { location, source })
   })
 
-  function dispatch (type, data) {
+  async function dispatch (type, data) {
+    try {
+      await _dispatch(type, data)
+    } catch (err) {
+      addError(err)
+    }
+  }
+
+  async function _dispatch (type, data) {
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
     else debug('%s %o', type, data)
 
@@ -128,15 +136,26 @@ export default function createStore (render, onFetchDone) {
        * MIDI
        */
 
+      case 'API_MIDI_GET': {
+        dispatch('API_MIDI_GET_DONE', await api.midi.get(data))
         return update()
       }
 
+      case 'API_MIDI_GET_DONE': {
+        const midi = data
+        addMidi(midi)
         return update()
       }
 
+      case 'API_MIDI_ALL': {
+        dispatch('API_MIDI_ALL_DONE', await api.midi.all(data))
         return update()
       }
 
+      case 'API_MIDI_ALL_DONE': {
+        const midis = data
+        midis.map(addMidi)
+        store.topMidiIds = midis.map(midi => midi.id)
         return update()
       }
 
@@ -194,8 +213,8 @@ export default function createStore (render, onFetchDone) {
     update()
   }
 
-  function addSnippet (snippet) {
-    store.snippets[snippet.id] = snippet
+  function addMidi (midi) {
+    store.midis[midi.id] = midi
   }
 
   function addSearch (search) {
