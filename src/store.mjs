@@ -1,6 +1,5 @@
 'use strict'
 
-import copy from 'clipboard-copy'
 import Debug from 'debug'
 import querystring from 'querystring'
 
@@ -126,105 +125,18 @@ export default function createStore (render, onFetchDone) {
       }
 
       /**
-       * DOC
+       * MIDI
        */
 
-      case 'API_DOC': {
-        api.doc.get(data, (err, doc) => {
-          dispatch('API_DOC_DONE', { err, doc })
-        })
         return update()
       }
 
-      case 'API_DOC_DONE': {
-        const { err, doc } = data
-        if (err) return addError(err)
-        store.doc = doc
         return update()
       }
 
-      /**
-       * SNIPPET
-       */
-
-      case 'API_SNIPPET_ADD': {
-        if (store.userName == null) {
-          addPendingDispatch(type, data)
-          addError(
-            new Error('Last step! Log in to get credit for your contribution.')
-          )
-          window.location.href = '/auth/twitter'
-          return
-        }
-        api.snippet.add(data, (err, result) => {
-          dispatch('API_SNIPPET_ADD_DONE', { err, result })
-        })
         return update()
       }
 
-      case 'API_SNIPPET_ADD_DONE': {
-        const { err } = data
-        if (err) return addError(err)
-        dispatch('LOCATION_PUSH', '/')
-        return update()
-      }
-
-      case 'API_SNIPPET_VOTE': {
-        api.snippet.vote(data, (err, snippet) => {
-          dispatch('API_SNIPPET_VOTE_DONE', { err, snippet })
-        })
-        return update()
-      }
-
-      case 'API_SNIPPET_VOTE_DONE': {
-        const { err, snippet } = data
-        if (err) return addError(err)
-        addSnippet(snippet)
-        return update()
-      }
-
-      case 'API_SNIPPET_GET': {
-        api.snippet.get(data, (err, snippet) => {
-          dispatch('API_SNIPPET_GET_DONE', { err, snippet })
-        })
-        return update()
-      }
-
-      case 'API_SNIPPET_GET_DONE': {
-        const { err, snippet } = data
-        if (err) return addError(err)
-
-        addSnippet(snippet)
-        return update()
-      }
-
-      case 'API_SNIPPET_ALL': {
-        api.snippet.all(data, (err, snippets) => {
-          dispatch('API_SNIPPET_ALL_DONE', { err, snippets })
-        })
-        return update()
-      }
-
-      case 'API_SNIPPET_ALL_DONE': {
-        const { err, snippets } = data
-        if (err) return addError(err)
-
-        snippets.map(addSnippet)
-        store.topSnippetIds = snippets.map(snippet => snippet.id)
-        return update()
-      }
-
-      case 'API_SNIPPET_SEARCH': {
-        api.snippet.search(data, (err, search) => {
-          dispatch('API_SNIPPET_SEARCH_DONE', { err, search })
-        })
-        return update()
-      }
-
-      case 'API_SNIPPET_SEARCH_DONE': {
-        const { err, search } = data
-        if (err) return addError(err)
-        addSearch(search)
         return update()
       }
 
@@ -244,15 +156,6 @@ export default function createStore (render, onFetchDone) {
             url
           )
         }
-        return
-      }
-
-      /**
-       * CLIPBOARD
-       */
-
-      case 'CLIPBOARD_COPY': {
-        copy(data)
         return
       }
 
@@ -280,9 +183,9 @@ export default function createStore (render, onFetchDone) {
     }
   }
 
-  function addPendingDispatch (type, data) {
-    window.localStorage.pendingDispatch = JSON.stringify({ type, data })
-  }
+  // function addPendingDispatch (type, data) {
+  //   window.localStorage.pendingDispatch = JSON.stringify({ type, data })
+  // }
 
   function addError (err) {
     const { message, code = null, stack } = err
