@@ -2,26 +2,26 @@ const { h } = require('preact') /** @jsx h */
 
 const Heading = require('./heading')
 const Loader = require('./loader')
-const Snippet = require('./snippet')
+const Midi = require('./midi')
 const PageComponent = require('./page-component')
 
 class HomePage extends PageComponent {
   load () {
     const { dispatch } = this.context
     dispatch('APP_META', { title: null, description: null })
-    dispatch('API_SNIPPET_ALL')
+    dispatch('API_MIDI_ALL')
   }
 
   render (props) {
-    const { topSnippetIds, snippets } = this.context.store
+    const { topMidiIds, midis } = this.context.store
 
-    const topSnippets = topSnippetIds &&
-      topSnippetIds.map(snippetId => snippets[snippetId])
+    const topMidis = topMidiIds &&
+      topMidiIds.map(midiId => midis[midiId])
 
     return (
-      <Loader show={topSnippetIds == null} center>
-        <Heading class='tc'>Most copied snippets</Heading>
-        {topSnippets && topSnippets.map(snippet => <Snippet snippet={snippet} />)}
+      <Loader show={topMidiIds.length === 0} center>
+        <Heading class='tc'>Most popular MIDIs</Heading>
+        {topMidis && topMidis.map(midi => <Midi midi={midi} />)}
       </Loader>
     )
   }
