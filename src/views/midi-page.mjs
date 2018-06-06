@@ -1,11 +1,11 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
-const Heading = require('./heading')
-const Loader = require('./loader')
-const Midi = require('./midi')
-const PageComponent = require('./page-component')
+import Heading from './heading'
+import Loader from './loader'
+import Midi from './midi'
+import PageComponent from './page-component'
 
-class MidiPage extends PageComponent {
+export default class MidiPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const { location } = this.context.store
@@ -29,5 +29,3 @@ class MidiPage extends PageComponent {
     )
   }
 }
-
-module.exports = MidiPage
