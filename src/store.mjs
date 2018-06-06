@@ -217,9 +217,9 @@ export default function createStore (render, onFetchDone) {
     store.midis[midi.id] = midi
   }
 
-  function addSearch (search) {
-    store.searches[search.q] = search
-  }
+  // function addSearch (search) {
+  //   store.searches[search.q] = search
+  // }
 
   let isRendering = false
   let isUpdatePending = false
