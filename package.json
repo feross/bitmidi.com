@@ -98,6 +98,7 @@
     "puppeteer": "^1.1.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
+    "simple-sha256": "^1.0.0",
     "standard": "^11.0.0",
     "tinyify": "^2.4.1",
     "watchify": "^3.11.0"
