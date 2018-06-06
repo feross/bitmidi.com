@@ -1,8 +1,8 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
-const Image = require('./image')
+import Image from './image'
 
-const Icon = (props) => {
+export default const Icon = (props) => {
   const { name, alt, ...rest } = props
   return (
     <Image
@@ -12,5 +12,3 @@ const Icon = (props) => {
     />
   )
 }
-
-module.exports = Icon
