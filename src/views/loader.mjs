@@ -1,7 +1,7 @@
-const { h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const Icon = require('./icon')
+import Icon from './icon'
 
 const Loader = (props) => {
   let {
@@ -40,4 +40,4 @@ const Loader = (props) => {
   )
 }
 
-module.exports = Loader
+export default Loader
