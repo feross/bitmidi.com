@@ -1,11 +1,11 @@
-const { Component, h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { Component, h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const { isBrowser } = require('../../config')
+import { isBrowser } from '../../config'
 
-const Link = require('./link')
+import Link from './link'
 
-class Midi extends Component {
+export default class Midi extends Component {
   componentDidMount () {
     if (isBrowser) {
       window.MIDIjs.message_callback = message => {
@@ -49,5 +49,3 @@ class Midi extends Component {
     window.MIDIjs.play(`/uploads/${midi.id}.mid`)
   }
 }
-
-module.exports = Midi
