@@ -23,7 +23,7 @@ const Header = (props, context) => {
         pill
         size='medium'
       >
-        Add a snippet ✨
+        Add a MIDI ✨
       </Button>
     )
   }
