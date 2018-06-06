@@ -19,7 +19,6 @@ async function all (opts) {
   return Midi
     .query()
     .limit(100)
-    .throwIfNotFound()
 }
 
 export default { get, all }
