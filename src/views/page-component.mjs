@@ -1,6 +1,6 @@
-const { Component } = require('preact')
+import { Component } from 'preact'
 
-class PageComponent extends Component {
+export default class PageComponent extends Component {
   componentDidMount () {
     this.load()
   }
@@ -11,5 +11,3 @@ class PageComponent extends Component {
     if (this.props.url !== nextProps.url) this.load()
   }
 }
-
-module.exports = PageComponent
