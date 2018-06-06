@@ -2,7 +2,7 @@
 
 const IS_BROWSER = typeof window !== 'undefined'
 
-class History {
+export default class History {
   constructor (onChange) {
     this._onChange = onChange
     if (IS_BROWSER) window.addEventListener('popstate', this._onPopState)
@@ -39,5 +39,3 @@ class History {
     this._onChange(url, 'popstate')
   }
 }
-
-module.exports = History
