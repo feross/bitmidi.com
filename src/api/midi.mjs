@@ -8,7 +8,7 @@ async function get (opts) {
   debug('get %o', opts)
   const midis = await Midi
     .query()
-    .where('id', opts.id)
+    .where(opts)
     .limit(1)
     .throwIfNotFound()
   return midis[0]
