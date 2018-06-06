@@ -10,7 +10,7 @@ import config from '../../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
-import secret from '../../secret'
+import { cookie as cookieSecret } from '../../secret'
 
 import routerApi from './router-api'
 import routerFeed from './router-feed'
@@ -81,7 +81,7 @@ export default function init (sessionStore) {
   // Set up session handling
   app.use(session({
     store: sessionStore,
-    secret: secret.cookie,
+    secret: cookieSecret,
     resave: false,
     saveUninitialized: false,
     unset: 'destroy',
