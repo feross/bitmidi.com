@@ -21,6 +21,10 @@ async function init () {
   const argv = minimist(process.argv.slice(2))
   const midiPath = argv._[0] // Path to MIDI folder
 
+  if (midiPath == null) {
+    throw new Error('Missing required argument: Path to MIDI folder')
+  }
+
   const duplicates = []
   let importCount = 0
 
