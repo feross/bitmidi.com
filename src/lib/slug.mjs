@@ -1,7 +1,5 @@
 // TODO: publish to npm
 
-module.exports = makeSlug
-
 const mollusc = require('mollusc')
 
 const MOLLUSC_OPTS = {
@@ -11,7 +9,7 @@ const MOLLUSC_OPTS = {
 
 const MAX_SLUG_LENGTH = 75
 
-function makeSlug (name) {
+export default function makeSlug (name) {
   let slug = mollusc(name, MOLLUSC_OPTS)
 
   // Some unicode symbols have no english equivalent defined
