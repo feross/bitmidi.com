@@ -1,5 +1,5 @@
-const { h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
 const Link = (props, context) => {
   const {
@@ -30,4 +30,4 @@ const Link = (props, context) => {
   )
 }
 
-module.exports = Link
+export default Link
