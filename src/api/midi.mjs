@@ -4,7 +4,7 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-export async function get (opts) {
+async function get (opts) {
   debug('get %o', opts)
   const midis = await Midi
     .query()
@@ -14,9 +14,11 @@ export async function get (opts) {
   return midis[0]
 }
 
-export async function all (opts) {
+async function all (opts) {
   debug('all %o', opts)
   return Midi
     .query()
     .throwIfNotFound()
 }
+
+export default { get, all }

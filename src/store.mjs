@@ -3,7 +3,7 @@
 import Debug from 'debug'
 import querystring from 'querystring'
 
-import * as api from './api'
+import api from './api'
 import config from '../config'
 import Location from './lib/location'
 import routes from './routes'

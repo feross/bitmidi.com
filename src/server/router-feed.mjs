@@ -1,6 +1,6 @@
 import Router from 'express-promise-router'
 
-import * as api from '../api'
+import api from '../api'
 import config from '../../config'
 import { oneLine } from 'common-tags'
 

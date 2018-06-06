@@ -1,2 +1,2 @@
-import * as midi from './midi'
-export { midi }
+import midi from './midi'
+export default { midi }

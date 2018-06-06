@@ -7,7 +7,7 @@ import puppeteer from 'puppeteer'
 import test from 'ava'
 import util from 'util'
 
-import { init as serverInit } from '../src/server'
+import serverInit from '../src/server'
 
 let server = null
 

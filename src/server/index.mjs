@@ -7,9 +7,9 @@ import session from 'express-session'
 import util from 'util'
 
 import config from '../../config'
-import { init as appInit } from './app'
+import appInit from './app'
 
-export async function init (port) {
+export default async function init (port) {
   const server = http.createServer()
 
   const listen = util.promisify(server.listen.bind(server))

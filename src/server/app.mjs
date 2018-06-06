@@ -15,7 +15,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import routerApi from './router-api'
 import routerFeed from './router-feed'
 
-export function init (sessionStore) {
+export default function init (sessionStore) {
   const app = express()
 
   app.set('view engine', 'ejs') // Use EJS for server-side templating

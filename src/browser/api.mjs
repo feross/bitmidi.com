@@ -6,9 +6,11 @@ import simpleFetch from '../lib/simple-fetch'
 
 const debug = Debug('bitmidi:api')
 
-export const midi = {
-  get: (opts, cb) => sendGet('/midi/get', opts),
-  all: (opts, cb) => sendGet('/midi/all', opts)
+export default {
+  midi: {
+    get: (opts, cb) => sendGet('/midi/get', opts),
+    all: (opts, cb) => sendGet('/midi/all', opts)
+  }
 }
 
 function sendGet (...args) {
