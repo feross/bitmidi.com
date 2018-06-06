@@ -2,7 +2,7 @@ import { h } from 'preact' /** @jsx h */
 
 import Image from './image'
 
-export default const Icon = (props) => {
+const Icon = (props) => {
   const { name, alt, ...rest } = props
   return (
     <Image
@@ -12,3 +12,5 @@ export default const Icon = (props) => {
     />
   )
 }
+
+export default Icon
