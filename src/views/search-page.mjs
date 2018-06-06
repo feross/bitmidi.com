@@ -1,11 +1,11 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
-const Heading = require('./heading')
-const Loader = require('./loader')
-const PageComponent = require('./page-component')
-const Snippet = require('./snippet')
+import Heading from './heading'
+import Loader from './loader'
+import PageComponent from './page-component'
+import Snippet from './snippet'
 
-class SearchPage extends PageComponent {
+export default class SearchPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const { location } = this.context.store
@@ -34,5 +34,3 @@ class SearchPage extends PageComponent {
     )
   }
 }
-
-module.exports = SearchPage
