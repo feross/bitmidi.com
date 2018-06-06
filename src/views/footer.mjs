@@ -1,6 +1,6 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
-const Link = require('./link')
+import Link from './link'
 
 const Footer = (props, context) => {
   const { location, userName } = context.store
@@ -47,4 +47,4 @@ const FooterDivider = () => {
   return <span class='mh1'>•</span>
 }
 
-module.exports = Footer
+export default Footer
