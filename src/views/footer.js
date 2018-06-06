@@ -9,7 +9,7 @@ const Footer = (props, context) => {
   if (location.name !== 'submit') {
     $submitLink = [
       <FooterItem>
-        <Link href='/submit'>Add a snippet</Link>
+        <Link href='/submit'>Add a MIDI</Link>
       </FooterItem>,
       <FooterDivider />
     ]
