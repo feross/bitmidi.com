@@ -57,6 +57,7 @@ async function init () {
     const outFile = path.join(rootPath, 'uploads', `${midi.id}.mid`)
     const flags = fs.constants.COPYFILE_EXCL /* fail if dest already exists */
     fs.copyFileSync(filePath, outFile, flags)
+    fs.chmodSync(outFile, 0o664)
 
     importCount += 1
   }
