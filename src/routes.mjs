@@ -2,12 +2,12 @@
  * List of routes in the app. Specified as [routeName, routePath, routePage].
  */
 
-const ErrorPage = require('./views/error-page')
-const HomePage = require('./views/home-page')
-const MidiPage = require('./views/midi-page')
+import ErrorPage from './views/error-page'
+import HomePage from './views/home-page'
+import MidiPage from './views/midi-page'
 // const SearchPage = require('./views/search-page')
 
-module.exports = [
+export default [
   ['home', '/', HomePage],
   // ['search', '/search', SearchPage],
   ['midi', '/:midiId', MidiPage],
