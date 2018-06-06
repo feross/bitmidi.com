@@ -1,11 +1,11 @@
 // TODO: publish to npm
 
-const History = require('./history')
-const Router = require('./router')
+import History from './history'
+import Router from './router'
 
 const IS_BROWSER = typeof window !== 'undefined'
 
-class Location {
+export default class Location {
   constructor (routes, onChange) {
     this._onChange = onChange
 
@@ -90,5 +90,3 @@ class Location {
     this.push(url)
   }
 }
-
-module.exports = Location
