@@ -55,7 +55,9 @@ export default function init (sessionStore) {
 
   // Set up static file serving
   const staticPath = path.join(config.rootPath, 'static')
+  const uploadsPath = path.join(config.rootPath, 'uploads')
   app.use(express.static(staticPath, { maxAge: config.maxAgeStatic }))
+  app.use('/uploads', express.static(uploadsPath, { maxAge: config.maxAgeStatic }))
 
   // Compute hashes for built resources
   const styleHash = config.isProd
