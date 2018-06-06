@@ -1,5 +1,5 @@
-const { h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
 const Heading = (props) => {
   const { children, class: className, ...rest } = props
@@ -11,4 +11,4 @@ const Heading = (props) => {
   )
 }
 
-module.exports = Heading
+export default Heading
