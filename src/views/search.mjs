@@ -1,9 +1,9 @@
-const { Component, h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { Component, h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const Input = require('./input')
+import Input from './input'
 
-class Search extends Component {
+export default class Search extends Component {
   render (props) {
     const { class: className, ...rest } = props
     const { lastSearch } = this.context.store
@@ -48,5 +48,3 @@ class Search extends Component {
     if (value.trim() !== '') this.dispatch(value)
   }
 }
-
-module.exports = Search
