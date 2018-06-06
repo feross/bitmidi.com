@@ -2,9 +2,7 @@
 
 /* global fetch, Headers */
 
-module.exports = simpleFetch
-
-async function simpleFetch (opts) {
+export default async function simpleFetch (opts) {
   opts = typeof opts === 'string' ? {url: opts} : Object.assign({}, opts)
 
   opts.headers = new Headers(opts.headers || {})
