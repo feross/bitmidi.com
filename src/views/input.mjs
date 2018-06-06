@@ -1,9 +1,9 @@
-const { Component, h } = require('preact') /** @jsx h */
-const c = require('classnames')
+import { Component, h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-const config = require('../../config')
+import config from '../../config'
 
-class Input extends Component {
+export default class Input extends Component {
   constructor () {
     super()
     this.state = {
@@ -73,5 +73,3 @@ class Input extends Component {
     if (onBlur) onBlur(event)
   }
 }
-
-module.exports = Input
