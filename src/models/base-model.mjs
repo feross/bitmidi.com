@@ -2,7 +2,8 @@ import Knex from 'knex'
 import { Model } from 'objection'
 import { join } from 'path'
 
-import { db, rootPath } from '../../config'
+import { db } from '../../secret'
+import { rootPath } from '../../config'
 
 const knex = Knex(db)
 

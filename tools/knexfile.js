@@ -1,3 +1,1 @@
-const { db } = require('../config')
-
-module.exports = db
+module.exports = require('../secret').db
