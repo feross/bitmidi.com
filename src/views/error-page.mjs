@@ -1,9 +1,9 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
-const Heading = require('./heading')
-const PageComponent = require('./page-component')
+import Heading from './heading'
+import PageComponent from './page-component'
 
-class ErrorPage extends PageComponent {
+export default class ErrorPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const firstError = this.getError()
@@ -24,5 +24,3 @@ class ErrorPage extends PageComponent {
     return fatalError || errors[0] || { message: 'Page Not Found' }
   }
 }
-
-module.exports = ErrorPage
