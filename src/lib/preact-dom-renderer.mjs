@@ -1,16 +1,14 @@
 // TODO: publish to npm
 
-module.exports = createRenderer
+import { render } from 'preact'
 
-const { render } = require('preact')
-
-const hyphenate = require('hyphenate-style-name')
-const undom = require('undom')
+import hyphenate from 'hyphenate-style-name'
+import undom from 'undom'
 
 // Patch the global object with a barebones `document`
 Object.assign(global, undom().defaultView)
 
-function createRenderer () {
+export default function createRenderer () {
   const doc = undom()
   const parent = doc.createElement('x-root')
 
