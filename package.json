@@ -74,6 +74,7 @@
     "knex": "^0.14.6",
     "memo-async-lru": "^1.0.1",
     "mollusc": "^2.0.0",
+    "mysql": "^2.15.0",
     "objection": "^1.1.10",
     "path-to-regexp": "^2.1.0",
     "preact": "^8.2.1",
