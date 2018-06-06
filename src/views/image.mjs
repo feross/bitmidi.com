@@ -1,4 +1,4 @@
-const { h } = require('preact') /** @jsx h */
+import { h } from 'preact' /** @jsx h */
 
 const Image = (props) => {
   const { alt, ...rest } = props
@@ -18,4 +18,4 @@ const Image = (props) => {
   )
 }
 
-module.exports = Image
+export default Image
