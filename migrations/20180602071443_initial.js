@@ -3,6 +3,7 @@ exports.up = knex => {
     .createTable('midis', table => {
       table.increments('id').primary()
       table.string('name')
+      table.string('hash', 64).unique()
     })
 }
 
