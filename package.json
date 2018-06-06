@@ -113,6 +113,7 @@
     "build": "npm run build-css && npm run build-js && chmod 777 db/",
     "build-css": "node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
+    "db-tunnel": "ssh -L 3306:localhost:3306 -N feross@athena",
     "knex": "knex --knexfile tools/knexfile.js --cwd .",
     "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete -e \"ssh -p 44444\" feross@future:\"/home/feross/www/bitmidi.com/secret/\" secret/",
