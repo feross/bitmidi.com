@@ -1,3 +1,3 @@
-const { db } = require('./config')
+const { db } = require('../config')
 
 module.exports = db
