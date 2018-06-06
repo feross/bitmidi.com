@@ -1,9 +1,22 @@
 const { Component, h } = require('preact') /** @jsx h */
 const c = require('classnames')
 
+const { isBrowser } = require('../../config')
+
 const Link = require('./link')
 
 class Midi extends Component {
+  componentDidMount () {
+    if (isBrowser) {
+      window.MIDIjs.message_callback = message => {
+        console.log(message)
+      }
+      window.MIDIjs.player_callback = event => {
+        console.log('time', event.time)
+      }
+    }
+  }
+
   render (props) {
     const { midi } = props
     const { mainColor } = this.context.theme
@@ -25,10 +38,15 @@ class Midi extends Component {
           </Link>
         </div>
         <div class='overflow-hidden br3 br--bottom'>
-          <div>MIDI</div>
+          <div onClick={this.onClick}>MIDI</div>
         </div>
       </article>
     )
+  }
+
+  onClick = () => {
+    const { midi } = this.props
+    window.MIDIjs.play(`/uploads/${midi.id}.mid`)
   }
 }
 

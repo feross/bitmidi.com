@@ -115,6 +115,7 @@ export default function init (sessionStore) {
       ;
       connect-src
         'self'
+        http://www.midijs.net
       ;
       img-src
         'self'
