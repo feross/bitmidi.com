@@ -1,6 +1,6 @@
-const { Component } = require('preact')
+import { Component } from 'preact'
 
-class Title extends Component {
+export default class Title extends Component {
   componentDidMount () {
     const { title } = this.props
     this.setTitle(title)
@@ -22,5 +22,3 @@ class Title extends Component {
     document.title = title
   }
 }
-
-module.exports = Title
