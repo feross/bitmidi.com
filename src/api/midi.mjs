@@ -18,6 +18,7 @@ async function all (opts) {
   debug('all %o', opts)
   return Midi
     .query()
+    .limit(100)
     .throwIfNotFound()
 }
 
