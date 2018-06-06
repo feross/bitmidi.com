@@ -1,10 +1,12 @@
 // TODO: publish to npm
 
-const pathToRegexp = require('path-to-regexp')
-const querystring = require('querystring')
-const URL = require('url').URL || window.URL
+import pathToRegexp from 'path-to-regexp'
+import querystring from 'querystring'
+import nodeUrl from 'url'
 
-class Router {
+const URL = nodeUrl.URL || window.URL
+
+export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
       const [name, path] = route
@@ -56,5 +58,3 @@ class Router {
     return this._compilers[name](data)
   }
 }
-
-module.exports = Router
