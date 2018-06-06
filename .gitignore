@@ -1,5 +1,5 @@
 secret/*
-!secret/index-sample.mjs
+!secret/index-sample.js
 
 static/bundle.js
 static/bundle.css
