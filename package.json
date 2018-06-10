@@ -11,6 +11,10 @@
     "require": [
       "@babel/register"
     ],
+    "extensions": [
+      "mjs",
+      "js"
+    ],
     "babel": false,
     "compileEnhancements": false
   },
