@@ -9,7 +9,8 @@ const debug = Debug('bitmidi:api')
 export default {
   midi: {
     get: (opts, cb) => sendGet('/midi/get', opts),
-    all: (opts, cb) => sendGet('/midi/all', opts)
+    all: (opts, cb) => sendGet('/midi/all', opts),
+    search: (opts, cb) => sendGet('/midi/search', opts)
   }
 }
 

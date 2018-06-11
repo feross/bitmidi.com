@@ -4,21 +4,36 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-async function get (opts) {
+const DEFAULT_SELECT = ['id', 'name']
+
+async function get (opts = {}) {
   debug('get %o', opts)
   const midis = await Midi
     .query()
+    .select(opts.select || DEFAULT_SELECT)
     .where(opts)
     .limit(1)
     .throwIfNotFound()
   return midis[0]
 }
 
-async function all (opts) {
+async function all (opts = {}) {
   debug('all %o', opts)
   return Midi
     .query()
-    .limit(100)
+    .select(opts.select || DEFAULT_SELECT)
+    .limit(opts.limit || 10)
 }
 
-export default { get, all }
+async function search (opts = {}) {
+  debug('search %o', opts)
+  const select = (opts.select || DEFAULT_SELECT)
+    .concat(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', opts.q))
+  return Midi
+    .query()
+    .select(select)
+    .limit(opts.limit || 10)
+    .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', opts.q)
+}
+
+export default { get, all, search }

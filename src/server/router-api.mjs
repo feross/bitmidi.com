@@ -12,6 +12,10 @@ router.get('/midi/all', async (req, res) => {
   res.json({ result: await api.midi.all(req.query) })
 })
 
+router.get('/midi/search', async (req, res) => {
+  res.json({ result: await api.midi.search(req.query) })
+})
+
 router.get('*', async (req, res) => {
   const err = new Error('404 Not Found')
   err.status = 404
