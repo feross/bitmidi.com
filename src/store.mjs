@@ -64,6 +64,8 @@ export default function createStore (render, onFetchDone = () => {}) {
       await _dispatch(type, data)
     } catch (err) {
       addError(err)
+      if (type.startsWith('API_') && !type.endsWith('_DONE')) decrementFetchCount()
+      update()
     }
   }
 
@@ -213,7 +215,6 @@ export default function createStore (render, onFetchDone = () => {}) {
     const { message, code = null, stack } = err
     store.errors.push({ message, code })
     console.error(stack)
-    update()
   }
 
   function addMidi (midi) {
