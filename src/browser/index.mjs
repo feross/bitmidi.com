@@ -12,7 +12,7 @@ Object.assign(store, window.initStore)
 
 const loc = window.location
 dispatch('LOCATION_REPLACE', loc.pathname + loc.search + loc.hash)
-dispatch('RUN_PENDING_DISPATCH')
+dispatch('PENDING_DISPATCH')
 window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 
 // Debugging

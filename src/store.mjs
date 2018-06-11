@@ -201,7 +201,7 @@ export default function createStore (render, onPendingChange = () => {}) {
        * PENDING DISPATCH
        */
 
-      case 'RUN_PENDING_DISPATCH': {
+      case 'PENDING_DISPATCH': {
         if (window.localStorage.pendingDispatch == null) return
 
         let event
