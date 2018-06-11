@@ -1,6 +1,7 @@
 import crypto from 'crypto'
 import express from 'express'
 import fs from 'fs'
+import MySQLSession from 'express-mysql-session'
 import path from 'path'
 import session from 'express-session'
 import uuid from 'uuid/v4'
@@ -10,12 +11,14 @@ import config from '../../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
-import { cookie as cookieSecret } from '../../secret'
+import { cookie as cookieSecret, db as dbSecret } from '../../secret'
 
 import routerApi from './router-api'
 import routerFeed from './router-feed'
 
-export default function init (sessionStore) {
+const MySQLStore = MySQLSession(session)
+
+export default function init () {
   const app = express()
 
   app.set('view engine', 'ejs') // Use EJS for server-side templating
@@ -78,7 +81,8 @@ export default function init (sessionStore) {
     next()
   })
 
-  // Set up session handling
+  // Set up session store
+  const sessionStore = new MySQLStore(dbSecret.connection)
   app.use(session({
     store: sessionStore,
     secret: cookieSecret,

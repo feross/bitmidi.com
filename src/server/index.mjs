@@ -1,24 +1,16 @@
 import './opbeat'
 
-import ConnectSQLite from 'connect-sqlite3'
 import http from 'http'
-import path from 'path'
-import session from 'express-session'
 import util from 'util'
 
-import config from '../../config'
 import appInit from './app'
 
 export default async function init (port) {
-  const server = http.createServer()
+  const app = appInit()
+  const server = http.createServer(app)
 
   const listen = util.promisify(server.listen.bind(server))
   await listen(port)
-
-  const SQLiteStore = ConnectSQLite(session)
-  const sessionStore = new SQLiteStore({ dir: path.join(config.rootPath, 'db') })
-  server.on('request', appInit(sessionStore))
-
   console.log('Listening on port %s', server.address().port)
 
   return server
