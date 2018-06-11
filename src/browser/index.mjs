@@ -25,7 +25,7 @@ console.timeEnd('render') // Measure time to first render
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/sw.mjs')
+    .register('/service-worker.mjs')
     .catch(err => console.error('Unable to register service worker.', err))
 }
 
