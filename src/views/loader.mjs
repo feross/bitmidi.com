@@ -15,7 +15,10 @@ const Loader = (props) => {
 
   // Show loader
   if (show) {
-    if (center) style.marginTop = 'calc(50vh - 120px)'
+    if (center) {
+      style.marginTop = 'calc(40vh - 80px)'
+      style.marginBottom = 'calc(40vh - 80px)'
+    }
 
     return (
       <div
