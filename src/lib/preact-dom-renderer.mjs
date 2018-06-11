@@ -22,6 +22,7 @@ export default function createRenderer () {
       return this
     },
     html: function () {
+      if (root == null) throw new Error('render() was not called before html()')
       return serializeHtml(root)
     }
   }
