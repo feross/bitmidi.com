@@ -5,11 +5,11 @@
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
-// const SearchPage = require('./views/search-page')
+import SearchPage from './views/search-page'
 
 export default [
   ['home', '/', HomePage],
-  // ['search', '/search', SearchPage],
+  ['search', '/search', SearchPage],
   ['midi', '/:midiId', MidiPage],
   ['error', '(.*)', ErrorPage]
 ]

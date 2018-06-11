@@ -14,26 +14,28 @@ async function get (opts = {}) {
     .where(opts)
     .limit(1)
     .throwIfNotFound()
-  return midis[0]
+  return { ...opts, midi: midis[0] }
 }
 
 async function all (opts = {}) {
   debug('all %o', opts)
-  return Midi
+  const midis = await Midi
     .query()
     .select(opts.select || DEFAULT_SELECT)
     .limit(opts.limit || 10)
+  return { ...opts, midis }
 }
 
 async function search (opts = {}) {
   debug('search %o', opts)
   const select = (opts.select || DEFAULT_SELECT)
     .concat(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', opts.q))
-  return Midi
+  const midis = await Midi
     .query()
     .select(select)
     .limit(opts.limit || 10)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', opts.q)
+  return { ...opts, midis }
 }
 
 export default { get, all, search }
