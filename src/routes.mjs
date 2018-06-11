@@ -8,8 +8,24 @@ import MidiPage from './views/midi-page'
 import SearchPage from './views/search-page'
 
 export default [
-  ['home', '/', HomePage],
-  ['search', '/search', SearchPage],
-  ['midi', '/:midiId', MidiPage],
-  ['error', '(.*)', ErrorPage]
+  {
+    name: 'home',
+    path: '/',
+    page: HomePage,
+  },
+  {
+    name: 'search',
+    path: '/search',
+    page: SearchPage
+  },
+  {
+    name: 'midi',
+    path: '/:midiId',
+    page: MidiPage
+  },
+  {
+    name: 'error',
+    path: '(.*)',
+    page: ErrorPage
+  }
 ]

@@ -2,14 +2,14 @@
 
 import pathToRegexp from 'path-to-regexp'
 import querystring from 'querystring'
-import nodeUrl from 'url'
+import nodeUrl from 'url' // TODO: remove for Node 10
 
 const URL = nodeUrl.URL || window.URL
 
 export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
-      const [name, path] = route
+      const { name, path } = route
       const keys = []
       const regexp = pathToRegexp(path, keys)
       return { name, path, keys, regexp }
@@ -17,7 +17,7 @@ export default class Router {
 
     this._compilers = {}
     routes.forEach(route => {
-      const [name, path] = route
+      const { name, path } = route
       this._compilers[name] = pathToRegexp.compile(path)
     })
   }
