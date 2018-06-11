@@ -4,38 +4,40 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-const DEFAULT_SELECT = ['id', 'name']
+const SELECT = ['id', 'name']
+const PAGE_SIZE = 10
 
-async function get (opts = {}) {
-  debug('get %o', opts)
-  const midis = await Midi
+async function get (query = {}) {
+  debug('get %o', query)
+  const result = await Midi
     .query()
-    .select(opts.select || DEFAULT_SELECT)
-    .where(opts)
-    .limit(1)
+    .select(SELECT)
+    .findOne(query)
     .throwIfNotFound()
-  return { ...opts, midi: midis[0] }
+  return { query, result }
 }
 
-async function all (opts = {}) {
-  debug('all %o', opts)
-  const midis = await Midi
+async function all (query = {}) {
+  debug('all %o', query)
+  const result = await Midi
     .query()
-    .select(opts.select || DEFAULT_SELECT)
-    .limit(opts.limit || 10)
-  return { ...opts, midis }
+    .select(SELECT)
+    .page(query.page || 0, PAGE_SIZE)
+  return { query, ...result }
 }
 
-async function search (opts = {}) {
-  debug('search %o', opts)
-  const select = (opts.select || DEFAULT_SELECT)
-    .concat(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', opts.q))
-  const midis = await Midi
+async function search (query = {}) {
+  debug('search %o', query)
+  const select = [].concat(
+    SELECT,
+    Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q)
+  )
+  const result = await Midi
     .query()
     .select(select)
-    .limit(opts.limit || 10)
-    .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', opts.q)
-  return { ...opts, midis }
+    .page(query.page || 0, PAGE_SIZE)
+    .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
+  return { query, ...result }
 }
 
 export default { get, all, search }

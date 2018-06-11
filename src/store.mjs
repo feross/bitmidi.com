@@ -40,10 +40,10 @@ export default function createStore (render, onPendingChange = () => {}) {
 
     // local data
     midis: {}, // midi.id -> midi
-    searches: {}, // search.q -> midi.id
 
     // local data views
-    topMidiIds: [] // [ midi.id ]
+    searches: {}, // q -> [midi.id]
+    allMidiIds: {} // page -> [midi.id]
   }
 
   const loc = new Location(routes, (location, source) => {
@@ -148,8 +148,8 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_GET_DONE': {
-        const { midi } = data
-        addMidi(midi)
+        const { result } = data
+        addMidi(result)
         return update()
       }
 
@@ -159,9 +159,9 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_ALL_DONE': {
-        const { midis } = data
-        midis.map(addMidi)
-        store.topMidiIds = midis.map(midi => midi.id)
+        const { results } = data
+        results.map(addMidi)
+        store.topMidiIds = results.map(midi => midi.id)
         return update()
       }
 
@@ -171,10 +171,10 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_SEARCH_DONE': {
-        const { q, midis } = data
-        const ids = midis.map(midi => midi.id)
-        store.searches[q] = ids
-        midis.map(addMidi)
+        const { query, results } = data
+        const ids = results.map(midi => midi.id)
+        store.searches[query.q] = ids
+        results.map(addMidi)
         return update()
       }
 
