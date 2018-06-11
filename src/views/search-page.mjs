@@ -9,7 +9,7 @@ export default class SearchPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const { location } = this.context.store
-    const q = location.query.q
+    const { q } = location.query
 
     dispatch('APP_META', {
       title: `MIDIs containing '${q}'`,
