@@ -26,7 +26,7 @@ test('home page loads', async t => {
     return window.App.store
   })
 
-  t.is(store.app.fetchCount, 0, 'app.fetchCount = 0 (after network idle)')
+  t.is(store.app.pending, 0, 'app.pending = 0 (after network idle)')
   t.is(store.app.isLoaded, true, 'app.isLoaded = true (after network idle)')
 
   await browser.close()

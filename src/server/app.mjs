@@ -160,7 +160,7 @@ export default function init (sessionStore) {
 // TODO: consider moving to its own file: router-app.mjs
 function renderApp (err, req, res) {
   const renderer = createRenderer()
-  const { store, dispatch } = createStore(update, onFetchDone)
+  const { store, dispatch } = createStore(update, onPendingChange)
   const jsx = getProvider(store, dispatch)
 
   // Useful for debugging JSX issues in the browser instead of Node
@@ -171,10 +171,10 @@ function renderApp (err, req, res) {
   store.userName = (req.session.user && req.session.user.userName) || null
 
   dispatch('LOCATION_REPLACE', req.url)
-  if (store.app.fetchCount === 0) done()
+  onPendingChange()
 
-  function onFetchDone () {
-    if (store.app.fetchCount === 0) process.nextTick(done)
+  function onPendingChange () {
+    if (store.app.pending === 0) process.nextTick(done)
   }
 
   function update () {

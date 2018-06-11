@@ -29,7 +29,7 @@ const Header = (props, context) => {
   }
 
   const isPageLoading = !config.isBrowser || // initial server render
-      app.fetchCount > 0 || // fetching async data
+      app.pending > 0 || // fetching async data
       !app.isLoaded // window.onload() has not fired yet
 
   let headerCls = ''
