@@ -11,6 +11,9 @@ export default class BaseModel extends Model {
   // Lookup model names referenced in `relationMappings` in this folder
   static modelPaths = join(rootPath, 'src', 'models')
 
+  // Add limit(1) to first() and getOne() queries
+  static useLimitInFirst = true
+
   // Set the status code to 404 when items are not found
   static createNotFoundError (queryContext) {
     const err = new this.NotFoundError()
