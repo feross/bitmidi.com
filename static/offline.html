@@ -33,8 +33,10 @@
   <body>
     <h1>You are offline</h1>
     <p>
-      <script>document.write(window.location.host)</script>
-      requires an internet connection.
+      <span class='host'>This site</span> requires an internet connection.
     </p>
+    <script>
+      document.querySelector('.host').textContent = window.location.host
+    </script>
   </body>
 </html>
