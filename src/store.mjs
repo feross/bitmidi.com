@@ -15,7 +15,7 @@ const DEBUG_VERBOSE = new Set([
   'APP_RESIZE'
 ])
 
-export default function createStore (render, onFetchDone) {
+export default function createStore (render, onFetchDone = () => {}) {
   const store = {
     location: {
       name: null,
@@ -50,6 +50,15 @@ export default function createStore (render, onFetchDone) {
     dispatch('LOCATION_CHANGED', { location, source })
   })
 
+  function incrementFetchCount () {
+    store.app.fetchCount += 1
+  }
+
+  function decrementFetchCount () {
+    store.app.fetchCount -= 1
+    onFetchDone()
+  }
+
   async function dispatch (type, data) {
     try {
       await _dispatch(type, data)
@@ -63,14 +72,8 @@ export default function createStore (render, onFetchDone) {
     else debug('%s %o', type, data)
 
     // Reference counter for pending fetches
-    if (type.startsWith('API_')) {
-      if (type.endsWith('_DONE')) {
-        store.app.fetchCount -= 1
-        if (typeof onFetchDone === 'function') onFetchDone()
-      } else {
-        store.app.fetchCount += 1
-      }
-    }
+    if (type.startsWith('API_') && !type.endsWith('_DONE')) incrementFetchCount()
+    if (type.startsWith('API_') && type.endsWith('_DONE')) decrementFetchCount()
 
     switch (type) {
       /**
@@ -236,10 +239,8 @@ export default function createStore (render, onFetchDone) {
     render()
     isRendering = false
 
-    if (isUpdatePending) {
-      isUpdatePending = false
-      update()
-    }
+    isUpdatePending = false
+    if (isUpdatePending) update()
   }
 
   return {
