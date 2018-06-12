@@ -1,9 +1,12 @@
+import Debug from 'debug'
 import Knex from 'knex'
 import { Model } from 'objection'
 import { join } from 'path'
 
 import { db } from '../../secret'
 import { rootPath } from '../../config'
+
+const debug = Debug('bitmidi:base-model')
 
 const knex = Knex(db)
 
@@ -19,6 +22,15 @@ export default class BaseModel extends Model {
     const err = new this.NotFoundError()
     err.status = 404
     return err
+  }
+
+  // Log raw SQL queries
+  static query(...args) {
+    return super.query(...args)
+      .runAfter(result => {
+        debug(query.toString())
+        return result
+      })
   }
 }
 
