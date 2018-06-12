@@ -4,14 +4,13 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-const SELECT = ['id', 'name']
+const SELECT_MINIMAL = ['id', 'name']
 const PAGE_SIZE = 10
 
 async function get (query = {}) {
   debug('get %o', query)
   const result = await Midi
     .query()
-    .select(SELECT)
     .findOne(query)
     .throwIfNotFound()
   return { query, result }
@@ -22,7 +21,7 @@ async function all (query = {}) {
   debug('all %o', query)
   const { total, results } = await Midi
     .query()
-    .select(SELECT)
+    .select(SELECT_MINIMAL)
     .page(query.page, PAGE_SIZE)
   return { query, results, total: getPages(total) }
 }
@@ -31,7 +30,7 @@ async function search (query = {}) {
   query.page = Number(query.page) || 0
   debug('search %o', query)
   const select = [].concat(
-    SELECT,
+    SELECT_MINIMAL,
     Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q)
   )
   const { total, results } = await Midi
