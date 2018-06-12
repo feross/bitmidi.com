@@ -1,6 +1,6 @@
 import Debug from 'debug'
 import Knex from 'knex'
-import { ObjectionModel } from 'objection'
+import { Model as ObjectionModel } from 'objection'
 import { join } from 'path'
 
 import { db } from '../../secret'
