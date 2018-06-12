@@ -10,6 +10,12 @@ export default class Midi extends BaseModel {
       id: { type: 'integer' },
       name: { type: 'string', minLength: 1, maxLength: 255 },
       hash: { type: 'string', minLength: 64, maxLength: 64 },
+      alternateNames: {
+        type: 'array',
+        items: {
+          type: 'string'
+        }
+      }
     }
   }
 }
