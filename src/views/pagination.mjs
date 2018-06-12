@@ -22,23 +22,24 @@ const Pagination = (props, context) => {
     )
   }
 
+  const showPrev = total >= 2 && page !== 0
+  const showNext = total >= 2 && page !== total - 1
+
   return (
     <div class='tc mv4'>
-      {
-        total >= 2 && page !== 0 &&
-        <Button href={getPageUrl(page - 1)}>‹ Prev</Button>
-      }
+      { showPrev && <Button href={getPageUrl(page - 1)}>‹ Prev</Button> }
       { total >= 2 && pageButtons }
-      {
-        total >= 2 && page !== total - 1 &&
-        <Button href={getPageUrl(page + 1)}>Next ›</Button>
-      }
+      { showNext && <Button href={getPageUrl(page + 1)}>Next ›</Button> }
     </div>
   )
 
-  function getPageUrl (page) {
+  function getPageUrl (pageNum) {
     const url = new URL(location.url, 'http://example.com')
-    url.searchParams.set('page', page)
+    if (pageNum === 0) {
+      url.searchParams.delete('page')
+    } else {
+      url.searchParams.set('page', pageNum)
+    }
     return url.pathname + url.search
   }
 }
