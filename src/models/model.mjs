@@ -25,11 +25,11 @@ export default class Model extends ObjectionModel {
   }
 
   // Log raw SQL queries
-  static query(...args) {
+  static query (...args) {
     return super.query(...args)
-      .runAfter(result => {
+      .runAfter((models, query) => {
         debug(query.toString())
-        return result
+        return models
       })
   }
 }
