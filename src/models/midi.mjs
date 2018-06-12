@@ -18,4 +18,10 @@ export default class Midi extends BaseModel {
       }
     }
   }
+
+  static virtualAttributes = ['url']
+
+  get url () {
+    return `/${this.id}`
+  }
 }
