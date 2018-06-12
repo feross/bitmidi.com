@@ -7,16 +7,13 @@ import { oneLine } from 'common-tags'
 const router = Router()
 
 router.get('/feed.xml', async (req, res, next) => {
-  const midis = await api.midi.all(req.query)
-  // if (err) return res.sendStatus(500)
+  const { results } = await api.midi.all()
 
-  res.status(200)
-  res.render('feed', { midis })
+  res.status(200).render('feed', { results })
 })
 
 router.get('/feed.json', async (req, res, next) => {
-  const midis = await api.midi.all(req.query)
-  // if (err) return res.sendStatus(500)
+  const { results } = await api.midi.all()
 
   const feed = {
     version: 'https://jsonfeed.org/version/1',
@@ -38,27 +35,26 @@ router.get('/feed.json', async (req, res, next) => {
     }
   }
 
-  feed.items = midis.map(midi => {
+  feed.items = results.map(midi => {
     return {
       id: midi.url,
       url: midi.url,
       title: midi.name,
-      content_html: midi.html,
-      content_text: midi.code,
+      content_html: midi.name,
+      content_text: midi.name,
       summary: midi.name,
       // date_published: '', // TODO
       // date_modified: '', // TODO
       author: {
-        name: `@${midi.author}`,
-        url: midi.author_url,
-        avatar: midi.author_image
+        name: config.title,
+        url: `${config.httpOrigin}/`,
+        avatar: `${config.httpOrigin}/android-chrome-512x512.png`
       },
       tags: config.keywords
     }
   })
 
-  res.status(200)
-  res.send(feed)
+  res.status(200).send(feed)
 })
 
 export default router
