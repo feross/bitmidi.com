@@ -21,11 +21,25 @@ export default class MidiPage extends PageComponent {
     const { midiId } = location.params
 
     const midi = data.midis[midiId]
+
+    if (midi == null) return <Loader center />
+
     return (
-      <Loader show={midi == null} center>
+      <div>
         <Heading>{midi && midi.name}</Heading>
         <Midi midi={midi} />
-      </Loader>
+        {
+          midi.alternateNames &&
+          <h3>This MIDI file has also been seen with other names:</h3>
+        }
+        <ul>
+          {
+            midi.alternateNames && midi.alternateNames.map(name => {
+              return <li>{name}</li>
+            })
+          }
+        </ul>
+      </div>
     )
   }
 }
