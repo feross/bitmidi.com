@@ -44,39 +44,47 @@ async function init () {
     const fileData = await readFileAsync(filePath)
     const hash = sha256.sync(fileData)
 
-    let midi = (
-      await Midi
-        .query()
-        .where({ hash })
-        .limit(1)
-    )[0]
-
-    // Duplicate, file already exists in DB
-    if (midi) {
-      // TODO: store alternate name
-      duplicates.push([midi.name, fileName])
-      continue
-    }
-
-    midi = await Midi
+    let midi = await Midi
       .query()
-      .insert({
-        name: fileName,
-        hash
-      })
+      .findOne({ hash })
 
-    const outFile = path.join(UPLOAD_PATH, `${midi.id}.mid`)
-    const flags = fs.constants.COPYFILE_EXCL /* fail if dest already exists */
-    fs.copyFileSync(filePath, outFile, flags)
-    fs.chmodSync(outFile, 0o664)
+    if (!midi) {
+      // File does not exist yet, so add it
+      midi = await Midi
+        .query()
+        .insert({
+          name: fileName,
+          hash
+        })
 
-    importCount += 1
+      const outFile = path.join(UPLOAD_PATH, `${midi.id}.mid`)
+      const flags = fs.constants.COPYFILE_EXCL /* fail if dest already exists */
+      fs.copyFileSync(filePath, outFile, flags)
+      fs.chmodSync(outFile, 0o664)
+
+      importCount += 1
+    } else {
+      // Duplicate, file already exists
+      duplicates.push([midi.name, fileName])
+
+      if (midi.name !== fileName &&
+          (!midi.alternateNames || !midi.alternateNames.includes(fileName))) {
+        // Alternate name is not in DB, so add it
+
+        if (!midi.alternateNames) midi.alternateNames = []
+        midi.alternateNames.push(fileName)
+
+        await midi
+          .$query()
+          .update(midi)
+      }
+    }
   }
 
   spinner.succeed(`Imported ${importCount} new files.\n`)
 
   if (duplicates.length > 0) {
-    console.log('Duplicates not imported:')
+    console.log(`Skipped ${duplicates.length} duplicates:`)
     for (let duplicate of duplicates) {
       console.log(`  - ${duplicate[0]} (exists as ${duplicate[1]})`)
     }
