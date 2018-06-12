@@ -22,7 +22,7 @@ async function all (query = {}) {
   const result = await Midi
     .query()
     .select(SELECT)
-    .page(query.page || 0, PAGE_SIZE)
+    .page(query.page, PAGE_SIZE)
   return { query, ...result }
 }
 
@@ -35,7 +35,7 @@ async function search (query = {}) {
   const result = await Midi
     .query()
     .select(select)
-    .page(query.page || 0, PAGE_SIZE)
+    .page(query.page, PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
   return { query, ...result }
 }

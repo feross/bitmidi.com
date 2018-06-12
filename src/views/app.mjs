@@ -30,7 +30,7 @@ export default class App extends Component {
 
     if (fatalError) location.name = 'error'
 
-    const Page = routes.find(route => route[0] === location.name)[2]
+    const Page = routes.find(route => route.name === location.name).page
 
     return (
       <div id='root'>
