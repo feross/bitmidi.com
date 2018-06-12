@@ -3,6 +3,7 @@ import { h } from 'preact' /** @jsx h */
 import Heading from './heading'
 import Loader from './loader'
 import PageComponent from './page-component'
+import Pagination from './pagination'
 import Midi from './midi'
 
 export default class SearchPage extends PageComponent {
@@ -23,6 +24,7 @@ export default class SearchPage extends PageComponent {
     const { q, page } = location.query
 
     const search = views.search[q]
+    const total = search && search.total
     const results = search && search[page]
       ? search[page].map(midiId => data.midis[midiId])
       : []
@@ -32,7 +34,13 @@ export default class SearchPage extends PageComponent {
         <Heading><span class='light-silver'>Search for</span> '{q}'</Heading>
         <Loader show={!search} center>
           { results.map(midi => <Midi midi={midi} />) }
-          { results.length === 0 && <div class='mt4'>No results.</div> }
+          {
+            results.length === 0 &&
+            <div class='mt4'>
+              No results containing all your search terms were found.
+            </div>
+          }
+          <Pagination page={page} total={total} />
         </Loader>
       </div>
     )
