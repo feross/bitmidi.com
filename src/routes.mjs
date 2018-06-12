@@ -1,7 +1,3 @@
-/**
- * List of routes in the app. Specified as [routeName, routePath, routePage].
- */
-
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'

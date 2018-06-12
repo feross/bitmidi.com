@@ -16,17 +16,19 @@ export default class HomePage extends PageComponent {
   }
 
   render (props) {
-    const { allMidiIds, midis, location } = this.context.store
+    const { data, location, views } = this.context.store
     const { page } = location.query
 
-    const midiIds = allMidiIds[page]
-    const results = midiIds && midiIds.map(midiId => midis[midiId])
+    const midiIds = views.all[page]
+    const midis = midiIds
+      ? midiIds.map(midiId => data.midis[midiId])
+      : []
 
     return (
       <div>
         <Heading class='tc'>Most popular MIDIs</Heading>
-        <Loader show={!results} center>
-          {results && results.map(midi => <Midi midi={midi} />)}
+        <Loader show={!midiIds} center>
+          {midis.map(midi => <Midi midi={midi} />)}
         </Loader>
       </div>
     )

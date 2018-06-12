@@ -39,11 +39,16 @@ export default function createStore (render, onPendingChange = () => {}) {
     userName: null,
 
     // local data
-    midis: {}, // midi.id -> midi
+    data: {
+      midis: {} // midi.id -> midi
+    },
 
-    // local data views
-    searches: {}, // q -> [midi.id]
-    allMidiIds: {} // page -> [midi.id]
+    views: {
+      search: {}, // 'query' -> { total: 0, '0': [1, 2, 3] } }
+      all: {
+        total: 0
+      }
+    }
   }
 
   const loc = new Location(routes, (location, source) => {
@@ -159,9 +164,12 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_ALL_DONE': {
-        const { query, results } = data
+        const { query, total, results } = data
+        const { views } = store
+
         results.map(addMidi)
-        store.allMidiIds[query.page] = results.map(midi => midi.id)
+        views.all.total = total
+        views.all[query.page] = results.map(midi => midi.id)
         return update()
       }
 
@@ -171,10 +179,13 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_SEARCH_DONE': {
-        const { query, results } = data
-        const ids = results.map(midi => midi.id)
-        store.searches[query.q] = ids
+        const { query, total, results } = data
+        const { views } = store
+
         results.map(addMidi)
+        if (!views.search[query.q]) views.search[query.q] = {}
+        views.search[query.q].total = total
+        views.search[query.q][query.page] = results.map(midi => midi.id)
         return update()
       }
 
@@ -232,7 +243,7 @@ export default function createStore (render, onPendingChange = () => {}) {
   }
 
   function addMidi (midi) {
-    store.midis[midi.id] = midi
+    store.data.midis[midi.id] = midi
   }
 
   let isRendering = false
