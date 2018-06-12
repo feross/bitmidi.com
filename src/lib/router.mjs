@@ -24,10 +24,14 @@ export default class Router {
   match (url) {
     const { pathname, searchParams } = new URL(url, 'http://example.com')
 
+    const searchStr = [...searchParams].length !== 0
+      ? `?${searchParams}`
+      : ''
+
     const ret = {
       name: null,
       params: {},
-      url: `${pathname}?${searchParams}`,
+      url: `${pathname}${searchStr}`,
       pathname,
       query: null
     }
