@@ -1,6 +1,6 @@
 import Debug from 'debug'
 import Knex from 'knex'
-import { Model } from 'objection'
+import { ObjectionModel } from 'objection'
 import { join } from 'path'
 
 import { db } from '../../secret'
@@ -10,7 +10,7 @@ const debug = Debug('bitmidi:base-model')
 
 const knex = Knex(db)
 
-export default class BaseModel extends Model {
+export default class Model extends ObjectionModel {
   // Lookup model names referenced in `relationMappings` in this folder
   static modelPaths = join(rootPath, 'src', 'models')
 
@@ -35,4 +35,4 @@ export default class BaseModel extends Model {
 }
 
 // Use this knex instance for all models
-BaseModel.knex(knex)
+Model.knex(knex)
