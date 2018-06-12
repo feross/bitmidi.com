@@ -6,7 +6,7 @@ import { join } from 'path'
 import { db } from '../../secret'
 import { rootPath } from '../../config'
 
-const debug = Debug('bitmidi:base-model')
+const debug = Debug('bitmidi:model')
 
 const knex = Knex(db)
 

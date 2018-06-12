@@ -1,4 +1,4 @@
-import BaseModel from './base-model'
+import BaseModel from './model'
 
 export default class Midi extends BaseModel {
   static tableName = 'midis'
