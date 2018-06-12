@@ -159,9 +159,9 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       case 'API_MIDI_ALL_DONE': {
-        const { results } = data
+        const { query, results } = data
         results.map(addMidi)
-        store.topMidiIds = results.map(midi => midi.id)
+        store.allMidiIds[query.page] = results.map(midi => midi.id)
         return update()
       }
 

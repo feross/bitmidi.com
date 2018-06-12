@@ -8,21 +8,27 @@ import PageComponent from './page-component'
 export default class HomePage extends PageComponent {
   load () {
     const { dispatch } = this.context
+    const { location } = this.context.store
+    const { page } = location.query
+
     dispatch('APP_META', { title: null, description: null })
-    dispatch('API_MIDI_ALL')
+    dispatch('API_MIDI_ALL', { page })
   }
 
   render (props) {
-    const { topMidiIds, midis } = this.context.store
+    const { allMidiIds, midis, location } = this.context.store
+    const { page } = location.query
 
-    const topMidis = topMidiIds &&
-      topMidiIds.map(midiId => midis[midiId])
+    const midiIds = allMidiIds[page]
+    const results = midiIds && midiIds.map(midiId => midis[midiId])
 
     return (
-      <Loader show={topMidiIds.length === 0} center>
+      <div>
         <Heading class='tc'>Most popular MIDIs</Heading>
-        {topMidis && topMidis.map(midi => <Midi midi={midi} />)}
-      </Loader>
+        <Loader show={!results} center>
+          {results && results.map(midi => <Midi midi={midi} />)}
+        </Loader>
+      </div>
     )
   }
 }
