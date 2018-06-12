@@ -5,10 +5,11 @@ export default class Midi extends BaseModel {
 
   static jsonSchema = {
     type: 'object',
-    required: ['name'],
+    required: ['name', 'hash'],
     properties: {
       id: { type: 'integer' },
-      name: { type: 'string', minLength: 1, maxLength: 255 }
+      name: { type: 'string', minLength: 1, maxLength: 255 },
+      hash: { type: 'string', minLength: 64, maxLength: 64 },
     }
   }
 }
