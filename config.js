@@ -33,10 +33,11 @@ exports.analyticsId = 'UA-3898076-25'
  * Keywords of the site
  */
 exports.keywords = [
-  'programming',
-  'coding',
-  'code',
-  'node.js'
+  'midi',
+  'music',
+  'retro',
+  'mid',
+  'midi files'
 ]
 
 /**
