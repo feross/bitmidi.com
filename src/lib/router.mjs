@@ -61,7 +61,7 @@ export default class Router {
 }
 
 function mapToObj (map) {
-  return [...map.entries()]
+  return [...map]
     .reduce((obj, [key, val]) => {
       obj[key] = val
       return obj
