@@ -8,13 +8,13 @@ export default [
     name: 'home',
     path: '/',
     page: HomePage,
-    defaultQuery: { page: 0 }
+    defaultQuery: { page: '0' }
   },
   {
     name: 'search',
     path: '/search',
     page: SearchPage,
-    defaultQuery: { page: 0 }
+    defaultQuery: { page: '0' }
   },
   {
     name: 'midi',

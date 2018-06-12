@@ -18,26 +18,32 @@ async function get (query = {}) {
 }
 
 async function all (query = {}) {
+  query.page = Number(query.page) || 0
   debug('all %o', query)
-  const result = await Midi
+  const { total, results } = await Midi
     .query()
     .select(SELECT)
     .page(query.page, PAGE_SIZE)
-  return { query, ...result }
+  return { query, results, total: getPages(total) }
 }
 
 async function search (query = {}) {
+  query.page = Number(query.page) || 0
   debug('search %o', query)
   const select = [].concat(
     SELECT,
     Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q)
   )
-  const result = await Midi
+  const { total, results } = await Midi
     .query()
     .select(select)
     .page(query.page, PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
-  return { query, ...result }
+  return { query, results, total: getPages(total) }
+}
+
+function getPages (total) {
+  return Math.ceil(total / PAGE_SIZE)
 }
 
 export default { get, all, search }
