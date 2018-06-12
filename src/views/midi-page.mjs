@@ -17,10 +17,10 @@ export default class MidiPage extends PageComponent {
 
   render (props) {
     const { store } = this.context
-    const { location, midis } = store
+    const { location, data } = store
     const { midiId } = location.params
 
-    const midi = midis[midiId]
+    const midi = data.midis[midiId]
     return (
       <Loader show={midi == null} center>
         <Heading>{midi && midi.name}</Heading>
