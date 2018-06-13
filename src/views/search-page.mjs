@@ -12,8 +12,10 @@ export default class SearchPage extends PageComponent {
     const { location } = this.context.store
     const { q, page } = location.query
 
+    let title = [`MIDIs containing '${q}'`]
+    if (page !== '0') title.unshift(`Page ${page}`)
     dispatch('APP_META', {
-      title: `MIDIs containing '${q}'`,
+      title,
       description: `Search results page for MIDI files that contain '${q}'`
     })
     dispatch('API_MIDI_SEARCH', { q, page })

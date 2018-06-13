@@ -12,7 +12,11 @@ export default class HomePage extends PageComponent {
     const { location } = this.context.store
     const { page } = location.query
 
-    dispatch('APP_META', { title: null, description: null })
+    if (page === '0') {
+      dispatch('APP_META', { title: null, description: null })
+    } else {
+      dispatch('APP_META', { title: `Page ${page}`, description: null })
+    }
     dispatch('API_MIDI_ALL', { page })
   }
 

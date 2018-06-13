@@ -119,16 +119,15 @@ export default function createStore (render, onPendingChange = () => {}) {
        */
 
       case 'APP_META': {
-        const title = data.title != null
-          ? data.title.trim() + ' – ' + config.title
-          : config.title
+        let title = data.title || []
+        if (typeof data.title === 'string') title = [data.title]
+        title.push(config.title)
+        store.app.title = title.map(str => str.trim()).join(' – ')
 
-        const description = data.description != null
+        store.app.description = data.description != null
           ? data.description.trim()
           : config.description
 
-        store.app.title = title
-        store.app.description = description
         return update()
       }
 
