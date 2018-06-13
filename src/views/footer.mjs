@@ -11,16 +11,13 @@ const Footer = (props, context) => {
       <FooterDivider />
 
       <FooterItem>
-        Powered by <Link href='https://github.com/feross/bitmidi.com' newtab>open source</Link>
+        Thanks to <Link href='https://feross.org/thanks/' newtab>my supporters</Link>
       </FooterItem>
       <FooterDivider />
 
       <FooterItem>
-        <Link href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>
-          { userName ? `Logout (${userName})` : 'Login with Twitter' }
-        </Link>
+        Powered by <Link href='https://github.com/feross/bitmidi.com' newtab>open source</Link>
       </FooterItem>
-
     </footer>
   )
 }
