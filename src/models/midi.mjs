@@ -19,9 +19,13 @@ export default class Midi extends BaseModel {
     }
   }
 
-  static virtualAttributes = ['url']
+  static virtualAttributes = ['url', 'downloadUrl']
 
   get url () {
     return `/${this.id}`
+  }
+
+  get downloadUrl () {
+    return `/uploads/${this.id}.mid`
   }
 }

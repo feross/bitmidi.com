@@ -26,8 +26,11 @@ export default class MidiPage extends PageComponent {
 
     return (
       <div>
-        <Heading>{midi && midi.name}</Heading>
+        <Heading>{midi.name}</Heading>
         <Midi midi={midi} />
+        <a download={midi.name} href={midi.downloadUrl}>
+          Download MIDI file
+        </a>
         {
           midi.alternateNames &&
           <h3>This MIDI file has also been seen with other names:</h3>

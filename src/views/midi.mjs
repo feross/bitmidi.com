@@ -46,6 +46,6 @@ export default class Midi extends Component {
 
   onClick = () => {
     const { midi } = this.props
-    window.MIDIjs.play(`/uploads/${midi.id}.mid`)
+    window.MIDIjs.play(midi.downloadUrl)
   }
 }
