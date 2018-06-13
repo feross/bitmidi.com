@@ -19,8 +19,7 @@ export default class ErrorPage extends PageComponent {
   }
 
   getError = () => {
-    const { store } = this.context
-    const { fatalError, errors } = store
+    const { fatalError, errors } = this.context.store
     return fatalError || errors[0] || { message: 'Page Not Found' }
   }
 }

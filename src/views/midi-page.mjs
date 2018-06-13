@@ -16,8 +16,7 @@ export default class MidiPage extends PageComponent {
   }
 
   render (props) {
-    const { store } = this.context
-    const { data, location } = store
+    const { data, location } = this.context.store
     const { midiId } = location.params
 
     const midi = data.midis[midiId]
