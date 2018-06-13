@@ -41,8 +41,16 @@ async function search (query = {}) {
   return { query, results, total: getPages(total) }
 }
 
+async function random (query = {}) {
+  const result = await Midi
+    .query()
+    .orderByRaw('RAND()')
+    .findOne({})
+  return { query, result }
+}
+
 function getPages (total) {
   return Math.ceil(total / PAGE_SIZE)
 }
 
-export default { get, all, search }
+export default { get, all, search, random }
