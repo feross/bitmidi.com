@@ -3,18 +3,6 @@ import { h } from 'preact' /** @jsx h */
 import Link from './link'
 
 const Footer = (props, context) => {
-  const { location, userName } = context.store
-
-  let $submitLink
-  if (location.name !== 'submit') {
-    $submitLink = [
-      <FooterItem>
-        <Link href='/submit'>Add a MIDI</Link>
-      </FooterItem>,
-      <FooterDivider />
-    ]
-  }
-
   return (
     <footer class='f6 lh-copy silver w-100 mt5 mb4 tc'>
       <FooterItem>
@@ -26,8 +14,6 @@ const Footer = (props, context) => {
         Powered by <Link href='https://github.com/feross/bitmidi.com' newtab>open source</Link>
       </FooterItem>
       <FooterDivider />
-
-      {$submitLink}
 
       <FooterItem>
         <Link href={userName ? '/auth/twitter/logout' : '/auth/twitter'} external>

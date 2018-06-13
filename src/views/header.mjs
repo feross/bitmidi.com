@@ -13,22 +13,6 @@ const Header = (props, context) => {
   const { headerColor, mainColor } = context.theme
   const { dispatch } = context
 
-  let $submitButton
-  if (location.name !== 'submit') {
-    $submitButton = (
-      <Button
-        class='mh1'
-        color={mainColor}
-        fill
-        href='/submit'
-        pill
-        size='medium'
-      >
-        Add a MIDI ✨
-      </Button>
-    )
-  }
-
   const isPageLoading = !config.isBrowser || // initial server render
       app.pending > 0 || // fetching async data
       !app.isLoaded // window.onload() has not fired yet
@@ -81,9 +65,8 @@ const Header = (props, context) => {
           size='medium'
           onClick={() => dispatch('GO_RANDOM_MIDI')}
         >
-          Random MIDI
+          Random MIDI ✨
         </Button>
-        {$submitButton}
       </nav>
     </header>
   )

@@ -36,7 +36,6 @@ export default function createStore (render, onPendingChange = () => {}) {
 
     fatalError: null,
     errors: [],
-    userName: null,
 
     // local data
     data: {

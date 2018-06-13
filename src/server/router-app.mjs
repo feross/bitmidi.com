@@ -17,8 +17,6 @@ router.use(async (req, res) => {
     return res.render('app', { content: '', store, url: req.url })
   }
 
-  store.userName = (req.session.user && req.session.user.userName) || null
-
   dispatch('LOCATION_REPLACE', req.url)
   onPendingChange()
 
