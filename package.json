@@ -132,6 +132,8 @@
     "test-ava": "echo \"skipping ava tests -- npm run build && ava 'test/**/*.js'\"",
     "test-lint": "standard '**/*.js' '**/*.mjs'",
     "tunnel": "ssh -L 3306:localhost:3306 -N athena",
+    "uploads-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/uploads/' uploads/",
+    "uploads-upload": "rsync -a -O -v --delete uploads/ future:'/home/feross/www/bitmidi.com/uploads/'",
     "watch": "npm run tunnel & npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "nodemon --exec 'npm run build-css -- --verbose' --watch src/server --ext css",
     "watch-js": "watchify --extension mjs . --debug --verbose --outfile static/bundle.js",
