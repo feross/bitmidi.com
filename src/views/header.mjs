@@ -11,6 +11,7 @@ import Search from './search'
 const Header = (props, context) => {
   const { app, location } = context.store
   const { headerColor, mainColor } = context.theme
+  const { dispatch } = context
 
   let $submitButton
   if (location.name !== 'submit') {
@@ -72,6 +73,16 @@ const Header = (props, context) => {
         <Search class='w-100' />
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
+        <Button
+          class='mh1'
+          color={mainColor}
+          fill
+          pill
+          size='medium'
+          onClick={() => dispatch('GO_RANDOM_MIDI')}
+        >
+          Random MIDI
+        </Button>
         {$submitButton}
       </nav>
     </header>

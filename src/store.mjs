@@ -189,6 +189,13 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
+      case 'GO_RANDOM_MIDI': {
+        const { result } = await api.midi.random()
+        addMidi(result)
+        dispatch('LOCATION_PUSH', result.url)
+        return
+      }
+
       /**
        * SEARCH
        */
