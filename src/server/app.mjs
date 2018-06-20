@@ -14,6 +14,11 @@ import routerApi from './router-api'
 import routerApp from './router-app'
 import routerFeed from './router-feed'
 
+// Set correct mime-type for streaming wasm compilation
+// See: https://github.com/expressjs/express/issues/3589
+// TODO: Remove when express 4.17.0 is released
+express.static.mime.types['wasm'] = 'application/wasm'
+
 const MySQLStore = MySQLSession(session)
 
 export default function init () {
@@ -130,6 +135,7 @@ export default function init () {
       ;
       script-src
         'strict-dynamic' https:
+        'unsafe-eval'
         'nonce-${res.locals.nonce}' 'unsafe-inline'
       ;
       style-src
