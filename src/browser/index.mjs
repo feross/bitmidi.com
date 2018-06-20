@@ -26,11 +26,10 @@ update()
 // Measure time to first render
 console.timeEnd('render')
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/service-worker.mjs', { updateViaCache: 'none' })
-    .catch(err => console.error('Unable to register service worker.', err))
-}
+// Register service worker
+navigator.serviceWorker
+  .register('/service-worker.mjs', { updateViaCache: 'none' })
+
 
 function update () {
   const jsx = getProvider(store, dispatch)
