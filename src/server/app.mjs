@@ -61,10 +61,15 @@ export default function init () {
   })
 
   // Set up static file serving
+  const staticOpts = { maxAge: config.maxAgeStatic }
   const staticPath = path.join(config.rootPath, 'static')
+  app.use(express.static(staticPath, staticOpts))
+
+  const timidityPath = path.join(config.rootPath, 'node_modules', 'timidity')
+  app.use(express.static(timidityPath, staticOpts))
+
   const uploadsPath = path.join(config.rootPath, 'uploads')
-  app.use(express.static(staticPath, { maxAge: config.maxAgeStatic }))
-  app.use('/uploads', express.static(uploadsPath, { maxAge: config.maxAgeStatic }))
+  app.use('/uploads', express.static(uploadsPath, staticOpts))
 
   // Compute hashes for built resources
   const styleHash = config.isProd
@@ -111,7 +116,7 @@ export default function init () {
     // rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
-    // Prevent XSS attacks by specifying valid sources of executable scripts, etc.
+    // Prevent XSS attacks with by explicitly specifying sources of content.
     res.header('Content-Security-Policy', oneLine`
       base-uri
         'none'
