@@ -1,8 +1,11 @@
 import { render } from 'preact'
+import dragDrop from 'drag-drop'
+import fileToArrayBuffer from 'file-to-array-buffer'
 
 import createStore from '../store'
 import debug from '../lib/debug-helper'
 import getProvider from '../views/provider'
+import { load, play } from '../lib/player'
 
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
@@ -30,6 +33,12 @@ console.timeEnd('render')
 navigator.serviceWorker
   .register('/service-worker.mjs', { updateViaCache: 'none' })
 
+// Play drag-and-dropped MIDI files
+dragDrop('body', async files => {
+  const file = new Uint8Array(await fileToArrayBuffer(files[0]))
+  load(file)
+  play()
+})
 
 function update () {
   const jsx = getProvider(store, dispatch)
