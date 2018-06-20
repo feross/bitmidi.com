@@ -7,21 +7,24 @@ import getProvider from '../views/provider'
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
 
-// Use server-initialized store values
+// Use server-initialized store
 Object.assign(store, window.initStore)
 
-const loc = window.location
-dispatch('LOCATION_REPLACE', loc.pathname + loc.search + loc.hash)
+// Dispatch initial events
+const { pathname, search, hash } = window.location
+dispatch('LOCATION_REPLACE', pathname + search + hash)
 dispatch('PENDING_DISPATCH')
 window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 
-// Debugging
+// Expose functions for debugging
 Object.assign(window, { store, dispatch, update, debug })
 if (process.env.NODE_ENV !== 'production') require('preact/devtools')
 
+// Render the UI
 update()
 
-console.timeEnd('render') // Measure time to first render
+// Measure time to first render
+console.timeEnd('render')
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
