@@ -5,7 +5,7 @@ import fileToArrayBuffer from 'file-to-array-buffer'
 import createStore from '../store'
 import debug from '../lib/debug-helper'
 import getProvider from '../views/provider'
-import { load, play } from '../lib/player'
+import { load, play } from '../browser/player'
 
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
