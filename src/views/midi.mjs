@@ -1,22 +1,11 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import { isBrowser } from '../../config'
+import { load, play } from '../browser/player'
 
 import Link from './link'
 
 export default class Midi extends Component {
-  componentDidMount () {
-    if (isBrowser) {
-      window.MIDIjs.message_callback = message => {
-        console.log(message)
-      }
-      window.MIDIjs.player_callback = event => {
-        console.log('time', event.time)
-      }
-    }
-  }
-
   render (props) {
     const { midi } = props
     const { mainColor } = this.context.theme
@@ -46,6 +35,7 @@ export default class Midi extends Component {
 
   onClick = () => {
     const { midi } = this.props
-    window.MIDIjs.play(midi.downloadUrl)
+    load(midi.downloadUrl)
+    play()
   }
 }

@@ -119,7 +119,6 @@ export default function init () {
       ;
       connect-src
         'self'
-        http://www.midijs.net
       ;
       img-src
         'self'

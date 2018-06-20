@@ -6,7 +6,6 @@
 
     <title><%= store.app.title %></title>
     <meta name='description' content='<%= store.app.description %>'>
-
     <link rel='canonical' href='<%= config.httpOrigin %><%= url %>' />
 
     <link rel='preload' as='script' href='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>' />
@@ -46,7 +45,6 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script src='//www.midijs.net/lib/midi.js' nonce='<%= nonce %>'></script>
     <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
