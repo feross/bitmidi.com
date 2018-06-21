@@ -8,18 +8,18 @@ const debug = Debug('bitmidi:api')
 
 export default {
   midi: {
-    get: (opts, cb) => sendGet('/midi/get', opts),
-    all: (opts, cb) => sendGet('/midi/all', opts),
-    search: (opts, cb) => sendGet('/midi/search', opts),
-    random: (opts, cb) => sendGet('/midi/random', opts)
+    get: opts => sendGet('/midi/get', opts),
+    all: opts => sendGet('/midi/all', opts),
+    search: opts => sendGet('/midi/search', opts),
+    random: opts => sendGet('/midi/random', opts)
   }
 }
 
-function sendGet (...args) {
-  return sendRequest('GET', ...args)
+function sendGet (urlBase, params) {
+  return sendRequest('GET', urlBase, params)
 }
 
-async function sendRequest (method, urlBase, params, cb) {
+async function sendRequest (method, urlBase, params) {
   const opts = {
     url: '/api' + urlBase + '?' + querystring.stringify(params),
     json: true,
