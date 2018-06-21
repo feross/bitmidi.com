@@ -76,6 +76,7 @@
     "express-promise-router": "^3.0.2",
     "express-session": "^1.15.3",
     "file-to-array-buffer": "^1.0.0",
+    "freepats": "^1.0.2",
     "hyphenate-style-name": "^1.0.2",
     "knex": "^0.14.6",
     "memo-async-lru": "^1.0.1",
@@ -87,6 +88,7 @@
     "preact-context-provider": "^1.1.1",
     "tachyons": "^4.7.4",
     "throttleit": "^1.0.0",
+    "timidity": "< 1.0.0",
     "undom": "^0.4.0",
     "uuid": "^3.2.1"
   },
