@@ -48,8 +48,7 @@
   "browser": {
     "./secret/index.js": false,
     "./src/api/index.mjs": "./src/browser/api.mjs",
-    "./src/server/start.mjs": "./src/browser/index.mjs",
-    "url": false
+    "./src/server/start.mjs": "./src/browser/index.mjs"
   },
   "browserify": {
     "transform": [

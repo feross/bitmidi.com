@@ -1,9 +1,6 @@
 import { h } from 'preact' /** @jsx h */
-import nodeUrl from 'url' // TODO: remove for Node 10
 
 import Button from './button'
-
-const URL = nodeUrl.URL || window.URL
 
 const Pagination = (props, context) => {
   const { page: pageStr, total } = props

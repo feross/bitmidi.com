@@ -1,9 +1,6 @@
 // TODO: publish to npm
 
 import pathToRegexp from 'path-to-regexp'
-import nodeUrl from 'url' // TODO: remove for Node 10
-
-const URL = nodeUrl.URL || window.URL
 
 export default class Router {
   constructor (routes) {
