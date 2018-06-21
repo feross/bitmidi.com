@@ -9,7 +9,7 @@ import Link from './link'
 import Search from './search'
 
 const Header = (props, context) => {
-  const { app, location } = context.store
+  const { app } = context.store
   const { headerColor, mainColor } = context.theme
   const { dispatch } = context
 
