@@ -1,7 +1,6 @@
 'use strict'
 
 import Debug from 'debug'
-import querystring from 'querystring'
 
 import api from './api'
 import config from '../config'
@@ -204,7 +203,7 @@ export default function createStore (render, onPendingChange = () => {}) {
         if (data === '') {
           dispatch('LOCATION_REPLACE', '/')
         } else {
-          const url = '/search?' + querystring.encode({ q: data })
+          const url = `/search?${new URLSearchParams({ q: data })}`
           dispatch(
             store.location.name === 'search' ? 'LOCATION_REPLACE' : 'LOCATION_PUSH',
             url

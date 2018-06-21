@@ -1,5 +1,4 @@
 import Debug from 'debug'
-import querystring from 'querystring'
 
 import config from '../../config'
 import simpleFetch from '../lib/simple-fetch'
@@ -15,13 +14,13 @@ export default {
   }
 }
 
-function sendGet (urlBase, params) {
-  return sendRequest('GET', urlBase, params)
+function sendGet (apiUrl, params) {
+  return sendRequest('GET', apiUrl, params)
 }
 
-async function sendRequest (method, urlBase, params) {
+async function sendRequest (method, apiUrl, params) {
   const opts = {
-    url: '/api' + urlBase + '?' + querystring.stringify(params),
+    url: `/api${apiUrl}?${new URLSearchParams(params)}`,
     json: true,
     method: method,
     timeout: config.apiTimeout
