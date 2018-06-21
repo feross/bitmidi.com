@@ -1,6 +1,7 @@
 // TODO: publish to npm
 
 import pathToRegexp from 'path-to-regexp'
+import fromEntries from 'fromentries'
 
 export default class Router {
   constructor (routes) {
@@ -46,7 +47,7 @@ export default class Router {
         paramValue = decodeURIComponent(paramValue.replace(/\+/g, ' '))
         ret.params[param] = paramValue
       })
-      ret.query = { ...route.defaultQuery, ...mapToObj(searchParams) }
+      ret.query = { ...route.defaultQuery, ...fromEntries(searchParams) }
       break
     }
     return ret
@@ -55,12 +56,4 @@ export default class Router {
   toUrl (name, data) {
     return this._compilers[name](data)
   }
-}
-
-function mapToObj (map) {
-  return [...map]
-    .reduce((obj, [key, val]) => {
-      obj[key] = val
-      return obj
-    }, {})
 }

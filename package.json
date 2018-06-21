@@ -74,6 +74,7 @@
     "express-session": "^1.15.3",
     "file-to-array-buffer": "^1.0.0",
     "freepats": "^1.0.2",
+    "fromentries": "^1.0.2",
     "hyphenate-style-name": "^1.0.2",
     "knex": "^0.14.6",
     "memo-async-lru": "^1.0.1",
