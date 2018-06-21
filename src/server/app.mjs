@@ -66,10 +66,10 @@ export default function init () {
   app.use(express.static(staticPath, staticOpts))
 
   const timidityPath = path.dirname(require.resolve('timidity'))
-  app.use(express.static(timidityPath, staticOpts))
+  app.use('/timidity', express.static(timidityPath, staticOpts))
 
   const freepatsPath = path.dirname(require.resolve('freepats'))
-  app.use(express.static(freepatsPath, staticOpts))
+  app.use('/timidity', express.static(freepatsPath, staticOpts))
 
   const uploadsPath = path.join(config.rootPath, 'uploads')
   app.use('/uploads', express.static(uploadsPath, staticOpts))

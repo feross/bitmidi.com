@@ -3,7 +3,7 @@ import Timidity from 'timidity'
 let player
 
 export function load (url) {
-  player = new Timidity()
+  player = new Timidity('/timidity')
   player.load(url)
 }
 
