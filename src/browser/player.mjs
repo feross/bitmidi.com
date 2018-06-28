@@ -5,6 +5,13 @@ let player
 function initPlayer () {
   if (player) return
   player = new Timidity('/timidity')
+  player.on('unstarted', () => console.log('unstarted'))
+  player.on('playing', () => console.log('playing'))
+  player.on('paused', () => console.log('paused'))
+  player.on('buffering', () => console.log('buffering'))
+  player.on('ended', () => console.log('ended'))
+  player.on('timeupdate', (time) => console.log('timeupdate', time))
+  player.on('error', (err) => console.log('error', err))
 }
 
 export function load (url) {
