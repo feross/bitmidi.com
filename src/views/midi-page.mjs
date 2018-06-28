@@ -9,17 +9,17 @@ export default class MidiPage extends PageComponent {
   load () {
     const { dispatch } = this.context
     const { location } = this.context.store
-    const { midiId } = location.params
+    const { midiSlug } = location.params
 
-    dispatch('API_MIDI_GET', { id: midiId })
+    dispatch('API_MIDI_GET', { slug: midiSlug })
     dispatch('APP_META', { title: 'TODO', description: 'TODO' })
   }
 
   render (props) {
     const { data, location } = this.context.store
-    const { midiId } = location.params
+    const { midiSlug } = location.params
 
-    const midi = data.midis[midiId]
+    const midi = data.midis[midiSlug]
 
     if (midi == null) return <Loader center />
 

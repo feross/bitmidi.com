@@ -28,7 +28,7 @@ export default class SearchPage extends PageComponent {
     const search = views.search[q]
     const total = search && search.total
     const results = search && search[page]
-      ? search[page].map(midiId => data.midis[midiId])
+      ? search[page].map(midiSlug => data.midis[midiSlug])
       : []
 
     return (

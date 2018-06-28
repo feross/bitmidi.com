@@ -21,7 +21,7 @@ export default class Midi extends Component {
             color='white'
             class='dib fl f4 lh-copy truncate'
             title={midi.name}
-            href={midi.id}
+            href={midi.url}
           >
             <h2 class='f4 mv0'>{midi.name}</h2>
           </Link>

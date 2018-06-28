@@ -38,11 +38,11 @@ export default function createStore (render, onPendingChange = () => {}) {
 
     // local data
     data: {
-      midis: {} // midi.id -> midi
+      midis: {} // midi.slug -> midi
     },
 
     views: {
-      search: {}, // 'query' -> { total: 0, '0': [1, 2, 3] } }
+      search: {}, // 'query' -> { total: 0, '0': ['slug-1', 'slug-2'] } }
       all: {
         total: 0
       }
@@ -166,7 +166,7 @@ export default function createStore (render, onPendingChange = () => {}) {
 
         results.map(addMidi)
         views.all.total = total
-        views.all[query.page] = results.map(midi => midi.id)
+        views.all[query.page] = results.map(midi => midi.slug)
         return update()
       }
 
@@ -182,7 +182,7 @@ export default function createStore (render, onPendingChange = () => {}) {
         results.map(addMidi)
         if (!views.search[query.q]) views.search[query.q] = {}
         views.search[query.q].total = total
-        views.search[query.q][query.page] = results.map(midi => midi.id)
+        views.search[query.q][query.page] = results.map(midi => midi.slug)
         return update()
       }
 
@@ -247,7 +247,7 @@ export default function createStore (render, onPendingChange = () => {}) {
   }
 
   function addMidi (midi) {
-    store.data.midis[midi.id] = midi
+    store.data.midis[midi.slug] = midi
   }
 
   let isRendering = false

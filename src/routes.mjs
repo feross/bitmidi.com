@@ -18,7 +18,7 @@ export default [
   },
   {
     name: 'midi',
-    path: '/:midiId',
+    path: '/:midiSlug',
     page: MidiPage
   },
   {

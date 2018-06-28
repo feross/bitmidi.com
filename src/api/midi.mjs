@@ -4,7 +4,7 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-const SELECT_MINIMAL = ['id', 'name']
+const SELECT_MINIMAL = ['id', 'name', 'slug']
 const PAGE_SIZE = 10
 
 async function get (query = {}) {
