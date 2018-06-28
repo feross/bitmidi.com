@@ -1,5 +1,5 @@
 import BaseModel from './model'
-import objectionSlug from './slug'
+import objectionSlug from 'objection-slug'
 
 const slug = objectionSlug({ sourceField: 'name' })
 
