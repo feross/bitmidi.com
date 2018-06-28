@@ -1,6 +1,5 @@
 {
   "name": "bitmidi.com",
-  "description": "Wayback machine for old-school MIDI files",
   "version": "1.0.0",
   "author": {
     "name": "Feross Aboukhadijeh",
