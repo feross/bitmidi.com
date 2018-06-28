@@ -63,6 +63,12 @@ exports.httpOrigin = (isProd ? 'https' : 'http') + '://' + exports.host
 exports.rootPath = isBrowser ? '/' : __dirname
 
 /**
+ * Time (in milliseconds) to wait before updating page component data. Page
+ * data will be reloaded at least this often.
+ */
+exports.loadInterval = 10 * 60 * 1000 // 10 minutes
+
+/**
  * Time (in milliseconds) to cache static resources. This value is sent in
  * the HTTP "Cache-Control" header.
  */
