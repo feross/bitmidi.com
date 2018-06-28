@@ -145,7 +145,7 @@ export default function init () {
         'self'
       ;
       script-src
-        'strict-dynamic' https:
+        'strict-dynamic' *
         'unsafe-eval'
         'nonce-${res.locals.nonce}' 'unsafe-inline'
       ;
