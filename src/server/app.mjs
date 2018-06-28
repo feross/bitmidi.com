@@ -135,6 +135,7 @@ export default function init () {
       ;
       connect-src
         'self'
+        https://www.google-analytics.com
       ;
       img-src
         'self'
