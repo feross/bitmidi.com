@@ -138,7 +138,6 @@ export default function init () {
       ;
       img-src
         'self'
-        https://pbs.twimg.com
         https://www.google-analytics.com
       ;
       manifest-src
