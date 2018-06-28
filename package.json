@@ -77,7 +77,6 @@
     "hyphenate-style-name": "^1.0.2",
     "knex": "^0.14.6",
     "memo-async-lru": "^1.0.1",
-    "mollusc": "^2.0.0",
     "mysql": "^2.15.0",
     "objection": "^1.1.10",
     "objection-slug": "^1.0.0",
