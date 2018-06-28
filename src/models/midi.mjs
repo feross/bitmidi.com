@@ -1,6 +1,9 @@
 import BaseModel from './model'
+import objectionSlug from './slug'
 
-export default class Midi extends BaseModel {
+const slug = objectionSlug({ sourceField: 'name' })
+
+export default class Midi extends slug(BaseModel) {
   static tableName = 'midis'
 
   static jsonSchema = {
