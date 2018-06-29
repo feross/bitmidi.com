@@ -18,10 +18,9 @@ export default function createStore (render, onPendingChange = () => {}) {
   const store = {
     location: {
       name: null,
-      params: {},
       url: null,
+      params: {},
       query: {},
-      pathname: null
     },
 
     app: {

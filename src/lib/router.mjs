@@ -30,7 +30,6 @@ export default class Router {
       name: null,
       params: {},
       url: `${pathname}${searchStr}`,
-      pathname,
       query: null
     }
 
