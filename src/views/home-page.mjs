@@ -13,9 +13,15 @@ export default class HomePage extends PageComponent {
     const { page } = location.query
 
     if (page === '0') {
-      dispatch('APP_META', { title: null, description: null })
+      dispatch('APP_META', {
+        title: ['Popular MIDIs'],
+        description: null
+      })
     } else {
-      dispatch('APP_META', { title: `Page ${page}`, description: null })
+      dispatch('APP_META', {
+        title: [`Page ${page}`, 'Popular MIDIs'],
+        description: null
+      })
     }
     dispatch('API_MIDI_ALL', { page })
   }
@@ -31,7 +37,7 @@ export default class HomePage extends PageComponent {
 
     return (
       <div>
-        <Heading class='tc'>Most popular MIDIs</Heading>
+        <Heading class='tc'>Popular MIDIs</Heading>
         <Loader show={!midiSlugs} center>
           {midis.map(midi => <Midi midi={midi} />)}
         </Loader>
