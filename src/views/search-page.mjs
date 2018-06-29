@@ -8,9 +8,8 @@ import Midi from './midi'
 
 export default class SearchPage extends PageComponent {
   load () {
-    const { dispatch } = this.context
-    const { location } = this.context.store
-    const { q, page } = location.query
+    const { store, dispatch } = this.context
+    const { q, page } = store.location.query
 
     let title = [`MIDIs containing '${q}'`]
     if (page !== '0') title.unshift(`Page ${page}`)

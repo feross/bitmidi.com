@@ -8,9 +8,8 @@ import Pagination from './pagination'
 
 export default class HomePage extends PageComponent {
   load () {
-    const { dispatch } = this.context
-    const { location } = this.context.store
-    const { page } = location.query
+    const { store, dispatch } = this.context
+    const { page } = store.location.query
 
     if (page === '0') {
       dispatch('APP_META', {
@@ -27,8 +26,9 @@ export default class HomePage extends PageComponent {
   }
 
   render (props) {
-    const { data, location, views } = this.context.store
-    const { page } = location.query
+    const { store } = this.context
+    const { data, views } = store
+    const { page } = store.location.query
 
     const midiSlugs = views.all[page]
     const midis = midiSlugs
