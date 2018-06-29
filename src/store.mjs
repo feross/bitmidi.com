@@ -62,26 +62,24 @@ export default function createStore (render, onPendingChange = () => {}) {
     onPendingChange()
   }
 
-  async function dispatch (type, data) {
+  async function dispatch (typeOrThunk, data) {
     try {
-      const ret = await _dispatch(type, data)
-      return ret
+      if (typeof typeOrThunk === 'function') {
+        incrementPending()
+        const ret = await typeOrThunk(dispatch)
+        decrementPending()
+        return ret
+      } else {
+        await _dispatch(typeOrThunk, data)
+      }
     } catch (err) {
       addError(err)
-      if (type.endsWith('_START')) decrementPending()
+      if (typeof typeOrThunk === 'function') decrementPending()
       update()
     }
   }
 
   async function _dispatch (type, data) {
-    if (typeof type === 'function') {
-      const thunk = type
-      return thunk(dispatch)
-    }
-
-    if (type.endsWith('_START')) incrementPending()
-    if (type.endsWith('_DONE')) decrementPending()
-
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
     else debug('%s %o', type, data)
 
