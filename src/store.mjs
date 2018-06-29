@@ -65,7 +65,8 @@ export default function createStore (render, onPendingChange = () => {}) {
 
   async function dispatch (type, data) {
     try {
-      await _dispatch(type, data)
+      const ret = await _dispatch(type, data)
+      return ret
     } catch (err) {
       addError(err)
       if (type.startsWith('API_') && !type.endsWith('_DONE')) decrementPending()
@@ -74,6 +75,11 @@ export default function createStore (render, onPendingChange = () => {}) {
   }
 
   async function _dispatch (type, data) {
+    if (typeof type === 'function') {
+      const thunk = type
+      return thunk(dispatch)
+    }
+
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
     else debug('%s %o', type, data)
 
@@ -145,7 +151,6 @@ export default function createStore (render, onPendingChange = () => {}) {
        */
 
       case 'API_MIDI_GET': {
-        dispatch('API_MIDI_GET_DONE', await api.midi.get(data))
         return update()
       }
 

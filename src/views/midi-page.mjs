@@ -1,18 +1,23 @@
 import { h } from 'preact' /** @jsx h */
 
+import { doGetMidi } from '../actions/midi'
+
 import Heading from './heading'
 import Loader from './loader'
 import Midi from './midi'
 import PageComponent from './page-component'
 
 export default class MidiPage extends PageComponent {
-  load () {
-    const { dispatch } = this.context
-    const { location } = this.context.store
-    const { midiSlug } = location.params
+  async load () {
+    const { store, dispatch } = this.context
+    const { midiSlug } = store.location.params
 
-    dispatch('API_MIDI_GET', { slug: midiSlug })
-    dispatch('APP_META', { title: 'TODO', description: 'TODO' })
+    const { result } = await dispatch(doGetMidi({ slug: midiSlug }))
+
+    dispatch('APP_META', {
+      title: result.name,
+      description: `Listen to ${result.name}`
+    })
   }
 
   render (props) {
