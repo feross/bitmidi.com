@@ -6,10 +6,10 @@ import fromEntries from 'fromentries'
 export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
-      const { name, path, defaultQuery } = route
+      const { name, path, queryDefault, queryWhitelist } = route
       const keys = []
       const regexp = pathToRegexp(path, keys)
-      return { name, path, defaultQuery, keys, regexp }
+      return { name, path, queryDefault, queryWhitelist, keys, regexp }
     })
 
     this._compilers = {}
@@ -19,8 +19,8 @@ export default class Router {
     })
   }
 
-  match (url) {
-    const { pathname, searchParams } = new URL(url, 'http://example.com')
+  match (rawUrl) {
+    const { pathname, searchParams } = new URL(rawUrl, 'http://example.com')
 
     const searchStr = [...searchParams].length !== 0
       ? `?${searchParams}`
@@ -28,9 +28,10 @@ export default class Router {
 
     const ret = {
       name: null,
-      params: {},
       url: `${pathname}${searchStr}`,
-      query: null
+      params: {},
+      query: null,
+      canonicalUrl: null
     }
 
     for (const route of this._routes) {
@@ -46,7 +47,20 @@ export default class Router {
         paramValue = decodeURIComponent(paramValue.replace(/\+/g, ' '))
         ret.params[param] = paramValue
       })
-      ret.query = { ...route.defaultQuery, ...fromEntries(searchParams) }
+      ret.query = { ...route.queryDefault, ...fromEntries(searchParams) }
+
+      // Only include whitelisted query params in the canonical url
+      const { queryWhitelist = [] } = route
+      for (let key of searchParams.keys()) {
+        if (!queryWhitelist.includes(key)) {
+          searchParams.delete(key)
+        }
+      }
+      const canonicalSearchStr = [...searchParams].length !== 0
+        ? `?${searchParams}`
+        : ''
+      ret.canonicalUrl = `${pathname}${canonicalSearchStr}`
+
       break
     }
     return ret

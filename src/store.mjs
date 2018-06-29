@@ -21,6 +21,7 @@ export default function createStore (render, onPendingChange = () => {}) {
       url: null,
       params: {},
       query: {},
+      canonicalUrl: null
     },
 
     app: {

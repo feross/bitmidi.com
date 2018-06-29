@@ -55,7 +55,7 @@ router.use(async (req, res) => {
     res.render('app', {
       content: renderer.html(),
       store,
-      url: req.url
+      canonicalUrl: store.location.canonicalUrl
     })
   }
 })
