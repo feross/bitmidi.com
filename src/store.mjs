@@ -69,7 +69,7 @@ export default function createStore (render, onPendingChange = () => {}) {
       return ret
     } catch (err) {
       addError(err)
-      if (type.startsWith('API_') && !type.endsWith('_DONE')) decrementPending()
+      if (type.endsWith('_START')) decrementPending()
       update()
     }
   }
@@ -80,12 +80,11 @@ export default function createStore (render, onPendingChange = () => {}) {
       return thunk(dispatch)
     }
 
+    if (type.endsWith('_START')) incrementPending()
+    if (type.endsWith('_DONE')) decrementPending()
+
     if (DEBUG_VERBOSE.has(type)) debugVerbose('%s %o', type, data)
     else debug('%s %o', type, data)
-
-    // Reference counter for pending fetches
-    if (type.startsWith('API_') && !type.endsWith('_DONE')) incrementPending()
-    if (type.startsWith('API_') && type.endsWith('_DONE')) decrementPending()
 
     switch (type) {
       /**
@@ -123,7 +122,7 @@ export default function createStore (render, onPendingChange = () => {}) {
        */
 
       case 'APP_META': {
-        let title = data.title || []
+        let title = [...data.title] || []
         if (typeof data.title === 'string') title = [data.title]
         title.push(config.title)
         store.app.title = title.map(str => str.trim()).join(' – ')
@@ -150,22 +149,21 @@ export default function createStore (render, onPendingChange = () => {}) {
        * MIDI
        */
 
-      case 'API_MIDI_GET': {
+      case 'MIDI_GET_START': {
         return update()
       }
 
-      case 'API_MIDI_GET_DONE': {
+      case 'MIDI_GET_DONE': {
         const { result } = data
         addMidi(result)
         return update()
       }
 
-      case 'API_MIDI_ALL': {
-        dispatch('API_MIDI_ALL_DONE', await api.midi.all(data))
+      case 'MIDI_ALL_START': {
         return update()
       }
 
-      case 'API_MIDI_ALL_DONE': {
+      case 'MIDI_ALL_DONE': {
         const { query, total, results } = data
         const { views } = store
 
@@ -175,12 +173,11 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
-      case 'API_MIDI_SEARCH': {
-        dispatch('API_MIDI_SEARCH_DONE', await api.midi.search(data))
+      case 'MIDI_SEARCH_START': {
         return update()
       }
 
-      case 'API_MIDI_SEARCH_DONE': {
+      case 'MIDI_SEARCH_DONE': {
         const { query, total, results } = data
         const { views } = store
 
@@ -191,8 +188,12 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
-      case 'GO_RANDOM_MIDI': {
-        const { result } = await api.midi.random()
+      case 'GO_MIDI_RANDOM_START': {
+        return update()
+      }
+
+      case 'GO_MIDI_RANDOM_DONE': {
+        const { result } = data
         addMidi(result)
         dispatch('LOCATION_PUSH', result.url)
         return
@@ -218,7 +219,7 @@ export default function createStore (render, onPendingChange = () => {}) {
       }
 
       /**
-       * PENDING DISPATCH
+       * PENDING
        */
 
       case 'PENDING_DISPATCH': {

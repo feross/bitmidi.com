@@ -2,6 +2,7 @@ import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 import config from '../../config'
+import { doGoMidiRandom } from '../actions/midi'
 
 import Button from './button'
 import Image from './image'
@@ -63,7 +64,7 @@ const Header = (props, context) => {
           fill
           pill
           size='medium'
-          onClick={() => dispatch('GO_RANDOM_MIDI')}
+          onClick={() => dispatch(doGoMidiRandom())}
         >
           Random MIDI ✨
         </Button>

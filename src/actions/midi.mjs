@@ -1,8 +1,29 @@
 import api from '../api'
 
-export const doGetMidi = opts => async dispatch => {
-  dispatch('API_MIDI_GET')
+export const doMidiGet = opts => async dispatch => {
+  dispatch('MIDI_GET_START', opts)
   const data = await api.midi.get(opts)
-  dispatch('API_MIDI_GET_DONE', data)
+  dispatch('MIDI_GET_DONE', data)
+  return data
+}
+
+export const doMidiAll = opts => async dispatch => {
+  dispatch('MIDI_ALL_START', opts)
+  const data = await api.midi.all(opts)
+  dispatch('MIDI_ALL_DONE', data)
+  return data
+}
+
+export const doMidiSearch = opts => async dispatch => {
+  dispatch('MIDI_SEARCH_START', opts)
+  const data = await api.midi.search(opts)
+  dispatch('MIDI_SEARCH_DONE', data)
+  return data
+}
+
+export const doGoMidiRandom = opts => async dispatch => {
+  dispatch('GO_MIDI_RANDOM_START', opts)
+  const data = await api.midi.random()
+  dispatch('GO_MIDI_RANDOM_DONE', data)
   return data
 }

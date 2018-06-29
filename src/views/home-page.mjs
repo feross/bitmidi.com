@@ -1,5 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 
+import { doMidiAll } from '../actions/midi'
+
 import Heading from './heading'
 import Loader from './loader'
 import Midi from './midi'
@@ -11,18 +13,12 @@ export default class HomePage extends PageComponent {
     const { store, dispatch } = this.context
     const { page } = store.location.query
 
-    if (page === '0') {
-      dispatch('APP_META', {
-        title: ['Popular MIDIs'],
-        description: null
-      })
-    } else {
-      dispatch('APP_META', {
-        title: [`Page ${page}`, 'Popular MIDIs'],
-        description: null
-      })
-    }
-    dispatch('API_MIDI_ALL', { page })
+    dispatch(doMidiAll({ page }))
+
+    const title = ['Popular MIDIs']
+    if (page !== '0') title.unshift(`Page ${page}`)
+
+    dispatch('APP_META', { title, description: null })
   }
 
   render (props) {

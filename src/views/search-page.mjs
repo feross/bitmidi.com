@@ -1,5 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 
+import { doMidiSearch } from '../actions/midi'
+
 import Heading from './heading'
 import Loader from './loader'
 import PageComponent from './page-component'
@@ -11,13 +13,15 @@ export default class SearchPage extends PageComponent {
     const { store, dispatch } = this.context
     const { q, page } = store.location.query
 
-    let title = [`MIDIs containing '${q}'`]
+    dispatch(doMidiSearch({ q, page }))
+
+    const title = [`MIDIs containing '${q}'`]
     if (page !== '0') title.unshift(`Page ${page}`)
+
     dispatch('APP_META', {
       title,
       description: `Search results page for MIDI files that contain '${q}'`
     })
-    dispatch('API_MIDI_SEARCH', { q, page })
   }
 
   render (props) {
