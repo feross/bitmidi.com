@@ -29,7 +29,6 @@ function addImage (result) {
       result.image = `/img/covers/${image.url}`
       break
     }
-    console.log('matched ' + result.name)
   }
 }
 
