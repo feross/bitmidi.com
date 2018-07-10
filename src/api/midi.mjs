@@ -13,6 +13,11 @@ async function get (query = {}) {
     .query()
     .findOne(query)
     .throwIfNotFound()
+
+  await result
+    .$query()
+    .increment('views', 1)
+
   return { query, result }
 }
 
