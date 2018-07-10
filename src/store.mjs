@@ -54,11 +54,13 @@ export default function createStore (render, onPendingChange = () => {}) {
 
   function incrementPending () {
     store.app.pending += 1
+    update()
     onPendingChange()
   }
 
   function decrementPending () {
     store.app.pending -= 1
+    update()
     onPendingChange()
   }
 
