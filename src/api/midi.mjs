@@ -16,6 +16,16 @@ async function get (query = {}) {
   return { query, result }
 }
 
+async function play (query = {}) {
+  debug('play %o', query)
+  const result = await Midi
+    .query()
+    .findOne(query)
+    .throwIfNotFound()
+    .increment('plays', 1)
+  return { query }
+}
+
 async function all (query = {}) {
   query.page = Number(query.page) || 0
   debug('all %o', query)
@@ -53,4 +63,4 @@ function getPages (total) {
   return Math.ceil(total / PAGE_SIZE)
 }
 
-export default { get, all, search, random }
+export default { get, play, all, search, random }

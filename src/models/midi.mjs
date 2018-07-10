@@ -19,7 +19,8 @@ export default class Midi extends slug(BaseModel) {
           type: 'string'
         }
       },
-      views: { type: 'number' }
+      views: { type: 'number' },
+      plays: { type: 'number' }
     }
   }
 

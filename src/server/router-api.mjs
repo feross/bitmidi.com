@@ -8,6 +8,10 @@ router.get('/midi/get', async (req, res) => {
   res.json({ result: await api.midi.get(req.query) })
 })
 
+router.get('/midi/play', async (req, res) => {
+  res.json({ result: await api.midi.play(req.query) })
+})
+
 router.get('/midi/all', async (req, res) => {
   res.json({ result: await api.midi.all(req.query) })
 })

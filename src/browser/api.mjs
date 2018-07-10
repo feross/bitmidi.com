@@ -8,6 +8,7 @@ const debug = Debug('bitmidi:api')
 export default {
   midi: {
     get: opts => sendGet('/midi/get', opts),
+    play: opts => sendGet('/midi/play', opts),
     all: opts => sendGet('/midi/all', opts),
     search: opts => sendGet('/midi/search', opts),
     random: opts => sendGet('/midi/random', opts)
