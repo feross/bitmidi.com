@@ -23,11 +23,11 @@ export default class Midi extends Component {
         </Link>
         <Link
           color='white'
-          class='w-20 fr tr'
+          class='fr tr grow-large'
           onClick={this.onClick}
           title={`Play ${midi.name}`}
         >
-          <Icon size={30} name='play_arrow' />
+          <Icon class='v-btm' size={30} name='play_arrow' />
         </Link>
       </article>
     )
