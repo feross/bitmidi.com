@@ -19,11 +19,11 @@ export default class Midi extends Component {
         >
           <Link
             color='white'
-            class='dib fl f4 lh-copy truncate'
+            class='dib fl f4 lh-copy w-100'
             title={midi.name}
             href={midi.url}
           >
-            <h2 class='f4 mv0'>{midi.name}</h2>
+            <h2 class='f4 mv0 w-100 truncate'>{midi.name}</h2>
           </Link>
         </div>
         <div class='overflow-hidden br3 br--bottom'>
