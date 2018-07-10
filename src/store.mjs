@@ -43,10 +43,8 @@ export default function createStore (render, onPendingChange = () => {}) {
     },
 
     views: {
-      search: {}, // 'query' -> { total: 0, '0': ['slug-1', 'slug-2'] } }
-      all: {
-        total: 0
-      }
+      search: {}, // 'query' -> { total: 0, pageTotal: 0, '0': ['slug'] } }
+      all: {}
     }
   }
 
@@ -159,23 +157,25 @@ export default function createStore (render, onPendingChange = () => {}) {
 
       case 'MIDI_ALL_START': return
       case 'MIDI_ALL_DONE': {
-        const { query, total, results } = data
+        const { query, total, pageTotal, results } = data
         const { views } = store
 
         results.map(addMidi)
         views.all.total = total
+        views.all.pageTotal = pageTotal
         views.all[query.page] = results.map(midi => midi.slug)
         return update()
       }
 
       case 'MIDI_SEARCH_START': return
       case 'MIDI_SEARCH_DONE': {
-        const { query, total, results } = data
+        const { query, total, pageTotal, results } = data
         const { views } = store
 
         results.map(addMidi)
         if (!views.search[query.q]) views.search[query.q] = {}
         views.search[query.q].total = total
+        views.search[query.q].pageTotal = pageTotal
         views.search[query.q][query.page] = results.map(midi => midi.slug)
         return update()
       }

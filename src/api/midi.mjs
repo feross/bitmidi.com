@@ -38,7 +38,7 @@ async function all (query = {}) {
     .query()
     .select(SELECT_MINIMAL)
     .page(query.page, PAGE_SIZE)
-  return { query, results, total: getPages(total) }
+  return { query, results, total, pageTotal: getPageTotal(total) }
 }
 
 async function search (query = {}) {
@@ -53,7 +53,7 @@ async function search (query = {}) {
     .select(select)
     .page(query.page, PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
-  return { query, results, total: getPages(total) }
+  return { query, results, total, pageTotal: getPageTotal(total) }
 }
 
 async function random (query = {}) {
@@ -64,7 +64,7 @@ async function random (query = {}) {
   return { query, result }
 }
 
-function getPages (total) {
+function getPageTotal (total) {
   return Math.ceil(total / PAGE_SIZE)
 }
 

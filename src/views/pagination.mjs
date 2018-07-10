@@ -5,14 +5,14 @@ import Button from './button'
 const NUM_PAGES = 5
 
 const Pagination = (props, context) => {
-  const { page: pageStr, total } = props
+  const { page: pageStr, pageTotal } = props
   const page = Number(pageStr)
   const { location } = context.store
 
-  if (page == null || total == null) return null
+  if (page == null || pageTotal == null) return null
 
   const firstPage = Math.max(0, page - Math.floor(NUM_PAGES / 2))
-  const lastPage = Math.min(total, firstPage + NUM_PAGES)
+  const lastPage = Math.min(pageTotal, firstPage + NUM_PAGES)
 
   const buttons = []
 
@@ -34,13 +34,13 @@ const Pagination = (props, context) => {
     )
   }
 
-  if (page !== total - 1) {
+  if (page !== pageTotal - 1) {
     buttons.push(
       <Button class='mr1' href={getPageUrl(page + 1)}>Next ›</Button>
     )
   }
 
-  const showButtons = total >= 2
+  const showButtons = pageTotal >= 2
 
   return (
     <div class='tc mv4'>

@@ -29,7 +29,7 @@ export default class SearchPage extends PageComponent {
     const { q, page } = location.query
 
     const search = views.search[q]
-    const total = search && search.total
+    const pageTotal = search && search.pageTotal
     const results = search && search[page]
       ? search[page].map(midiSlug => data.midis[midiSlug])
       : []
@@ -45,7 +45,7 @@ export default class SearchPage extends PageComponent {
               No results containing all your search terms were found.
             </div>
           }
-          <Pagination page={page} total={total} />
+          <Pagination page={page} pageTotal={pageTotal} />
         </Loader>
       </div>
     )
