@@ -11,6 +11,8 @@ const PAGE_SIZE = 10
 const IMAGES = [
   { re: 'aladdin', url: 'aladdin.jpg' },
   { re: 'backstreet', url: 'backstreet.jpg' },
+  { re: 'blink182', url: 'blink182.jpg' },
+  { re: 'blink-182', url: 'blink182.jpg' },
   { re: 'usa', url: 'bornintheusa.jpg' },
   { re: 'kingdom hearts', url: 'kingdomhearts.jpg' },
   { re: 'lion king', url: 'lionking.jpg' },
@@ -84,6 +86,7 @@ async function search (query = {}) {
     .select(select)
     .page(query.page, PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
+
   return { query, results, total, pageTotal: getPageTotal(total) }
 }
 
