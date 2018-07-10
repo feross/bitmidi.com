@@ -23,7 +23,7 @@ async function get (query = {}) {
 
 async function play (query = {}) {
   debug('play %o', query)
-  const result = await Midi
+  await Midi
     .query()
     .findOne(query)
     .throwIfNotFound()
