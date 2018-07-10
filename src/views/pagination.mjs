@@ -5,7 +5,7 @@ import Button from './button'
 const NUM_PAGES = 5
 
 const Pagination = (props, context) => {
-  const { page: pageStr, pageTotal } = props
+  const { page: pageStr, pageTotal, total } = props
   const page = Number(pageStr)
   const { location } = context.store
 
@@ -41,7 +41,8 @@ const Pagination = (props, context) => {
 
   return (
     <div class='tc mv4'>
-      { pageTotal >= 2 && buttons }
+      <div class='mb3'>{ pageTotal >= 2 && buttons }</div>
+      <small class='f6 lh-copy silver'>{total.toLocaleString()} results</small>
     </div>
   )
 

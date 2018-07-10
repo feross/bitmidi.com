@@ -37,7 +37,11 @@ export default class HomePage extends PageComponent {
         <Loader show={!midiSlugs} center>
           {midis.map(midi => <Midi midi={midi} />)}
         </Loader>
-        <Pagination page={page} pageTotal={views.all.pageTotal} />
+        <Pagination
+          page={page}
+          pageTotal={views.all.pageTotal}
+          total={views.all.total}
+        />
       </div>
     )
   }
