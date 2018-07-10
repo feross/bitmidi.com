@@ -2,6 +2,7 @@ import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 import Icon from './icon'
+import Image from './image'
 import Link from './link'
 
 export default class Midi extends Component {
@@ -14,26 +15,36 @@ export default class Midi extends Component {
 
     return (
       <article
-        class={c(`cf white bg-${mainColor} br2 pv2 ph3 mv4 shadow-6`, props.class)}
+        class={c(`relative br2 mv4 shadow-6`, props.class)}
       >
         <Link
           color='white'
-          class='dib fl f4 lh-copy w-80'
+          class=''
           title={midi.name}
           href={midi.url}
         >
-          <h2 class='f4 mv0 w-100 truncate'>{midi.name}</h2>
-        </Link>
-        <Link
-          color='white'
-          class='fr tr grow-large'
-          onClick={this.onClick}
-          title={`Play ${midi.name}`}
-        >
-          {isPlaying
-            ? <Icon class='v-btm' size={30} name='stop' />
-            : <Icon class='v-btm' size={30} name='play_arrow' />
-          }
+          <div
+            class='cover br2 br--top h5 bg-center'
+            style={{
+              backgroundImage: 'url(/img/backstreet.png)'
+            }}
+          />
+          <div
+            class={`cf br2 br--bottom bg-${mainColor} pv2 ph3`}
+          >
+            <h2 class='fl f4 mv0 lh-copy w-80 truncate underline-hover'>{midi.name}</h2>
+            <Link
+              color='white'
+              class='fr tr grow-large'
+              onClick={this.onClick}
+              title={`Play ${midi.name}`}
+            >
+              {isPlaying
+                ? <Icon class='v-btm' size={30} name='stop' />
+                : <Icon class='v-btm' size={30} name='play_arrow' />
+              }
+            </Link>
+          </div>
         </Link>
       </article>
     )

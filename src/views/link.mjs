@@ -4,7 +4,6 @@ import c from 'classnames'
 const Link = (props, context) => {
   const {
     color = context.theme.mainColor,
-    children,
     class: className,
     href,
     onClick,
