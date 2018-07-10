@@ -122,6 +122,18 @@ export default function init () {
     // rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
+    res.header('Feature-Policy', oneLine`
+      geolocation
+        'none'
+      ;
+      sync-xhr
+        'none'
+      ;
+      unsized-media
+        'none'
+      ;
+    `)
+
     // Prevent XSS attacks with by explicitly specifying sources of content.
     res.header('Content-Security-Policy', oneLine`
       base-uri
