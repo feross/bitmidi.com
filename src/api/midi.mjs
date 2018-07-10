@@ -37,6 +37,7 @@ async function all (query = {}) {
   const { total, results } = await Midi
     .query()
     .select(SELECT_MINIMAL)
+    .orderBy('plays', 'desc')
     .page(query.page, PAGE_SIZE)
   return { query, results, total, pageTotal: getPageTotal(total) }
 }
