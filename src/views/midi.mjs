@@ -1,7 +1,7 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import Icon from './Icon'
+import Icon from './icon'
 import Link from './link'
 
 export default class Midi extends Component {
