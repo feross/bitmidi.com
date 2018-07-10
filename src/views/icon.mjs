@@ -1,15 +1,19 @@
 import { h } from 'preact' /** @jsx h */
 
-import Image from './image'
+import c from 'classnames'
 
 const Icon = (props) => {
-  const { name, alt, ...rest } = props
+  const { name, class: className, size, ...rest } = props
   return (
-    <Image
-      src={`./img/icon-${name}.svg`}
-      alt={alt || name}
+    <i
+      class={c('material-icons', className)}
+      style={{
+        fontSize: size || 24
+      }}
       {...rest}
-    />
+    >
+      {name}
+    </i>
   )
 }
 
