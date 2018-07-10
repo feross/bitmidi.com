@@ -3,6 +3,7 @@ import { h } from 'preact' /** @jsx h */
 import { doMidiGet } from '../actions/midi'
 
 import Heading from './heading'
+import Link from './link'
 import Loader from './loader'
 import Midi from './midi'
 import PageComponent from './page-component'
@@ -33,11 +34,16 @@ export default class MidiPage extends PageComponent {
       <div>
         <Heading>{midi.name}</Heading>
         <Midi midi={midi} />
-        <a download={midi.name} href={midi.downloadUrl}>
-          Download MIDI file
-        </a>
-        {
-          midi.alternateNames &&
+        <h3>Download</h3>
+        <Link download={midi.name} href={midi.downloadUrl}>
+          Download {midi.name}
+        </Link>
+        <h3>Stats</h3>
+        <ul>
+          <li>The MIDI file <strong>{midi.name}</strong> has been played {midi.plays} times.</li>
+          <li>This page has been viewed {midi.views} times.</li>
+        </ul>
+        { midi.alternateNames &&
           <h3>This MIDI file has also been seen with other names:</h3>
         }
         <ul>
