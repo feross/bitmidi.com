@@ -1,7 +1,7 @@
 exports.up = knex => {
   return knex.schema
     .table('midis', table => {
-      table.integer('plays').defaultTo(0).notNullable()
+      table.integer('plays').defaultTo(0).notNullable().index()
     })
 }
 
