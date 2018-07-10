@@ -13,6 +13,8 @@ const IMAGES = [
   { re: 'backstreet', url: 'backstreet.jpg' },
   { re: 'blink182', url: 'blink182.jpg' },
   { re: 'blink-182', url: 'blink182.jpg' },
+  { re: 'jingle bells', url: 'christmas.jpg' },
+  { re: 'jingle-bells', url: 'christmas.jpg' },
   { re: 'usa', url: 'bornintheusa.jpg' },
   { re: 'kingdom hearts', url: 'kingdomhearts.jpg' },
   { re: 'lion king', url: 'lionking.jpg' },
