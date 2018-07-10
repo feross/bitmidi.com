@@ -18,7 +18,8 @@ export default class Midi extends slug(BaseModel) {
         items: {
           type: 'string'
         }
-      }
+      },
+      views: { type: 'number' }
     }
   }
 
