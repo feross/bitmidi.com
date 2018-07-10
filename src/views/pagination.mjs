@@ -16,12 +16,6 @@ const Pagination = (props, context) => {
 
   const buttons = []
 
-  if (page !== 0) {
-    buttons.push(
-      <Button class='mh1' href={getPageUrl(page - 1)}>‹ Prev</Button>
-    )
-  }
-
   for (let pageNum = firstPage; pageNum < lastPage; pageNum += 1) {
     buttons.push(
       <Button
@@ -34,27 +28,27 @@ const Pagination = (props, context) => {
     )
   }
 
+  if (page !== 0) {
+    buttons.unshift(
+      <Button class='mh1' href={getPageUrl(page - 1)}>‹ Prev</Button>
+    )
+  }
   if (page !== pageTotal - 1) {
     buttons.push(
       <Button class='mr1' href={getPageUrl(page + 1)}>Next ›</Button>
     )
   }
 
-  const showButtons = pageTotal >= 2
-
   return (
     <div class='tc mv4'>
-      { showButtons && buttons }
+      { pageTotal >= 2 && buttons }
     </div>
   )
 
   function getPageUrl (pageNum) {
     const url = new URL(location.url, 'http://example.com')
-    if (pageNum === 0) {
-      url.searchParams.delete('page')
-    } else {
-      url.searchParams.set('page', pageNum)
-    }
+    if (pageNum === 0) url.searchParams.delete('page')
+    else url.searchParams.set('page', pageNum)
     return url.pathname + url.search
   }
 }
