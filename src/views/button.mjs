@@ -44,7 +44,6 @@ const Button = (props, context) => {
   } else {
     ButtonElement = Link
     elemProps = {
-      color: 'white',
       underlineHover: false
     }
   }
