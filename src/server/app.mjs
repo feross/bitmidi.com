@@ -68,6 +68,12 @@ export default function init () {
   const staticPath = path.join(config.rootPath, 'static')
   app.use(express.static(staticPath, staticOpts))
 
+  const iconsPath = path.join(
+    path.dirname(require.resolve('material-design-icons')),
+    'iconfont'
+  )
+  app.use(express.static(iconsPath, staticOpts))
+
   const timidityPath = path.dirname(require.resolve('timidity'))
   app.use('/timidity', express.static(timidityPath, staticOpts))
 
@@ -148,6 +154,9 @@ export default function init () {
       connect-src
         'self'
         https://www.google-analytics.com
+      ;
+      font-src
+        'self'
       ;
       img-src
         'self'
