@@ -20,7 +20,7 @@ const Button = (props, context) => {
 
   const cls = ['pointer dib ttu fw6 v-mid ba bw1 sans-serif grow']
 
-  if (size === 'small') cls.push('f6 ph3 pv2')
+  if (size === 'small') cls.push('f6 ph2 pv1')
   if (size === 'medium') cls.push('f5 ph3 pv2')
   if (size === 'large') cls.push('f4 ph4 pv3')
 
@@ -28,7 +28,7 @@ const Button = (props, context) => {
   else cls.push(color)
 
   if (pill) cls.push('br-pill')
-  else cls.push('br3')
+  else cls.push('br2')
 
   if (disabled) cls.push('o-60')
 

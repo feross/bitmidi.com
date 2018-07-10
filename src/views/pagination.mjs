@@ -2,6 +2,8 @@ import { h } from 'preact' /** @jsx h */
 
 import Button from './button'
 
+const NUM_PAGES = 5
+
 const Pagination = (props, context) => {
   const { page: pageStr, total } = props
   const page = Number(pageStr)
@@ -9,24 +11,40 @@ const Pagination = (props, context) => {
 
   if (page == null || total == null) return null
 
-  const firstPage = Math.max(0, page - 5)
-  const lastPage = Math.min(total, firstPage + 10)
+  const firstPage = Math.max(0, page - Math.floor(NUM_PAGES / 2))
+  const lastPage = Math.min(total, firstPage + NUM_PAGES)
 
-  const pageButtons = []
-  for (let pageNum = firstPage; pageNum < lastPage; pageNum += 1) {
-    pageButtons.push(
-      <Button href={getPageUrl(pageNum)}>{pageNum}</Button>
+  const buttons = []
+
+  if (page !== 0) {
+    buttons.push(
+      <Button class='mh1' href={getPageUrl(page - 1)}>‹ Prev</Button>
     )
   }
 
-  const showPrev = total >= 2 && page !== 0
-  const showNext = total >= 2 && page !== total - 1
+  for (let pageNum = firstPage; pageNum < lastPage; pageNum += 1) {
+    buttons.push(
+      <Button
+        class='mr1'
+        href={getPageUrl(pageNum)}
+        fill={pageNum === page}
+      >
+        {pageNum + 1}
+      </Button>
+    )
+  }
+
+  if (page !== total - 1) {
+    buttons.push(
+      <Button class='mr1' href={getPageUrl(page + 1)}>Next ›</Button>
+    )
+  }
+
+  const showButtons = total >= 2
 
   return (
     <div class='tc mv4'>
-      { showPrev && <Button href={getPageUrl(page - 1)}>‹ Prev</Button> }
-      { total >= 2 && pageButtons }
-      { showNext && <Button href={getPageUrl(page + 1)}>Next ›</Button> }
+      { showButtons && buttons }
     </div>
   )
 

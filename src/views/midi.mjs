@@ -12,10 +12,10 @@ export default class Midi extends Component {
 
     return (
       <article
-        class={c('relative br3 center hidden mv4 shadow-6', props.class)}
+        class={c('relative br2 center hidden mv4 shadow-6', props.class)}
       >
         <div
-          class={`cf br3 br--top white pv2 ph3 bg-${mainColor}`}
+          class={`cf br2 br--top white pv2 ph3 bg-${mainColor}`}
         >
           <Link
             color='white'
@@ -26,7 +26,7 @@ export default class Midi extends Component {
             <h2 class='f4 mv0 w-100 truncate'>{midi.name}</h2>
           </Link>
         </div>
-        <div class='overflow-hidden br3 br--bottom'>
+        <div class='overflow-hidden br2 br--bottom'>
           <div onClick={this.onClick}>MIDI</div>
         </div>
       </article>
