@@ -6,7 +6,7 @@ import api from './api'
 import config from '../config'
 import Location from './lib/location'
 import routes from './routes'
-import { load, play } from './browser/player'
+import * as player from './browser/player'
 
 const debug = Debug('bitmidi:store')
 const debugVerbose = Debug('bitmidi:store:verbose')
@@ -36,6 +36,10 @@ export default function createStore (render, onPendingChange = () => {}) {
 
     fatalError: null,
     errors: [],
+
+    player: {
+      current: null
+    },
 
     // local data
     data: {
@@ -188,16 +192,22 @@ export default function createStore (render, onPendingChange = () => {}) {
         return
       }
 
-      case 'MIDI_PLAY': {
+      case 'MIDI_PLAY_PAUSE': {
         const midiSlug = data
         const midi = store.data.midis[midiSlug]
 
-        // Start the MIDI in the player
-        load(midi.downloadUrl)
-        play()
+        if (store.player.currentSlug === midiSlug) {
+          player.pause()
+          store.player.currentSlug = null
+        } else {
+          player.load(midi.downloadUrl)
+          player.play()
+          store.player.currentSlug = midiSlug
+        }
 
-        api.midi.play({ slug: midiSlug })
-        midi.plays += 1
+        api.midi.play({ slug: midiSlug }) // Track play count
+        midi.plays += 1 // Optimistically update local play count
+
         return update()
       }
 

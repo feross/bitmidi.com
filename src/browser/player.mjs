@@ -23,3 +23,8 @@ export function play () {
   initPlayer()
   player.play()
 }
+
+export function pause () {
+  initPlayer()
+  player.pause()
+}

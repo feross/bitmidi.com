@@ -8,6 +8,9 @@ export default class Midi extends Component {
   render (props) {
     const { midi } = props
     const { mainColor } = this.context.theme
+    const { player } = this.context.store
+
+    const isPlaying = player.currentSlug === midi.slug
 
     return (
       <article
@@ -27,7 +30,10 @@ export default class Midi extends Component {
           onClick={this.onClick}
           title={`Play ${midi.name}`}
         >
-          <Icon class='v-btm' size={30} name='play_arrow' />
+          {isPlaying
+            ? <Icon class='v-btm' size={30} name='stop' />
+            : <Icon class='v-btm' size={30} name='play_arrow' />
+          }
         </Link>
       </article>
     )
@@ -36,6 +42,6 @@ export default class Midi extends Component {
   onClick = () => {
     const { dispatch } = this.context
     const { midi } = this.props
-    dispatch('MIDI_PLAY', midi.slug)
+    dispatch('MIDI_PLAY_PAUSE', midi.slug)
   }
 }
