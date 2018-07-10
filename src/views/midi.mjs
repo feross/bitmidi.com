@@ -1,8 +1,6 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import { load, play } from '../browser/player'
-
 import Link from './link'
 
 export default class Midi extends Component {
@@ -34,8 +32,8 @@ export default class Midi extends Component {
   }
 
   onClick = () => {
+    const { dispatch } = this.context
     const { midi } = this.props
-    load(midi.downloadUrl)
-    play()
+    dispatch('MIDI_PLAY', midi.slug)
   }
 }

@@ -2,9 +2,11 @@
 
 import Debug from 'debug'
 
+import api from './api'
 import config from '../config'
 import Location from './lib/location'
 import routes from './routes'
+import { load, play } from './browser/player'
 
 const debug = Debug('bitmidi:store')
 const debugVerbose = Debug('bitmidi:store:verbose')
@@ -148,20 +150,14 @@ export default function createStore (render, onPendingChange = () => {}) {
        * MIDI
        */
 
-      case 'MIDI_GET_START': {
-        return update()
-      }
-
+      case 'MIDI_GET_START': return
       case 'MIDI_GET_DONE': {
         const { result } = data
         addMidi(result)
         return update()
       }
 
-      case 'MIDI_ALL_START': {
-        return update()
-      }
-
+      case 'MIDI_ALL_START': return
       case 'MIDI_ALL_DONE': {
         const { query, total, results } = data
         const { views } = store
@@ -172,10 +168,7 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
-      case 'MIDI_SEARCH_START': {
-        return update()
-      }
-
+      case 'MIDI_SEARCH_START': return
       case 'MIDI_SEARCH_DONE': {
         const { query, total, results } = data
         const { views } = store
@@ -187,15 +180,25 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
-      case 'GO_MIDI_RANDOM_START': {
-        return update()
-      }
-
+      case 'GO_MIDI_RANDOM_START': return
       case 'GO_MIDI_RANDOM_DONE': {
         const { result } = data
         addMidi(result)
         dispatch('LOCATION_PUSH', result.url)
         return
+      }
+
+      case 'MIDI_PLAY': {
+        const midiSlug = data
+        const midi = store.data.midis[midiSlug]
+
+        // Start the MIDI in the player
+        load(midi.downloadUrl)
+        play()
+
+        api.midi.play({ slug: midiSlug })
+        midi.plays += 1
+        return update()
       }
 
       /**
