@@ -191,3 +191,12 @@
   );
   background-size: 400% 400%;
 }
+
+.midi-image {
+  opacity: 0.75;
+  transition: all ease-out .15s;
+}
+
+.midi-image:hover {
+  opacity: 1;
+}

@@ -24,7 +24,7 @@ export default class Midi extends Component {
         >
           { midi.image &&
             <div
-              class='cover br2 br--top h5 bg-center'
+              class='midi-image cover br2 br--top h5 bg-center'
               style={{
                 backgroundImage: `url("${midi.image}")`
               }}

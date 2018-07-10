@@ -36,7 +36,17 @@ export default class HomePage extends PageComponent {
     return (
       <div>
         { showIntroText &&
-          <div class='mh4 mb5'>
+          <div
+            class='cover bg-center absolute top-0 left-0 w-100'
+            style={{
+              backgroundImage: 'url(/img/hero.jpg)',
+              zIndex: -1,
+              height: 550
+            }}
+          />
+        }
+        { showIntroText &&
+          <div class='white mv6 mh4 mb5' style={{ marginBottom: 200 }}>
             <h1 class='f2 f1-l measure lh-title fw9'>
               Listen to your favorite MIDI files on BitMidi
             </h1>
