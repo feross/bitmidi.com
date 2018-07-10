@@ -31,8 +31,22 @@ export default class HomePage extends PageComponent {
       ? midiSlugs.map(midiSlug => data.midis[midiSlug])
       : []
 
+    const showIntroText = page === '0'
+
     return (
       <div>
+        { showIntroText &&
+          <div class='mh4 mb5'>
+            <h1 class='f2 f1-l measure lh-title fw9'>
+              Listen to your favorite MIDI files on BitMidi
+            </h1>
+            { views.all.total &&
+              <h2 class='f4 fw6 lh-copy'>
+                Serving {views.all.total.toLocaleString()} MIDI files curated by volunteers around the world.
+              </h2>
+            }
+          </div>
+        }
         <Heading class='tc'>Popular MIDIs</Heading>
         <Loader show={!midiSlugs} center>
           {midis.map(midi => <Midi midi={midi} />)}
