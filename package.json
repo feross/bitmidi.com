@@ -75,7 +75,7 @@
     "freepats": "^1.0.2",
     "fromentries": "^1.0.2",
     "hyphenate-style-name": "^1.0.2",
-    "knex": "^0.14.6",
+    "knex": "^0.15.1",
     "material-design-icons": "^3.0.1",
     "memo-async-lru": "^1.0.1",
     "mysql": "^2.15.0",
