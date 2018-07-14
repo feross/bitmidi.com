@@ -9,7 +9,7 @@ const router = Router()
 
 router.get('/feed.json', async (req, res, next) => {
   const jsonFeed = await getJsonFeed()
-  res.status(200).send(jsonFeed)
+  res.status(200).json(jsonFeed)
 })
 
 router.get('/feed.xml', async (req, res, next) => {
