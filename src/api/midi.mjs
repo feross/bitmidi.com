@@ -4,7 +4,6 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-const SELECT_MINIMAL = ['id', 'name', 'slug']
 const PAGE_SIZE = 10
 
 // HACK: hardcode some images so homepage looks nice
@@ -13,6 +12,8 @@ const IMAGES = [
   { re: 'backstreet', url: 'backstreet.jpg' },
   { re: 'blink182', url: 'blink182.jpg' },
   { re: 'blink-182', url: 'blink182.jpg' },
+  { re: 'jingle bells', url: 'christmas.jpg' },
+  { re: 'jingle-bells', url: 'christmas.jpg' },
   { re: 'usa', url: 'bornintheusa.jpg' },
   { re: 'kingdom hearts', url: 'kingdomhearts.jpg' },
   { re: 'lion king', url: 'lionking.jpg' },
@@ -65,9 +66,8 @@ async function all (query = {}) {
   debug('all %o', query)
   const { total, results } = await Midi
     .query()
-    .select(SELECT_MINIMAL)
-    .orderBy('plays', 'desc')
-    .page(query.page, PAGE_SIZE)
+    .orderBy(query.orderBy || 'plays', 'desc')
+    .page(query.page, query.pageSize || PAGE_SIZE)
 
   results.forEach(addImage)
 
@@ -77,14 +77,9 @@ async function all (query = {}) {
 async function search (query = {}) {
   query.page = Number(query.page) || 0
   debug('search %o', query)
-  const select = [].concat(
-    SELECT_MINIMAL,
-    Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q)
-  )
   const { total, results } = await Midi
     .query()
-    .select(select)
-    .page(query.page, PAGE_SIZE)
+    .page(query.page, query.pageSize || PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
 
   return { query, results, total, pageTotal: getPageTotal(total) }

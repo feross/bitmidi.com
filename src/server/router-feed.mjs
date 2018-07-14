@@ -1,19 +1,28 @@
+import jsonfeedToAtom from 'jsonfeed-to-atom'
 import Router from 'express-promise-router'
+import { oneLine } from 'common-tags'
 
 import api from '../api'
 import config from '../../config'
-import { oneLine } from 'common-tags'
 
 const router = Router()
 
-router.get('/feed.xml', async (req, res, next) => {
-  const { results } = await api.midi.all()
-
-  res.status(200).render('feed', { results })
+router.get('/feed.json', async (req, res, next) => {
+  const jsonFeed = await getJsonFeed()
+  res.status(200).json(jsonFeed)
 })
 
-router.get('/feed.json', async (req, res, next) => {
-  const { results } = await api.midi.all()
+router.get('/feed.xml', async (req, res, next) => {
+  const jsonFeed = await getJsonFeed()
+  const atomFeed = jsonfeedToAtom(jsonFeed)
+  res
+    .status(200)
+    .set('Content-Type', 'application/atom+xml')
+    .send(atomFeed)
+})
+
+async function getJsonFeed () {
+  const { results } = await api.midi.all({ orderBy: 'createdAt', pageSize: 100 })
 
   const feed = {
     version: 'https://jsonfeed.org/version/1',
@@ -22,9 +31,10 @@ router.get('/feed.json', async (req, res, next) => {
     home_page_url: `${config.httpOrigin}/`,
     feed_url: `${config.httpOrigin}/feed.json`,
     user_comment: oneLine`
-      This feed allows you to read the posts from this site in any feed reader
-      that supports the JSON Feed format. To add this feed to your reader, copy
-      the following URL — ${config.httpOrigin}/feed.json — and add it your reader.
+      This feed allows you to read the posts from ${config.title} in any feed
+      reader that supports the JSON Feed format. To add this feed to your
+      reader, copy the following URL — ${config.httpOrigin}/feed.json — and add
+      it your reader.
     `,
     favicon: `${config.httpOrigin}/favicon.ico`,
     icon: `${config.httpOrigin}/android-chrome-512x512.png`,
@@ -36,15 +46,21 @@ router.get('/feed.json', async (req, res, next) => {
   }
 
   feed.items = results.map(midi => {
+    const url = `${config.httpOrigin}${midi.url}`
     return {
-      id: midi.url,
-      url: midi.url,
+      id: url,
+      url: url,
       title: midi.name,
-      content_html: midi.name,
-      content_text: midi.name,
+      content_html: oneLine`
+        The MIDI file <a href='${url}'>${midi.name}</a> was added to BitMidi.
+      `,
+      content_text: oneLine`
+        The MIDI file "${midi.name}" was added to BitMidi. View it at: ${url}
+      `,
       summary: midi.name,
-      // date_published: '', // TODO
-      // date_modified: '', // TODO
+      image: midi.image,
+      date_published: midi.createdAt.toISOString(),
+      date_modified: midi.updatedAt.toISOString(),
       author: {
         name: config.title,
         url: `${config.httpOrigin}/`,
@@ -54,7 +70,7 @@ router.get('/feed.json', async (req, res, next) => {
     }
   })
 
-  res.status(200).send(feed)
-})
+  return feed
+}
 
 export default router
