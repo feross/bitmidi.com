@@ -79,7 +79,6 @@ async function search (query = {}) {
   debug('search %o', query)
   const { total, results } = await Midi
     .query()
-    .select(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q))
     .page(query.page, query.pageSize || PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
 
