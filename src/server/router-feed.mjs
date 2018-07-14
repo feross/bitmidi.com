@@ -15,7 +15,10 @@ router.get('/feed.json', async (req, res, next) => {
 router.get('/feed.xml', async (req, res, next) => {
   const jsonFeed = await getJsonFeed()
   const atomFeed = jsonfeedToAtom(jsonFeed)
-  res.status(200).send(atomFeed)
+  res
+    .status(200)
+    .set('Content-Type', 'application/atom+xml')
+    .send(atomFeed)
 })
 
 async function getJsonFeed () {
