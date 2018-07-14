@@ -50,6 +50,7 @@ async function getJsonFeed () {
       content_html: midi.name,
       content_text: midi.name,
       summary: midi.name,
+      image: midi.image,
       date_published: midi.createdAt.toISOString(),
       date_modified: midi.updatedAt.toISOString(),
       author: {
