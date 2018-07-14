@@ -32,6 +32,14 @@ export default class Model extends ObjectionModel {
         return models
       })
   }
+
+  $beforeInsert () {
+    this.createdAt = new Date().toISOString()
+  }
+
+  $beforeUpdate () {
+    this.updatedAt = new Date().toISOString()
+  }
 }
 
 // Use this knex instance for all models
