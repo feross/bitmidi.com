@@ -34,11 +34,11 @@ export default class Model extends ObjectionModel {
   }
 
   $beforeInsert () {
-    this.createdAt = new Date().toISOString()
+    this.createdAt = new Date()
   }
 
   $beforeUpdate () {
-    this.updatedAt = new Date().toISOString()
+    this.updatedAt = new Date()
   }
 }
 
