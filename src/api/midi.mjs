@@ -67,7 +67,7 @@ async function all (query = {}) {
   const { total, results } = await Midi
     .query()
     .orderBy('plays', 'desc')
-    .page(query.page, PAGE_SIZE)
+    .page(query.page, query.pageSize || PAGE_SIZE)
 
   results.forEach(addImage)
 
@@ -80,7 +80,7 @@ async function search (query = {}) {
   const { total, results } = await Midi
     .query()
     .select(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q))
-    .page(query.page, PAGE_SIZE)
+    .page(query.page, query.pageSize || PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
 
   return { query, results, total, pageTotal: getPageTotal(total) }
