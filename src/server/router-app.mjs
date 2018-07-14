@@ -1,11 +1,19 @@
 import Router from 'express-promise-router'
 
+import api from '../api'
 import config from '../../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
 
 const router = Router()
+
+// Redirect from /1 to /009count-mid
+// TODO: remove this once Google indexes the new /:midiSlug URLs
+router.get('/:midiId(\\d+)', async (req, res) => {
+  const { result } = await api.midi.get({ id: Number(req.params.midiId) })
+  res.redirect(301, `${config.httpOrigin}${result.url}`)
+})
 
 router.use(async (req, res) => {
   const renderer = createRenderer()
