@@ -63,26 +63,30 @@ async function play (query = {}) {
 
 async function all (query = {}) {
   query.page = Number(query.page) || 0
+  query.pageSize = Number(query.pageSize) || PAGE_SIZE
   debug('all %o', query)
+
   const { total, results } = await Midi
     .query()
     .orderBy(query.orderBy || 'plays', 'desc')
-    .page(query.page, query.pageSize || PAGE_SIZE)
+    .page(query.page, query.pageSize)
 
   results.forEach(addImage)
 
-  return { query, results, total, pageTotal: getPageTotal(total) }
+  return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
 async function search (query = {}) {
   query.page = Number(query.page) || 0
+  query.pageSize = Number(query.pageSize) || PAGE_SIZE
   debug('search %o', query)
+
   const { total, results } = await Midi
     .query()
-    .page(query.page, query.pageSize || PAGE_SIZE)
+    .page(query.page, query.pageSize)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
 
-  return { query, results, total, pageTotal: getPageTotal(total) }
+  return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
 async function random (query = {}) {
@@ -93,8 +97,8 @@ async function random (query = {}) {
   return { query, result }
 }
 
-function getPageTotal (total) {
-  return Math.ceil(total / PAGE_SIZE)
+function getPageTotal (total, pageSize) {
+  return Math.ceil(total / pageSize)
 }
 
 export default { get, play, all, search, random }
