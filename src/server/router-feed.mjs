@@ -51,8 +51,12 @@ async function getJsonFeed () {
       id: url,
       url: url,
       title: midi.name,
-      content_html: midi.name,
-      content_text: midi.name,
+      content_html: oneLine`
+        The MIDI file <a href='${url}'>${midi.name}</a> was added to BitMidi.
+      `,
+      content_text: oneLine`
+        The MIDI file "${midi.name}" was added to BitMidi. View it at: ${url}
+      `,
       summary: midi.name,
       image: midi.image,
       date_published: midi.createdAt.toISOString(),
