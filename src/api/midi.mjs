@@ -4,7 +4,6 @@ import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
 
-const SELECT_MINIMAL = ['id', 'name', 'slug']
 const PAGE_SIZE = 10
 
 // HACK: hardcode some images so homepage looks nice
@@ -67,7 +66,6 @@ async function all (query = {}) {
   debug('all %o', query)
   const { total, results } = await Midi
     .query()
-    .select(SELECT_MINIMAL)
     .orderBy('plays', 'desc')
     .page(query.page, PAGE_SIZE)
 
@@ -79,13 +77,9 @@ async function all (query = {}) {
 async function search (query = {}) {
   query.page = Number(query.page) || 0
   debug('search %o', query)
-  const select = [].concat(
-    SELECT_MINIMAL,
-    Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q)
-  )
   const { total, results } = await Midi
     .query()
-    .select(select)
+    .select(Midi.raw('MATCH(name) AGAINST(? IN BOOLEAN MODE) as score', query.q))
     .page(query.page, PAGE_SIZE)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
 
