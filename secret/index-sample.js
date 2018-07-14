@@ -1,3 +1,5 @@
+const { isProd } = require('../config')
+
 exports.cookie = 'TODO'
 
 exports.opbeat = {
@@ -8,8 +10,9 @@ exports.opbeat = {
 
 exports.db = {
   client: 'mysql',
+  version: '5.7',
   connection: {
-    host: 'TODO',
+    host: isProd ? 'TODO' : 'TODO',
     user: 'TODO',
     password: 'TODO',
     database: 'TODO'
