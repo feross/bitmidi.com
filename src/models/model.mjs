@@ -1,20 +1,30 @@
 import Debug from 'debug'
 import Knex from 'knex'
-import { Model as ObjectionModel, knexSnakeCaseMappers } from 'objection'
 import { join } from 'path'
+import { knexSnakeCaseMappers, Model, QueryBuilder } from 'objection'
 
 import { db } from '../../secret'
 import { rootPath } from '../../config'
 
 const debug = Debug('bitmidi:model')
 
-const knex = Knex({ ...db, ...knexSnakeCaseMappers() })
+class BaseQueryBuilder extends QueryBuilder {
+  // Suppress knex warning ("A valid integer must be provided to limit") when
+  // `pageSize` is Infinity
+  page (page, pageSize) {
+    if (pageSize === Infinity) pageSize = Number.MAX_SAFE_INTEGER
+    return super.page(page, pageSize)
+  }
+}
 
-export default class Model extends ObjectionModel {
+export default class BaseModel extends Model {
+  // Use a custom query builder
+  static QueryBuilder = BaseQueryBuilder
+
   // Lookup model names referenced in `relationMappings` in this folder
   static modelPaths = join(rootPath, 'src', 'models')
 
-  // Add limit(1) to first() and getOne() queries
+  // Add limit(1) to first() and findOne() queries
   static useLimitInFirst = true
 
   // Set the status code to 404 when items are not found
@@ -42,5 +52,8 @@ export default class Model extends ObjectionModel {
   }
 }
 
-// Use this knex instance for all models
-Model.knex(knex)
+// Create database connection
+const knex = Knex({ ...db, ...knexSnakeCaseMappers() })
+
+// Use the connection for *all* models
+BaseModel.knex(knex)
