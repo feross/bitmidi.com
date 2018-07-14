@@ -66,7 +66,7 @@ async function all (query = {}) {
   debug('all %o', query)
   const { total, results } = await Midi
     .query()
-    .orderBy('plays', 'desc')
+    .orderBy(query.orderBy || 'plays', 'desc')
     .page(query.page, query.pageSize || PAGE_SIZE)
 
   results.forEach(addImage)

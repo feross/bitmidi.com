@@ -22,7 +22,7 @@ router.get('/feed.xml', async (req, res, next) => {
 })
 
 async function getJsonFeed () {
-  const { results } = await api.midi.all({ pageSize: 100 })
+  const { results } = await api.midi.all({ orderBy: 'createdAt', pageSize: 100 })
 
   const feed = {
     version: 'https://jsonfeed.org/version/1',

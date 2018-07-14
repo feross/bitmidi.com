@@ -9,7 +9,7 @@ export const doMidiGet = opts => async dispatch => {
 
 export const doMidiAll = opts => async dispatch => {
   dispatch('MIDI_ALL_START', opts)
-  const data = await api.midi.all(opts)
+  const data = await api.midi.all({ orderBy: 'plays', ...opts })
   dispatch('MIDI_ALL_DONE', data)
   return data
 }
