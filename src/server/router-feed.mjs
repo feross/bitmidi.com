@@ -7,12 +7,12 @@ import config from '../../config'
 
 const router = Router()
 
-router.get('/feed.json', async (req, res, next) => {
+router.get('/feed.json', async (req, res) => {
   const jsonFeed = await getJsonFeed()
   res.status(200).json(jsonFeed)
 })
 
-router.get('/feed.xml', async (req, res, next) => {
+router.get('/feed.xml', async (req, res) => {
   const jsonFeed = await getJsonFeed()
   const atomFeed = jsonfeedToAtom(jsonFeed)
   res
