@@ -14,7 +14,7 @@ router.use(async (req, res) => {
 
   // Useful for debugging JSX issues in the browser instead of Node
   if (!config.isProd && req.query.ssr === '0') {
-    res.render('app', {
+    res.render('layout', {
       content: '',
       store,
       canonicalUrl: ''
@@ -57,7 +57,7 @@ router.use(async (req, res) => {
     }
 
     res.status(status)
-    res.render('app', {
+    res.render('layout', {
       content: renderer.html(),
       store,
       canonicalUrl: `${config.httpOrigin}${store.location.canonicalUrl}`
