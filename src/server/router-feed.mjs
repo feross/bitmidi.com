@@ -46,9 +46,10 @@ async function getJsonFeed () {
   }
 
   feed.items = results.map(midi => {
+    const url = `${config.httpOrigin}${midi.url}`
     return {
-      id: midi.url,
-      url: midi.url,
+      id: url,
+      url: url,
       title: midi.name,
       content_html: midi.name,
       content_text: midi.name,
