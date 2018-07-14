@@ -50,8 +50,8 @@ async function getJsonFeed () {
       content_html: midi.name,
       content_text: midi.name,
       summary: midi.name,
-      // date_published: '', // TODO
-      // date_modified: '', // TODO
+      date_published: midi.createdAt.toISOString(),
+      date_modified: midi.updatedAt.toISOString(),
       author: {
         name: config.title,
         url: `${config.httpOrigin}/`,
