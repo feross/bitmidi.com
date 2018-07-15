@@ -62,7 +62,6 @@ const Header = (props, context) => {
           class='mh1'
           color={mainColor}
           fill
-          pill
           size='medium'
           onClick={() => dispatch(doGoMidiRandom())}
         >
