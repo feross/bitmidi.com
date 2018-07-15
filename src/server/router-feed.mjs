@@ -4,6 +4,7 @@ import { oneLine } from 'common-tags'
 
 import api from '../api'
 import config from '../../config'
+import simpleSitemap from '../lib/sitemap'
 
 const router = Router()
 
@@ -20,6 +21,17 @@ router.get('/feed.xml', async (req, res) => {
     .set('Content-Type', 'application/atom+xml')
     .send(atomFeed)
 })
+
+router.use(simpleSitemap(loadUrls, config.httpOrigin))
+
+async function loadUrls () {
+  const { results } = await api.midi.all({
+    select: ['slug'],
+    orderBy: 'views',
+    pageSize: Infinity
+  })
+  return ['/'].concat(results.map(result => result.url))
+}
 
 async function getJsonFeed () {
   const { results } = await api.midi.all({ orderBy: 'createdAt', pageSize: 100 })
