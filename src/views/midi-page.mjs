@@ -7,6 +7,8 @@ import Link from './link'
 import Loader from './loader'
 import Midi from './midi'
 import PageComponent from './page-component'
+import RelativeTime from './relative-time'
+import { HorizListItem, HorizListDivider } from './horiz-list'
 
 export default class MidiPage extends PageComponent {
   async load () {
@@ -33,26 +35,38 @@ export default class MidiPage extends PageComponent {
     return (
       <div>
         <Heading>{midi.name}</Heading>
+        <div>
+          <HorizListItem>
+            Uploaded <RelativeTime time={midi.createdAt} />
+          </HorizListItem>
+          <HorizListDivider />
+          <HorizListItem>
+            {midi.plays} plays
+          </HorizListItem>
+          <HorizListDivider />
+          <HorizListItem>
+            {midi.views} page views
+          </HorizListItem>
+        </div>
         <Midi midi={midi} />
-        <h3>Download</h3>
+        <h3>Play now</h3>
+        <p>
+          Tap the play button above to play this MIDI file now.
+        </p>
+        <h3>Download this MIDI file</h3>
         <Link download={midi.name} href={midi.downloadUrl}>
           Download {midi.name}
         </Link>
-        <h3>Stats</h3>
-        <ul>
-          <li>The MIDI file <strong>{midi.name}</strong> has been played {midi.plays} times.</li>
-          <li>This page has been viewed {midi.views} times.</li>
-        </ul>
         { midi.alternateNames &&
-          <h3>This MIDI file has also been seen with other names:</h3>
+          <h3>This MIDI file has alternate names</h3>
         }
-        <ul>
-          {
-            midi.alternateNames && midi.alternateNames.map(name => {
-              return <li>{name}</li>
-            })
-          }
-        </ul>
+        {
+          midi.alternateNames &&
+          <ul>
+            { midi.alternateNames.map(name => <li>{name}</li>) }
+            <li>{midi.name}</li>
+          </ul>
+        }
       </div>
     )
   }
