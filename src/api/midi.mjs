@@ -64,11 +64,14 @@ async function play (query = {}) {
 async function all (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
+  query.orderBy = query.orderBy || 'plays'
+  query.select = query.select || '*'
   debug('all %o', query)
 
   const { total, results } = await Midi
     .query()
-    .orderBy(query.orderBy || 'plays', 'desc')
+    .select(query.select)
+    .orderBy(query.orderBy, 'desc')
     .page(query.page, query.pageSize)
 
   results.forEach(addImage)
@@ -79,10 +82,12 @@ async function all (query = {}) {
 async function search (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
+  query.select = query.select || '*'
   debug('search %o', query)
 
   const { total, results } = await Midi
     .query()
+    .select(query.select)
     .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
     .page(query.page, query.pageSize)
 
