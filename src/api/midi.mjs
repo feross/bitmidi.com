@@ -28,7 +28,7 @@ const IMAGES = [
 
 function addImage (result) {
   for (const image of IMAGES) {
-    if (result.name.toLowerCase().includes(image.re)) {
+    if (result.name && result.name.toLowerCase().includes(image.re)) {
       result.image = `/img/covers/${image.url}`
       break
     }
