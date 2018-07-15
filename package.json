@@ -139,7 +139,7 @@
     "uploads-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/uploads/' uploads/",
     "uploads-upload": "rsync -a -O -v --delete uploads/ future:'/home/feross/www/bitmidi.com/uploads/'",
     "watch": "npm run tunnel & npm run watch-css & npm run watch-js & npm run watch-server",
-    "watch-css": "nodemon --exec 'npm run build-css -- --verbose' --watch src/server --watch src/views --ext js,mjs,css",
+    "watch-css": "nodemon --exec 'npm run build-css -- --verbose' --watch src/views --watch config.js --watch src/server/index.css --ext js,mjs,css",
     "watch-js": "watchify --extension mjs . --debug --verbose --outfile static/bundle.js",
     "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,mjs,json,ejs --ignore static --ignore src/browser"
   },
