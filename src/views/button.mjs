@@ -13,7 +13,7 @@ const Button = (props, context) => {
     href,
     onClick,
     pill = false,
-    size = 'small',
+    size = 'medium',
     style = {},
     ...rest
   } = props
@@ -21,7 +21,7 @@ const Button = (props, context) => {
   const cls = ['pointer dib ttu fw6 v-mid ba bw1 sans-serif grow']
 
   if (size === 'small') cls.push('f6 ph2 pv1')
-  if (size === 'medium') cls.push('f5 ph3 pv2')
+  if (size === 'medium') cls.push('f5 ph2 pv2')
   if (size === 'large') cls.push('f4 ph4 pv3')
 
   if (fill) cls.push('white', `bg-${color}`, `b--${color}`)
@@ -44,13 +44,14 @@ const Button = (props, context) => {
   } else {
     ButtonElement = Link
     elemProps = {
+      color: null,
       underlineHover: false
     }
   }
 
   return (
     <ButtonElement
-      class={c(cls, className)}
+      class={c(...cls, className)}
       href={href}
       onClick={onClick}
       style={style}
