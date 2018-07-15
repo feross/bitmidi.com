@@ -1,10 +1,10 @@
+import expressSitemapXml from 'express-sitemap-xml'
 import jsonfeedToAtom from 'jsonfeed-to-atom'
 import Router from 'express-promise-router'
 import { oneLine } from 'common-tags'
 
 import api from '../api'
 import config from '../../config'
-import simpleSitemap from '../lib/sitemap'
 
 const router = Router()
 
@@ -22,9 +22,9 @@ router.get('/feed.xml', async (req, res) => {
     .send(atomFeed)
 })
 
-router.use(simpleSitemap(loadUrls, config.httpOrigin))
+router.use(expressSitemapXml(getUrls, config.httpOrigin))
 
-async function loadUrls () {
+async function getUrls () {
   const { results } = await api.midi.all({
     select: ['slug'],
     orderBy: 'views',

@@ -71,6 +71,7 @@
     "express-mysql-session": "^2.0.0",
     "express-promise-router": "^3.0.2",
     "express-session": "^1.15.3",
+    "express-sitemap-xml": "^1.0.1",
     "file-to-array-buffer": "^1.0.0",
     "freepats": "^1.0.2",
     "fromentries": "^1.0.2",
@@ -78,7 +79,6 @@
     "jsonfeed-to-atom": "^1.1.2",
     "knex": "^0.15.1",
     "material-design-icons": "^3.0.1",
-    "mem": "^3.0.1",
     "mysql": "^2.15.0",
     "objection": "^1.1.10",
     "objection-slug": "^1.0.0",
@@ -89,8 +89,7 @@
     "throttleit": "^1.0.0",
     "timidity": "^1.0.0",
     "undom": "^0.4.0",
-    "uuid": "^3.2.1",
-    "xmlbuilder": "^10.0.0"
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
