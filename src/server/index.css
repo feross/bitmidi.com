@@ -66,14 +66,6 @@
 }
 
 /**
- * Tachyons tweaks
- */
-
-.link:focus {
-  outline: none;
-}
-
-/**
  * Animations (adapted from animate.css)
  */
 
@@ -191,6 +183,10 @@
   );
   background-size: 400% 400%;
 }
+
+/**
+ * Page-specific styles
+ */
 
 .midi-image {
   opacity: 0.75;
