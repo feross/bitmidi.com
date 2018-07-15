@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-const Heading = (props) => {
+const Heading = props => {
   const { children, class: className, ...rest } = props
 
   return (

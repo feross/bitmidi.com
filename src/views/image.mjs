@@ -1,6 +1,6 @@
 import { h } from 'preact' /** @jsx h */
 
-const Image = (props) => {
+const Image = props => {
   const { alt, ...rest } = props
 
   if (typeof alt !== 'string' || alt.length === 0) {

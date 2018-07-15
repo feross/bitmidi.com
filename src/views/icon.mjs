@@ -2,7 +2,7 @@ import { h } from 'preact' /** @jsx h */
 
 import c from 'classnames'
 
-const Icon = (props) => {
+const Icon = props => {
   const { name, class: className, size, ...rest } = props
   return (
     <i

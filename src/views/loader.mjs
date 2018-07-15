@@ -3,7 +3,7 @@ import c from 'classnames'
 
 import Icon from './icon'
 
-const Loader = (props) => {
+const Loader = props => {
   let {
     center,
     children,
