@@ -104,6 +104,6 @@ exports.apiUserAgent = `${exports.title}/1.0.0 (${exports.httpOrigin})`
  * Website theme colors
  */
 exports.theme = {
-  mainColor: 'dark-gray',
+  mainColor: 'dark-blue',
   headerColor: 'hot-pink'
 }
