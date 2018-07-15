@@ -33,6 +33,7 @@ router.get('*', async (req, res) => {
 if (global.opbeat) router.use(global.opbeat.middleware.express())
 
 router.use(async (err, req, res, next) => {
+  console.error(err.stack)
   const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
   res.status(status)
   res.json({ error: { message: err.message, code: err.code } })

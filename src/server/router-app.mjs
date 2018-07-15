@@ -43,14 +43,15 @@ router.use(async (req, res) => {
 
   function done () {
     if (req.err) {
-      const { message, code = null, status = 500, stack } = req.err
+      const { message, stack, code = null, status = 500 } = req.err
       store.fatalError = { message, code, status }
       console.error(stack)
       update()
     } else if (store.errors.length > 0) {
       // When an error occurs during server rendering, treat it as a fatal error
-      const { message, code = null, status = 404 } = store.errors.shift()
+      const { message, stack, code = null, status = 404 } = store.errors.shift()
       store.fatalError = { message, code, status }
+      console.error(stack)
       update()
     }
 
