@@ -102,7 +102,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "nodemon": "^1.15.1",
-    "ora": "^2.1.0",
+    "ora": "^3.0.0",
     "puppeteer": "^1.5.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
