@@ -15,7 +15,7 @@ const Footer = (props, context) => {
       <HorizListDivider />
 
       <HorizListItem>
-        <Link href='/random' newtab>Random MIDI</Link>
+        <Link href='/random'>Random MIDI</Link>
       </HorizListItem>
 
       <HorizListDivider />
