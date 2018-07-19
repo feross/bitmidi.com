@@ -10,8 +10,11 @@ const router = Router()
 
 // Redirect from /1 to /009count-mid
 // TODO: remove this once Google indexes the new /:midiSlug URLs
-router.get('/:midiId(\\d+)', async (req, res) => {
-  const { result } = await api.midi.get({ id: Number(req.params.midiId) })
+router.get('/:midiId(\\d+)', async (req, res, next) => {
+  const midiId = Number(req.params.midiId)
+  if (midiId === 500) return next()
+
+  const { result } = await api.midi.get({ id: midiId })
   res.redirect(301, `${config.httpOrigin}${result.url}`)
 })
 
