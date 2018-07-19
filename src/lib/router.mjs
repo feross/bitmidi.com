@@ -20,22 +20,18 @@ export default class Router {
   }
 
   match (rawUrl) {
-    const { pathname, searchParams } = new URL(rawUrl, 'http://example.com')
-
-    const searchStr = [...searchParams].length !== 0
-      ? `?${searchParams}`
-      : ''
+    const url = new URL(rawUrl, 'http://example.com')
 
     const ret = {
       name: null,
-      url: `${pathname}${searchStr}`,
+      url: `${url.pathname}${url.search}`,
       params: {},
       query: null,
       canonicalUrl: null
     }
 
     for (const route of this._routes) {
-      const matches = route.regexp.exec(pathname)
+      const matches = route.regexp.exec(url.pathname)
       if (!matches) continue
 
       // Found a matching route
@@ -47,18 +43,13 @@ export default class Router {
         paramValue = decodeURIComponent(paramValue.replace(/\+/g, ' '))
         ret.params[param] = paramValue
       })
-      ret.query = { ...route.query, ...fromEntries(searchParams) }
+      ret.query = { ...route.query, ...fromEntries(url.searchParams) }
 
       // Only include whitelisted query params in the canonical url
-      for (let key of searchParams.keys()) {
-        if (!('query' in route) || !(key in route.query)) {
-          searchParams.delete(key)
-        }
+      for (let key of url.searchParams.keys()) {
+        if (!route.query.hasOwnProperty(key)) url.searchParams.delete(key)
       }
-      const canonicalSearchStr = [...searchParams].length !== 0
-        ? `?${searchParams}`
-        : ''
-      ret.canonicalUrl = `${pathname}${canonicalSearchStr}`
+      ret.canonicalUrl = `${url.pathname}${url.search}`
 
       break
     }
