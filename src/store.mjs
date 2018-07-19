@@ -223,7 +223,9 @@ export default function createStore (render, onPendingChange = () => {}) {
         } else {
           const url = `/search?${new URLSearchParams({ q: data })}`
           dispatch(
-            store.location.name === 'search' ? 'LOCATION_REPLACE' : 'LOCATION_PUSH',
+            store.location.name === 'search'
+              ? 'LOCATION_REPLACE'
+              : 'LOCATION_PUSH',
             url
           )
         }
