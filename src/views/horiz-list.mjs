@@ -5,5 +5,5 @@ export const HorizListItem = ({ children }) => {
 }
 
 export const HorizListDivider = () => {
-  return <span class='mh2 ph1'>•</span>
+  return <span class='mh2'>•</span>
 }
