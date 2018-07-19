@@ -270,23 +270,24 @@ export default function createStore (render, onPendingChange = () => {}) {
     store.data.midis[midi.slug] = midi
   }
 
-  let isRendering = false
+  let isUpdating = false
   let isUpdatePending = false
 
   function update () {
     // Prevent infinite recursion when dispatch() is called during an update()
-    if (isRendering) {
+    if (isUpdating) {
       isUpdatePending = true
       return
     }
     debugVerbose('update')
 
-    isRendering = true
+    isUpdating = true
     render()
-    isRendering = false
+    isUpdating = false
 
+    const needUpdate = isUpdatePending
     isUpdatePending = false
-    if (isUpdatePending) update()
+    if (needUpdate) update()
   }
 
   return {
