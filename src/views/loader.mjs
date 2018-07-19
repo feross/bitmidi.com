@@ -1,7 +1,8 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import Icon from './icon'
+import Heading from './heading'
+import Image from './image'
 
 const Loader = props => {
   let {
@@ -9,6 +10,7 @@ const Loader = props => {
     children,
     class: className,
     show = false,
+    label,
     style = {},
     ...rest
   } = props
@@ -26,7 +28,14 @@ const Loader = props => {
         style={style}
         {...rest}
       >
-        <Icon name='loader' alt='Loading...' />
+        { label &&
+          <Heading
+            class='animate-pulse animate--normal animate--infinite'
+          >
+            {label}…
+          </Heading>
+        }
+        <Image src='/img/icon-loader.svg' alt='Loading…' />
       </div>
     )
   }
