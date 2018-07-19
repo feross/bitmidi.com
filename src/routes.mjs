@@ -2,6 +2,7 @@ import AboutPage from './views/about-page'
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
+import RandomPage from './views/random-page'
 import SearchPage from './views/search-page'
 
 export default [
@@ -17,19 +18,8 @@ export default [
     page: SearchPage,
     query: { page: '0' }
   },
-  {
-    name: 'about',
-    path: '/about',
-    page: AboutPage
-  },
-  {
-    name: 'midi',
-    path: '/:midiSlug',
-    page: MidiPage
-  },
-  {
-    name: 'error',
-    path: '(.*)',
-    page: ErrorPage
-  }
+  { name: 'about', path: '/about', page: AboutPage },
+  { name: 'random', path: '/random', page: RandomPage },
+  { name: 'midi', path: '/:midiSlug', page: MidiPage },
+  { name: 'error', path: '(.*)', page: ErrorPage }
 ]
