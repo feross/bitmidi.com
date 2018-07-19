@@ -2,32 +2,60 @@ import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 import config from '../../config'
-import { doGoMidiRandom } from '../actions/midi'
 
 import Button from './button'
 import Image from './image'
 import Link from './link'
 import Search from './search'
 
+const HeaderLogo = ({ isPageLoading }) => {
+  const logoCls = isPageLoading
+    ? 'animate-pulse animate--normal animate--infinite'
+    : 'animate-bounce-in animate--normal'
+
+  return (
+    <Link
+      color='white'
+      class={c(logoCls, 'dib lh-copy white f3')}
+      href='/'
+    >
+      <Image
+        src='/img/bitmidi.svg'
+        alt={config.title}
+        style={{
+          marginTop: 2,
+          height: 36,
+          width: 132
+        }}
+      />
+    </Link>
+  )
+}
+
+const RandomMidiButton = () => {
+  return (
+    <Button
+      class='mh1'
+      fill
+      size='medium'
+      href='/random'
+    >
+      Random MIDI ✨
+    </Button>
+  )
+}
+
 const Header = (props, context) => {
   const { app } = context.store
-  const { headerColor, mainColor } = context.theme
-  const { dispatch } = context
+  const { headerColor } = context.theme
 
   const isPageLoading = !config.isBrowser || // initial server render
       app.pending > 0 || // fetching async data
       !app.isLoaded // window.onload() has not fired yet
 
-  let headerCls = ''
-  let logoCls = ''
-
-  if (isPageLoading) {
-    headerCls = 'animate-bg-rainbow'
-    logoCls = 'animate-pulse animate--normal animate--infinite'
-  } else {
-    headerCls = `bg-${headerColor}`
-    logoCls = 'animate-bounce-in animate--normal'
-  }
+  const headerCls = isPageLoading
+    ? 'animate-bg-rainbow'
+    : `bg-${headerColor}`
 
   return (
     <header
@@ -38,35 +66,13 @@ const Header = (props, context) => {
       }}
     >
       <div class='fl w-third'>
-        <Link
-          color='white'
-          class={c(logoCls, 'dib lh-copy white f3')}
-          href='/'
-        >
-          <Image
-            src='/img/bitmidi.svg'
-            alt={config.title}
-            style={{
-              marginTop: 2,
-              height: 36,
-              width: 132
-            }}
-          />
-        </Link>
+        <HeaderLogo />
       </div>
       <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
         <Search class='w-100' />
       </div>
       <nav class='fl w-third dn db-m db-l v-mid tr'>
-        <Button
-          class='mh1'
-          color={mainColor}
-          fill
-          size='medium'
-          onClick={() => dispatch(doGoMidiRandom())}
-        >
-          Random MIDI ✨
-        </Button>
+        <RandomMidiButton />
       </nav>
     </header>
   )
