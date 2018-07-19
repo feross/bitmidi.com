@@ -6,7 +6,7 @@ import fromEntries from 'fromentries'
 export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
-      const { name, path, query } = route
+      const { name, path, query = {} } = route
       const keys = []
       const regexp = pathToRegexp(path, keys)
       return { name, path, query, keys, regexp }
