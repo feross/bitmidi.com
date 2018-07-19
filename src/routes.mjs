@@ -9,15 +9,13 @@ export default [
     name: 'home',
     path: '/',
     page: HomePage,
-    queryDefault: { page: '0' },
-    queryWhitelist: ['page']
+    query: { page: '0' }
   },
   {
     name: 'search',
     path: '/search',
     page: SearchPage,
-    queryDefault: { page: '0' },
-    queryWhitelist: ['page']
+    query: { page: '0' }
   },
   {
     name: 'about',

@@ -6,10 +6,10 @@ import fromEntries from 'fromentries'
 export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
-      const { name, path, queryDefault, queryWhitelist } = route
+      const { name, path, query } = route
       const keys = []
       const regexp = pathToRegexp(path, keys)
-      return { name, path, queryDefault, queryWhitelist, keys, regexp }
+      return { name, path, query, keys, regexp }
     })
 
     this._compilers = {}
@@ -47,12 +47,11 @@ export default class Router {
         paramValue = decodeURIComponent(paramValue.replace(/\+/g, ' '))
         ret.params[param] = paramValue
       })
-      ret.query = { ...route.queryDefault, ...fromEntries(searchParams) }
+      ret.query = { ...route.query, ...fromEntries(searchParams) }
 
       // Only include whitelisted query params in the canonical url
-      const { queryWhitelist = [] } = route
       for (let key of searchParams.keys()) {
-        if (!queryWhitelist.includes(key)) {
+        if (!('query' in route) || !(key in route.query)) {
           searchParams.delete(key)
         }
       }
