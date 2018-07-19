@@ -34,6 +34,8 @@ router.use(async (req, res) => {
   }
 
   dispatch('LOCATION_REPLACE', req.url)
+  const routeName = store.location.name
+
   onPendingChange()
 
   function onPendingChange () {
@@ -66,6 +68,8 @@ router.use(async (req, res) => {
         : 500
     } else if (store.location.name === 'error') {
       status = 404
+    } else if (routeName !== store.location.name) {
+      return res.redirect(store.location.canonicalUrl)
     }
 
     res.status(status)
