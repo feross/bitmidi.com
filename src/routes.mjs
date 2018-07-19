@@ -1,3 +1,4 @@
+import AboutPage from './views/about-page'
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
@@ -17,6 +18,11 @@ export default [
     page: SearchPage,
     queryDefault: { page: '0' },
     queryWhitelist: ['page']
+  },
+  {
+    name: 'about',
+    path: '/about',
+    page: AboutPage
   },
   {
     name: 'midi',
