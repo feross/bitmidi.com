@@ -7,7 +7,7 @@ const Footer = (props, context) => {
   return (
     <footer class='f6 lh-copy silver w-100 mt5 mb4 tc'>
       <HorizListItem>
-        Built by <Link href='https://twitter.com/feross' newtab>@feross</Link>
+        Built by <Link href='https://feross.org' newtab>Feross</Link>
       </HorizListItem>
       <HorizListDivider />
 
