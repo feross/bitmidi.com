@@ -7,17 +7,21 @@ const Footer = (props, context) => {
   return (
     <footer class='f6 lh-copy silver w-100 mt5 mb4 tc'>
       <HorizListItem>
-        Built by <Link href='https://feross.org' newtab>Feross</Link>
+        <Link href='https://github.com/feross/bitmidi.com' newtab>
+          About BitMidi
+        </Link>
       </HorizListItem>
+
       <HorizListDivider />
 
       <HorizListItem>
-        Thanks to <Link href='https://feross.org/thanks/' newtab>my supporters</Link>
+        <Link href='/random' newtab>Random MIDI</Link>
       </HorizListItem>
+
       <HorizListDivider />
 
       <HorizListItem>
-        Powered by <Link href='https://github.com/feross/bitmidi.com' newtab>open source</Link>
+        Built by Feross
       </HorizListItem>
     </footer>
   )
