@@ -184,11 +184,11 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
-      case 'GO_MIDI_RANDOM_START': return
-      case 'GO_MIDI_RANDOM_DONE': {
+      case 'MIDI_RANDOM_START': return
+      case 'MIDI_RANDOM_DONE': {
         const { result } = data
         addMidi(result)
-        dispatch('LOCATION_PUSH', result.url)
+        dispatch('LOCATION_REPLACE', result.url)
         return
       }
 

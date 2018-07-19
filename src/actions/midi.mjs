@@ -22,8 +22,8 @@ export const doMidiSearch = opts => async dispatch => {
 }
 
 export const doGoMidiRandom = opts => async dispatch => {
-  dispatch('GO_MIDI_RANDOM_START', opts)
+  dispatch('MIDI_RANDOM_START', opts)
   const data = await api.midi.random()
-  dispatch('GO_MIDI_RANDOM_DONE', data)
+  dispatch('MIDI_RANDOM_DONE', data)
   return data
 }
