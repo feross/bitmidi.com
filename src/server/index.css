@@ -84,7 +84,7 @@
 }
 
 .animate--delay {
-  animation-delay: 1s;
+  animation-delay: 0.5s;
 }
 
 .animate--infinite {
