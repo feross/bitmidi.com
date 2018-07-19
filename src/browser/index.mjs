@@ -10,6 +10,10 @@ import { load, play } from '../browser/player'
 let root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
 
+// Expose for debugging
+Object.assign(window, { store, dispatch, update, debug })
+if (process.env.NODE_ENV !== 'production') require('preact/devtools')
+
 // Use server-initialized store
 Object.assign(store, window.initStore)
 
@@ -18,10 +22,6 @@ const { pathname, search, hash } = window.location
 dispatch('LOCATION_REPLACE', pathname + search + hash)
 dispatch('PENDING_DISPATCH')
 window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
-
-// Expose functions for debugging
-Object.assign(window, { store, dispatch, update, debug })
-if (process.env.NODE_ENV !== 'production') require('preact/devtools')
 
 // Render the UI
 update()
