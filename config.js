@@ -22,7 +22,7 @@ exports.title = 'BitMidi'
 /**
  * Description of the site
  */
-exports.description = 'Wayback machine for old-school MIDI files'
+exports.description = 'Listen to free MIDI songs, download the top MIDI files, and share the best free MIDIs on the web.'
 
 /**
  * Google Analytics tracking ID
@@ -37,7 +37,8 @@ exports.keywords = [
   'music',
   'retro',
   'mid',
-  'midi files'
+  'midi files',
+  'free midi'
 ]
 
 /**
