@@ -64,14 +64,6 @@ export default function init () {
   })
 
   // Set up static file serving
-  function serveStatic (path) {
-    const opts = {
-      // Time (in ms) until static content will be deleted from cache
-      maxAge: config.maxAgeStatic
-    }
-    return express.static(path, opts)
-  }
-
   const staticPath = join(config.rootPath, 'static')
   app.use(serveStatic(staticPath))
 
@@ -99,8 +91,8 @@ export default function init () {
     ? createHash(readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
 
+  // Add template local variables
   app.use((req, res, next) => {
-    // Add template local variables
     res.locals.config = config
     res.locals.styleHash = styleHash
     res.locals.scriptHash = scriptHash
@@ -113,9 +105,13 @@ export default function init () {
   const sessionStore = new MySQLStore(dbSecret.connection)
   app.use(session({
     store: sessionStore,
+    // Secret used to sign the session ID cookie
     secret: cookieSecret,
+    // Only save a session to the store if it was modified
     resave: false,
+    // Do not save "uninitialized" sessions to the store
     saveUninitialized: false,
+    // Delete session from store when `req.session` is unset
     unset: 'destroy',
     cookie: {
       // Prevent cookies from being accessed by client JavaScript
@@ -129,14 +125,15 @@ export default function init () {
     }
   }))
 
+  // Serve API routes
   app.use('/api', routerApi)
   app.use(routerFeed)
 
   // Headers to send with HTML responses
   app.use((req, res, next) => {
-    // Enable browser XSS filtering. Usually enabled by default, but this header re-
-    // enables it if it was disabled by the user, and asks the the browser to prevent
-    // rendering of the page if an attack is detected.
+    // Enable browser XSS filtering. Usually enabled by default, re-enable
+    // it if it was disabled by the user and asks the the browser to
+    // prevent rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
     res.header('Feature-Policy', oneLine`
@@ -151,7 +148,7 @@ export default function init () {
       ;
     `)
 
-    // Prevent XSS attacks with by explicitly specifying sources of content.
+    // Prevent XSS attacks by explicitly specifying sources of content
     res.header('Content-Security-Policy', oneLine`
       base-uri
         'none'
@@ -193,9 +190,11 @@ export default function init () {
     next()
   })
 
-  app.get('/500', (req, res, next) => next(new Error('Manually visited /500')))
+  app.get('/500', (req, res, next) => {
+    next(new Error('Manually visited /500'))
+  })
 
-  // Render all routes on the server
+  // Serve routes with server-side rendering
   app.get('*', routerApp)
 
   // Log errors to Opbeat
@@ -210,7 +209,16 @@ export default function init () {
   return app
 }
 
-// Create a cache-busting hash for static assets like `bundle.js` and `bundle.css`
+// Returns a correctly configured express.static middleware
+function serveStatic (path) {
+  return express.static(path, {
+    // Time (in ms) until static content will be deleted from cache
+    maxAge: config.maxAgeStatic
+  })
+}
+
+// Create a hash for static assets like `bundle.js` and `bundle.css` to use
+// in a cache-busting query parameter
 function createHash (data) {
   return crypto.createHash('sha256')
     .update(data)
