@@ -6,14 +6,14 @@ import Loader from './loader'
 import PageComponent from './page-component'
 
 export default class RandomPage extends PageComponent {
-  load () {
+  async load () {
     const { dispatch } = this.context
-    dispatch(doGoMidiRandom())
     dispatch('APP_META', {
       title: 'Random MIDI'
     })
+    await dispatch(doGoMidiRandom())
   }
   render (props) {
-    return <Loader center show label='Finding random MIDI' />
+    return <Loader center label='Finding random MIDI' />
   }
 }

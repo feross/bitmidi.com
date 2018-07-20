@@ -9,11 +9,11 @@ import Pagination from './pagination'
 import Midi from './midi'
 
 export default class SearchPage extends PageComponent {
-  load () {
+  async load () {
     const { store, dispatch } = this.context
     const { q, page } = store.location.query
 
-    dispatch(doMidiSearch({ q, page }))
+    await dispatch(doMidiSearch({ q, page }))
 
     const title = [`MIDIs containing '${q}'`]
     if (page !== '0') title.unshift(`Page ${page}`)
@@ -28,6 +28,10 @@ export default class SearchPage extends PageComponent {
     const { data, location, views } = this.context.store
     const { q, page } = location.query
 
+    if (!this.loaded) {
+      return <Loader center label={`Searching for ${q}`} />
+    }
+
     const search = views.search[q]
     const pageTotal = search && search.pageTotal
     const total = search && search.total
@@ -38,16 +42,14 @@ export default class SearchPage extends PageComponent {
     return (
       <div>
         <Heading><span class='silver'>Search for</span> '{q}'</Heading>
-        <Loader show={!search} center>
-          { results.map(midi => <Midi midi={midi} />) }
-          {
-            results.length === 0 &&
-            <div class='mt4'>
-              No results containing all your search terms were found.
-            </div>
-          }
-          <Pagination page={page} pageTotal={pageTotal} total={total} />
-        </Loader>
+        { results.map(midi => <Midi midi={midi} />) }
+        {
+          results.length === 0 &&
+          <div class='mt4'>
+            No results with your search terms were found.
+          </div>
+        }
+        <Pagination page={page} pageTotal={pageTotal} total={total} />
       </div>
     )
   }
