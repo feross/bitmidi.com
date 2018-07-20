@@ -1,18 +1,19 @@
 const isProd = process.env.NODE_ENV === 'production'
 
-exports.cookie = 'TODO'
+export const cookie = 'TODO'
 
-exports.opbeat = {
+export const opbeat = {
   appId: 'TODO',
   organizationId: 'TODO',
   secretToken: 'TODO'
 }
 
-exports.db = {
+export const db = {
   client: 'mysql',
   version: '5.7',
   connection: {
     host: isProd ? 'TODO' : 'TODO',
+    port: 3306,
     user: 'TODO',
     password: 'TODO',
     database: 'TODO'
