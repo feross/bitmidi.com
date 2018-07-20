@@ -170,18 +170,19 @@
   }
 
   100% {
-    background-position: 400% 0%
+    background-position: 200% 0%
   }
 }
 
 .animate-bg-rainbow {
-  animation: bgRainbow 6s linear infinite;
+  animation: 4s linear 0.25s infinite bgRainbow;
 
   background: linear-gradient(
     to right,
-    #ff4136, #ff6300, #ffb700, gold, #19a974, #357edd, #a463f2, #ff80cc, #ff4136
+    #ff4136, #ff6300, #ffb700, gold, #19a974, #357edd, #a463f2, #ff80cc,
+    #ff4136
   );
-  background-size: 400% 400%;
+  background-size: 200% 200%;
 }
 
 /**
