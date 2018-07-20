@@ -27,12 +27,11 @@ exports.analyticsId = 'UA-3898076-25'
 
 // Keywords of the site
 exports.keywords = [
-  'midi',
-  'music',
-  'retro',
+  'free midi',
   'mid',
   'midi files',
-  'free midi'
+  'midi',
+  'music'
 ]
 
 // Website hostname + port
