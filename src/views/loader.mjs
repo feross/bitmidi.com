@@ -8,7 +8,7 @@ const Loader = props => {
   let {
     center,
     class: className,
-    label,
+    label = 'Loading',
     style,
     ...rest
   } = props
