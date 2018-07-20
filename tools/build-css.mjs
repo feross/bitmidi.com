@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
 import minimist from 'minimist'
-import path from 'path'
+import oneLine from 'common-tags/lib/oneLine'
 import purifyCss from 'purify-css'
 import rimraf from 'rimraf'
-import oneLine from 'common-tags/lib/oneLine'
+import { join, basename, dirname } from 'path'
+import { writeFileSync } from 'fs'
 
 import { rootPath, theme, isProd } from '../src/config'
 
@@ -13,7 +13,7 @@ const argv = minimist(process.argv.slice(2), {
   boolean: ['verbose']
 })
 
-const outputPath = path.join(rootPath, './static/bundle.css')
+const outputPath = join(rootPath, './static/bundle.css')
 
 rimraf.sync(outputPath)
 
@@ -50,12 +50,12 @@ const startTime = Date.now()
 
 purifyCss(content, css, opts, bundle => {
   // Write file
-  fs.writeFileSync(outputPath, bundle)
+  writeFileSync(outputPath, bundle)
 
   if (argv.verbose) {
-    const shortOutputPath = path.join(
-      path.basename(path.dirname(outputPath)),
-      path.basename(outputPath)
+    const shortOutputPath = join(
+      basename(dirname(outputPath)),
+      basename(outputPath)
     )
     const buildTime = ((Date.now() - startTime) / 1000).toFixed(2)
     const currentTime = new Date().toLocaleTimeString()

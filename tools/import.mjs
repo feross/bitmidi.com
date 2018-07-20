@@ -1,19 +1,24 @@
-import fs from 'fs'
 import glob from 'glob'
 import minimist from 'minimist'
 import mkdirp from 'mkdirp'
 import ora from 'ora'
-import path from 'path'
 import sha256 from 'simple-sha256'
 import { promisify } from 'util'
+import { join, basename } from 'path'
+import {
+  copyFileSync,
+  chmodSync,
+  readFile,
+  constants as fsConstants
+} from 'fs'
 
 import { rootPath } from '../src/config'
 import Midi from '../src/models/Midi'
 
 const globAsync = promisify(glob)
-const readFileAsync = promisify(fs.readFile)
+const readFileAsync = promisify(readFile)
 
-const UPLOAD_PATH = path.join(rootPath, 'uploads')
+const UPLOAD_PATH = join(rootPath, 'uploads')
 
 init()
 
@@ -35,12 +40,12 @@ async function init () {
   spinner.text = `Finding MIDI files in ${midiPath}...`
 
   let filePaths = await globAsync('**/*.mid', { cwd: midiPath, nocase: true })
-  filePaths = filePaths.map(filePath => path.join(midiPath, filePath))
+  filePaths = filePaths.map(filePath => join(midiPath, filePath))
 
   for (let [i, filePath] of filePaths.entries()) {
     spinner.text = `Processing file ${i} / ${filePaths.length}...`
 
-    const fileName = path.basename(filePath)
+    const fileName = basename(filePath)
     const fileData = await readFileAsync(filePath)
     const hash = sha256.sync(fileData)
 
@@ -57,10 +62,10 @@ async function init () {
           hash
         })
 
-      const outFile = path.join(UPLOAD_PATH, `${midi.id}.mid`)
-      const flags = fs.constants.COPYFILE_EXCL /* fail if dest already exists */
-      fs.copyFileSync(filePath, outFile, flags)
-      fs.chmodSync(outFile, 0o664)
+      const outFile = join(UPLOAD_PATH, `${midi.id}.mid`)
+      const flags = fsConstants.COPYFILE_EXCL // fail if dest exists
+      copyFileSync(filePath, outFile, flags)
+      chmodSync(outFile, 0o664)
 
       importCount += 1
     } else {

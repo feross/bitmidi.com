@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import express from 'express'
-import fs from 'fs'
+import { readFileSync } from 'fs'
 import MySQLSession from 'express-mysql-session'
 import { join, dirname } from 'path'
 import session from 'express-session'
@@ -92,11 +92,11 @@ export default function init () {
 
   // Compute hashes for built resources
   const styleHash = config.isProd
-    ? createHash(fs.readFileSync(join(staticPath, 'bundle.css')))
+    ? createHash(readFileSync(join(staticPath, 'bundle.css')))
     : 'dev'
 
   const scriptHash = config.isProd
-    ? createHash(fs.readFileSync(join(staticPath, 'bundle.js')))
+    ? createHash(readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
 
   app.use((req, res, next) => {
