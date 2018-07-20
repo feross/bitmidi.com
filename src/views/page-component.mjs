@@ -6,19 +6,24 @@ export default class PageComponent extends Component {
   constructor () {
     super()
     this._interval = null
+    this.state = {
+      loaded: false
+    }
   }
 
   componentDidMount () {
-    this.load()
+    this._load()
     if (isBrowser) {
-      this._interval = setInterval(() => this.load(), loadInterval)
+      this._interval = setInterval(() => this._load(), loadInterval)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    // If the user navigates, then the location prop of <Page location={location} />
-    // will change. Call load() since new data may need to be fetched.
-    if (this.props.url !== nextProps.url) this.load()
+    // If the user navigates, then the url prop of <Page /> will change.
+    // Call load() since new data may need to be fetched.
+    if (this.props.url !== nextProps.url) {
+      this.setState({ loaded: false }, () => this._load())
+    }
   }
 
   componentWillUnmount () {
@@ -26,5 +31,17 @@ export default class PageComponent extends Component {
       clearTimeout(this._interval)
       this._interval = null
     }
+  }
+
+  // Optionally overwritten in subclass
+  async load () {}
+
+  async _load () {
+    await this.load()
+    this.setState({ loaded: true })
+  }
+
+  get loaded () {
+    return this.state.loaded
   }
 }
