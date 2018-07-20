@@ -29,7 +29,7 @@ const Header = (props, context) => {
       }}
     >
       <div class='fl w-third'>
-        <HeaderLogo />
+        <HeaderLogo isPageLoading={isPageLoading} />
       </div>
       <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
         <Search class='w-100' />
@@ -44,10 +44,13 @@ const Header = (props, context) => {
 export default Header
 
 const HeaderLogo = ({ isPageLoading }) => {
+  const logoCls = isPageLoading &&
+    'animate-pulse animate--normal animate--infinite'
+
   return (
     <Link
       color='white'
-      class='dib lh-copy white f3'
+      class={c(logoCls, 'dib lh-copy white f3')}
       href='/'
     >
       <Image
