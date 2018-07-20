@@ -7,7 +7,7 @@ const Footer = (props, context) => {
   return (
     <footer class='f6 lh-copy silver w-100 mt5 mb4 tc'>
       <HorizListItem>
-        <Link href='https://github.com/feross/bitmidi.com' newtab>
+        <Link href='/about'>
           About BitMidi
         </Link>
       </HorizListItem>
