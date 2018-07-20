@@ -1,7 +1,7 @@
 import Router from 'express-promise-router'
 
 import api from '../api'
-import config from '../config'
+import { httpOrigin, isProd } from '../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
@@ -15,7 +15,7 @@ router.get('/:midiId(\\d+)', async (req, res, next) => {
   if (midiId === 500) return next()
 
   const { result } = await api.midi.get({ id: midiId })
-  res.redirect(301, `${config.httpOrigin}${result.url}`)
+  res.redirect(301, `${httpOrigin}${result.url}`)
 })
 
 router.use(async (req, res) => {
@@ -24,7 +24,7 @@ router.use(async (req, res) => {
   const jsx = getProvider(store, dispatch)
 
   // Useful for debugging JSX issues in the browser instead of Node
-  if (!config.isProd && req.query.ssr === '0') {
+  if (!isProd && req.query.ssr === '0') {
     res.render('layout', {
       content: '',
       store

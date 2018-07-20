@@ -3,7 +3,7 @@
 import Debug from 'debug'
 
 import api from './api'
-import config from './config'
+import { title as siteTitle, description, isBrowser } from './config'
 import Location from './lib/location'
 import routes from './routes'
 import * as player from './browser/player'
@@ -111,7 +111,7 @@ export default function createStore (render, onPendingChange = () => {}) {
         // Clear fatal errors on page navigation
         store.fatalError = null
 
-        if (config.isBrowser) {
+        if (isBrowser) {
           if (source === 'push') window.scroll(0, 0)
           window.ga('send', 'pageview', location.url)
         }
@@ -125,12 +125,12 @@ export default function createStore (render, onPendingChange = () => {}) {
       case 'APP_META': {
         let title = [...data.title] || []
         if (typeof data.title === 'string') title = [data.title]
-        title.push(config.title)
+        title.push(siteTitle)
         store.app.title = title.map(str => str.trim()).join(' – ')
 
         store.app.description = data.description != null
           ? data.description.trim()
-          : config.description
+          : description
 
         return update()
       }

@@ -1,7 +1,7 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import config from '../config'
+import { isBrowser } from '../config'
 
 export default class Input extends Component {
   constructor () {
@@ -13,7 +13,7 @@ export default class Input extends Component {
 
   componentDidMount () {
     const { autofocus } = this.props
-    if (config.isBrowser && autofocus) this.elem.focus()
+    if (isBrowser && autofocus) this.elem.focus()
   }
 
   render (props) {

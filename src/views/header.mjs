@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import config from '../config'
+import { isBrowser, title } from '../config'
 
 import Button from './button'
 import Image from './image'
@@ -12,7 +12,7 @@ const Header = (props, context) => {
   const { app } = context.store
   const { headerColor } = context.theme
 
-  const isPageLoading = !config.isBrowser || // initial server render
+  const isPageLoading = !isBrowser || // initial server render
       app.pending > 0 || // fetching async data
       !app.isLoaded // window.onload() has not fired yet
 
@@ -55,7 +55,7 @@ const HeaderLogo = ({ isPageLoading }) => {
     >
       <Image
         src='/img/bitmidi.svg'
-        alt={config.title}
+        alt={title}
         style={{
           marginTop: 2,
           height: 36,

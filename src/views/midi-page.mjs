@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import oneLine from 'common-tags/lib/oneLine'
 
-import config from '../config'
+import { title } from '../config'
 import { doMidiGet } from '../actions/midi'
 
 import Heading from './heading'
@@ -22,7 +22,7 @@ export default class MidiPage extends Page {
     dispatch('APP_META', {
       title: result.name,
       description: oneLine`
-        Listen to ${result.name}, a free MIDI file on ${config.title}. Play, download, or share the MIDI song ${result.name} from your web browser.
+        Listen to ${result.name}, a free MIDI file on ${title}. Play, download, or share the MIDI song ${result.name} from your web browser.
       `
     })
   }

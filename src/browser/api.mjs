@@ -1,6 +1,6 @@
 import Debug from 'debug'
 
-import config from '../config'
+import { apiTimeout } from '../config'
 import simpleFetch from '../lib/simple-fetch'
 
 const debug = Debug('bitmidi:api')
@@ -24,7 +24,7 @@ async function sendRequest (method, apiUrl, params) {
     url: `/api${apiUrl}?${new URLSearchParams(params)}`,
     json: true,
     method: method,
-    timeout: config.apiTimeout
+    timeout: apiTimeout
   }
   debug('request %s', opts.url)
 

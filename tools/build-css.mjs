@@ -7,13 +7,13 @@ import purifyCss from 'purify-css'
 import rimraf from 'rimraf'
 import oneLine from 'common-tags/lib/oneLine'
 
-import config from '../src/config'
+import { rootPath, theme, isProd } from '../src/config'
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ['verbose']
 })
 
-const outputPath = path.join(config.rootPath, './static/bundle.css')
+const outputPath = path.join(rootPath, './static/bundle.css')
 
 rimraf.sync(outputPath)
 
@@ -29,7 +29,7 @@ const css = [
 
 const whitelist = [
   // Theme colors
-  ...Object.values(config.theme).map(color => `*${color}*`)
+  ...Object.values(theme).map(color => `*${color}*`)
 ]
 
 const opts = {
@@ -37,7 +37,7 @@ const opts = {
   whitelist,
 
   // Minify the CSS
-  minify: config.isProd,
+  minify: isProd,
 
   // Logs stats on how much CSS was removed
   info: argv.debug,
