@@ -5,10 +5,10 @@ import { doMidiAll } from '../actions/midi'
 import Heading from './heading'
 import Loader from './loader'
 import Midi from './midi'
-import PageComponent from './page-component'
+import Page from './page'
 import Pagination from './pagination'
 
-export default class HomePage extends PageComponent {
+export default class HomePage extends Page {
   async load () {
     const { store, dispatch } = this.context
     const { page } = store.location.query

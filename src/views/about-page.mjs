@@ -5,9 +5,9 @@ import { doMidiAll } from '../actions/midi'
 
 import Loader from './loader'
 import Heading from './heading'
-import PageComponent from './page-component'
+import Page from './page'
 
-export default class AboutPage extends PageComponent {
+export default class AboutPage extends Page {
   async load () {
     const { dispatch } = this.context
 

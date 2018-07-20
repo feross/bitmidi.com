@@ -1,9 +1,9 @@
 import { h } from 'preact' /** @jsx h */
 
 import Heading from './heading'
-import PageComponent from './page-component'
+import Page from './page'
 
-export default class ErrorPage extends PageComponent {
+export default class ErrorPage extends Page {
   load () {
     const { dispatch } = this.context
     const firstError = this.getError()

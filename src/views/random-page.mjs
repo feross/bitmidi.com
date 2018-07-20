@@ -3,9 +3,9 @@ import { h } from 'preact' /** @jsx h */
 import { doGoMidiRandom } from '../actions/midi'
 
 import Loader from './loader'
-import PageComponent from './page-component'
+import Page from './page'
 
-export default class RandomPage extends PageComponent {
+export default class RandomPage extends Page {
   async load () {
     const { dispatch } = this.context
     dispatch('APP_META', {

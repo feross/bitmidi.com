@@ -4,11 +4,11 @@ import { doMidiSearch } from '../actions/midi'
 
 import Heading from './heading'
 import Loader from './loader'
-import PageComponent from './page-component'
+import Page from './page'
 import Pagination from './pagination'
 import Midi from './midi'
 
-export default class SearchPage extends PageComponent {
+export default class SearchPage extends Page {
   async load () {
     const { store, dispatch } = this.context
     const { q, page } = store.location.query

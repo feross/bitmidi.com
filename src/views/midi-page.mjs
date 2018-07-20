@@ -8,11 +8,11 @@ import Heading from './heading'
 import Link from './link'
 import Loader from './loader'
 import Midi from './midi'
-import PageComponent from './page-component'
+import Page from './page'
 import RelativeTime from './relative-time'
 import { HorizListItem, HorizListDivider } from './horiz-list'
 
-export default class MidiPage extends PageComponent {
+export default class MidiPage extends Page {
   async load () {
     const { store, dispatch } = this.context
     const { midiSlug } = store.location.params

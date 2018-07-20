@@ -2,7 +2,7 @@ import { Component } from 'preact'
 
 import { isBrowser, loadInterval } from '../../config'
 
-export default class PageComponent extends Component {
+export default class Page extends Component {
   constructor () {
     super()
     this._interval = null
