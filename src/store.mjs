@@ -28,8 +28,6 @@ export default function createStore (render, onPendingChange = () => {}) {
     app: {
       title: null, // Page title
       description: null, // Page meta description
-      width: 0,
-      height: 0,
       isLoaded: false, // Did window.onload() fire?
       pending: 0
     },
@@ -134,12 +132,6 @@ export default function createStore (render, onPendingChange = () => {}) {
           ? data.description.trim()
           : config.description
 
-        return update()
-      }
-
-      case 'APP_RESIZE': {
-        store.app.width = data.width
-        store.app.height = data.height
         return update()
       }
 
