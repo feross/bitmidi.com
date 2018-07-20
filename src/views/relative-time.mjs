@@ -7,22 +7,27 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 
 const RelativeTime = (props, context) => {
-  const { mainColor } = context.theme
-  const { time, class: className, ...rest } = props
+  const { class: className, datetime, style, ...rest } = props
 
-  const datetime = dayjs(time)
+  if (datetime == null) {
+    throw new Error('Missing required `datetime` prop')
+  }
+
+  const dt = dayjs(datetime)
+
   return (
     <time
-      class={c(`b--${mainColor}`, className)}
+      class={c(`b--black`, className)}
       style={{
         borderWidth: '0.05em',
-        borderBottomStyle: 'dotted'
+        borderBottomStyle: 'dotted',
+        ...style
       }}
-      title={datetime.toString()}
-      datetime={datetime.toISOString()}
+      title={dt.toString()}
+      datetime={dt.toISOString()}
       {...rest}
     >
-      {datetime.fromNow()}
+      {dt.fromNow()}
     </time>
   )
 }
