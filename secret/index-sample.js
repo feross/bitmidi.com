@@ -1,4 +1,4 @@
-const { isProd } = require('../config')
+const isProd = process.env.NODE_ENV === 'production'
 
 exports.cookie = 'TODO'
 
