@@ -8,43 +8,6 @@ import Image from './image'
 import Link from './link'
 import Search from './search'
 
-const HeaderLogo = ({ isPageLoading }) => {
-  const logoCls = isPageLoading
-    ? 'animate-pulse animate--normal animate--infinite'
-    : 'animate-bounce-in animate--normal'
-
-  return (
-    <Link
-      color='white'
-      class={c(logoCls, 'dib lh-copy white f3')}
-      href='/'
-    >
-      <Image
-        src='/img/bitmidi.svg'
-        alt={config.title}
-        style={{
-          marginTop: 2,
-          height: 36,
-          width: 132
-        }}
-      />
-    </Link>
-  )
-}
-
-const RandomMidiButton = () => {
-  return (
-    <Button
-      class='mh1'
-      fill
-      size='medium'
-      href='/random'
-    >
-      Random MIDI ✨
-    </Button>
-  )
-}
-
 const Header = (props, context) => {
   const { app } = context.store
   const { headerColor } = context.theme
@@ -79,3 +42,36 @@ const Header = (props, context) => {
 }
 
 export default Header
+
+const HeaderLogo = ({ isPageLoading }) => {
+  return (
+    <Link
+      color='white'
+      class='dib lh-copy white f3'
+      href='/'
+    >
+      <Image
+        src='/img/bitmidi.svg'
+        alt={config.title}
+        style={{
+          marginTop: 2,
+          height: 36,
+          width: 132
+        }}
+      />
+    </Link>
+  )
+}
+
+const RandomMidiButton = () => {
+  return (
+    <Button
+      class='mh1'
+      fill
+      size='medium'
+      href='/random'
+    >
+      Random MIDI ✨
+    </Button>
+  )
+}
