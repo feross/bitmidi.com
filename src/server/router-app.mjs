@@ -27,8 +27,7 @@ router.use(async (req, res) => {
   if (!config.isProd && req.query.ssr === '0') {
     res.render('layout', {
       content: '',
-      store,
-      canonicalUrl: ''
+      store
     })
     return
   }
@@ -75,8 +74,7 @@ router.use(async (req, res) => {
     res.status(status)
     res.render('layout', {
       content: renderer.html(),
-      store,
-      canonicalUrl: `${config.httpOrigin}${store.location.canonicalUrl}`
+      store
     })
   }
 })
