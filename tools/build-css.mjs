@@ -7,7 +7,7 @@ import purifyCss from 'purify-css'
 import rimraf from 'rimraf'
 import { oneLine } from 'common-tags'
 
-import config from '../config'
+import config from '../src/config'
 
 const argv = minimist(process.argv.slice(2), {
   boolean: ['verbose']

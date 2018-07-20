@@ -1,6 +1,6 @@
 import { h } from 'preact' /** @jsx h */
 
-import config from '../../config'
+import config from '../config'
 import { doMidiAll } from '../actions/midi'
 
 import Loader from './loader'

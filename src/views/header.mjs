@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import config from '../../config'
+import config from '../config'
 
 import Button from './button'
 import Image from './image'

@@ -1,7 +1,7 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import config from '../../config'
+import config from '../config'
 
 export default class Input extends Component {
   constructor () {

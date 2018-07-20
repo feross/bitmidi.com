@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import { oneLine } from 'common-tags'
 
-import config from '../../config'
+import config from '../config'
 import { doMidiGet } from '../actions/midi'
 
 import Heading from './heading'

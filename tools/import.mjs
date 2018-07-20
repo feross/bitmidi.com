@@ -7,7 +7,7 @@ import path from 'path'
 import sha256 from 'simple-sha256'
 import { promisify } from 'util'
 
-import { rootPath } from '../config'
+import { rootPath } from '../src/config'
 import Midi from '../src/models/Midi'
 
 const globAsync = promisify(glob)

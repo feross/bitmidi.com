@@ -7,7 +7,7 @@ import session from 'express-session'
 import uuid from 'uuid/v4'
 import { oneLine } from 'common-tags'
 
-import config from '../../config'
+import config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
 
 import routerApi from './router-api'

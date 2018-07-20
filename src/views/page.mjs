@@ -1,6 +1,6 @@
 import { Component } from 'preact'
 
-import { isBrowser, loadInterval } from '../../config'
+import { isBrowser, loadInterval } from '../config'
 
 export default class Page extends Component {
   constructor () {

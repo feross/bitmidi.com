@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import Provider from 'preact-context-provider'
 
-import config from '../../config'
+import config from '../config'
 
 import App from '../views/app'
 

@@ -1,7 +1,7 @@
 import Router from 'express-promise-router'
 
 import api from '../api'
-import config from '../../config'
+import config from '../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'

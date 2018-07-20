@@ -4,7 +4,7 @@ import Router from 'express-promise-router'
 import { oneLine } from 'common-tags'
 
 import api from '../api'
-import config from '../../config'
+import config from '../config'
 
 const router = Router()
 

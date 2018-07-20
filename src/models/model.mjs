@@ -4,7 +4,7 @@ import { join } from 'path'
 import { knexSnakeCaseMappers, Model, QueryBuilder } from 'objection'
 
 import { db } from '../../secret'
-import { rootPath } from '../../config'
+import { rootPath } from '../config'
 
 const debug = Debug('bitmidi:model')
 

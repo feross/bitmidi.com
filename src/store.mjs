@@ -3,7 +3,7 @@
 import Debug from 'debug'
 
 import api from './api'
-import config from '../config'
+import config from './config'
 import Location from './lib/location'
 import routes from './routes'
 import * as player from './browser/player'

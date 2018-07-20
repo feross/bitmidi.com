@@ -1,6 +1,6 @@
 import Debug from 'debug'
 
-import config from '../../config'
+import config from '../config'
 import simpleFetch from '../lib/simple-fetch'
 
 const debug = Debug('bitmidi:api')

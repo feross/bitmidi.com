@@ -1,6 +1,6 @@
 // import Opbeat from 'opbeat'
 
-// import { isProd } from '../../config'
+// import { isProd } from '../config'
 // import { opbeat as opbeatSecret } from '../../secret'
 
 // if (isProd) {
