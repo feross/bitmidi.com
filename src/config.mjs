@@ -43,27 +43,27 @@ export const rootPath = isBrowser
   ? '/'
   : join(__dirname, '..')
 
-// Time (in milliseconds) to wait before updating page component data. Page
-// data will be reloaded at least this often.
+// Time (in ms) to wait before updating page component data. Page data will
+// be reloaded at least this often.
 export const loadInterval = 10 * 60 * 1000 // 10 minutes
 
-// Time (in milliseconds) to cache static resources. This value is sent in
-// the HTTP "Cache-Control" header.
+// Time (in ms) to cache static resources. This value is sent in the HTTP
+// "Cache-Control" header.
 export const maxAgeStatic = isProd
   ? 7 * 24 * 60 * 60 * 1000 // 7 days
   : 0
 
-// Time (in milliseconds) to keep cookies before deletion. This value is sent in
-// the HTTP "Set-Cookie" header as the "Expires" attribute.
+// Time (in ms) to keep cookies before deletion. This value is sent in the
+// HTTP "Set-Cookie" header as the "Expires" attribute.
 export const maxAgeCookie = isProd
   ? 365 * 24 * 60 * 60 * 1000 // 1 year
   : 0
 
-// Time (in milliseconds) to cache the HTTP "Strict-Transport-Security" (HSTS)
+// Time (in ms) to cache the HTTP "Strict-Transport-Security" (HSTS)
 // setting. This value is sent as the "max-age" attribute in the header.
 export const maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
 
-// Time (in milliseconds) to wait before an API request is considered timed out.
+// Time (in ms) to wait before an API request is considered timed out
 export const apiTimeout = 30 * 1000
 
 // User agent for API requests
