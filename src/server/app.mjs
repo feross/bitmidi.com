@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import express from 'express'
 import fs from 'fs'
 import MySQLSession from 'express-mysql-session'
-import path from 'path'
+import { join, dirname } from 'path'
 import session from 'express-session'
 import uuid from 'uuid/v4'
 import oneLine from 'common-tags/lib/oneLine'
@@ -28,7 +28,7 @@ export default function init () {
   const app = express()
 
   app.set('view engine', 'ejs') // Use EJS for server-side templating
-  app.set('views', path.join(config.rootPath, 'src', 'server')) // Template folder
+  app.set('views', join(config.rootPath, 'src', 'server')) // Template folder
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
@@ -64,32 +64,39 @@ export default function init () {
   })
 
   // Set up static file serving
-  const staticOpts = { maxAge: config.maxAgeStatic }
-  const staticPath = path.join(config.rootPath, 'static')
-  app.use(express.static(staticPath, staticOpts))
+  function serveStatic (path) {
+    const opts = {
+      // Time (in ms) until static content will be deleted from cache
+      maxAge: config.maxAgeStatic
+    }
+    return express.static(path, opts)
+  }
 
-  const iconsPath = path.join(
-    path.dirname(require.resolve('material-design-icons')),
+  const staticPath = join(config.rootPath, 'static')
+  app.use(serveStatic(staticPath))
+
+  const iconsPath = join(
+    dirname(require.resolve('material-design-icons')),
     'iconfont'
   )
-  app.use(express.static(iconsPath, staticOpts))
+  app.use(serveStatic(iconsPath))
 
-  const timidityPath = path.dirname(require.resolve('timidity'))
-  app.use('/timidity', express.static(timidityPath, staticOpts))
+  const timidityPath = dirname(require.resolve('timidity'))
+  app.use('/timidity', serveStatic(timidityPath))
 
-  const freepatsPath = path.dirname(require.resolve('freepats'))
-  app.use('/timidity', express.static(freepatsPath, staticOpts))
+  const freepatsPath = dirname(require.resolve('freepats'))
+  app.use('/timidity', serveStatic(freepatsPath))
 
-  const uploadsPath = path.join(config.rootPath, 'uploads')
-  app.use('/uploads', express.static(uploadsPath, staticOpts))
+  const uploadsPath = join(config.rootPath, 'uploads')
+  app.use('/uploads', serveStatic(uploadsPath))
 
   // Compute hashes for built resources
   const styleHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(staticPath, 'bundle.css')))
+    ? createHash(fs.readFileSync(join(staticPath, 'bundle.css')))
     : 'dev'
 
   const scriptHash = config.isProd
-    ? createHash(fs.readFileSync(path.join(staticPath, 'bundle.js')))
+    ? createHash(fs.readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
 
   app.use((req, res, next) => {
@@ -111,10 +118,14 @@ export default function init () {
     saveUninitialized: false,
     unset: 'destroy',
     cookie: {
-      httpOnly: true, // Prevent cookies from being accessed by client JavaScript
-      maxAge: config.maxAgeCookie, // Time to keep cookies before deletion
-      sameSite: 'lax', // Prevent cookies from being sent with cross-site requests
-      secure: config.isProd // Prevent cookies from being sent over insecure HTTP
+      // Prevent cookies from being accessed by client JavaScript
+      httpOnly: true,
+      // Time (in ms) until cookies will be deleted
+      maxAge: config.maxAgeCookie,
+      // Omit cookies for requests initiated on other origins
+      sameSite: 'lax',
+      // Prevent cookies from being sent over insecure HTTP
+      secure: config.isProd
     }
   }))
 
