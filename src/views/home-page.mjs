@@ -61,10 +61,12 @@ const HomePageHero = ({ numFiles }) => {
         style={{
           backgroundImage: 'url(/img/hero.jpg)',
           zIndex: -1,
-          height: 550
+          height: 480
         }}
       />
-      <div class='white mv6 mh4 mb5' style={{ marginBottom: 200 }}>
+      <div class='white pv5 ph3' style={{
+        height: 450
+      }}>
         <h1 class='f2 f1-l measure lh-title fw9'>
           Listen to your favorite MIDI files on BitMidi
         </h1>
