@@ -1,7 +1,7 @@
 import expressSitemapXml from 'express-sitemap-xml'
 import jsonfeedToAtom from 'jsonfeed-to-atom'
 import Router from 'express-promise-router'
-import { oneLine } from 'common-tags'
+import oneLine from 'common-tags/lib/oneLine'
 
 import api from '../api'
 import config from '../config'

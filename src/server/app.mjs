@@ -5,7 +5,7 @@ import MySQLSession from 'express-mysql-session'
 import path from 'path'
 import session from 'express-session'
 import uuid from 'uuid/v4'
-import { oneLine } from 'common-tags'
+import oneLine from 'common-tags/lib/oneLine'
 
 import config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'

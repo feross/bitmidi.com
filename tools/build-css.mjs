@@ -5,7 +5,7 @@ import minimist from 'minimist'
 import path from 'path'
 import purifyCss from 'purify-css'
 import rimraf from 'rimraf'
-import { oneLine } from 'common-tags'
+import oneLine from 'common-tags/lib/oneLine'
 
 import config from '../src/config'
 
