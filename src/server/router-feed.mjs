@@ -4,7 +4,7 @@ import Router from 'express-promise-router'
 import oneLine from 'common-tags/lib/oneLine'
 
 import api from '../api'
-import { title, description, keywords, httpOrigin } from '../config'
+import { title, description, keywords, origin } from '../config'
 
 const router = Router()
 
@@ -22,7 +22,7 @@ router.get('/feed.xml', async (req, res) => {
     .send(atomFeed)
 })
 
-router.use(expressSitemapXml(getUrls, httpOrigin))
+router.use(expressSitemapXml(getUrls, origin))
 
 async function getUrls () {
   const { results } = await api.midi.all({
@@ -43,25 +43,25 @@ async function getJsonFeed () {
     version: 'https://jsonfeed.org/version/1',
     title: title,
     description: description,
-    home_page_url: `${httpOrigin}/`,
-    feed_url: `${httpOrigin}/feed.json`,
+    home_page_url: `${origin}/`,
+    feed_url: `${origin}/feed.json`,
     user_comment: oneLine`
       This feed allows you to read the posts from ${title} in any feed
       reader that supports the JSON Feed format. To add this feed to your
-      reader, copy the following URL — ${httpOrigin}/feed.json — and add
+      reader, copy the following URL — ${origin}/feed.json — and add
       it your reader.
     `,
-    favicon: `${httpOrigin}/favicon.ico`,
-    icon: `${httpOrigin}/android-chrome-512x512.png`,
+    favicon: `${origin}/favicon.ico`,
+    icon: `${origin}/android-chrome-512x512.png`,
     author: {
       name: title,
-      url: `${httpOrigin}/`,
-      avatar: `${httpOrigin}/android-chrome-512x512.png`
+      url: `${origin}/`,
+      avatar: `${origin}/android-chrome-512x512.png`
     }
   }
 
   feed.items = results.map(midi => {
-    const url = `${httpOrigin}${midi.url}`
+    const url = `${origin}${midi.url}`
     return {
       id: url,
       url: url,
@@ -80,8 +80,8 @@ async function getJsonFeed () {
       date_modified: midi.updatedAt.toISOString(),
       author: {
         name: title,
-        url: `${httpOrigin}/`,
-        avatar: `${httpOrigin}/android-chrome-512x512.png`
+        url: `${origin}/`,
+        avatar: `${origin}/android-chrome-512x512.png`
       },
       tags: keywords
     }

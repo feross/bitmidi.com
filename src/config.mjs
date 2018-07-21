@@ -36,7 +36,7 @@ export const host = isProd
   : 'localhost:4000'
 
 // Website origin (scheme + hostname + port)
-export const httpOrigin = (isProd ? 'https' : 'http') + '://' + host
+export const origin = (isProd ? 'https' : 'http') + '://' + host
 
 // Root path of project
 export const rootPath = isBrowser
@@ -67,7 +67,7 @@ export const maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
 export const apiTimeout = 30 * 1000
 
 // User agent for API requests
-export const apiUserAgent = `${title}/1.0.0 (${httpOrigin})`
+export const apiUserAgent = `${title}/1.0.0 (${origin})`
 
 // Website theme colors
 export const theme = {

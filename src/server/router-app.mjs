@@ -1,7 +1,7 @@
 import Router from 'express-promise-router'
 
 import api from '../api'
-import { httpOrigin, isProd } from '../config'
+import { origin, isProd } from '../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
@@ -15,7 +15,7 @@ router.get('/:midiId(\\d+)', async (req, res, next) => {
   if (midiId === 500) return next()
 
   const { result } = await api.midi.get({ id: midiId })
-  res.redirect(301, `${httpOrigin}${result.url}`)
+  res.redirect(301, `${origin}${result.url}`)
 })
 
 router.use(async (req, res) => {

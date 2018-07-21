@@ -40,7 +40,7 @@ export default function init () {
     // Redirect to canonical origin, over https
     if (config.isProd && req.method === 'GET' &&
         (req.protocol !== 'https' || req.hostname !== config.host)) {
-      return res.redirect(301, config.httpOrigin + req.url)
+      return res.redirect(301, config.origin + req.url)
     }
 
     // Disable browser mime-type sniffing to reduce exposure to drive-by

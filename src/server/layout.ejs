@@ -6,7 +6,7 @@
 
     <title><%= store.app.title %></title>
     <meta name='description' content='<%= store.app.description %>'>
-    <link rel='canonical' href='<%= config.httpOrigin + (store.location.canonicalUrl || '') %>' />
+    <link rel='canonical' href='<%= config.origin + (store.location.canonicalUrl || '') %>' />
 
     <link rel='preload' as='script' href='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>' />
     <link rel='stylesheet' href='/bundle.css?c=<%- styleHash %>' />
