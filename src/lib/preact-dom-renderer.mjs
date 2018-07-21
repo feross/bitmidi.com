@@ -58,7 +58,7 @@ function serializeHtml (el) {
   const styleProps = Object.keys(el.style).filter(k => el.style[k] !== '')
 
   const style = styleProps.length
-    ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${el.style[k]}`).join('; ')}"`
+    ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${encAttr(el.style[k])}`).join('; ')}"`
     : ''
 
   if (innerHTML === '' && selfClosingTags.includes(nodeName)) {
@@ -81,6 +81,7 @@ function encXML (s) {
 }
 
 function encAttr (s) {
+  if (typeof s !== 'string') s = s.toString()
   return s.replace(/[&'"<>]/g, a => charMap[a])
 }
 
