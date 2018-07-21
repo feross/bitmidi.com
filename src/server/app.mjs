@@ -1,11 +1,11 @@
-import crypto from 'crypto'
 import express from 'express'
-import { readFileSync } from 'fs'
 import MySQLSession from 'express-mysql-session'
-import { join, dirname } from 'path'
+import oneLine from 'common-tags/lib/oneLine'
 import session from 'express-session'
 import uuid from 'uuid/v4'
-import oneLine from 'common-tags/lib/oneLine'
+import crypto from 'crypto'
+import { join, dirname } from 'path'
+import { readFileSync } from 'fs'
 
 import * as config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
@@ -98,7 +98,7 @@ export default function init () {
     res.locals.config = config
     res.locals.styleHash = styleHash
     res.locals.scriptHash = scriptHash
-    res.locals.nonce = Buffer.from(uuid()).toString('base64')
+    res.locals.nonce = createNonce()
 
     next()
   })
@@ -222,9 +222,13 @@ function serveStatic (path) {
 // Create a hash for static assets like `bundle.js` and `bundle.css` to use
 // in a cache-busting query parameter
 function createHash (data) {
-  return crypto.createHash('sha256')
-    .update(data)
-    .digest('base64')
-    .slice(0, 20)
-    .replace(/\+|\/|=/g, '')
+  return trimHash(crypto.createHash('sha256').update(data).digest('base64'))
+}
+
+function createNonce () {
+  return trimHash(Buffer.from(uuid()).toString('base64'))
+}
+
+function trimHash (str) {
+  return str.slice(0, 20).replace(/\+|\/|=/g, '')
 }
