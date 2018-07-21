@@ -57,9 +57,7 @@ const HeaderLogo = ({ isPageLoading }) => {
         src='/img/bitmidi.svg'
         alt={title}
         style={{
-          marginTop: 2,
-          height: 36,
-          width: 132
+          height: 39
         }}
       />
     </Link>
