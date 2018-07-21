@@ -27,11 +27,12 @@ const MySQLStore = MySQLSession(session)
 export default function init () {
   const app = express()
 
-  app.set('view engine', 'ejs') // Use EJS for server-side templating
-  app.set('views', join(config.rootPath, 'src', 'server')) // Template folder
+  // Use EJS for server-side templating
+  app.set('view engine', 'ejs')
+  app.set('views', join(config.rootPath, 'src', 'server'))
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
-  app.set('json spaces', config.isProd ? 0 : 2) // Pretty-print JSON in development
+  app.set('json spaces', config.isProd ? 0 : 2) // Pretty JSON (in dev)
   app.set('x-powered-by', false) // Prevent server fingerprinting
 
   // Headers to send with all responses
@@ -42,17 +43,18 @@ export default function init () {
       return res.redirect(301, config.httpOrigin + req.url)
     }
 
-    // Disable browser mime-type sniffing to reduce exposure to drive-by download
-    // attacks when serving user uploaded content
+    // Disable browser mime-type sniffing to reduce exposure to drive-by
+    // download attacks when serving user uploaded content
     res.header('X-Content-Type-Options', 'nosniff')
 
-    // Prevent information leaks through the 'Referer' header. Only send a full URL
-    // for same-origin requests, only send the document origin when navigating
-    // HTTPS->HTTPS, and send no header when navigating HTTPS->HTTP.
+    // Prevent information leaks through the 'Referer' header. For same-
+    // origin requests, send a full URL. For cross-origin HTTPS->HTTPS
+    // navigation, send the document origin. For cross-origin HTTPS->HTTP
+    // navigation, send nothing.
     res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
 
-    // Use HTTP Strict Transport Security (HSTS), cached for 2 years, including on
-    // subdomains, and allow browser preload.
+    // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
+    // including on subdomains, and allow browser preload.
     if (config.isProd) {
       res.header(
         'Strict-Transport-Security',
