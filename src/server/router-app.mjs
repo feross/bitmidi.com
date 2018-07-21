@@ -8,8 +8,8 @@ import getProvider from '../views/provider'
 
 const router = Router()
 
-// Redirect from /1 to /009count-mid
 // TODO: remove this once Google indexes the new /:midiSlug URLs
+// Redirect from /1 to /009count-mid
 router.get('/:midiId(\\d+)', async (req, res, next) => {
   const midiId = Number(req.params.midiId)
   if (midiId === 500) return next()
@@ -52,8 +52,9 @@ router.use(async (req, res) => {
       console.error(stack)
       update()
     } else if (store.errors.length > 0) {
-      // When an error occurs during server rendering, treat it as a fatal error
-      const { message, stack, code = null, status = 404 } = store.errors.shift()
+      // When an error occurs during server rendering, treat it as fatal
+      const { message, stack, code = null, status = 404 } =
+        store.errors.shift()
       store.fatalError = { message, code, status }
       console.error(stack)
       update()
@@ -68,7 +69,7 @@ router.use(async (req, res) => {
     } else if (store.location.name === 'error') {
       status = 404
     } else if (routeName !== store.location.name) {
-      return res.redirect(store.location.canonicalUrl)
+      return res.redirect(307, store.location.canonicalUrl)
     }
 
     res.status(status)
