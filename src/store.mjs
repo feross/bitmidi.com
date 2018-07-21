@@ -140,6 +140,17 @@ export default function createStore (render, onPendingChange = () => {}) {
         return update()
       }
 
+      case 'APP_SHARE': {
+        if (navigator.share != null) {
+          navigator.share({
+            title: store.app.title,
+            text: store.app.description,
+            url: store.location.canonicalUrl
+          })
+        }
+        return
+      }
+
       /**
        * MIDI
        */

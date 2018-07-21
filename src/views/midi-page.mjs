@@ -10,6 +10,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import RelativeTime from './relative-time'
+import ShareButton from './share-button'
 import { HorizListItem, HorizListDivider } from './horiz-list'
 
 export default class MidiPage extends Page {
@@ -40,8 +41,16 @@ export default class MidiPage extends Page {
 
     return (
       <div>
-        <Heading>{midi.name}</Heading>
-        <MidiMetadata midi={midi} />
+        <div>
+          <div class='dib w-90'>
+            <Heading>{midi.name}</Heading>
+            <MidiMetadata midi={midi} />
+          </div>
+          <div class='fr w-10 tr'>
+            <ShareButton class='mt2' />
+          </div>
+        </div>
+
         <Midi midi={midi} />
 
         <h3>Play now</h3>

@@ -43,8 +43,8 @@ export default class Midi extends Component {
               title={`Play ${midi.name}`}
             >
               {isPlaying
-                ? <Icon class='v-btm' size={30} name='stop' />
-                : <Icon class='v-btm' size={30} name='play_arrow' />
+                ? <Icon class='v-btm' name='stop' />
+                : <Icon class='v-btm' name='play_arrow' />
               }
             </Link>
           </div>

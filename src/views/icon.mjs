@@ -6,7 +6,7 @@ const Icon = props => {
   const {
     name,
     class: className,
-    size = 24,
+    size = 30,
     ...rest
   } = props
 
