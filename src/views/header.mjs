@@ -22,21 +22,23 @@ const Header = (props, context) => {
 
   return (
     <header
-      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph2 ph3-m ph3-l')}
+      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph1 ph2-m ph2-l')}
       style={{
         height: 50,
         paddingTop: 6
       }}
     >
-      <div class='fl w-third'>
-        <HeaderLogo isPageLoading={isPageLoading} />
+      <div class='center mw9'>
+        <div class='fl w-third'>
+          <HeaderLogo isPageLoading={isPageLoading} />
+        </div>
+        <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
+          <Search class='w-100' />
+        </div>
+        <nav class='fl w-third dn db-m db-l v-mid tr'>
+          <RandomMidiButton />
+        </nav>
       </div>
-      <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
-        <Search class='w-100' />
-      </div>
-      <nav class='fl w-third dn db-m db-l v-mid tr'>
-        <RandomMidiButton />
-      </nav>
     </header>
   )
 }
