@@ -22,7 +22,7 @@ const Header = (props, context) => {
 
   return (
     <header
-      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph1 ph2-m ph2-l')}
+      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph2')}
       style={{
         height: 50,
         paddingTop: 6
