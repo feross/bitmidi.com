@@ -144,7 +144,6 @@ export default function createStore (render, onPendingChange = () => {}) {
         if (navigator.share == null) return
         await navigator.share({
           title: store.app.title,
-          text: store.app.description,
           url: store.location.canonicalUrl
         })
         window.ga('send', 'event', 'share', 'navigator.share')
