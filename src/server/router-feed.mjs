@@ -4,6 +4,8 @@ import Router from 'express-promise-router'
 import oneLine from 'common-tags/lib/oneLine'
 
 import api from '../api'
+import asyncFlatMap from '../lib/async-flatmap'
+import routes from '../routes'
 import { title, description, keywords, origin } from '../config'
 
 const router = Router()
@@ -24,13 +26,13 @@ router.get('/feed.xml', async (req, res) => {
 
 router.use(expressSitemapXml(getUrls, origin))
 
-async function getUrls () {
-  const { results } = await api.midi.all({
-    select: ['slug'],
-    orderBy: 'views',
-    pageSize: Infinity
+function getUrls () {
+  const sitemapRoutes = routes.filter(route => route.sitemap)
+  return asyncFlatMap(sitemapRoutes, async route => {
+    return route.sitemap === true
+      ? route.path
+      : route.sitemap()
   })
-  return ['/'].concat(results.map(result => result.url))
 }
 
 async function getJsonFeed () {
