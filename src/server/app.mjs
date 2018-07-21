@@ -11,8 +11,8 @@ import * as config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
 
 import routerApi from './router-api'
-import routerApp from './router-app'
 import routerFeed from './router-feed'
+import routerRender from './router-render'
 
 // Set correct mime-type for streaming wasm compilation
 // See: https://github.com/expressjs/express/issues/3589
@@ -197,7 +197,7 @@ export default function init () {
   })
 
   // Serve routes with server-side rendering
-  app.get('*', routerApp)
+  app.get('*', routerRender)
 
   // Log errors to Opbeat
   if (global.opbeat) app.use(global.opbeat.middleware.express())
@@ -205,7 +205,7 @@ export default function init () {
   // Handle errors with the same server-side rendering path
   app.use((err, req, res, next) => {
     req.err = err
-    routerApp(req, res, next)
+    routerRender(req, res, next)
   })
 
   return app
