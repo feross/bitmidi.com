@@ -72,5 +72,6 @@ export const apiUserAgent = `${title}/1.0.0 (${origin})`
 // Website theme colors
 export const theme = {
   mainColor: 'dark-blue',
-  headerColor: 'hot-pink'
+  headerColor: 'hot-pink',
+  headerColorHex: '#ff41b4'
 }
