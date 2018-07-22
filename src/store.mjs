@@ -3,7 +3,7 @@
 import Debug from 'debug'
 
 import api from './api'
-import { title as siteTitle, description, isBrowser } from './config'
+import { title as siteTitle, description, siteImage, isBrowser } from './config'
 import Location from './lib/location'
 import routes from './routes'
 import * as player from './browser/player'
@@ -28,6 +28,7 @@ export default function createStore (render, onPendingChange = () => {}) {
     app: {
       title: null, // Page title
       description: null, // Page meta description
+      image: null, // Page image
       isLoaded: false, // Did window.onload() fire?
       pending: 0
     },
@@ -123,14 +124,20 @@ export default function createStore (render, onPendingChange = () => {}) {
        */
 
       case 'APP_META': {
-        let title = [...data.title] || []
-        if (typeof data.title === 'string') title = [data.title]
+        const title = typeof data.title === 'string'
+          ? [data.title]
+          : Array.isArray(data.title)
+            ? [...data.title]
+            : []
         title.push(siteTitle)
-        store.app.title = title.map(str => str.trim()).join(' – ')
+
+        store.app.title = title.map(str => str.trim()).join(' — ')
 
         store.app.description = data.description != null
           ? data.description.trim()
           : description
+
+        store.app.image = data.image || siteImage
 
         return update()
       }

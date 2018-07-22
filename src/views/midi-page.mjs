@@ -18,13 +18,14 @@ export default class MidiPage extends Page {
     const { store, dispatch } = this.context
     const { midiSlug } = store.location.params
 
-    const { result } = await dispatch(doMidiGet({ slug: midiSlug }))
+    const { result: midi } = await dispatch(doMidiGet({ slug: midiSlug }))
 
     dispatch('APP_META', {
-      title: result.name,
+      title: midi.name,
       description: oneLine`
-        Listen to ${result.name}, a free MIDI file on ${title}. Play, download, or share the MIDI song ${result.name} from your web browser.
-      `
+        Listen to ${midi.name}, a free MIDI file on ${title}. Play, download, or share the MIDI song ${midi.name} from your web browser.
+      `,
+      image: midi.image
     })
   }
 

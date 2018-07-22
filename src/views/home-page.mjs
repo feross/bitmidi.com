@@ -17,7 +17,7 @@ export default class HomePage extends Page {
 
     const title = ['Popular MIDIs']
     if (page !== '0') title.unshift(`Page ${page}`)
-    dispatch('APP_META', { title, description: null })
+    dispatch('APP_META', { title })
   }
 
   render (props) {
@@ -59,7 +59,7 @@ const HomePageHero = ({ numFiles }) => {
       <div
         class='cover bg-center absolute top-0 left-0 w-100'
         style={{
-          backgroundImage: 'url(/img/hero.jpg)',
+          backgroundImage: 'url("/img/hero.jpg")',
           zIndex: -1,
           height: 480
         }}

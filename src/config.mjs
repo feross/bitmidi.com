@@ -18,6 +18,12 @@ export const description = oneLine`
   best free MIDIs on the web.
 `
 
+// Twitter username of the site
+export const twitterUser = 'BitMidi'
+
+// Default image to represent the site in social sharing
+export const siteImage = '/img/hero.png'
+
 // Google Analytics tracking ID
 export const analyticsId = 'UA-3898076-25'
 
