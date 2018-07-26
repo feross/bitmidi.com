@@ -120,7 +120,7 @@
   },
   "scripts": {
     "build": "npm run build-css && npm run build-js",
-    "build-css": "node -r @babel/register ./tools/build-css",
+    "build-css": "NODE_ENV=production node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
     "knex": "knex --knexfile tools/knexfile.js --cwd .",
     "prepush": "npm test",
