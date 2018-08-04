@@ -19,7 +19,7 @@ export const siteDesc = oneLine`
 `
 
 // Twitter username of the site
-export const twitterUser = 'BitMidi'
+export const siteTwitter = 'BitMidi'
 
 // Default image to represent the site in social sharing
 export const siteImage = '/img/hero.jpg'
