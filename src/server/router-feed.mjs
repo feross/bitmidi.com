@@ -6,7 +6,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import api from '../api'
 import asyncFlatMap from '../lib/async-flatmap'
 import routes from '../routes'
-import { siteName, siteDesc, keywords, origin } from '../config'
+import { siteName, siteDesc, siteKeywords, origin } from '../config'
 
 const router = Router()
 
@@ -85,7 +85,7 @@ async function getJsonFeed () {
         url: `${origin}/`,
         avatar: `${origin}/android-chrome-512x512.png`
       },
-      tags: keywords
+      tags: siteKeywords
     }
   })
 

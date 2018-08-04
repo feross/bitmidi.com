@@ -18,23 +18,23 @@ export const siteDesc = oneLine`
   best MIDIs on the web.
 `
 
-// Twitter username of the site
-export const siteTwitter = 'BitMidi'
-
-// Default image to represent the site in social sharing
-export const siteImage = '/img/hero.jpg'
-
-// Google Analytics tracking ID
-export const analyticsId = 'UA-3898076-25'
-
 // Keywords of the site
-export const keywords = [
+export const siteKeywords = [
   'free midi',
   'mid',
   'midi files',
   'midi',
   'music'
 ]
+
+// Twitter username of the site
+export const siteTwitter = 'BitMidi'
+
+// Default image to represent the site on social networks
+export const siteImage = '/img/hero.jpg'
+
+// Google Analytics tracking ID
+export const analyticsId = 'UA-3898076-25'
 
 // Website hostname + port
 export const host = isProd
