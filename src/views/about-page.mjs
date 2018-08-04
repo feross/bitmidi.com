@@ -1,6 +1,6 @@
 import { h } from 'preact' /** @jsx h */
 
-import { title } from '../config'
+import { siteName } from '../config'
 import { doMidiAll } from '../actions/midi'
 
 import Loader from './loader'
@@ -12,7 +12,7 @@ export default class AboutPage extends Page {
     const { dispatch } = this.context
 
     dispatch('APP_META', {
-      title: `About ${title}`
+      title: `About ${siteName}`
     })
 
     await dispatch(doMidiAll({ pageSize: 1 }))
@@ -25,7 +25,7 @@ export default class AboutPage extends Page {
 
     return (
       <div>
-        <Heading>About {title}</Heading>
+        <Heading>About {siteName}</Heading>
         <p>Serving {views.all.total.toLocaleString()} MIDI files curated by volunteers around the world.</p>
 
         <Heading>What is this site?</Heading>

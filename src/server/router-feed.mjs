@@ -6,7 +6,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import api from '../api'
 import asyncFlatMap from '../lib/async-flatmap'
 import routes from '../routes'
-import { title, description, keywords, origin } from '../config'
+import { siteName, description, keywords, origin } from '../config'
 
 const router = Router()
 
@@ -43,12 +43,12 @@ async function getJsonFeed () {
 
   const feed = {
     version: 'https://jsonfeed.org/version/1',
-    title: title,
+    title: siteName,
     description: description,
     home_page_url: `${origin}/`,
     feed_url: `${origin}/feed.json`,
     user_comment: oneLine`
-      This feed allows you to read the posts from ${title} in any feed
+      This feed allows you to read the posts from ${siteName} in any feed
       reader that supports the JSON Feed format. To add this feed to your
       reader, copy the following URL — ${origin}/feed.json — and add
       it your reader.
@@ -56,7 +56,7 @@ async function getJsonFeed () {
     favicon: `${origin}/favicon.ico`,
     icon: `${origin}/android-chrome-512x512.png`,
     author: {
-      name: title,
+      name: siteName,
       url: `${origin}/`,
       avatar: `${origin}/android-chrome-512x512.png`
     }
@@ -81,7 +81,7 @@ async function getJsonFeed () {
       date_published: midi.createdAt.toISOString(),
       date_modified: midi.updatedAt.toISOString(),
       author: {
-        name: title,
+        name: siteName,
         url: `${origin}/`,
         avatar: `${origin}/android-chrome-512x512.png`
       },

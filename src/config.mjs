@@ -10,7 +10,7 @@ export const isProd = isBrowser
   : process.env.NODE_ENV === 'production'
 
 // Title of the site
-export const title = 'BitMidi'
+export const siteName = 'BitMidi'
 
 // Description of the site
 export const description = oneLine`
@@ -73,7 +73,7 @@ export const maxAgeHSTS = 365 * 24 * 60 * 60 * 1000 // 1 year
 export const apiTimeout = 30 * 1000
 
 // User agent for API requests
-export const apiUserAgent = `${title}/1.0.0 (${origin})`
+export const apiUserAgent = `${siteName}/1.0.0 (${origin})`
 
 // Website theme colors
 export const theme = {

@@ -16,8 +16,8 @@
     <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
     <link rel='manifest' href='/manifest.webmanifest' />
     <link rel='mask-icon' href='/safari-pinned-tab.svg' color='<%= config.headerColorHex %>' />
-    <meta name='apple-mobile-web-app-title' content='<%= config.title %>' />
-    <meta name='application-name' content='<%= config.title %>' />
+    <meta name='apple-mobile-web-app-title' content='<%= config.siteName %>' />
+    <meta name='application-name' content='<%= config.siteName %>' />
     <meta name='theme-color' content='<%= config.headerColorHex %>' />
     <meta name='apple-mobile-web-app-capable' content='yes' />
 
@@ -25,14 +25,14 @@
     <meta property='og:description' content='<%= store.app.description %>'>
     <meta property='og:url' content='<%= config.origin %><%= store.location.canonicalUrl %>'>
     <meta property='og:image' content='<%= config.origin %><%= store.app.image %>'>
-    <meta property='og:site_name' content='<%= config.title %>'>
+    <meta property='og:site_name' content='<%= config.siteName %>'>
     <meta property='og:type' content='website'>
     <meta name='twitter:site' content='@<%= config.twitterUser %>'>
     <meta name='twitter:card' content='summary_large_image'>
 
-    <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.title %>'>
-    <link rel='alternate' href='/feed.json' type='application/json' title='<%= config.title %>' />
-    <link rel='alternate' href='/feed.xml' type='application/atom+xml' title='<%= config.title %>' />
+    <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.siteName %>'>
+    <link rel='alternate' href='/feed.json' type='application/json' title='<%= config.siteName %>' />
+    <link rel='alternate' href='/feed.xml' type='application/atom+xml' title='<%= config.siteName %>' />
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>

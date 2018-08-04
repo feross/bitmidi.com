@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import { isBrowser, title } from '../config'
+import { isBrowser, siteName } from '../config'
 
 import Button from './button'
 import Image from './image'
@@ -57,7 +57,7 @@ const HeaderLogo = ({ isPageLoading }) => {
     >
       <Image
         src='/img/bitmidi.svg'
-        alt={title}
+        alt={siteName}
         style={{
           height: 39
         }}

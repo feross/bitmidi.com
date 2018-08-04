@@ -3,7 +3,7 @@
 import Debug from 'debug'
 
 import api from './api'
-import { title as siteTitle, description, siteImage, isBrowser } from './config'
+import { siteName, description, siteImage, isBrowser } from './config'
 import Location from './lib/location'
 import routes from './routes'
 import * as player from './browser/player'
@@ -129,7 +129,7 @@ export default function createStore (render, onPendingChange = () => {}) {
           : Array.isArray(data.title)
             ? [...data.title]
             : []
-        title.push(siteTitle)
+        title.push(siteName)
 
         store.app.title = title.map(str => str.trim()).join(' — ')
 
