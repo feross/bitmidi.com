@@ -3,7 +3,7 @@
 import Debug from 'debug'
 
 import api from './api'
-import { siteName, description, siteImage, isBrowser } from './config'
+import { siteName, siteDesc, siteImage, isBrowser } from './config'
 import Location from './lib/location'
 import routes from './routes'
 import * as player from './browser/player'
@@ -135,7 +135,7 @@ export default function createStore (render, onPendingChange = () => {}) {
 
         store.app.description = data.description != null
           ? data.description.trim()
-          : description
+          : siteDesc
 
         store.app.image = data.image || siteImage
 

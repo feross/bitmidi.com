@@ -13,7 +13,7 @@ export const isProd = isBrowser
 export const siteName = 'BitMidi'
 
 // Description of the site
-export const description = oneLine`
+export const siteDesc = oneLine`
   Listen to free MIDI songs, download the best MIDI files, and share the
   best MIDIs on the web.
 `

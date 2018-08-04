@@ -6,7 +6,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import api from '../api'
 import asyncFlatMap from '../lib/async-flatmap'
 import routes from '../routes'
-import { siteName, description, keywords, origin } from '../config'
+import { siteName, siteDesc, keywords, origin } from '../config'
 
 const router = Router()
 
@@ -44,7 +44,7 @@ async function getJsonFeed () {
   const feed = {
     version: 'https://jsonfeed.org/version/1',
     title: siteName,
-    description: description,
+    description: siteDesc,
     home_page_url: `${origin}/`,
     feed_url: `${origin}/feed.json`,
     user_comment: oneLine`
