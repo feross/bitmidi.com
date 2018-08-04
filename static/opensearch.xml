@@ -1,6 +1,6 @@
 <OpenSearchDescription xmlns:moz='http://www.mozilla.org/2006/browser/search/' xmlns='http://a9.com/-/spec/opensearch/1.1/'>
   <ShortName>BitMidi</ShortName>
-  <Description>Wayback machine for old-school MIDI files</Description>
+  <Description>Listen to free MIDI songs, download the best MIDI files, and share the best free MIDIs on the web.</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image height='48' width='48' type='image/x-icon'>https://bitmidi.com/favicon.ico</Image>
   <Url type='text/html' method='GET' template='https://bitmidi.com/search?q={searchTerms}'/>
