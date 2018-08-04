@@ -8,8 +8,8 @@
     <meta name='description' content='<%= store.app.description %>'>
     <link rel='canonical' href='<%= config.origin %><%= store.location.canonicalUrl %>' />
 
-    <link rel='preload' as='script' href='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>' />
-    <link rel='stylesheet' href='/bundle.css?c=<%- styleHash %>' />
+    <link rel='preload' as='script' href='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>' />
+    <link rel='stylesheet' href='/bundle.css?c=<%= styleHash %>' />
 
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
@@ -54,7 +54,7 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script async src='/bundle.js?c=<%- scriptHash %>' nonce='<%= nonce %>'></script>
+    <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
   </body>
 </html>
