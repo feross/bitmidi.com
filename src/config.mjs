@@ -15,7 +15,7 @@ export const siteName = 'BitMidi'
 // Description of the site
 export const description = oneLine`
   Listen to free MIDI songs, download the best MIDI files, and share the
-  best free MIDIs on the web.
+  best MIDIs on the web.
 `
 
 // Twitter username of the site
