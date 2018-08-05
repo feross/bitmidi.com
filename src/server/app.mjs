@@ -1,5 +1,6 @@
 import crypto from 'crypto'
 import express from 'express'
+import morgan from 'morgan'
 import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
 import session from 'express-session'
@@ -126,6 +127,9 @@ export default function init () {
       secure: config.isProd
     }
   }))
+
+  // Log HTTP requests
+  app.use(morgan(config.isProd ? 'combined' : 'dev'))
 
   // Serve API routes
   app.use('/api', routerApi)

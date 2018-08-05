@@ -80,6 +80,7 @@
     "jsonfeed-to-atom": "^1.1.2",
     "knex": "^0.15.1",
     "material-design-icons": "^3.0.1",
+    "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "objection": "^1.1.10",
     "objection-slug": "^1.0.0",
