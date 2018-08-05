@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 import express from 'express'
-import favicon from 'express-favicon'
+import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
