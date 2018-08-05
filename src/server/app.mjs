@@ -221,7 +221,7 @@ export default function init () {
   return app
 }
 
-// Returns a correctly configured express.static middleware
+// Returns an express.static middleware, configured correctly
 function serveStatic (path) {
   return express.static(path, {
     // Time (in ms) until static content will be deleted from cache
@@ -235,10 +235,12 @@ function createHash (data) {
   return trimHash(crypto.createHash('sha256').update(data).digest('base64'))
 }
 
+// Create a random nonce to use in CSP
 function createNonce () {
   return trimHash(Buffer.from(uuid()).toString('base64'))
 }
 
+// Trim hashes or nonces to a reasonable size
 function trimHash (str) {
   return str.slice(0, 20).replace(/\+|\/|=/g, '')
 }
