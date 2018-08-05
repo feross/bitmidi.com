@@ -1,5 +1,6 @@
 import crypto from 'crypto'
 import express from 'express'
+import favicon from 'express-favicon'
 import morgan from 'morgan'
 import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
@@ -66,7 +67,12 @@ export default function init () {
     next()
   })
 
-  // Set up static file serving
+  // Serve favicon
+  app.use(favicon(join(config.rootPath, 'static', 'favicon.ico'), {
+    maxAge: config.maxAgeStatic
+  }))
+
+  // Serve static files
   const staticPath = join(config.rootPath, 'static')
   app.use(serveStatic(staticPath))
 
