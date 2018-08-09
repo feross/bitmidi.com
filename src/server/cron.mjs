@@ -5,6 +5,6 @@ import { isProd } from '../config'
 
 export default function init () {
   if (isProd) {
-    schedule.scheduleJob('19 1 * * *', shareTwitter)
+    schedule.scheduleJob('26 1 * * *', shareTwitter)
   }
 }
