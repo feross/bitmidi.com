@@ -20,7 +20,8 @@ export default class Midi extends slug(Model) {
         }
       },
       views: { type: 'number' },
-      plays: { type: 'number' }
+      plays: { type: 'number' },
+      sharedTwitter: { type: 'boolean' }
     }
   }
 
