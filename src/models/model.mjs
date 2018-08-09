@@ -3,7 +3,7 @@ import Knex from 'knex'
 import { join } from 'path'
 import { knexSnakeCaseMappers, Model, QueryBuilder } from 'objection'
 
-import { db } from '../../secret'
+import { db as dbSecret } from '../../secret'
 import { rootPath } from '../config'
 
 const debug = Debug('bitmidi:model')
@@ -53,7 +53,7 @@ export default class BaseModel extends Model {
 }
 
 // Create database connection
-const knex = Knex({ ...db, ...knexSnakeCaseMappers() })
+const knex = Knex({ ...dbSecret, ...knexSnakeCaseMappers() })
 
 // Use the connection for *all* models
 BaseModel.knex(knex)
