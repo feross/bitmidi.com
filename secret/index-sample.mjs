@@ -19,3 +19,8 @@ export const db = {
     database: 'TODO'
   }
 }
+
+export const buffer = {
+  accessToken: 'TODO',
+  profileId: 'TODO'
+}
