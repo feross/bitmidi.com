@@ -43,7 +43,7 @@ export default class AboutPage extends Page {
           Some websites offered inline playback with Flash (but it was flaky and hard to get working in Chrome), and the JS-based ones were missing many instruments or multi-MB Emscripten-compiled monstrosities!
         </p>
         <p>
-          I decided that I'd compile the best MIDI player written in C (libtimidity) to WebAssembly and put in lots of effort to optimize the bundle and include the minimal amount of code. The result of that is <Link href='https://github.com/feross/timidity'>timidity</Link> It's quite lightweight - just 34 KB of JavaScript and 23 KB of lazy-loaded WebAssembly.
+          I decided that I'd compile the best MIDI player written in C (libtimidity) to WebAssembly and put in lots of effort to optimize the bundle and include the minimal amount of code. The result of that is the <Link href='https://github.com/feross/timidity'>timidity</Link> library. It's quite lightweight - just 34 KB of JavaScript and 23 KB of lazy-loaded WebAssembly.
         </p>
         <p>
           Then I put a frontend on it, so it's easy to browse that .zip file's contents. And that's BitMidi.
