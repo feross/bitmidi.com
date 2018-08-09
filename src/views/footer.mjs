@@ -21,6 +21,14 @@ const Footer = (props, context) => {
       <HorizListDivider />
 
       <HorizListItem>
+        <Link href='https://twitter.com/bitmidi' newtab>
+          @BitMidi
+        </Link>
+      </HorizListItem>
+
+      <HorizListDivider />
+
+      <HorizListItem>
         Built by Feross
       </HorizListItem>
     </footer>
