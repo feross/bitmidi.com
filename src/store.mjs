@@ -217,7 +217,7 @@ export default function createStore (render, onPendingChange = () => {}) {
           player.play(() => {
             store.player.currentSlug = null
             api.midi.play({ slug: midiSlug })
-            return update();
+            return update()
           })
 
           store.player.currentSlug = midiSlug
