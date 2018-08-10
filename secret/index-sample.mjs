@@ -12,11 +12,12 @@ export const db = {
   client: 'mysql',
   version: '5.7',
   connection: {
-    host: isProd ? 'TODO' : 'TODO',
+    host: isProd ? 'TODO' : 'localhost',
     port: 3306,
     user: 'TODO',
     password: 'TODO',
-    database: 'TODO'
+    database: 'bitmidi'
+    // insecureAuth: true,
   }
 }
 
