@@ -16,8 +16,7 @@ export const db = {
     port: 3306,
     user: 'TODO',
     password: 'TODO',
-    database: 'bitmidi'
-    // insecureAuth: true,
+    database: 'TODO'
   }
 }
 
