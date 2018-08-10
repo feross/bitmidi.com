@@ -17,6 +17,6 @@ export const db = {
     user: 'TODO',
     password: 'TODO',
     database: 'bitmidi'
-    // insecureAuth: true, 
+    // insecureAuth: true,
   }
 }
