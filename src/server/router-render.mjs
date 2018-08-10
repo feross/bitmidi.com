@@ -70,6 +70,9 @@ router.use(async (req, res) => {
       return res.redirect(307, store.location.canonicalUrl)
     }
 
+    console.log('Rendering with store:')
+    console.log(store)
+
     res.status(status)
     res.render('layout', {
       content: renderer.html(),
