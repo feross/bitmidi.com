@@ -47,26 +47,36 @@ npm install
 
 ### Setup Database
 
-First, copy the secret sample:
-```
+First, copy the sample secret file to a new file:
+
+```bash
 cp secret/index-sample.mjs secret/index.mjs
 ```
 
-Then run a local MySQL Server on Port 3306 and create a database called `bitmidi`. 
-**Don't forget to adapt the credentials in `secret/index.mjs`!** Also, if you use MySQL >5.7, adapt the version number in `index.mjs` and uncomment the `insecureAuth` flag.
+Second, run a local MySQL Server on port 3306 and create a database called `bitmidi.com`.
+
+**Don't forget to change the credentials in `secret/index.mjs` to match what you
+configured!** If you use a different MySQL version than what is specified, then
+remember to change that, too. If you're running an older version of MySQL, you
+may need to add a `insecureAuth: true` option under `db.connection`.
 
 ### Run Database Migrations
 
-Once you completed the database setup, run the migrations:
-```
+Once you complete the database setup, run the migrations:
+
+```bash
 npm run knex -- migrate:latest
 ```
 
 ### Mock local MIDI files
 
-Have a folder with MIDI files ready, you can get a large collection [here](https://www.reddit.com/r/WeAreTheMusicMakers/comments/3ajwe4/the_largest_midi_collection_on_the_internet/) or some smaller ones [here](http://www.jsbach.net/midi/).
+To load the site with MIDI files, you need to have a folder with MIDI files in
+it. You can get a large collection
+[here](https://www.reddit.com/r/WeAreTheMusicMakers/comments/3ajwe4/the_largest_midi_collection_on_the_internet/)
+or some smaller ones [here](http://www.jsbach.net/midi/).
 
-Then, run in the project root:
+Then, in the project root, run this:
+
 ```bash
 node -r @babel/register tools/import.mjs <path-to-folder-with-midis>
 ```
@@ -78,7 +88,7 @@ npm run build
 npm start
 ```
 
-Watch and restart automatically:
+### Watch and restart automatically:
 
 ```bash
 npm run watch
