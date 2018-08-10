@@ -37,13 +37,41 @@ Visit the live site at **[bitmidi.com](https://bitmidi.com)**, the wayback machi
 
 It's easy to run the code!
 
+### Clone the project and install the dependencies
+
 ```bash
 git clone git@github.com:feross/bitmidi.com.git
 cd bitmidi.com
 npm install
 ```
 
-Run the server:
+### Setup Database
+
+First, copy the secret sample:
+```
+cp secret/index-sample.mjs secret/index.mjs
+```
+
+Then run a local MySQL Server on Port 3306 and create a database called `bitmidi`. 
+**Don't forget to adapt the credentials in `secret/index.mjs`!** Also, if you use MySQL >5.7, adapt the version number in `index.mjs` and uncomment the `insecureAuth` flag.
+
+### Run Database Migrations
+
+Once you completed the database setup, run the migrations:
+```
+npm run knex -- migrate:latest
+```
+
+### Mock local MIDI files
+
+Have a folder with MIDI files ready, you can get a large collection [here](https://www.reddit.com/r/WeAreTheMusicMakers/comments/3ajwe4/the_largest_midi_collection_on_the_internet/) or some smaller ones [here](http://www.jsbach.net/midi/).
+
+Then, run in the project root:
+```bash
+node -r @babel/register tools/import.mjs <path-to-folder-with-midis>
+```
+
+### Run the server
 
 ```bash
 npm run build
