@@ -1,11 +1,7 @@
 const isProd = process.env.NODE_ENV === 'production'
 
-export const cookie = 'TODO'
-
-export const opbeat = {
-  appId: 'TODO',
-  organizationId: 'TODO',
-  secretToken: 'TODO'
+export const cookie = {
+  secret: 'TODO'
 }
 
 export const db = {
@@ -23,4 +19,8 @@ export const db = {
 export const buffer = {
   accessToken: 'TODO',
   profileId: 'TODO'
+}
+
+export const rollbar = {
+  accessToken: 'TODO'
 }

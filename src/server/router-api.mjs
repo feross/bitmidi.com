@@ -30,7 +30,7 @@ router.get('*', async (req, res) => {
   throw err
 })
 
-if (global.opbeat) router.use(global.opbeat.middleware.express())
+if (global.rollbar) router.use(global.rollbar.errorHandler())
 
 router.use(async (err, req, res, next) => {
   console.error(err.stack)

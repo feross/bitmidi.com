@@ -1,4 +1,4 @@
-import './opbeat'
+import './rollbar'
 import './polyfill'
 
 import http from 'http'

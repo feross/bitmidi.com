@@ -115,7 +115,7 @@ export default function init () {
   app.use(session({
     store: sessionStore,
     // Secret used to sign the session ID cookie
-    secret: cookieSecret,
+    secret: cookieSecret.secret,
     // Only save a session to the store if it was modified
     resave: false,
     // Do not save "uninitialized" sessions to the store
@@ -209,8 +209,8 @@ export default function init () {
   // Serve routes with server-side rendering
   app.get('*', routerRender)
 
-  // Log errors to Opbeat
-  if (global.opbeat) app.use(global.opbeat.middleware.express())
+  // Log errors
+  if (global.rollbar) app.use(global.rollbar.errorHandler())
 
   // Handle errors with the same server-side rendering path
   app.use((err, req, res, next) => {

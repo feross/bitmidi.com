@@ -88,6 +88,7 @@
     "path-to-regexp": "^2.1.0",
     "preact": "^8.2.1",
     "preact-context-provider": "^1.1.1",
+    "rollbar": "^2.4.4",
     "serve-favicon": "^2.5.0",
     "simple-get": "^3.0.3",
     "tachyons": "^4.7.4",
