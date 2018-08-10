@@ -15,13 +15,16 @@ export default class SearchPage extends Page {
 
     await dispatch(doMidiSearch({ q, page }))
 
-    const title = [`MIDIs containing '${q}'`]
-    if (page !== '0') title.unshift(`Page ${page}`)
-
-    dispatch('APP_META', {
-      title,
-      description: `Search results page for MIDI files that contain '${q}'`
-    })
+    const meta = {
+      title: [`MIDIs containing '${q}'`],
+      description: [`Search results page for MIDI files that contain '${q}'.`]
+    }
+    if (page !== '0') {
+      const pageStr = `Page ${page}`
+      meta.title.unshift(pageStr)
+      meta.description.unshift(pageStr)
+    }
+    dispatch('APP_META', meta)
   }
 
   render (props) {

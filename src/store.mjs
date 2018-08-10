@@ -124,18 +124,22 @@ export default function createStore (render, onPendingChange = () => {}) {
        */
 
       case 'APP_META': {
-        const title = typeof data.title === 'string'
-          ? [data.title]
-          : Array.isArray(data.title)
-            ? [...data.title]
+        const parse = input => typeof input === 'string'
+          ? [input]
+          : Array.isArray(input)
+            ? [...input]
             : []
-        title.push(siteName)
 
-        store.app.title = title.map(str => str.trim()).join(' — ')
+        const format = arr => arr.map(str => str.trim()).join(' — ')
 
-        store.app.description = data.description != null
-          ? data.description.trim()
-          : siteDesc
+        store.app.title = format([...parse(data.title), siteName])
+
+        let description = format(parse(data.description))
+
+        // If description is too short, include site description at end
+        store.app.description = description.length >= 50
+          ? description
+          : format([...parse(data.description), siteDesc])
 
         store.app.image = data.image || siteImage
 

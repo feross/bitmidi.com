@@ -15,9 +15,16 @@ export default class HomePage extends Page {
 
     await dispatch(doMidiAll({ page }))
 
-    const title = ['Popular MIDIs']
-    if (page !== '0') title.unshift(`Page ${page}`)
-    dispatch('APP_META', { title })
+    const meta = {
+      title: ['Popular MIDIs'],
+      description: []
+    }
+    if (page !== '0') {
+      const pageStr = `Page ${page}`
+      meta.title.unshift(pageStr)
+      meta.description.unshift(pageStr)
+    }
+    dispatch('APP_META', meta)
   }
 
   render (props) {
