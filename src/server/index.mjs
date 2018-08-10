@@ -5,7 +5,7 @@ import http from 'http'
 import util from 'util'
 
 import appInit from './app'
-import cronInit from './cron'
+import scheduleInit from './schedule'
 
 export default async function init (port) {
   const app = appInit()
@@ -15,7 +15,7 @@ export default async function init (port) {
   await listen(port)
   console.log('Listening on port %s', server.address().port)
 
-  cronInit()
+  scheduleInit()
 
   return server
 }
