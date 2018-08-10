@@ -216,10 +216,10 @@ export default function createStore (render, onPendingChange = () => {}) {
           player.load(midi.downloadUrl)
           player.play()
           store.player.currentSlug = midiSlug
+          midi.plays += 1 // Optimistically update local play count
         }
 
         api.midi.play({ slug: midiSlug }) // Track play count
-        midi.plays += 1 // Optimistically update local play count
 
         return update()
       }
