@@ -214,7 +214,12 @@ export default function createStore (render, onPendingChange = () => {}) {
           store.player.currentSlug = null
         } else {
           player.load(midi.downloadUrl)
-          player.play()
+          player.play(() => {
+            store.player.currentSlug = null
+            api.midi.play({ slug: midiSlug })
+            return update();
+          })
+
           store.player.currentSlug = midiSlug
 
           // Track play count
