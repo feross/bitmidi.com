@@ -88,7 +88,7 @@ async function search (query = {}) {
   const { total, results } = await Midi
     .query()
     .select(query.select)
-    .whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', query.q)
+    .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', query.q)
     .page(query.page, query.pageSize)
 
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
