@@ -25,7 +25,7 @@ export default [
     name: 'search',
     path: '/search',
     page: SearchPage,
-    query: { page: '0' }
+    query: { page: '0', q: '' }
   },
   {
     name: 'random',

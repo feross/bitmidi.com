@@ -87,6 +87,7 @@ async function search (query = {}) {
 
   const { total, results } = await Midi
     .query()
+    .skipUndefined()
     .select(query.select)
     .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', query.q)
     .page(query.page, query.pageSize)
