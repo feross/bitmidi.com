@@ -138,7 +138,7 @@ export default function init () {
   app.use(morgan(config.isProd ? 'combined' : 'dev'))
 
   // Serve API routes
-  app.use('/api', routerApi)
+  app.use(routerApi)
   app.use(routerFeed)
 
   // Headers to send with HTML responses

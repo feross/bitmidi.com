@@ -4,23 +4,23 @@ import api from '../api'
 
 const router = Router()
 
-router.get('/midi/get', async (req, res) => {
+router.get('/api/midi/get', async (req, res) => {
   res.json({ result: await api.midi.get(req.query) })
 })
 
-router.get('/midi/play', async (req, res) => {
+router.get('/api/midi/play', async (req, res) => {
   res.json({ result: await api.midi.play(req.query) })
 })
 
-router.get('/midi/all', async (req, res) => {
+router.get('/api/midi/all', async (req, res) => {
   res.json({ result: await api.midi.all(req.query) })
 })
 
-router.get('/midi/search', async (req, res) => {
+router.get('/api/midi/search', async (req, res) => {
   res.json({ result: await api.midi.search(req.query) })
 })
 
-router.get('/midi/random', async (req, res) => {
+router.get('/api/midi/random', async (req, res) => {
   res.json({ result: await api.midi.random(req.query) })
 })
 
