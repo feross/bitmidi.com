@@ -5,7 +5,7 @@ import { HorizListItem, HorizListDivider } from './horiz-list'
 
 const Footer = (props, context) => {
   return (
-    <footer class='f6 lh-copy gray w-100 mt5 mb4 tc'>
+    <footer class='f6 lh-copy mid-gray w-100 mt5 mb4 tc'>
       <HorizListItem>
         <Link href='/about'>
           About BitMidi
