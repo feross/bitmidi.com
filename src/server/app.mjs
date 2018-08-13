@@ -99,13 +99,14 @@ export default function init () {
     ? createHash(readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
 
-  // Add template local variables
-  app.use((req, res, next) => {
-    res.locals.config = config
-    res.locals.style = style
-    res.locals.scriptHash = scriptHash
-    res.locals.nonce = createNonce()
+  // Add app template variables
+  app.locals.config = config
+  app.locals.style = style
+  app.locals.scriptHash = scriptHash
 
+  // Add per-request template variables
+  app.use((req, res, next) => {
+    res.locals.nonce = createNonce()
     next()
   })
 
