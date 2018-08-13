@@ -88,7 +88,7 @@
     "objection": "^1.1.10",
     "objection-slug": "^1.0.0",
     "path-to-regexp": "^2.1.0",
-    "preact": "^8.2.1",
+    "preact": "^8.3.0",
     "preact-context-provider": "^1.1.1",
     "rollbar": "^2.4.4",
     "serve-favicon": "^2.5.0",
