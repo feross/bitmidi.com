@@ -70,11 +70,12 @@ router.use(async (req, res) => {
       return res.redirect(307, store.location.canonicalUrl)
     }
 
-    res.status(status)
-    res.render('layout', {
-      content: renderer.html(),
-      store
-    })
+    res
+      .status(status)
+      .render('layout', {
+        content: renderer.html(),
+        store
+      })
   }
 })
 

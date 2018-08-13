@@ -256,7 +256,7 @@ export default function createStore (render, onPendingChange = () => {}) {
         let event
         try {
           event = JSON.parse(window.localStorage.pendingDispatch)
-        } catch (err) {}
+        } catch {}
 
         delete window.localStorage.pendingDispatch
 
