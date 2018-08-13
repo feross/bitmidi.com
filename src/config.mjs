@@ -62,7 +62,7 @@ export const maxAgeStatic = isProd
 // Time (in ms) to keep cookies before deletion. This value is sent in the
 // HTTP "Set-Cookie" header as the "Expires" attribute.
 export const maxAgeCookie = isProd
-  ? 365 * 24 * 60 * 60 * 1000 // 1 year
+  ? 5 * 365 * 24 * 60 * 60 * 1000 // 5 years
   : 0
 
 // Time (in ms) to cache the HTTP "Strict-Transport-Security" (HSTS)
