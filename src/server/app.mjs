@@ -91,11 +91,10 @@ export default function init () {
   const uploadsPath = join(config.rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
 
-  // Compute hashes for built resources
-  const styleHash = config.isProd
-    ? createHash(readFileSync(join(staticPath, 'bundle.css')))
-    : 'dev'
+  // Load CSS to inline in page
+  const style = readFileSync(join(staticPath, 'bundle.css'), 'utf8')
 
+  // Compute hash for far-future cached static resources for invalidation
   const scriptHash = config.isProd
     ? createHash(readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
@@ -103,7 +102,7 @@ export default function init () {
   // Add template local variables
   app.use((req, res, next) => {
     res.locals.config = config
-    res.locals.styleHash = styleHash
+    res.locals.style = style
     res.locals.scriptHash = scriptHash
     res.locals.nonce = createNonce()
 

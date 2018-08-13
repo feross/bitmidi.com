@@ -9,7 +9,6 @@
     <link rel='canonical' href='<%= config.origin %><%= store.location.canonicalUrl %>' />
 
     <link rel='preload' as='script' href='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>' />
-    <link rel='stylesheet' href='/bundle.css?c=<%= styleHash %>' />
 
     <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
     <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
@@ -33,6 +32,10 @@
     <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.siteName %>'>
     <link rel='alternate' href='/feed.json' type='application/json' title='<%= config.siteName %>' />
     <link rel='alternate' href='/feed.xml' type='application/atom+xml' title='<%= config.siteName %>' />
+
+    <style>
+      <%- style %>
+    </style>
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll bg-black-025'>
