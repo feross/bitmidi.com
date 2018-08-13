@@ -153,9 +153,6 @@ export default function init () {
     res.header('X-XSS-Protection', '1; mode=block')
 
     res.header('Feature-Policy', oneLine`
-      geolocation
-        'none'
-      ;
       sync-xhr
         'none'
       ;
