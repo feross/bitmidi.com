@@ -44,7 +44,7 @@ export default class SearchPage extends Page {
 
     return (
       <div>
-        <Heading><span class='silver'>Search for</span> '{q}'</Heading>
+        <Heading><span class='gray'>Search for</span> '{q}'</Heading>
         { results.map(midi => <Midi midi={midi} />) }
         {
           results.length === 0 &&

@@ -43,7 +43,7 @@ const Pagination = (props, context) => {
   return (
     <div class='tc mv4'>
       <div class='mb3'>{ pageTotal >= 2 && buttons }</div>
-      <small class='f6 lh-copy silver'>{total.toLocaleString()} results</small>
+      <small class='f6 lh-copy gray'>{total.toLocaleString()} results</small>
     </div>
   )
 
