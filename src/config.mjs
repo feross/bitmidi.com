@@ -56,7 +56,7 @@ export const loadInterval = 10 * 60 * 1000 // 10 minutes
 // Time (in ms) to cache static resources. This value is sent in the HTTP
 // "Cache-Control" header.
 export const maxAgeStatic = isProd
-  ? 7 * 24 * 60 * 60 * 1000 // 7 days
+  ? 14 * 24 * 60 * 60 * 1000 // 14 days
   : 0
 
 // Time (in ms) to keep cookies before deletion. This value is sent in the
