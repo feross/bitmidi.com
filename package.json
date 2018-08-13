@@ -71,7 +71,7 @@
     "drag-drop": "^4.2.0",
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-    "express-mysql-session": "^2.0.0",
+    "express-mysql-session": "^2.0.1",
     "express-promise-router": "^3.0.2",
     "express-session": "^1.15.3",
     "express-sitemap-xml": "^1.0.1",
