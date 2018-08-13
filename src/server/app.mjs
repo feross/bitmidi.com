@@ -32,6 +32,7 @@ export default function init () {
   // Use EJS for server-side templating
   app.set('view engine', 'ejs')
   app.set('views', join(config.rootPath, 'src', 'server'))
+  app.locals.rmWhitespace = config.isProd
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
   app.set('json spaces', config.isProd ? 0 : 2) // Pretty JSON (in dev)
