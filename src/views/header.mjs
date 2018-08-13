@@ -25,7 +25,8 @@ const Header = (props, context) => {
       class={c(headerCls, 'top-0 w-100 shadow-1 cf ph2')}
       style={{
         height: 50,
-        paddingTop: 6
+        paddingTop: 6,
+        willChange: 'background, background-size'
       }}
     >
       <div class='center mw9'>
