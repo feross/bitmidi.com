@@ -37,8 +37,10 @@ export default class Page extends Component {
   async load () {}
 
   async _load () {
-    await this.load()
-    this.setState({ loaded: true })
+    try {
+      await this.load()
+      this.setState({ loaded: true })
+    } catch {}
   }
 
   get loaded () {

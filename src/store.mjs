@@ -68,18 +68,20 @@ export default function createStore (render, onPendingChange = () => {}) {
   }
 
   async function dispatch (typeOrThunk, data) {
+    const thunk = typeof typeOrThunk === 'function' ? typeOrThunk : null
+    const type = typeof typeOrThunk === 'string' ? typeOrThunk : null
     try {
-      if (typeof typeOrThunk === 'function') {
+      if (thunk != null) {
         incrementPending()
-        const ret = await typeOrThunk(dispatch)
+        const ret = await thunk(dispatch)
         decrementPending()
         return ret
-      } else {
-        await _dispatch(typeOrThunk, data)
+      } else if (type != null) {
+        await _dispatch(type, data)
       }
     } catch (err) {
       addError(err)
-      if (typeof typeOrThunk === 'function') decrementPending()
+      if (thunk != null) decrementPending()
       update()
     }
   }
@@ -276,8 +278,12 @@ export default function createStore (render, onPendingChange = () => {}) {
 
   function addError (err) {
     const { message, code = null, stack } = err
-    store.errors.push({ message, code })
-    console.error(stack)
+    store.errors.push({
+      message: err.message,
+      code: err.code || null,
+      stack: err.stack
+    })
+    console.error(err.stack)
   }
 
   function addMidi (midi) {
