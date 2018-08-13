@@ -93,8 +93,10 @@ export default function init () {
   const uploadsPath = join(config.rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
 
-  // Load CSS to inline in page
-  const style = readFileSync(join(staticPath, 'bundle.css'), 'utf8')
+  // Read CSS for inlining in page
+  const style = config.isProd
+    ? readFileSync(join(staticPath, 'bundle.css'), 'utf8')
+    : ''
 
   // Compute hash for far-future cached static resources for invalidation
   const scriptHash = config.isProd
