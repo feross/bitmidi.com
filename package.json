@@ -109,7 +109,7 @@
     "mkdirp": "^0.5.1",
     "nodemon": "^1.15.1",
     "ora": "^3.0.0",
-    "puppeteer": "^1.5.0",
+    "puppeteer": "^1.7.0",
     "purify-css": "^1.2.6",
     "rimraf": "^2.6.2",
     "simple-sha256": "^1.0.0",
