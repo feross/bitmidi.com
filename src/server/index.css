@@ -42,8 +42,8 @@
  * Single-purpose classes
  */
 
-.code-font, .CodeMirror, .hljs code {
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+.no-js .hide-no-js {
+  display: none;
 }
 
 .shadow-6 {
