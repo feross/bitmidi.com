@@ -46,8 +46,9 @@ class Image extends Component {
 
     const role = alt === null ? 'presentation' : null
 
-    // TODO: handle absolute, relative, etc. URL forms
-    const $source = isConvertibleToWebp(src) &&
+    // Use automatic server-side WebP conversion on absolutely specified images
+    // (i.e. /img/test.png)
+    const $source = isAbsolutePath(src) && isConvertibleToWebp(src) &&
       <source srcset={`/webp${src}.webp`} type='image/webp' />
 
     const $picture = (
@@ -121,8 +122,12 @@ class Image extends Component {
   }
 }
 
-function isConvertibleToWebp (path) {
-  return path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.tif')
+function isAbsolutePath (url) {
+  return url[0] === '/'
+}
+
+function isConvertibleToWebp (url) {
+  return url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.tif')
 }
 
 export default Image
