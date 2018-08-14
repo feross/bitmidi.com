@@ -29,7 +29,7 @@ const Header = (props, context) => {
         willChange: 'background, background-size'
       }}
     >
-      <div class='center mw9'>
+      <div class='center mw9 safe-padding'>
         <div class='fl w-third'>
           <HeaderLogo isPageLoading={isPageLoading} />
         </div>

@@ -42,6 +42,12 @@
  * Single-purpose classes
  */
 
+/* Padding for the iPhone X notch */
+.safe-padding {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
 .no-js .hide-no-js {
   display: none;
 }
