@@ -76,9 +76,6 @@ export default function init () {
   }))
 
   // Serve static files
-  const staticPath = join(config.rootPath, 'static')
-  app.use(serveStatic(staticPath))
-
   const iconsPath = dirname(require.resolve('material-design-icons'))
   app.use('/icons', serveStatic(iconsPath))
 
@@ -91,8 +88,10 @@ export default function init () {
   const uploadsPath = join(config.rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
 
-  app.use('/webp', serveWebp(staticPath))
+  const staticPath = join(config.rootPath, 'static')
   app.use('/webp/icons', serveWebp(iconsPath))
+  app.use('/webp', serveWebp(staticPath))
+  app.use(serveStatic(staticPath))
 
   // Read CSS for inlining in page
   const style = config.isProd
