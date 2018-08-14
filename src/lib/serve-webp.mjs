@@ -6,6 +6,10 @@ import parseUrl from 'parseurl'
 import rimraf from 'rimraf'
 import send from 'send'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
+import { open } from 'fs'
+import { promisify } from 'util'
+
+const openAsync = promisify(open)
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -28,7 +32,7 @@ export default function serveWebp (root, opts = {}) {
 
   rimraf.sync(cacheRoot)
 
-  return (req, res, next) => {
+  return async (req, res, next) => {
     // decode the path
     let path = decode(parseUrl(req).pathname)
     if (path === -1) return next()
@@ -63,12 +67,20 @@ export default function serveWebp (root, opts = {}) {
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') {
       return next()
     }
+
+    // if path does not exist, abort before checking cache or running imagemin
+    try {
+      await openAsync(path, 'r')
+    } catch {
+      return next()
+    }
+
     // attempt to serve from cache folder, if file exists
     const webpPath = relative(root, path).replace(/\.(png|jpg|tif)$/, '.webp')
-    console.log(webpPath)
     send(req, webpPath, { root: cacheRoot })
       .on('error', async () => {
         try {
+          // if file is not in cache folder, convert to .webp and serve it
           const webpPath = await convertToWebp()
           send(req, webpPath, { root: cacheRoot }).pipe(res)
         } catch {
@@ -81,7 +93,6 @@ export default function serveWebp (root, opts = {}) {
       const outputPath = join(cacheRoot, dirname(relative(root, path)))
       const [file] = await imagemin([path], outputPath, IMAGEMIN_OPTS)
       if (file == null) throw new Error(`No file with path "${path}"`)
-      console.log('ran imagemin, output to ', file.path)
       return relative(cacheRoot, file.path)
     }
   }
