@@ -17,7 +17,7 @@ export default class Title extends Component {
 
   setTitle (title) {
     if (typeof title !== 'string' && title !== null) {
-      throw new Error('"props.title" must be a string or null')
+      throw new Error('Prop `title` must be a string or null')
     }
     document.title = title
   }

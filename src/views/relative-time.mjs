@@ -10,7 +10,7 @@ const RelativeTime = (props, context) => {
   const { class: className, datetime, style, ...rest } = props
 
   if (datetime == null) {
-    throw new Error('Missing required `datetime` prop')
+    throw new Error('Prop `datetime` is required')
   }
 
   const dt = dayjs(datetime)
