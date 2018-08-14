@@ -81,6 +81,8 @@ class Image extends Component {
     try {
       this.observer = new IntersectionObserver(([image]) => {
         if (image.isIntersecting) this.showImage()
+      }, {
+        rootMargin: '300px'
       })
       this.observer.observe(this.elem)
     } catch {
