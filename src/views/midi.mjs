@@ -2,6 +2,7 @@ import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 import Icon from './icon'
+import Image from './image'
 import Link from './link'
 
 export default class Midi extends Component {
@@ -18,16 +19,17 @@ export default class Midi extends Component {
       >
         <Link
           color='white'
-          class=''
           title={midi.name}
           href={midi.url}
         >
           { midi.image &&
-            <div
-              class='midi-image cover br2 br--top h5 bg-center'
+            <Image
+              class='db midi-image w-100 br2 br--top h5 bg-center'
               style={{
-                backgroundImage: `url("${midi.image}")`
+                objectFit: 'cover'
               }}
+              src={midi.image}
+              alt={midi.name}
             />
           }
           <div
