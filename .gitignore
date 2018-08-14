@@ -1,8 +1,9 @@
+.cache/
+node_modules/
+uploads/
+
 secret/*
 !secret/index-sample.mjs
 
-static/bundle.js
 static/bundle.css
-
-node_modules/
-uploads/
+static/bundle.js
