@@ -46,37 +46,46 @@ class Image extends Component {
 
     const role = alt === null ? 'presentation' : null
 
-    const img = (
-      <img
-        alt={alt}
-        class={className}
-        decoding='async'
-        role={role}
-        src={src}
-        style={style}
-        {...rest}
-      />
+    // TODO: handle absolute, relative, etc. URL forms
+    const $source = isConvertibleToWebp(src) &&
+      <source srcset={`/webp${src}.webp`} type='image/webp' />
+
+    const $picture = (
+      <picture>
+        {$source}
+        <img
+          alt={alt}
+          class={className}
+          decoding='async'
+          role={role}
+          src={src}
+          style={style}
+          {...rest}
+        />
+      </picture>
     )
 
     // Show image
-    if (visible || !lazyload) return img
+    if (visible || !lazyload) return $picture
 
     // Show placeholder and until image is visible
     return (
       <div>
-        <img
-          ref={this.ref}
-          alt={alt}
-          class={c('hide-no-js', className)}
-          decoding='async'
-          role={role}
-          style={{
-            opacity: 0,
-            ...style
-          }}
-          {...rest}
-        />
-        {!isBrowser && <noscript>{img}</noscript>}
+        <picture>
+          <img
+            ref={this.ref}
+            alt={alt}
+            class={c('hide-no-js', className)}
+            decoding='async'
+            role={role}
+            style={{
+              opacity: 0,
+              ...style
+            }}
+            {...rest}
+          />
+        </picture>
+        {!isBrowser && <noscript>{$picture}</noscript>}
       </div>
     )
   }
@@ -110,6 +119,10 @@ class Image extends Component {
       this.observer = null
     }
   }
+}
+
+function isConvertibleToWebp (path) {
+  return path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.tif')
 }
 
 export default Image
