@@ -33,7 +33,7 @@ class Image extends Component {
   }
 
   render (props, state) {
-    const { alt, lazyload = true, src, class: className, ...rest } = props
+    const { alt, lazyload = true, src, class: className, style, ...rest } = props
     const { visible } = state
 
     if (typeof src !== 'string' || src.length === 0) {
@@ -50,6 +50,7 @@ class Image extends Component {
         class={className}
         decoding='async'
         src={src}
+        style={style}
         {...rest}
       />
     )
@@ -65,6 +66,10 @@ class Image extends Component {
           alt={alt}
           class={c('hide-no-js', className)}
           decoding='async'
+          style={{
+            opacity: 0,
+            ...style
+          }}
           {...rest}
         />
         {!isBrowser && <noscript>{img}</noscript>}
