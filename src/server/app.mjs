@@ -9,6 +9,7 @@ import uuid from 'uuid/v4'
 import { join, dirname } from 'path'
 import { readFileSync } from 'fs'
 
+import serveWebp from '../lib/serve-webp'
 import * as config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
 
@@ -89,6 +90,8 @@ export default function init () {
 
   const uploadsPath = join(config.rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
+
+  app.use('/webp', serveWebp(staticPath))
 
   // Read CSS for inlining in page
   const style = config.isProd
