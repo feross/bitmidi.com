@@ -3,11 +3,12 @@
 import imagemin from 'imagemin'
 import imageminWebp from 'imagemin-webp'
 import parseUrl from 'parseurl'
-import rimraf from 'rimraf'
 import send from 'send'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
 import { open } from 'fs'
 import { promisify } from 'util'
+import { randomBytes } from 'crypto'
+import { tmpdir } from 'os'
 
 const openAsync = promisify(open)
 
@@ -28,9 +29,9 @@ export default function serveWebp (root, opts = {}) {
   }
 
   root = resolve(root)
-  const cacheRoot = join(root, '.cache')
 
-  rimraf.sync(cacheRoot)
+  // use a cache folder in /tmp, since that's guaranteed to be writable
+  const cacheRoot = join(tmpdir(), randomBytes(16).toString('hex'))
 
   return async (req, res, next) => {
     // decode the path
