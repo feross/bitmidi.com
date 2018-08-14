@@ -92,6 +92,7 @@ export default function init () {
   app.use('/uploads', serveStatic(uploadsPath))
 
   app.use('/webp', serveWebp(staticPath))
+  app.use('/webp/icons', serveWebp(iconsPath))
 
   // Read CSS for inlining in page
   const style = config.isProd
