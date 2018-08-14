@@ -1,14 +1,11 @@
 // TODO: publish to npm
 
-import Debug from 'debug'
 import imagemin from 'imagemin'
 import imageminWebp from 'imagemin-webp'
 import parseUrl from 'parseurl'
 import rimraf from 'rimraf'
 import send from 'send'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
-
-const debug = Debug('bitmidi:serve-webp')
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -40,23 +37,16 @@ export default function serveWebp (root, opts = {}) {
     if (~path.indexOf('\0')) return next()
 
     // normalize
-    if (path) {
-      path = normalize('.' + sep + path)
-    }
+    if (path) path = normalize('.' + sep + path)
 
     // malicious path
-    if (UP_PATH_REGEXP.test(path)) {
-      debug('malicious path "%s"', path)
-      return next()
-    }
+    if (UP_PATH_REGEXP.test(path)) return next()
 
     // explode path parts
     const parts = path.split(sep)
 
     // dotfile
-    if (containsDotFile(parts)) {
-      return next()
-    }
+    if (containsDotFile(parts)) return next()
 
     // join / normalize from root dir
     path = normalize(join(root, path))
@@ -65,8 +55,7 @@ export default function serveWebp (root, opts = {}) {
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') {
       return next()
     }
-
-    // serve from cache folder
+    // attempt to serve from cache folder, if file exists
     const webpPath = relative(root, path).replace(/\.(png|jpg|tif)$/, '.webp')
     console.log(webpPath)
     send(req, webpPath, { root: cacheRoot })
