@@ -7,7 +7,7 @@ const Icon = props => {
   const {
     name,
     class: className,
-    color = '#fff',
+    color = '#000',
     size = 30,
     ...rest
   } = props
