@@ -59,6 +59,7 @@ const HeaderLogo = ({ isPageLoading }) => {
       <Image
         src='/img/bitmidi.svg'
         alt={siteName}
+        lazyload={false}
         style={{
           height: 39
         }}
