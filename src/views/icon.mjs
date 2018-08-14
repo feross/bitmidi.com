@@ -27,7 +27,7 @@ const Icon = props => {
     const src = `/icons/${categoryName}/2x_web/ic_${iconName}_${color}_48dp.png`
     return (
       <Image
-        class={c('lh-solid', className)}
+        class={c('lh-solid v-btm', className)}
         width={size}
         height={size}
         alt={null}
@@ -41,7 +41,7 @@ const Icon = props => {
   const src = `/icons/${categoryName}/svg/production/ic_${iconName}_48px.svg`
   return (
     <div
-      class={c('lh-solid', className)}
+      class={c('lh-solid v-btm', className)}
       style={{
         width: size,
         height: size,
