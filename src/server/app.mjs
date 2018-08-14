@@ -78,11 +78,8 @@ export default function init () {
   const staticPath = join(config.rootPath, 'static')
   app.use(serveStatic(staticPath))
 
-  const iconsPath = join(
-    dirname(require.resolve('material-design-icons')),
-    'iconfont'
-  )
-  app.use(serveStatic(iconsPath))
+  const iconsPath = dirname(require.resolve('material-design-icons'))
+  app.use('/icons', serveStatic(iconsPath))
 
   const timidityPath = dirname(require.resolve('timidity'))
   app.use('/timidity', serveStatic(timidityPath))
