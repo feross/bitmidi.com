@@ -40,15 +40,18 @@ class Image extends Component {
       throw new Error('Prop `src` must be a string of non-zero length')
     }
 
-    if (typeof alt !== 'string' || alt.length === 0) {
-      throw new Error('Prop `alt` must be a string of non-zero length')
+    if ((typeof alt !== 'string' || alt.length === 0) && alt !== null) {
+      throw new Error('Prop `alt` must be a string of non-zero length, or null')
     }
+
+    const role = alt === null ? 'presentation' : null
 
     const img = (
       <img
         alt={alt}
         class={className}
         decoding='async'
+        role={role}
         src={src}
         style={style}
         {...rest}
@@ -66,6 +69,7 @@ class Image extends Component {
           alt={alt}
           class={c('hide-no-js', className)}
           decoding='async'
+          role={role}
           style={{
             opacity: 0,
             ...style
