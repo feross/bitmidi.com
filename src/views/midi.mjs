@@ -15,7 +15,7 @@ export default class Midi extends Component {
 
     return (
       <article
-        class={c('relative br2 mv4 shadow-6', className)}
+        class={c('relative br2 mv3 mv3-m mv4-l shadow-6', className)}
       >
         <Link
           color='white'

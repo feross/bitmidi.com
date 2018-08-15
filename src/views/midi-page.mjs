@@ -52,7 +52,9 @@ export default class MidiPage extends Page {
           </div>
         </div>
 
-        <Midi midi={midi} />
+        <div class='mv4'>
+          <Midi midi={midi} />
+        </div>
 
         <h3>Play now</h3>
         <p>

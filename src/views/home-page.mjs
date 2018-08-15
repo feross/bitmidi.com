@@ -48,7 +48,9 @@ export default class HomePage extends Page {
         { page === '0' && <HomePageHero numFiles={numFiles} /> }
 
         <Heading class='tc'>Popular MIDIs</Heading>
-        { midis.map(midi => <Midi midi={midi} />) }
+        <div class='mv4'>
+          { midis.map(midi => <Midi midi={midi} />) }
+        </div>
 
         <Pagination
           page={page}
