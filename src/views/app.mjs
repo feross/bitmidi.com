@@ -7,8 +7,8 @@ import Footer from './footer'
 import Title from './title'
 
 export default class App extends Component {
-  render (props) {
-    const { app, location, fatalError, errors } = this.context.store
+  render (props, _, { store }) {
+    const { app, location, fatalError, errors } = store
 
     if (fatalError) location.name = 'error'
 

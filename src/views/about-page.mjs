@@ -19,10 +19,10 @@ export default class AboutPage extends Page {
     await dispatch(doMidiAll({ pageSize: 1 }))
   }
 
-  render (props) {
-    if (!this.loaded) return <Loader center />
+  render (props, _, { store }) {
+    const { views } = store
 
-    const { views } = this.context.store
+    if (!this.loaded) return <Loader center />
 
     return (
       <div>

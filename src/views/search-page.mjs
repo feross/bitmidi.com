@@ -27,8 +27,8 @@ export default class SearchPage extends Page {
     dispatch('APP_META', meta)
   }
 
-  render (props) {
-    const { data, location, views } = this.context.store
+  render (props, _, { store }) {
+    const { data, location, views } = store
     const { q, page } = location.query
 
     if (!this.loaded) {

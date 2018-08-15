@@ -6,16 +6,16 @@ import Image from './image'
 import Link from './link'
 
 export default class Midi extends Component {
-  render (props) {
-    const { midi } = props
-    const { mainColor } = this.context.theme
-    const { player } = this.context.store
+  render (props, _, { theme, store }) {
+    const { midi, class: className } = props
+    const { mainColor } = theme
+    const { player } = store
 
     const isPlaying = player.currentSlug === midi.slug
 
     return (
       <article
-        class={c(`relative br2 mv4 shadow-6`, props.class)}
+        class={c('relative br2 mv4 shadow-6', className)}
       >
         <Link
           color='white'

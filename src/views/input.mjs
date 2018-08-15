@@ -16,12 +16,11 @@ export default class Input extends Component {
     if (isBrowser && autofocus) this.elem.focus()
   }
 
-  render (props) {
-    const { mainColor } = this.context.theme
+  render (props, state, { theme }) {
     const {
       class: className,
       borderColor = 'black-50',
-      borderFocusColor = mainColor,
+      borderFocusColor = theme.mainColor,
       type = 'text',
       pill = false,
       onFocus: _,
@@ -29,7 +28,7 @@ export default class Input extends Component {
       placeholder,
       ...rest
     } = props
-    const { focused } = this.state
+    const { focused } = state
 
     const focusClass = focused
       ? `b--${borderFocusColor} shadow-4`
