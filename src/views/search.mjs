@@ -4,20 +4,31 @@ import c from 'classnames'
 import Input from './input'
 
 export default class Search extends Component {
-  render (props) {
+  constructor () {
+    super()
+    this.state = {
+      focused: false
+    }
+  }
+
+  render (props, state, { store, theme }) {
     const { class: className, ...rest } = props
-    const { lastSearch } = this.context.store
-    const { mainColor, headerColor } = this.context.theme
+    const { focused } = state
+    const { lastSearch } = store
+    const { mainColor, headerColor } = theme
 
     return (
       <Input
         borderColor={headerColor}
         borderFocusColor={mainColor}
-        class={c(className, 'grow-subtle')}
+        class={c({
+          'o-90': !focused
+        }, 'grow-subtle', className)}
         pill
         onInput={this.onInput}
         onKeyPress={this.onKeyPress}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         placeholder='Search'
         value={lastSearch}
         {...rest}
@@ -30,12 +41,12 @@ export default class Search extends Component {
     dispatch('SEARCH_INPUT', value)
   }
 
-  onInput = (event) => {
+  onInput = event => {
     const value = event.target.value
     this.dispatch(value)
   }
 
-  onKeyPress = (event) => {
+  onKeyPress = event => {
     event.stopPropagation()
     if (event.key === 'Enter') {
       const value = event.target.value
@@ -43,8 +54,11 @@ export default class Search extends Component {
     }
   }
 
-  onFocus = (event) => {
-    const value = event.target.value
-    if (value.trim() !== '') this.dispatch(value)
+  onFocus = () => {
+    this.setState({ focused: true })
+  }
+
+  onBlur = () => {
+    this.setState({ focused: false })
   }
 }
