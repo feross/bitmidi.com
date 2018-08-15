@@ -45,19 +45,29 @@ const Header = (props, context) => {
 export default Header
 
 const HeaderLogo = ({ isPageLoading }) => {
-  const logoCls = isPageLoading &&
+  const cls = isPageLoading &&
     'animate-pulse animate--normal animate--infinite'
 
   return (
     <Link
       color='white'
-      class={c(logoCls, 'dib lh-copy white f3')}
+      class={c(cls, 'dib lh-copy white f3')}
       href='/'
     >
       <Image
-        src='/img/bitmidi.svg'
         alt={siteName}
+        class='dn db-m db-l'
         lazyload={false}
+        src='/img/bitmidi.svg'
+        style={{
+          height: 39
+        }}
+      />
+      <Image
+        alt={siteName}
+        class='db dn-m dn-l'
+        lazyload={false}
+        src='/img/bitmidi-icon.svg'
         style={{
           height: 39
         }}
