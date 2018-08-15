@@ -18,14 +18,14 @@ export default class Input extends Component {
 
   render (props, state, { theme }) {
     const {
-      class: className,
       borderColor = 'black-50',
       borderFocusColor = theme.mainColor,
-      type = 'text',
+      class: className,
+      onBlur: _,
+      onFocus: _2,
       pill = false,
-      onFocus: _,
-      onBlur: _2,
       placeholder,
+      type = 'text',
       ...rest
     } = props
     const { focused } = state
@@ -38,19 +38,19 @@ export default class Input extends Component {
 
     return (
       <input
+        ref={this.ref}
+        aria-label={placeholder}
         class={c(
           'db input-reset ba bw1 ph3 pv2 outline-0 sans-serif',
           focusClass,
           pillClass,
           className
         )}
-        ref={this.ref}
+        onBlur={this.onBlur}
+        onFocus={this.onFocus}
+        placeholder={placeholder}
         spellCheck='false'
         type={type}
-        onFocus={this.onFocus}
-        onBlur={this.onBlur}
-        placeholder={placeholder}
-        aria-label={placeholder}
         {...rest}
       />
     )
