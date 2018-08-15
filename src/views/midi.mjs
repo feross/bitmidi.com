@@ -33,7 +33,7 @@ export default class Midi extends Component {
             />
           }
           <div
-            class={c(`cf br2 bg-${mainColor} pv2 ph3`, {
+            class={c(`cf br2 bg-${mainColor} pv2 ph2 ph3-m ph3-l`, {
               'br--bottom': midi.image
             })}
           >
