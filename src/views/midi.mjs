@@ -33,14 +33,14 @@ export default class Midi extends Component {
             />
           }
           <div
-            class={c(`cf br2 bg-${mainColor} pv2 ph2 ph3-m ph3-l`, {
+            class={c(`br2 bg-${mainColor} pv2 ph3 flex`, {
               'br--bottom': midi.image
             })}
           >
-            <h2 class='fl f4 mv0 lh-copy w-80 truncate underline-hover'>{midi.name}</h2>
+            <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
             <Link
+              class='flex-none grow-large'
               color='white'
-              class='fr tr grow-large'
               onClick={this.onClick}
               title={`Play ${midi.name}`}
             >
