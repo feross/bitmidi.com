@@ -29,10 +29,10 @@ const Header = (props, context) => {
         willChange: 'background, background-size'
       }}
     >
-      <div>
+      <div class='flex-none'>
         <HeaderLogo isPageLoading={isPageLoading} />
       </div>
-      <div class='flex-auto mh4 mw7'>
+      <div class='flex-auto mh3 mw7'>
         <Search class='w-100' />
       </div>
       <nav class='tr'>
