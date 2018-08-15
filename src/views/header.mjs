@@ -22,14 +22,14 @@ const Header = (props, context) => {
 
   return (
     <header
-      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph2')}
+      class={c(headerCls, 'top-0 w-100 shadow-1 cf ph3')}
       style={{
         height: 50,
         paddingTop: 6,
         willChange: 'background, background-size'
       }}
     >
-      <div class='center mw9 safe-padding'>
+      <div class='center safe-padding'>
         <div class='fl w-third'>
           <HeaderLogo isPageLoading={isPageLoading} />
         </div>

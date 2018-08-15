@@ -60,17 +60,21 @@ export default class MidiPage extends Page {
         </p>
 
         <h3>Download this MIDI file</h3>
-        <Link download={midi.name} href={midi.downloadUrl}>
-          Download {midi.name}
-        </Link>
+        <p>
+          <Link download={midi.name} href={midi.downloadUrl}>
+            Download {midi.name}
+          </Link>
+        </p>
 
         { midi.alternateNames &&
           <div>
             <h3>This MIDI file has alternate names</h3>
-            <ul>
-              { midi.alternateNames.map(name => <li>{name}</li>) }
-              <li>{midi.name}</li>
-            </ul>
+            <p>
+              <ul>
+                { midi.alternateNames.map(name => <li>{name}</li>) }
+                <li>{midi.name}</li>
+              </ul>
+            </p>
           </div>
         }
       </div>
