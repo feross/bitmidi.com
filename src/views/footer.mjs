@@ -4,6 +4,11 @@ import Link from './link'
 import { HorizListItem, HorizListDivider } from './horiz-list'
 
 const Footer = (props, context) => {
+  const { app } = context.store
+
+  // Hide footer while page is loading
+  if (app.pending > 0) return null
+
   return (
     <footer class='f6 lh-copy mid-gray mw7 center mt4 mb4 tc'>
       <HorizListItem>
