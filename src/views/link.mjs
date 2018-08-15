@@ -20,7 +20,7 @@ export default class Link extends Component {
 
     return (
       <a
-        class={c('pointer no-underline', color, cls, className)}
+        class={c('pointer no-underline fw4', color, cls, className)}
         href={href}
         onClick={onClick && this.onClick}
         rel={c(external && 'external', newtab && 'noopener') || null}
