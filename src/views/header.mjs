@@ -33,10 +33,10 @@ const Header = (props, context) => {
         <div class='fl w-third'>
           <HeaderLogo isPageLoading={isPageLoading} />
         </div>
-        <div class='fl w-third v-mid pl4 pr1 ph2-m ph0-l'>
+        <div class='fl w-third v-mid ph2'>
           <Search class='w-100' />
         </div>
-        <nav class='fl w-third dn db-m db-l v-mid tr'>
+        <nav class='fl w-third v-mid tr'>
           <RandomMidiButton />
         </nav>
       </div>
@@ -76,7 +76,7 @@ const RandomMidiButton = () => {
       size='medium'
       href='/random'
     >
-      Random MIDI ✨
+      Random <span class='dn di-l'>MIDI ✨</span>
     </Button>
   )
 }
