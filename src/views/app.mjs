@@ -18,7 +18,7 @@ export default class App extends Component {
       <div id='root'>
         <Title title={app.title} />
         <Header />
-        <main class='mt2 pa2 pa3-m pa3-l mw7 center'>
+        <main class='mt4 mb5 ph2 ph3-m ph3-l mw7 center'>
           <Page url={location.url} />
           {errors.map(err => <small>{err.message}</small>)}
         </main>
