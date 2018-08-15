@@ -17,6 +17,8 @@ import routerApi from './router-api'
 import routerFeed from './router-feed'
 import routerRender from './router-render'
 
+const { isProd, rootPath } = config
+
 // Set correct mime-type for streaming wasm compilation
 // See: https://github.com/expressjs/express/issues/3589
 // TODO: Remove when express 4.17.0 is released
@@ -25,25 +27,23 @@ express.static.mime.types['wasm'] = 'application/wasm'
 // Set correct mime type for .pat (Gravis Ultrasound) files
 express.static.mime.types['pat'] = 'audio/pat'
 
-const MySQLStore = MySQLSession(session)
-
 export default function init () {
   const app = express()
 
   // Use EJS for server-side templating
   app.set('view engine', 'ejs')
-  app.set('views', join(config.rootPath, 'src', 'server'))
-  app.locals.rmWhitespace = config.isProd
-  app.locals.compileDebug = !config.isProd
+  app.set('views', join(rootPath, 'src', 'server'))
+  app.locals.rmWhitespace = isProd
+  app.locals.compileDebug = !isProd
 
   app.set('trust proxy', true) // Trust the nginx reverse proxy
-  app.set('json spaces', config.isProd ? 0 : 2) // Pretty JSON (in dev)
+  app.set('json spaces', isProd ? 0 : 2) // Pretty JSON (in dev)
   app.set('x-powered-by', false) // Prevent server fingerprinting
 
   // Headers to send with all responses
   app.use((req, res, next) => {
     // Redirect to canonical origin, over https
-    if (config.isProd && req.method === 'GET' &&
+    if (isProd && req.method === 'GET' &&
         (req.protocol !== 'https' || req.hostname !== config.host)) {
       return res.redirect(301, config.origin + req.url)
     }
@@ -60,7 +60,7 @@ export default function init () {
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
-    if (config.isProd) {
+    if (isProd) {
       res.header(
         'Strict-Transport-Security',
         `max-age=${config.maxAgeHSTS / 1000}; includeSubDomains; preload`
@@ -71,7 +71,7 @@ export default function init () {
   })
 
   // Serve favicon
-  app.use(favicon(join(config.rootPath, 'static', 'favicon.ico'), {
+  app.use(favicon(join(rootPath, 'static', 'favicon.ico'), {
     maxAge: config.maxAgeStatic
   }))
 
@@ -85,21 +85,21 @@ export default function init () {
   const freepatsPath = dirname(require.resolve('freepats'))
   app.use('/timidity', serveStatic(freepatsPath))
 
-  const uploadsPath = join(config.rootPath, 'uploads')
+  const uploadsPath = join(rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
 
-  const staticPath = join(config.rootPath, 'static')
+  const staticPath = join(rootPath, 'static')
   app.use('/webp/icons', serveWebp(iconsPath))
   app.use('/webp', serveWebp(staticPath))
   app.use(serveStatic(staticPath))
 
   // Read CSS for inlining in page
-  const style = config.isProd
+  const style = isProd
     ? readFileSync(join(staticPath, 'bundle.css'), 'utf8')
     : ''
 
   // Compute hash for far-future cached static resources for invalidation
-  const scriptHash = config.isProd
+  const scriptHash = isProd
     ? createHash(readFileSync(join(staticPath, 'bundle.js')))
     : 'dev'
 
@@ -115,6 +115,7 @@ export default function init () {
   })
 
   // Set up session store
+  const MySQLStore = MySQLSession(session)
   const sessionStore = new MySQLStore(dbSecret.connection)
   app.use(session({
     store: sessionStore,
@@ -134,12 +135,12 @@ export default function init () {
       // Omit cookies for requests initiated on other origins
       sameSite: 'lax',
       // Prevent cookies from being sent over insecure HTTP
-      secure: config.isProd
+      secure: isProd
     }
   }))
 
   // Log HTTP requests
-  app.use(morgan(config.isProd ? 'combined' : 'dev'))
+  app.use(morgan(isProd ? 'combined' : 'dev'))
 
   // Serve API routes
   app.use('/api', routerApi)
