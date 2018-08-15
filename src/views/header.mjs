@@ -22,14 +22,14 @@ const Header = (props, context) => {
 
   return (
     <header
-      class={c(headerCls, 'top-0 w-100 shadow-1 ph3 safe-padding flex justify-between')}
+      class={c(headerCls, 'top-0 w-100 shadow-1 ph2 ph2-safe ph3-m ph3-l flex justify-between')}
       style={{
         height: 50,
         paddingTop: 6,
         willChange: 'background, background-size'
       }}
     >
-      <div class=''>
+      <div>
         <HeaderLogo isPageLoading={isPageLoading} />
       </div>
       <div class='flex-auto mh4 mw7'>
