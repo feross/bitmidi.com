@@ -16,13 +16,13 @@ const Header = (props, context) => {
       app.pending > 0 || // fetching async data
       !app.isLoaded // window.onload() has not fired yet
 
-  const headerCls = isPageLoading
+  const cls = isPageLoading
     ? 'animate-bg-rainbow'
     : `bg-${headerColor}`
 
   return (
     <header
-      class={c(headerCls, 'top-0 w-100 shadow-1 ph2 ph2-safe ph3-m ph3-l flex justify-between')}
+      class={c(cls, 'top-0 w-100 shadow-1 ph3 ph3-safe flex justify-between')}
       style={{
         height: 50,
         paddingTop: 6,

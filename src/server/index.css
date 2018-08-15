@@ -3,9 +3,9 @@
  */
 
 /* Padding for the iPhone X notch */
-.ph2-safe {
-  padding-left: max(.5rem, env(safe-area-inset-left));
-  padding-right: max(.5rem, env(safe-area-inset-right));
+.ph3-safe {
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
 }
 
 .no-js .hide-no-js {

@@ -25,7 +25,7 @@ const Footer = (props, context) => {
   if (app.pending > 0) return null
 
   return (
-    <footer class='f6 lh-copy mid-gray mv4 ph2 ph2-safe mw7 center tc'>
+    <footer class='f6 lh-copy mid-gray mv4 ph3 ph3-safe mw7 center tc'>
       <div class='mv3'>
         <RandomTip />
       </div>
