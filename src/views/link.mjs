@@ -18,6 +18,10 @@ export default class Link extends Component {
 
     const cls = underlineHover ? 'underline-hover' : ''
 
+    if (href == null && onClick == null) {
+      throw new Error('Prop `href` and `onClick` are missing, one is required')
+    }
+
     return (
       <a
         class={c('pointer no-underline fw4', color, cls, className)}
