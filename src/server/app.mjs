@@ -204,9 +204,7 @@ export default function init () {
     next()
   })
 
-  app.get('/500', (req, res, next) => {
-    next(new Error('Manually visited /500'))
-  })
+  app.get('/500', () => { throw new Error('Manually visited /500') })
 
   // Serve routes with server-side rendering
   app.get('*', routerRender)
