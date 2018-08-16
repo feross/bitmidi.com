@@ -1,12 +1,12 @@
 'use strict'
 
 import Debug from 'debug'
+import Timidity from 'timidity'
 
 import api from './api'
 import { siteName, siteDesc, siteImage, isBrowser } from './config'
 import Location from './lib/location'
 import routes from './routes'
-import * as player from './browser/player'
 
 const debug = Debug('bitmidi:store')
 const debugVerbose = Debug('bitmidi:store:verbose')
@@ -14,6 +14,14 @@ const debugVerbose = Debug('bitmidi:store:verbose')
 const DEBUG_VERBOSE = new Set([
   'APP_RESIZE'
 ])
+
+let player = null
+
+export function getPlayerInstance () {
+  if (!player) player = new Timidity('/timidity')
+  player.on('ended', () => { dispatch('MIDI_ENDED') })
+  return player
+}
 
 export default function createStore (render, onPendingChange = () => {}) {
   const store = {
@@ -230,11 +238,11 @@ export default function createStore (render, onPendingChange = () => {}) {
         const midi = store.data.midis[midiSlug]
 
         if (store.player.currentSlug === midiSlug) {
-          player.pause()
+          getPlayerInstance().pause()
           store.player.currentSlug = null
         } else {
-          player.load(midi.downloadUrl)
-          player.play()
+          getPlayerInstance().load(midi.downloadUrl)
+          getPlayerInstance().play()
 
           store.player.currentSlug = midiSlug
 
@@ -244,6 +252,12 @@ export default function createStore (render, onPendingChange = () => {}) {
         }
 
         return update()
+      }
+
+      case 'MIDI_PLAY_BUFFER': {
+        const buf = data
+        getPlayerInstance().load(buf)
+        getPlayerInstance().play()
       }
 
       case 'MIDI_ENDED': {
