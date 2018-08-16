@@ -13,7 +13,7 @@ const TIPS = [
   </span>,
   <span>
     We tweet a new MIDI every day.{' '}
-    <Link src={`https://twitter.com/${siteTwitter}`}>Follow @{siteTwitter}</Link>{' '}
+    <Link href={`https://twitter.com/${siteTwitter}`} newtab>Follow @{siteTwitter}</Link>{' '}
     on Twitter!
   </span>
 ]
