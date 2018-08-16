@@ -214,6 +214,7 @@ export default function init () {
 
   // Handle errors with the same server-side rendering path
   app.use((err, req, res, next) => {
+    console.error(err.stack)
     req.err = err
     routerRender(req, res, next)
   })
