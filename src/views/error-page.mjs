@@ -6,21 +6,20 @@ import Page from './page'
 export default class ErrorPage extends Page {
   load () {
     const { dispatch } = this.context
-    const firstError = this.getError()
-    dispatch('APP_META', { title: firstError.message })
+    const err = this.getError()
+    dispatch('APP_META', { title: err.message })
   }
 
   render (props) {
-    const firstError = this.getError()
+    const err = this.getError()
 
     return (
-      <Heading>Error – {firstError.message}</Heading>
+      <Heading>Error – {err.message}</Heading>
     )
   }
 
   getError = () => {
-    const { store } = this.context
-    const { fatalError, errors } = store
-    return fatalError || errors[0] || { message: 'Page Not Found' }
+    const { errors } = this.context.store
+    return errors[errors.length - 1] || { message: 'Not Found' }
   }
 }

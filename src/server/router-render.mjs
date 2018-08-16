@@ -13,25 +13,24 @@ const router = Router()
 router.get('/:midiId(\\d+)', async (req, res, next) => {
   const midiId = Number(req.params.midiId)
   if (midiId === 500) return next()
-
   const { result } = await api.midi.get({ id: midiId })
   res.redirect(301, `${origin}${result.url}`)
 })
 
-router.use(async (req, res) => {
+router.use((req, res, next) => {
   const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onPendingChange)
   const jsx = getProvider(store, dispatch)
 
-  // Useful for debugging JSX issues in the browser instead of Node
+  // For debugging – Disable SSR to debug JSX in the browser rather than Node
   if (!isProd && req.query.ssr === '0') {
-    res.render('layout', {
-      content: '',
-      store
-    })
-    return
+    return res.render('layout', { content: '', store })
   }
 
+  if (req.err) {
+    const { message, stack, code = null, status = null } = req.err
+    dispatch('ERROR_FATAL', { message, stack, code, status })
+  }
   dispatch('LOCATION_REPLACE', req.url)
   const routeName = store.location.name
 
@@ -46,36 +45,29 @@ router.use(async (req, res) => {
   }
 
   function done () {
-    // When an error occurs during server rendering, treat it as fatal
-    if (req.err || store.errors.length > 0) {
-      const err = req.err || store.errors.shift()
-      store.fatalError = {
-        message: err.message,
-        code: err.code || null,
-        status: req.err ? 500 : 404
-      }
-      console.error(err.stack || err.message)
-      update()
-    }
-
-    let status = 200
-
-    if (store.fatalError) {
-      status = typeof store.fatalError.status === 'number'
-        ? store.fatalError.status
-        : 500
+    if (req.err != null) {
+      // Fatal error occurred, send page and ignore any render errors
+      return sendPage(Number(req.err.status) || 500)
+    } else if (store.errors[0] != null) {
+      // Render errors are treated as fatal during server render
+      return next(store.errors[0])
     } else if (store.location.name === 'error') {
-      status = 404
+      // Request did not match any routes
+      return sendPage(404)
     } else if (routeName !== store.location.name) {
+      // Location changes are treated as redirects during server render
       return res.redirect(307, store.location.canonicalUrl)
+    } else {
+      // Happy path! No errors, rendered successfully!
+      return sendPage(200)
     }
 
-    res
-      .status(status)
-      .render('layout', {
-        content: renderer.html(),
-        store
-      })
+    function sendPage (status) {
+      store.errors.map(err => { delete err.stack })
+      res
+        .status(status)
+        .render('layout', { content: renderer.html(), store })
+    }
   }
 })
 

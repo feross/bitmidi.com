@@ -33,7 +33,7 @@ export default function createStore (render, onPendingChange = () => {}) {
       pending: 0
     },
 
-    fatalError: null,
+    fatalError: false,
     errors: [],
 
     player: {
@@ -80,7 +80,8 @@ export default function createStore (render, onPendingChange = () => {}) {
         await _dispatch(type, data)
       }
     } catch (err) {
-      addError(err)
+      const { message, stack, code = null, status = null } = err
+      _dispatch('ERROR_FATAL', { message, stack, code, status })
       if (thunk != null) decrementPending()
       update()
     }
@@ -111,13 +112,30 @@ export default function createStore (render, onPendingChange = () => {}) {
         const { location, source } = data
         store.location = location
 
-        // Clear fatal errors on page navigation
-        store.fatalError = null
+        if (source !== 'replace') {
+          // Clear fatal error on page navigation
+          store.fatalError = false
+        }
 
         if (isBrowser) {
           if (source === 'push') window.scroll(0, 0)
           window.ga('send', 'pageview', location.url)
         }
+        return update()
+      }
+
+      case 'ERROR_FATAL': {
+        const error = data
+        store.errors.push(error)
+        if (isBrowser) console.error(error.stack)
+        store.fatalError = true
+        return update()
+      }
+
+      case 'ERROR': {
+        const error = data
+        store.errors.push(error)
+        if (isBrowser) console.error(error.stack)
         return update()
       }
 
@@ -275,16 +293,6 @@ export default function createStore (render, onPendingChange = () => {}) {
   // function addPendingDispatch (type, data) {
   //   window.localStorage.pendingDispatch = JSON.stringify({ type, data })
   // }
-
-  function addError (err) {
-    const { message, code = null, stack } = err
-    store.errors.push({
-      message: err.message,
-      code: err.code || null,
-      stack: err.stack
-    })
-    console.error(err.stack)
-  }
 
   function addMidi (midi) {
     store.data.midis[midi.slug] = midi
