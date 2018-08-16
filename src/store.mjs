@@ -18,8 +18,19 @@ const DEBUG_VERBOSE = new Set([
 let player = null
 
 export function getPlayerInstance () {
-  if (!player) player = new Timidity('/timidity')
-  player.on('ended', () => { dispatch('MIDI_ENDED') })
+  if (!player) {
+    player = new Timidity('/timidity')
+    player.on('unstarted', () => console.log('unstarted'))
+    player.on('playing', () => console.log('playing'))
+    player.on('paused', () => console.log('paused'))
+    player.on('ended', () => {
+      console.log('ended')
+      dispatch('MIDI_ENDED')
+    })
+    player.on('buffering', () => console.log('buffering'))
+    player.on('timeupdate', (time) => console.log('timeupdate', time))
+    player.on('error', (err) => console.log('error', err))
+  }
   return player
 }
 
