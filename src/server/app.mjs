@@ -140,7 +140,7 @@ export default function init () {
   }))
 
   // Log HTTP requests
-  app.use(morgan(isProd ? 'combined' : 'dev'))
+  app.use(morgan(isProd ? 'combined' : 'dev', { immediate: !isProd }))
 
   // Serve API routes
   app.use('/api', routerApi)
