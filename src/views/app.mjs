@@ -8,11 +8,11 @@ import Title from './title'
 
 export default class App extends Component {
   render (props, _, { store }) {
-    const { app, location, fatalError, errors } = store
+    const { app, errors, fatalError, location } = store
 
-    if (fatalError) location.name = 'error'
-
-    const Page = routes.find(route => route.name === location.name).page
+    const routeName = fatalError ? 'error' : location.name
+    const route = routes.find(route => route.name === routeName)
+    const Page = route.page
 
     return (
       <div id='root'>
