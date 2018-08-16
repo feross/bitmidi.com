@@ -50,7 +50,9 @@ router.use((req, res, next) => {
       return sendPage(Number(req.err.status) || 500)
     } else if (store.errors[0] != null) {
       // Render errors are treated as fatal during server render
-      return next(store.errors[0])
+      const err = new Error(store.errors[0].message)
+      Object.assign(err, store.errors[0])
+      return next(err)
     } else if (store.location.name === 'error') {
       // Request did not match any routes
       return sendPage(404)
