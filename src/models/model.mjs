@@ -1,5 +1,6 @@
 import Debug from 'debug'
 import Knex from 'knex'
+import { DbErrors } from 'objection-db-errors'
 import { join } from 'path'
 import { knexSnakeCaseMappers, Model, QueryBuilder } from 'objection'
 
@@ -17,7 +18,7 @@ class BaseQueryBuilder extends QueryBuilder {
   }
 }
 
-export default class BaseModel extends Model {
+export default class BaseModel extends DbErrors(Model) {
   // Use a custom query builder
   static QueryBuilder = BaseQueryBuilder
 
@@ -30,6 +31,7 @@ export default class BaseModel extends Model {
   // Set the status code to 404 when items are not found
   static createNotFoundError (queryContext) {
     const err = new this.NotFoundError()
+    err.message = 'Not Found'
     err.status = 404
     return err
   }

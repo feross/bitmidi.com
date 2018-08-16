@@ -1,4 +1,14 @@
 import Router from 'express-promise-router'
+import { NotFoundError, ValidationError } from 'objection'
+import {
+  CheckViolationError,
+  ConstraintViolationError,
+  DataError,
+  DBError,
+  ForeignKeyViolationError,
+  NotNullViolationError,
+  UniqueViolationError
+} from 'objection-db-errors'
 
 import api from '../api'
 
@@ -33,10 +43,45 @@ router.get('*', async (req, res) => {
 if (global.rollbar) router.use(global.rollbar.errorHandler())
 
 router.use(async (err, req, res, next) => {
-  console.error(err.stack)
-  const status = typeof err.status === 'number' ? err.status : 400 // Bad Request
-  res.status(status)
-  res.json({ error: { message: err.message, code: err.code } })
+  augmentObjectionError(err)
+
+  const { message, stack, code = null, status = null } = err
+  console.error(stack)
+
+  res
+    .status(Number(err.status) || 500)
+    .json({ error: { message, code, status } })
 })
+
+function augmentObjectionError (err, res) {
+  if (err instanceof ValidationError) {
+    err.status = 400
+    err.code = err.type || 'UnknownValidationError'
+  } else if (err instanceof NotFoundError) {
+    err.status = 404
+    err.code = 'NOT_FOUND'
+  } else if (err instanceof UniqueViolationError) {
+    err.status = 409
+    err.code = 'UNIQUE_VIOLATION'
+  } else if (err instanceof NotNullViolationError) {
+    err.status = 400
+    err.code = 'NOT_NULL_VIOLATION'
+  } else if (err instanceof ForeignKeyViolationError) {
+    err.status = 409
+    err.code = 'FOREIGN_KEY_VIOLATION'
+  } else if (err instanceof CheckViolationError) {
+    err.status = 400
+    err.code = 'CHECK_VIOLATION'
+  } else if (err instanceof ConstraintViolationError) {
+    err.status = 409
+    err.code = 'UNKNOWN_CONSTRAINT_VIOLATION'
+  } else if (err instanceof DataError) {
+    err.status = 400
+    err.code = 'UNKNOWN_DATA_ERROR'
+  } else if (err instanceof DBError) {
+    err.status = 500
+    err.code = 'UNKNOWN_DB_ERROR'
+  }
+}
 
 export default router
