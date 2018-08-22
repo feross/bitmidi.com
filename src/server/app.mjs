@@ -233,15 +233,15 @@ function serveStatic (path) {
 // Create a hash for static assets like `bundle.js` and `bundle.css` to use
 // in a cache-busting query parameter
 function createHash (data) {
-  return trimHash(crypto.createHash('sha256').update(data).digest('base64'))
+  return trimBase64(crypto.createHash('sha256').update(data).digest('base64'))
 }
 
 // Create a random nonce to use in CSP
 function createNonce () {
-  return trimHash(Buffer.from(uuid()).toString('base64'))
+  return trimBase64(Buffer.from(uuid()).toString('base64'))
 }
 
-// Trim hashes or nonces to a reasonable size
-function trimHash (str) {
-  return str.slice(0, 20).replace(/\+|\/|=/g, '')
+// Trim base64 hashes or nonces to a reasonable size
+function trimBase64 (str) {
+  return str.replace(/\+|\/|=/g, '').slice(0, 24)
 }
