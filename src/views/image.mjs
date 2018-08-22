@@ -69,23 +69,17 @@ class Image extends Component {
     // Show image
     if (visible || !lazyload) return $picture
 
-    // Show placeholder and until image is visible
+    // Show placeholder (since image is not visible)
     return (
       <div>
-        <picture>
-          <img
-            ref={this.ref}
-            alt={alt}
-            class={c('hide-no-js', className)}
-            decoding='async'
-            role={role}
-            style={{
-              opacity: 0,
-              ...style
-            }}
-            {...rest}
-          />
-        </picture>
+        <div
+          ref={this.ref}
+          class={c('hide-no-js', className)}
+          style={{
+            ...style
+          }}
+          {...rest}
+        />
         {!isBrowser && <noscript>{$picture}</noscript>}
       </div>
     )
