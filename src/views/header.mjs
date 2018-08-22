@@ -57,7 +57,7 @@ const HeaderLogo = (_, { store }) => {
         lazyload={false}
         src='/img/bitmidi.svg'
         style={{
-          height: 39
+          height: 38
         }}
       />
       <Image
