@@ -3,22 +3,10 @@ import { h } from 'preact' /** @jsx h */
 import { siteTwitter } from '../config'
 
 import Link from './link'
+import Random from './random'
 import { HorizListItem, HorizListDivider } from './horiz-list'
 
-const TIPS = [
-  <span>You can drag-and-drop a MIDI file onto this page to play it!</span>,
-  <span>
-    This project is open source on{' '}
-    <Link href='https://github.com/feross/bitmidi.com' newtab>GitHub</Link>!
-  </span>,
-  <span>
-    We tweet a new MIDI every day.{' '}
-    <Link href={`https://twitter.com/${siteTwitter}`} newtab>Follow @{siteTwitter}</Link>{' '}
-    on Twitter!
-  </span>
-]
-
-const Footer = (props, { store }) => {
+const Footer = (_, { store }) => {
   const { app } = store
 
   // Hide footer while page is loading
@@ -61,10 +49,23 @@ const Footer = (props, { store }) => {
 }
 
 const RandomTip = () => {
-  const tip = TIPS[Math.floor(TIPS.length * Math.random())]
   return (
     <span>
-      <strong>Pro Tip</strong>: {tip}
+      <strong>Pro Tip</strong>:{' '}
+      <Random>
+        <span>You can drag-and-drop a MIDI file onto this page to play it!</span>
+        <span>
+          This project is open source on{' '}
+          <Link href='https://github.com/feross/bitmidi.com' newtab>GitHub</Link>!
+        </span>
+        <span>
+          We tweet a new MIDI every day.{' '}
+          <Link href={`https://twitter.com/${siteTwitter}`} newtab>
+            Follow @{siteTwitter}
+          </Link>{' '}
+          on Twitter!
+        </span>
+      </Random>
     </span>
   )
 }
