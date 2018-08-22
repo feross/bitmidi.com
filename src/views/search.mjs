@@ -15,12 +15,11 @@ export default class Search extends Component {
     const { class: className, ...rest } = props
     const { focused } = state
     const { lastSearch } = store
-    const { mainColor, headerColor } = theme
+    const { headerColor } = theme
 
     return (
       <Input
         borderColor={headerColor}
-        borderFocusColor={mainColor}
         class={c({
           'o-90': !focused
         }, 'grow-subtle', className)}
