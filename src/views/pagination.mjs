@@ -4,10 +4,10 @@ import Button from './button'
 
 const NUM_PAGES = 5
 
-const Pagination = (props, context) => {
+const Pagination = (props, { store }) => {
   const { page: pageStr, pageTotal, total } = props
   const page = Number(pageStr)
-  const { location } = context.store
+  const { location } = store
 
   if (page == null || pageTotal == null) return null
 

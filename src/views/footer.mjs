@@ -18,8 +18,8 @@ const TIPS = [
   </span>
 ]
 
-const Footer = (props, context) => {
-  const { app } = context.store
+const Footer = (props, { store }) => {
+  const { app } = store
 
   // Hide footer while page is loading
   if (app.pending > 0) return null

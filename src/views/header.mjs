@@ -8,9 +8,9 @@ import Image from './image'
 import Link from './link'
 import Search from './search'
 
-const Header = (props, context) => {
-  const { app } = context.store
-  const { headerColor } = context.theme
+const Header = (props, { store, theme }) => {
+  const { app } = store
+  const { headerColor } = theme
 
   const isPageLoading = !isBrowser || // initial server render
       app.pending > 0 || // fetching async data

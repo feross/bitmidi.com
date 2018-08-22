@@ -3,11 +3,11 @@ import c from 'classnames'
 
 import Link from './link'
 
-const Button = (props, context) => {
+const Button = (props, { theme }) => {
   const {
     children,
     class: className,
-    color = context.theme.mainColor,
+    color = theme.mainColor,
     disabled = false,
     fill = false,
     href,
