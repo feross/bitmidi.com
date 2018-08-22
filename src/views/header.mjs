@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import { isBrowser, siteName } from '../config'
+import { siteName } from '../config'
 
 import Button from './button'
 import Image from './image'
@@ -12,11 +12,7 @@ const Header = (props, { store, theme }) => {
   const { app } = store
   const { headerColor } = theme
 
-  const isPageLoading = !isBrowser || // initial server render
-      app.pending > 0 || // fetching async data
-      !app.isLoaded // window.onload() has not fired yet
-
-  const cls = isPageLoading
+  const cls = app.pending > 0
     ? 'animate-bg-rainbow'
     : `bg-${headerColor}`
 
@@ -30,7 +26,7 @@ const Header = (props, { store, theme }) => {
       }}
     >
       <div class='flex-none'>
-        <HeaderLogo isPageLoading={isPageLoading} />
+        <HeaderLogo />
       </div>
       <div class='flex-auto mh3 mw7'>
         <Search class='w-100' />
@@ -44,8 +40,9 @@ const Header = (props, { store, theme }) => {
 
 export default Header
 
-const HeaderLogo = ({ isPageLoading }) => {
-  const cls = isPageLoading &&
+const HeaderLogo = (_, { store }) => {
+  const { app } = store
+  const cls = app.pending > 0 &&
     'animate-pulse animate--normal animate--infinite'
 
   return (
