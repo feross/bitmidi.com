@@ -48,12 +48,21 @@ class Image extends Component {
 
     // Use automatic server-side WebP conversion on absolutely specified images
     // (i.e. /img/test.png)
-    const $source = isAbsolutePath(src) && isConvertibleToWebp(src) &&
-      <source srcset={`/webp${src}.webp`} type='image/webp' />
+    const $sources = isAbsolutePath(src) && isConvertibleToWebp(src) && [
+      <source
+        media="(max-width: 480px)"
+        srcset={`/webp${src}.low.webp`}
+        type='image/webp'
+      />,
+      <source
+        srcset={`/webp${src}.webp`}
+        type='image/webp'
+      />
+    ]
 
     const $picture = (
       <picture>
-        {$source}
+        {$sources}
         <img
           alt={alt}
           class={className}

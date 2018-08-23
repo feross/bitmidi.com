@@ -17,9 +17,14 @@ const writeFileAsync = promisify(writeFile)
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
-const imageminWebp = ImageminWebp({
+const convertWebp = ImageminWebp({
   method: 6,
   quality: 75
+})
+
+const convertWebpLow = ImageminWebp({
+  method: 6,
+  quality: 50
 })
 
 export default function serveWebp (root, opts = {}) {
@@ -62,6 +67,10 @@ export default function serveWebp (root, opts = {}) {
     // strip off .webp extname
     path = path.replace(/\.webp$/, '')
 
+    ext = extname(path)
+    const isLow = ext === '.low'
+    if (isLow) path = path.replace(/\.low$/, '')
+
     // ensure that file to convert is actually convertible to .webp
     ext = extname(path)
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') {
@@ -76,7 +85,9 @@ export default function serveWebp (root, opts = {}) {
     }
 
     // attempt to serve from cache folder, if file exists
-    const webpPath = relative(root, path).replace(/\.(png|jpg|tif)$/, '.webp')
+    const webpExt = isLow ? '.low.webp' : '.webp'
+    const webpPath = relative(root, path).replace(/\.(png|jpg|tif)$/, webpExt)
+
     send(req, webpPath, { root: cacheRoot })
       .on('error', async () => {
         try {
@@ -91,7 +102,9 @@ export default function serveWebp (root, opts = {}) {
 
     async function convertToWebp () {
       const file = await readFileAsync(path)
-      const outputFile = await imageminWebp(file)
+      const outputFile = isLow
+        ? await convertWebpLow(file)
+        : await convertWebp(file)
       const outputPath = join(cacheRoot, webpPath)
       await mkdirpAsync(dirname(outputPath))
       await writeFileAsync(outputPath, outputFile)
