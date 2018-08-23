@@ -40,9 +40,7 @@ export default class Page extends Component {
 
   async _load () {
     try {
-      console.log('LOAD')
       await this.load()
-      console.log('LOADED')
       this.setState({ loaded: true })
     } catch {}
   }
