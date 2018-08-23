@@ -20,7 +20,9 @@ export default class App extends Component {
         <Header />
         <main class='mt4 mb5 ph3 ph3-safe mw7 center'>
           <Page url={location.url} />
-          {errors.map(err => <div><small>{err.message}</small></div>)}
+          <div class='tc light-gray'>
+            {errors.map(err => <div><small>{err.message}</small></div>)}
+          </div>
         </main>
         <Footer />
       </div>
