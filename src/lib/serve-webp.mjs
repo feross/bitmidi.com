@@ -1,27 +1,26 @@
 // TODO: publish to npm
 
-import imagemin from 'imagemin'
-import imageminWebp from 'imagemin-webp'
+import ImageminWebp from 'imagemin-webp'
+import mkdirp from 'mkdirp'
 import parseUrl from 'parseurl'
 import send from 'send'
+import { access, readFile, writeFile } from 'fs'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
-import { access } from 'fs'
 import { promisify } from 'util'
 import { randomBytes } from 'crypto'
 import { tmpdir } from 'os'
 
 const accessAsync = promisify(access)
+const mkdirpAsync = promisify(mkdirp)
+const readFileAsync = promisify(readFile)
+const writeFileAsync = promisify(writeFile)
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
-const IMAGEMIN_OPTS = {
-  use: [
-    imageminWebp({
-      quality: 75,
-      method: 6
-    })
-  ]
-}
+const imageminWebp = ImageminWebp({
+  method: 6,
+  quality: 75
+})
 
 export default function serveWebp (root, opts = {}) {
   if (typeof root !== 'string') {
@@ -82,19 +81,22 @@ export default function serveWebp (root, opts = {}) {
       .on('error', async () => {
         try {
           // if file is not in cache folder, convert to .webp and serve it
-          const webpPath = await convertToWebp()
+          await convertToWebp()
+          console.log('converted')
           send(req, webpPath, { root: cacheRoot }).pipe(res)
-        } catch {
+        } catch (err) {
+          console.log('error', err)
           return next()
         }
       })
       .pipe(res)
 
     async function convertToWebp () {
-      const outputPath = join(cacheRoot, dirname(relative(root, path)))
-      const [file] = await imagemin([path], outputPath, IMAGEMIN_OPTS)
-      if (file == null) throw new Error(`No file with path "${path}"`)
-      return relative(cacheRoot, file.path)
+      const file = await readFileAsync(path)
+      const outputFile = await imageminWebp(file)
+      const outputPath = join(cacheRoot, webpPath)
+      await mkdirpAsync(dirname(outputPath))
+      await writeFileAsync(outputPath, outputFile)
     }
   }
 }
