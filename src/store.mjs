@@ -49,7 +49,8 @@ export default function createStore (render, onPendingChange = () => {}) {
       description: null, // Page meta description
       image: null, // Page image
       isLoaded: false, // Did window.onload() fire?
-      pending: 0
+      isServerRendered: false, // Was the current page server rendered?
+      pending: 0 // How many outstanding load requests?
     },
 
     fatalError: false,
@@ -132,8 +133,9 @@ export default function createStore (render, onPendingChange = () => {}) {
         store.location = location
 
         if (source !== 'replace') {
-          // Clear fatal error on page navigation
+          // On page navigation, clear certain flags
           store.fatalError = false
+          store.app.isServerRendered = false
         }
 
         if (isBrowser) {

@@ -12,7 +12,8 @@ export default class Page extends Component {
   }
 
   componentDidMount () {
-    this._load()
+    const { isServerRendered } = this.props
+    if (!isServerRendered) this._load()
     if (isBrowser) {
       this._interval = setInterval(() => this._load(), loadInterval)
     }
@@ -21,7 +22,8 @@ export default class Page extends Component {
   componentWillReceiveProps (nextProps) {
     // If the user navigates, then the url prop of <Page /> will change.
     // Call load() since new data may need to be fetched.
-    if (this.props.url !== nextProps.url) {
+    if (this.props.url !== nextProps.url ||
+        this.props.isServerRendered !== nextProps.isServerRendered) {
       this.setState({ loaded: false }, () => this._load())
     }
   }
@@ -38,12 +40,15 @@ export default class Page extends Component {
 
   async _load () {
     try {
+      console.log('LOAD')
       await this.load()
+      console.log('LOADED')
       this.setState({ loaded: true })
     } catch {}
   }
 
   get loaded () {
-    return this.state.loaded
+    const { isServerRendered } = this.props
+    return this.state.loaded || isServerRendered
   }
 }
