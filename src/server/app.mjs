@@ -153,10 +153,7 @@ export default function init () {
     // prevent rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
-    res.header('Feature-Policy', oneLine`
-      sync-xhr
-        'none'
-      ;
+    const devFeaturePolicy = !isProd && `
       image-compression
         'none'
       ;
@@ -166,6 +163,12 @@ export default function init () {
       unsized-media
         'none'
       ;
+    `
+    res.header('Feature-Policy', oneLine`
+      sync-xhr
+        'none'
+      ;
+      ${devFeaturePolicy || ''}
     `)
 
     // Prevent XSS attacks by explicitly specifying sources of content
