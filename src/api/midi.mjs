@@ -6,6 +6,15 @@ const debug = Debug('bitmidi:api:midi')
 
 const PAGE_SIZE = 10
 
+async function getDefaultSelect () {
+  const { columns } = await Midi.fetchTableMetadata()
+  const set = new Set(columns)
+  set.delete('hash')
+  set.delete('sharedTwitter')
+  set.delete('updatedAt')
+  return [...set]
+}
+
 // HACK: hardcode some images so homepage looks nice
 const IMAGES = [
   { re: 'aladdin', url: 'aladdin.jpg' },
@@ -36,10 +45,14 @@ function addImage (result) {
 }
 
 async function get (query = {}) {
+  let { select: _, ...where } = query
+  query.select = query.select || await getDefaultSelect()
   debug('get %o', query)
+
   const result = await Midi
     .query()
-    .findOne(query)
+    .select(query.select)
+    .findOne(where)
     .throwIfNotFound()
 
   addImage(result)
@@ -65,7 +78,7 @@ async function all (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
   query.orderBy = query.orderBy || 'plays'
-  query.select = query.select || '*'
+  query.select = query.select || await getDefaultSelect()
   debug('all %o', query)
 
   const { total, results } = await Midi
@@ -82,7 +95,7 @@ async function all (query = {}) {
 async function search (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
-  query.select = query.select || '*'
+  query.select = query.select || await getDefaultSelect()
   debug('search %o', query)
 
   const { total, results } = await Midi
