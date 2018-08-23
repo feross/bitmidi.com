@@ -82,10 +82,8 @@ export default function serveWebp (root, opts = {}) {
         try {
           // if file is not in cache folder, convert to .webp and serve it
           await convertToWebp()
-          console.log('converted')
           send(req, webpPath, { root: cacheRoot }).pipe(res)
         } catch (err) {
-          console.log('error', err)
           return next()
         }
       })
