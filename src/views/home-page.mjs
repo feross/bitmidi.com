@@ -3,6 +3,7 @@ import { h } from 'preact' /** @jsx h */
 import { doMidiAll } from '../actions/midi'
 
 import Heading from './heading'
+import Image from './image'
 import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
@@ -65,11 +66,13 @@ export default class HomePage extends Page {
 const HomePageHero = ({ numFiles }) => {
   return (
     <div>
-      <div
-        class='cover bg-center absolute top-0 left-0 w-100'
+      <Image
+        src='/img/hero.jpg'
+        alt='BitMidi hero image - MIDI vaporwave landscape'
+        class='absolute top-0 left-0 w-100'
         style={{
-          backgroundImage: 'url("/img/hero.jpg")',
           zIndex: -1,
+          objectFit: 'cover',
           height: 480
         }}
       />
