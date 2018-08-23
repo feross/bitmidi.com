@@ -57,6 +57,7 @@ const HeaderLogo = (_, { store }) => {
         lazyload={false}
         src='/img/bitmidi.svg'
         style={{
+          width: 152,
           height: 38
         }}
       />
@@ -66,7 +67,8 @@ const HeaderLogo = (_, { store }) => {
         lazyload={false}
         src='/img/bitmidi-icon.svg'
         style={{
-          height: 39
+          width: 44,
+          height: 38
         }}
       />
     </Link>
