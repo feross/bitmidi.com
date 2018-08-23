@@ -157,6 +157,12 @@ export default function init () {
       sync-xhr
         'none'
       ;
+      image-compression
+        'none'
+      ;
+      legacy-image-formats
+        'none'
+      ;
       unsized-media
         'none'
       ;
