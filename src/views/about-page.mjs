@@ -12,11 +12,11 @@ export default class AboutPage extends Page {
   async load () {
     const { dispatch } = this.context
 
+    await dispatch(doMidiAll({ pageSize: 1 }))
+
     dispatch('APP_META', {
       title: `About ${siteName}`
     })
-
-    await dispatch(doMidiAll({ pageSize: 1 }))
   }
 
   render (props, _, { store }) {
