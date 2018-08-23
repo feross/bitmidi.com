@@ -48,7 +48,7 @@ const Pagination = (props, { store }) => {
   )
 
   function getPageUrl (pageNum) {
-    const url = new URL(location.url, 'http://example.com')
+    const url = new URL(location.canonicalUrl, 'http://example.com')
     if (pageNum === 0) url.searchParams.delete('page')
     else url.searchParams.set('page', pageNum)
     return url.pathname + url.search
