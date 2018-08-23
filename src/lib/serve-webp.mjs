@@ -5,12 +5,12 @@ import imageminWebp from 'imagemin-webp'
 import parseUrl from 'parseurl'
 import send from 'send'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
-import { open } from 'fs'
+import { access } from 'fs'
 import { promisify } from 'util'
 import { randomBytes } from 'crypto'
 import { tmpdir } from 'os'
 
-const openAsync = promisify(open)
+const accessAsync = promisify(access)
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -69,9 +69,9 @@ export default function serveWebp (root, opts = {}) {
       return next()
     }
 
-    // if path does not exist, abort before checking cache or running imagemin
+    // if requested path does not exist, skip checking cache or running imagemin
     try {
-      await openAsync(path, 'r')
+      await accessAsync(path)
     } catch {
       return next()
     }
