@@ -7,7 +7,7 @@ import Link from './link'
 
 export default class Midi extends Component {
   render (props, _, { theme, store }) {
-    const { midi, class: className } = props
+    const { class: className, midi, showImage = true } = props
     const { mainColor } = theme
     const { player } = store
 
@@ -22,7 +22,7 @@ export default class Midi extends Component {
           title={midi.name}
           href={midi.url}
         >
-          { midi.image &&
+          { midi.image && showImage &&
             <Image
               class='db midi-image w-100 br2 br--top h5 bg-center'
               style={{
@@ -34,7 +34,7 @@ export default class Midi extends Component {
           }
           <div
             class={c(`br2 bg-${mainColor} pv2 ph3 flex`, {
-              'br--bottom': midi.image
+              'br--bottom': midi.image && showImage
             })}
           >
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
