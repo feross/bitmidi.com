@@ -63,6 +63,28 @@ export async function get (query = {}) {
   return { query, result }
 }
 
+export async function related (query = {}) {
+  let { select: _, ...where } = query
+  query.select = query.select || await getDefaultSelect()
+  query.limit = query.limit || 5
+  debug('related %o', query)
+
+  const midi = await Midi
+    .query()
+    .select('name')
+    .findOne(where)
+    .throwIfNotFound()
+
+  const result = await Midi
+    .query()
+    .select(query.select)
+    .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', midi.name)
+    .whereNot(where)
+    .limit(query.limit)
+
+  return { query, result }
+}
+
 export async function play (query = {}) {
   debug('play %o', query)
   await Midi
