@@ -4,6 +4,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import { siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
+import Button from './button'
 import Heading from './heading'
 import Link from './link'
 import Loader from './loader'
@@ -31,7 +32,7 @@ export default class MidiPage extends Page {
 
   render (props) {
     const { store } = this.context
-    const { data } = store
+    const { data, views } = store
     const { midiSlug } = store.location.params
 
     if (!this.loaded) {
@@ -39,6 +40,10 @@ export default class MidiPage extends Page {
     }
 
     const midi = data.midis[midiSlug]
+
+    const relatedMidis = views.related[midi.slug] &&
+      views.related[midi.slug]
+        .map(relatedMidiSlug => data.midis[relatedMidiSlug])
 
     return (
       <div>
@@ -56,12 +61,12 @@ export default class MidiPage extends Page {
           <Midi midi={midi} />
         </div>
 
-        <h3>Play now</h3>
+        <h3>▶️ Play now</h3>
         <p>
-          Tap the play button above to play this MIDI file now.
+          Tap the play button above! ☝️
         </p>
 
-        <h3>Download this MIDI file</h3>
+        <h3>💻 Download this MIDI file</h3>
         <p>
           <Link download={midi.name} href={midi.downloadUrl}>
             Download {midi.name}
@@ -77,6 +82,21 @@ export default class MidiPage extends Page {
                 <li>{midi.name}</li>
               </ul>
             </p>
+          </div>
+        }
+
+        { relatedMidis &&
+          <div class='mt5'>
+            <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
+            { relatedMidis.map(midi => <Midi midi={midi} showImage={false} />) }
+            <div class='tc'>
+              <Button
+                class='center'
+                href={`/search?q=${encodeURIComponent(midi.name)}`}
+              >
+                More Related
+              </Button>
+            </div>
           </div>
         }
       </div>

@@ -66,8 +66,9 @@ export default function createStore (render, onPendingChange = () => {}) {
     },
 
     views: {
+      related: {}, // 'slug' -> ['slug']
       search: {}, // 'query' -> { total: 0, pageTotal: 0, '0': ['slug'] } }
-      all: {}
+      all: {} // { total: 0, pageTotal: 0, '0': ['slug' ] }
     }
   }
 
@@ -208,8 +209,14 @@ export default function createStore (render, onPendingChange = () => {}) {
 
       case 'MIDI_GET_START': return
       case 'MIDI_GET_DONE': {
-        const { result } = data
+        const { result, related } = data
+        const { views } = store
+
         addMidi(result)
+        if (related) {
+          related.map(addMidi)
+          views.related[result.slug] = related.map(midi => midi.slug)
+        }
         return update()
       }
 
