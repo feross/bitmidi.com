@@ -27,7 +27,7 @@ export default class ErrorPage extends Page {
           </div>
           <div>
             <Heading>We're sorry.</Heading>
-            <ErrorEmoji>😢 💐💐💐</ErrorEmoji>
+            <ErrorEmoji>😢 💐💐</ErrorEmoji>
           </div>
           <div>
             <Heading>What does the fox say?</Heading>
