@@ -28,10 +28,10 @@ export default class Midi extends slug(Model) {
   static virtualAttributes = ['url', 'downloadUrl']
 
   get url () {
-    return `/${this.slug}`
+    return this.slug && `/${this.slug}`
   }
 
   get downloadUrl () {
-    return `/uploads/${this.id}.mid`
+    return this.id && `/uploads/${this.id}.mid`
   }
 }
