@@ -43,7 +43,7 @@ function addImage (result) {
   }
 }
 
-async function get (query = {}) {
+export async function get (query = {}) {
   let { select: _, ...where } = query
   query.select = query.select || await getDefaultSelect()
   debug('get %o', query)
@@ -63,7 +63,7 @@ async function get (query = {}) {
   return { query, result }
 }
 
-async function play (query = {}) {
+export async function play (query = {}) {
   debug('play %o', query)
   await Midi
     .query()
@@ -73,7 +73,7 @@ async function play (query = {}) {
   return { query }
 }
 
-async function all (query = {}) {
+export async function all (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
   query.orderBy = query.orderBy || 'plays'
@@ -91,7 +91,7 @@ async function all (query = {}) {
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
-async function search (query = {}) {
+export async function search (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
   query.select = query.select || await getDefaultSelect()
@@ -107,7 +107,7 @@ async function search (query = {}) {
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
-async function random (query = {}) {
+export async function random (query = {}) {
   const result = await Midi
     .query()
     .orderByRaw('RAND()')
@@ -118,5 +118,3 @@ async function random (query = {}) {
 function getPageTotal (total, pageSize) {
   return Math.ceil(total / pageSize)
 }
-
-export default { get, play, all, search, random }
