@@ -62,13 +62,15 @@ export async function get (query = {}) {
     .increment('views', 1)
     .execute()
 
-  let related = result.name &&
+  const related = result.name &&
     await Midi
       .query()
       .select(query.select)
       .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', result.name)
       .whereNot(where)
       .limit(5)
+
+  related.forEach(addImage)
 
   return { query, result, related }
 }
@@ -113,6 +115,8 @@ export async function search (query = {}) {
     .select(query.select)
     .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', query.q)
     .page(query.page, query.pageSize)
+
+  results.forEach(addImage)
 
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
