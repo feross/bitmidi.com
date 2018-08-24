@@ -56,9 +56,11 @@ export async function get (query = {}) {
 
   addImage(result)
 
-  await result
+  // Increment view count asynchronously
+  result
     .$query()
     .increment('views', 1)
+    .execute()
 
   return { query, result }
 }
