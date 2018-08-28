@@ -1,5 +1,14 @@
 language: node_js
 node_js:
   - lts/*
+before_install:
+  - mysql -e 'CREATE DATABASE bitmidi;'
+install:
+  - npm install
 before_script:
-  - cp secret/index-sample.mjs secret/index.mjs
+  - chmod +x .travis/db-setup.sh
+  - ./.travis/db-setup.sh
+script:
+  - npm run build
+services:
+- mysql
