@@ -2,6 +2,7 @@
 
 # replace the user with the Travis root user
 sed -i -e "s/.*user.*/user: 'root',/" secret/index-sample.mjs
+sed -i -e "s/.*password.*/password: '',/" secret/index-sample.mjs
 cp secret/index-sample.mjs secret/index.mjs
 
 # database migrations
