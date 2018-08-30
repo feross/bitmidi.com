@@ -16,21 +16,21 @@ const POSTS = [
 
     Get it while it's hot! 🔥 MIDI_NAME is soooo goood.
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     🎵 IT'S MIDI TIME 🎵
 
     Today's MIDI is MIDI_NAME ✨
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     📬 YOU'VE GOT MAIL 📨
 
     There's a fresh MIDI in your inbox! It's MIDI_NAME! 💌
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     📼 COMING SOON ON VIDEOCASSETTE 📼
@@ -39,14 +39,14 @@ const POSTS = [
 
     Be kind, please rewind. 📼
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     📦 YOUR MIDI SHIPMENT HAS ARRIVED 📦
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     🐢💧 A WILD MIDI APPEARED! 🐸🔥
@@ -55,14 +55,14 @@ const POSTS = [
 
     Listening to the MIDI was super effective! ✨
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     🎼 FRESH MIDI GOODNESS 🎹
 
     This ish is so phat: MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     💽 💾 PARTY LIKE IT'S 1999 💿 📀
@@ -71,14 +71,14 @@ const POSTS = [
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     📞 WE GOT THE 4-1-1 ☎️
 
     It's a new MIDI every day. Today's MIDI is MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     ⭐️ MIDI-CHLORIAN READINGS OFF THE CHART 📈
@@ -87,28 +87,28 @@ const POSTS = [
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL (It's a trap!)
+    It's a trap: MIDI_URL
   `,
   stripIndent`
     🎺 🎸 PARTY TIME 🎷 🥁
 
     The MIDI of the Day is MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     🌟 MIDI of the Day™ 🌟
 
     Listen to it here: MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
-    🔥 THIS MIDI IS ON FIRE 🔥
+    🌶🌶 THIS MIDI IS HOTTTT 🌶🌶
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     🔥 THIS MIDI IS LIT 🔥
@@ -117,7 +117,7 @@ const POSTS = [
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `,
   stripIndent`
     ✨ BRAND NEW MIDI ✨
@@ -126,7 +126,7 @@ const POSTS = [
 
     MIDI_NAME
 
-    BitMidi Link: MIDI_URL
+    MIDI_URL
   `
 ]
 
