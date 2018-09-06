@@ -83,7 +83,7 @@ export default function init () {
   app.use('/timidity', serveStatic(timidityPath))
 
   const freepatsPath = dirname(require.resolve('freepats'))
-  app.use('/timidity', serveStatic(freepatsPath))
+  app.use('/freepats', serveStatic(freepatsPath))
 
   const uploadsPath = join(rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
