@@ -60,9 +60,11 @@ export default function serveWebp (root, opts = {}) {
     // join / normalize from root dir
     path = normalize(join(root, path))
 
-    let ext = extname(path)
+    const webpPath = path
+    const relativeWebpPath = relative(root, webpPath)
 
     // request must end in .webp extname
+    let ext = extname(path)
     if (ext !== '.webp') return next()
 
     // strip off .webp extname
@@ -71,33 +73,40 @@ export default function serveWebp (root, opts = {}) {
 
     // is low-quality image requested?
     const isLow = ext === '.low'
-    if (isLow) path = path.slice(0, -4)
-    ext = extname(path)
+
+    // strip off .low extname
+    if (isLow) {
+      path = path.slice(0, -4)
+      ext = extname(path)
+    }
 
     // ensure that file to convert is actually convertible to .webp
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') {
-      return next()
-    }
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') return next()
 
-    // if requested path does not exist, skip checking cache or running imagemin
-    try {
-      await accessAsync(path)
-    } catch {
-      return next()
-    }
-
-    // attempt to serve from cache folder, if file exists
-    const webpExt = isLow ? '.low.webp' : '.webp'
-    const webpPath = relative(root, path).slice(0, -4) + webpExt
-    send(req, webpPath, { root: cacheRoot })
-      .on('error', async () => {
-        // if file is not in cache folder, convert to .webp and serve it
+    // attempt to serve webp file from cache folder
+    send(req, relativeWebpPath, { root: cacheRoot })
+      .once('error', async () => {
+        // webp file was not in cache folder
         try {
-          await convertToWebp()
-          send(req, webpPath, { root: cacheRoot }).pipe(res)
-        } catch (err) {
+          // ensure that original image file exists
+          await accessAsync(path)
+        } catch {
+          // if original image file is missing, then skip running imagemin
           return next()
         }
+
+        try {
+          // convert original image file to webp and serve it
+          await convertToWebp()
+        } catch (err) {
+          // if conversion to webp fails, return the error
+          return next(err)
+        }
+
+        // once more, attempt to serve webp file from cache folder
+        send(req, relativeWebpPath, { root: cacheRoot })
+          .once('error', next)
+          .pipe(res)
       })
       .pipe(res)
 
@@ -106,7 +115,7 @@ export default function serveWebp (root, opts = {}) {
       const outputFile = isLow
         ? await convertWebpLow(file)
         : await convertWebp(file)
-      const outputPath = join(cacheRoot, webpPath)
+      const outputPath = join(cacheRoot, relativeWebpPath)
       await mkdirpAsync(dirname(outputPath))
       await writeFileAsync(outputPath, outputFile)
     }
