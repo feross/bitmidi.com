@@ -85,9 +85,8 @@ export default function init () {
   })
 
   // Serve favicon
-  app.use(favicon(join(rootPath, 'static', 'favicon.ico'), {
-    maxAge: config.maxAgeStatic
-  }))
+  const faviconPath = join(rootPath, 'static', 'favicon.ico')
+  app.use(favicon(faviconPath, { maxAge: config.maxAgeStatic }))
 
   // Serve static files
   const iconsPath = dirname(require.resolve('material-design-icons'))
@@ -232,10 +231,7 @@ export default function init () {
 
 // Returns an express.static middleware, configured correctly
 function serveStatic (path) {
-  return express.static(path, {
-    // Time (in ms) until static content will be deleted from cache
-    maxAge: config.maxAgeStatic
-  })
+  return express.static(path, { maxAge: config.maxAgeStatic })
 }
 
 // Create a hash for static assets like `bundle.js` and `bundle.css` to use
