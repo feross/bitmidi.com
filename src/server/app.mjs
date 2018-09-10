@@ -19,6 +19,8 @@ import routerRender from './router-render'
 
 const { isProd, rootPath } = config
 
+const staticPath = join(rootPath, 'static')
+
 // Set correct mime-type for streaming wasm compilation
 // See: https://github.com/expressjs/express/issues/3589
 // TODO: Remove when express 4.17.0 is released
@@ -29,6 +31,18 @@ express.static.mime.types['pat'] = 'audio/pat'
 
 export default function init () {
   const app = express()
+
+  // Styles are inlined in page
+  app.locals.style = isProd
+    ? readFileSync(join(staticPath, 'bundle.css'), 'utf8')
+    : ''
+
+  // Compute hash of `bundle.js` so it can be invalidated when changed
+  app.locals.scriptHash = isProd
+    ? createHash(readFileSync(join(staticPath, 'bundle.js')))
+    : 'dev'
+
+  app.locals.config = config
 
   // Use EJS for server-side templating
   app.set('view engine', 'ejs')
@@ -88,25 +102,10 @@ export default function init () {
   const uploadsPath = join(rootPath, 'uploads')
   app.use('/uploads', serveStatic(uploadsPath))
 
-  const staticPath = join(rootPath, 'static')
   app.use('/webp/icons', serveWebp(iconsPath))
   app.use('/webp', serveWebp(staticPath))
   app.use(serveStatic(staticPath))
 
-  // Read CSS for inlining in page
-  const style = isProd
-    ? readFileSync(join(staticPath, 'bundle.css'), 'utf8')
-    : ''
-
-  // Compute hash for far-future cached static resources for invalidation
-  const scriptHash = isProd
-    ? createHash(readFileSync(join(staticPath, 'bundle.js')))
-    : 'dev'
-
-  // Add app template variables
-  app.locals.config = config
-  app.locals.style = style
-  app.locals.scriptHash = scriptHash
 
   // Add per-request template variables
   app.use((req, res, next) => {
