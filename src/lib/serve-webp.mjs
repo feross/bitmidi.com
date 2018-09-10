@@ -66,11 +66,12 @@ export default function serveWebp (root, opts = {}) {
     if (ext !== '.webp') return next()
 
     // strip off .webp extname
-    path = path.replace(/\.webp$/, '')
+    path = path.slice(0, -5)
     ext = extname(path)
 
+    // is low-quality image requested?
     const isLow = ext === '.low'
-    if (isLow) path = path.replace(/\.low$/, '')
+    if (isLow) path = path.slice(0, -4)
     ext = extname(path)
 
     // ensure that file to convert is actually convertible to .webp
@@ -87,12 +88,11 @@ export default function serveWebp (root, opts = {}) {
 
     // attempt to serve from cache folder, if file exists
     const webpExt = isLow ? '.low.webp' : '.webp'
-    const webpPath = relative(root, path).replace(/\.(png|jpg|tif)$/, webpExt)
-
+    const webpPath = relative(root, path).slice(0, -4) + webpExt
     send(req, webpPath, { root: cacheRoot })
       .on('error', async () => {
+        // if file is not in cache folder, convert to .webp and serve it
         try {
-          // if file is not in cache folder, convert to .webp and serve it
           await convertToWebp()
           send(req, webpPath, { root: cacheRoot }).pipe(res)
         } catch (err) {
