@@ -81,6 +81,9 @@ export default function init () {
       )
     }
 
+    // Add per-request template variables
+    res.locals.nonce = createNonce()
+
     next()
   })
 
@@ -104,13 +107,6 @@ export default function init () {
   app.use('/webp/icons', serveWebp(iconsPath))
   app.use('/webp', serveWebp(staticPath))
   app.use(serveStatic(staticPath))
-
-
-  // Add per-request template variables
-  app.use((req, res, next) => {
-    res.locals.nonce = createNonce()
-    next()
-  })
 
   // Set up session store
   const MySQLStore = MySQLSession(session)
