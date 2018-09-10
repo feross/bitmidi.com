@@ -60,19 +60,20 @@ export default function serveWebp (root, opts = {}) {
     // join / normalize from root dir
     path = normalize(join(root, path))
 
-    // request must end in .webp extname
     let ext = extname(path)
+
+    // request must end in .webp extname
     if (ext !== '.webp') return next()
 
     // strip off .webp extname
     path = path.replace(/\.webp$/, '')
-
     ext = extname(path)
+
     const isLow = ext === '.low'
     if (isLow) path = path.replace(/\.low$/, '')
+    ext = extname(path)
 
     // ensure that file to convert is actually convertible to .webp
-    ext = extname(path)
     if (ext !== '.png' && ext !== '.jpg' && ext !== '.tif') {
       return next()
     }
