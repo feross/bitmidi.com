@@ -91,7 +91,7 @@ async function init () {
   if (duplicates.length > 0) {
     console.log(`Skipped ${duplicates.length} duplicates:`)
     for (let duplicate of duplicates) {
-      console.log(`  - ${duplicate[0]} (exists as ${duplicate[1]})`)
+      console.log(`  - ${duplicate[1]} (exists as ${duplicate[0]})`)
     }
   }
 
