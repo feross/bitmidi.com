@@ -22,7 +22,7 @@ export default class AboutPage extends Page {
   render (props, _, { store }) {
     const { views } = store
 
-    if (!this.loaded) return <Loader center />
+    if (!this.state.loaded) return <Loader center />
 
     return (
       <div>

@@ -31,7 +31,7 @@ export default class SearchPage extends Page {
     const { data, location, views } = store
     const { q, page } = location.query
 
-    if (!this.loaded) {
+    if (!this.state.loaded) {
       return <Loader center label={`Searching for ${q}`} />
     }
 

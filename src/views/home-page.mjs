@@ -29,7 +29,7 @@ export default class HomePage extends Page {
   }
 
   render (props) {
-    if (!this.loaded) return <Loader center />
+    if (!this.state.loaded) return <Loader center />
 
     const { store } = this.context
     const { data, views } = store

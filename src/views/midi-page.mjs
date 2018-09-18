@@ -35,7 +35,7 @@ export default class MidiPage extends Page {
     const { data, views } = store
     const { midiSlug } = store.location.params
 
-    if (!this.loaded) {
+    if (!this.state.loaded) {
       return <Loader center label={`Loading ${midiSlug}`} />
     }
 
