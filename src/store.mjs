@@ -17,23 +17,6 @@ const DEBUG_VERBOSE = new Set([
 
 let player = null
 
-export function getPlayerInstance () {
-  if (!player) {
-    player = new Timidity('/timidity')
-    player.on('unstarted', () => console.log('unstarted'))
-    player.on('playing', () => console.log('playing'))
-    player.on('paused', () => console.log('paused'))
-    player.on('ended', () => {
-      console.log('ended')
-      dispatch('MIDI_ENDED')
-    })
-    player.on('buffering', () => console.log('buffering'))
-    player.on('timeupdate', (time) => console.log('timeupdate', time))
-    player.on('error', (err) => console.log('error', err))
-  }
-  return player
-}
-
 export default function createStore (render, onPendingChange = () => {}) {
   const store = {
     location: {
@@ -338,6 +321,23 @@ export default function createStore (render, onPendingChange = () => {}) {
 
   function addMidi (midi) {
     store.data.midis[midi.slug] = midi
+  }
+
+  function getPlayerInstance () {
+    if (!player) {
+      player = new Timidity('/timidity')
+      player.on('unstarted', () => console.log('unstarted'))
+      player.on('playing', () => console.log('playing'))
+      player.on('paused', () => console.log('paused'))
+      player.on('ended', () => {
+        console.log('ended')
+        dispatch('MIDI_ENDED')
+      })
+      player.on('buffering', () => console.log('buffering'))
+      player.on('timeupdate', (time) => console.log('timeupdate', time))
+      player.on('error', (err) => console.log('error', err))
+    }
+    return player
   }
 
   let isUpdating = false
