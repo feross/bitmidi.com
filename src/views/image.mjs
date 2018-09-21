@@ -50,7 +50,7 @@ class Image extends Component {
     // (i.e. /img/test.png)
     const $sources = isAbsolutePath(src) && isConvertibleToWebp(src) && [
       <source
-        media="(max-width: 480px)"
+        media='(max-width: 480px)'
         srcset={`/webp${src}.low.webp`}
         type='image/webp'
       />,

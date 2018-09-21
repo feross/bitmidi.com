@@ -3,7 +3,7 @@
 /* global fetch, Headers */
 
 export default async function simpleFetch (opts) {
-  opts = typeof opts === 'string' ? {url: opts} : Object.assign({}, opts)
+  opts = typeof opts === 'string' ? { url: opts } : Object.assign({}, opts)
 
   opts.headers = new Headers(opts.headers || {})
 
@@ -42,7 +42,7 @@ export default async function simpleFetch (opts) {
 
 ;['get', 'post', 'put', 'patch', 'head', 'delete'].forEach(function (method) {
   simpleFetch[method] = function (opts) {
-    if (typeof opts === 'string') opts = {url: opts}
+    if (typeof opts === 'string') opts = { url: opts }
     opts.method = method.toUpperCase()
     return simpleFetch(opts)
   }
