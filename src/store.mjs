@@ -278,6 +278,8 @@ export default function createStore (render, onPendingChange = () => {}) {
         const buf = data
         getPlayerInstance().load(buf)
         getPlayerInstance().play()
+        store.player.currentSlug = null
+        return update()
       }
 
       case 'MIDI_ENDED': {
