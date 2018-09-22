@@ -171,7 +171,7 @@ function queueTweet (text) {
         top: true
       }
     }, (err, res, body) => {
-      if (err) return reject(err)
+      if (err) return reject(new Error(`Failed to queue tweet: ${err.message}`))
       if (res.statusCode !== 200) {
         return reject(new Error(`Non-200 status code: ${res.statusCode}`))
       }
