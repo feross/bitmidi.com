@@ -17,7 +17,7 @@ const DEBUG_VERBOSE = new Set([
 
 let player = null
 
-export default function createStore (render, onPendingChange = () => {}) {
+export default function createStore (_update, onPendingChange = () => {}) {
   const store = {
     location: {
       name: null,
@@ -352,7 +352,7 @@ export default function createStore (render, onPendingChange = () => {}) {
     debugVerbose('update')
 
     isUpdating = true
-    render()
+    _update()
     isUpdating = false
 
     const needUpdate = isUpdatePending
