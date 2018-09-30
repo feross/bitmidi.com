@@ -21,7 +21,7 @@ export default class Page extends Component {
 
   componentWillReceiveProps (nextProps) {
     // If the user navigates, then the url prop of <Page /> will change.
-    // Call load() since new data may need to be fetched.
+    // Call _load() since new data may need to be fetched.
     if (this.props.url !== nextProps.url ||
         this.props.isServerRendered !== nextProps.isServerRendered) {
       this.setState({ loaded: false }, () => this._load())

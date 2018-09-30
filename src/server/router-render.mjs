@@ -1,3 +1,4 @@
+import Debug from 'debug'
 import Router from 'express-promise-router'
 
 import api from '../api'
@@ -5,6 +6,8 @@ import { origin, isProd } from '../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
+
+const debug = Debug('bitmidi:router-render')
 
 const router = Router()
 
@@ -32,7 +35,6 @@ router.use((req, res, next) => {
     dispatch('ERROR_FATAL', { message, stack, code, status })
   }
   dispatch('LOCATION_REPLACE', req.url)
-  const routeName = store.location.name
 
   onPendingChange()
 
@@ -44,7 +46,12 @@ router.use((req, res, next) => {
     renderer.render(jsx)
   }
 
+  let isDone = false
   function done () {
+    if (isDone) return
+    isDone = true
+    debug('Render done')
+
     if (req.err != null) {
       // Fatal error occurred, send page and ignore any render errors
       return sendPage(Number(req.err.status) || 500)
@@ -56,7 +63,7 @@ router.use((req, res, next) => {
     } else if (store.location.name === 'error') {
       // Request did not match any routes
       return sendPage(404)
-    } else if (routeName !== store.location.name) {
+    } else if (req.url !== store.location.url) {
       // Location changes are treated as redirects during server render
       return res.redirect(307, store.location.canonicalUrl)
     } else {

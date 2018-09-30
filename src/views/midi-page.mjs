@@ -21,6 +21,10 @@ export default class MidiPage extends Page {
 
     const { result: midi } = await dispatch(doMidiGet({ slug: midiSlug }))
 
+    if (midiSlug.toLowerCase() !== midiSlug) {
+      return dispatch('LOCATION_REPLACE', midi.url)
+    }
+
     dispatch('APP_META', {
       title: midi.name,
       description: oneLine`
