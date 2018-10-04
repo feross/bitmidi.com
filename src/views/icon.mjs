@@ -32,6 +32,7 @@ const Icon = props => {
         height={size}
         alt={null}
         src={src}
+        {...rest}
       />
     )
   }
