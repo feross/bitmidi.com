@@ -13,6 +13,9 @@ if (isProd) {
       // Never ignore uncaught errors
       if (isUncaught) return false
 
+      // Ignore 'Bad Request' errors
+      if (err.status === 400) return true
+
       // Ignore 'Not Found' errors
       if (err.status === 404) return true
 
