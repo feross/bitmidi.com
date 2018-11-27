@@ -81,7 +81,7 @@
     "hyphenate-style-name": "^1.0.2",
     "imagemin-webp": "^4.1.0",
     "jsonfeed-to-atom": "^1.1.2",
-    "knex": "^0.15.1",
+    "knex": "^0.16.0",
     "material-design-icons": "^3.0.1",
     "mkdirp": "^0.5.1",
     "morgan": "^1.9.0",
