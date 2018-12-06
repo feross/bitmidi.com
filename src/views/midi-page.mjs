@@ -70,7 +70,7 @@ export default class MidiPage extends Page {
           Tap the play button above! ☝️
         </p>
 
-        <h3>💻 Download this MIDI file</h3>
+        <h3>💿 Download this MIDI file</h3>
         <p>
           <Link download={midi.name} href={midi.downloadUrl}>
             Download {midi.name}
