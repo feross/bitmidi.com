@@ -64,7 +64,7 @@ class Image extends Component {
       <picture>
         {$sources}
         <img
-          alt={alt}
+          alt={alt === null ? '' : alt}
           class={className}
           decoding='async'
           role={role}
