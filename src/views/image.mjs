@@ -44,8 +44,6 @@ class Image extends Component {
       throw new Error('Prop `alt` must be a string of non-zero length, or null')
     }
 
-    const role = alt === null ? 'presentation' : null
-
     // Use automatic server-side WebP conversion on absolutely specified images
     // (i.e. /img/test.png)
     const $sources = isAbsolutePath(src) && isConvertibleToWebp(src) && [
@@ -67,7 +65,7 @@ class Image extends Component {
           alt={alt === null ? '' : alt}
           class={className}
           decoding='async'
-          role={role}
+          role={alt === null && 'presentation'}
           src={src}
           style={style}
           {...rest}
@@ -84,9 +82,7 @@ class Image extends Component {
         <div
           ref={this.ref}
           class={c('hide-no-js', className)}
-          style={{
-            ...style
-          }}
+          style={style}
           {...rest}
         />
         {!isBrowser && <noscript>{$picture}</noscript>}
