@@ -65,7 +65,7 @@ export default class MidiPage extends Page {
           <Midi midi={midi} />
         </div>
 
-        <h3>▶️ Play now</h3>
+        <h3>🎶 Play now</h3>
         <p>
           Tap the play button above! ☝️
         </p>
@@ -92,7 +92,11 @@ export default class MidiPage extends Page {
         { relatedMidis &&
           <div class='mt5'>
             <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
-            { relatedMidis.map(midi => <Midi midi={midi} showImage={false} />) }
+            {
+              relatedMidis.map(midi => {
+                return <Midi midi={midi} showImage={false} showPlay={false} />
+              })
+            }
             <div class='tc'>
               <Button
                 class='center'

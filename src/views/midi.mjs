@@ -7,7 +7,7 @@ import Link from './link'
 
 export default class Midi extends Component {
   render (props, _, { theme, store }) {
-    const { class: className, midi, showImage = true } = props
+    const { class: className, midi, showImage = true, showPlay = true } = props
     const { mainColor } = theme
     const { player } = store
 
@@ -19,8 +19,9 @@ export default class Midi extends Component {
       >
         <Link
           color='white'
-          title={midi.name}
-          href={midi.url}
+          title={showPlay ? `Play ${midi.name}` : midi.name}
+          onClick={showPlay && this.onClick}
+          href={!showPlay && midi.url}
         >
           { midi.image && showImage &&
             <Image
@@ -38,17 +39,14 @@ export default class Midi extends Component {
             })}
           >
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
-            <Link
-              class='flex-none grow-large'
-              color='white'
-              onClick={this.onClick}
-              title={`Play ${midi.name}`}
-            >
-              {isPlaying
-                ? <Icon color='#fff' name='av/stop' />
-                : <Icon color='#fff' name='av/play_arrow' />
-              }
-            </Link>
+            { showPlay &&
+              <div class='flex-none grow-large'>
+                {isPlaying
+                  ? <Icon color='#fff' name='av/stop' />
+                  : <Icon color='#fff' name='av/play_arrow' />
+                }
+              </div>
+            }
           </div>
         </Link>
       </article>

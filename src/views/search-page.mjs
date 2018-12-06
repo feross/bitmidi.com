@@ -45,7 +45,11 @@ export default class SearchPage extends Page {
     return (
       <div>
         <Heading><span class='mid-gray'>Search for</span> '{q}'</Heading>
-        { results.map(midi => <Midi midi={midi} showImage={false} />) }
+        {
+          results.map(midi => {
+            return <Midi midi={midi} showImage={false} showPlay={false} />
+          })
+        }
         {
           results.length === 0 &&
           <div class='mt4'>
