@@ -33,7 +33,7 @@ class Image extends Component {
   }
 
   render (props, state) {
-    const { alt, lazyload = true, src, class: className, style, ...rest } = props
+    const { alt, class: className, lazyload = true, src, style, ...rest } = props
     const { visible } = state
 
     if (typeof src !== 'string' || src.length === 0) {
@@ -42,6 +42,10 @@ class Image extends Component {
 
     if ((typeof alt !== 'string' || alt.length === 0) && alt !== null) {
       throw new Error('Prop `alt` must be a string of non-zero length, or null')
+    }
+
+    if (props.width != null || props.height != null) {
+      throw new Error('Use prop `style` instead of `width` or `height` to set size')
     }
 
     // Use automatic server-side WebP conversion on absolutely specified images

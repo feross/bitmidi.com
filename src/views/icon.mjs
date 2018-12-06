@@ -28,10 +28,12 @@ const Icon = props => {
     return (
       <Image
         class={c('lh-solid v-btm', className)}
-        width={size}
-        height={size}
         alt={null}
         src={src}
+        style={{
+          width: size,
+          height: size
+        }}
         {...rest}
       />
     )
