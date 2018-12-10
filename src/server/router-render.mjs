@@ -65,7 +65,7 @@ router.use((req, res, next) => {
       return sendPage(404)
     } else if (req.url !== store.location.url) {
       // Location changes are treated as redirects during server render
-      return res.redirect(307, store.location.canonicalUrl)
+      return res.redirect(302, store.location.canonicalUrl)
     } else {
       // Happy path! No errors, rendered successfully!
       return sendPage(200)
