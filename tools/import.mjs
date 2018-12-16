@@ -13,7 +13,7 @@ import {
 } from 'fs'
 
 import { rootPath } from '../src/config'
-import Midi from '../src/models/Midi'
+import Midi from '../src/models/midi'
 
 const globAsync = promisify(glob)
 const readFileAsync = promisify(readFile)
