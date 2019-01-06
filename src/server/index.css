@@ -31,6 +31,10 @@
   transform: scale(1.05);
 }
 
+.break-word {
+  word-wrap: break-word;
+}
+
 /**
  * Animations (adapted from animate.css)
  */
