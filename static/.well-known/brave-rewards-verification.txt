@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: bitmidi.com
+Token: 00aaa2ac625134ee3cb98fe913705b574146ede2d2b443c3871bfeed710920be
