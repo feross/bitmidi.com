@@ -2,8 +2,10 @@
   BitMidi
 </h1>
 
-<h4 align="center">🎹 Listen to free MIDI songs, download the best MIDI files, and share the
-  best MIDIs on the web.</h4>
+<h4 align="center">
+  🎹 Listen to free MIDI songs, download the best MIDI files, and share the
+  best MIDIs on the web.
+</h4>
 
 <p align="center">
   <a href="https://travis-ci.org/feross/bitmidi.com"><img src="https://img.shields.io/travis/feross/bitmidi.com/master.svg" alt="travis"></a>
