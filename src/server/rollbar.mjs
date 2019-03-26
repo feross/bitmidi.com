@@ -19,6 +19,9 @@ if (isProd) {
       // Ignore 'Not Found' errors
       if (err.status === 404) return true
 
+      // Ignore 'Precondition Failed' errors
+      if (err.status === 412) return true
+
       // Ignore 'Range Not Satisfiable' errors
       if (err.status === 416) return true
 
