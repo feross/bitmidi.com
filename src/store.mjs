@@ -178,11 +178,13 @@ export default function createStore (_update, onPendingChange = () => {}) {
 
       case 'APP_SHARE': {
         if (navigator.share == null) return
-        await navigator.share({
-          title: store.app.title,
-          url: store.location.canonicalUrl
-        })
-        window.ga('send', 'event', 'share', 'navigator.share')
+        try {
+          await navigator.share({
+            title: store.app.title,
+            url: store.location.canonicalUrl
+          })
+          window.ga('send', 'event', 'share', 'navigator.share')
+        } catch {}
         return
       }
 
