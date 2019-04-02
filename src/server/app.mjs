@@ -178,14 +178,12 @@ export default function init () {
       ;
       connect-src
         'self'
-        https://www.google-analytics.com
       ;
       font-src
         'self'
       ;
       img-src
-        'self'
-        https://www.google-analytics.com
+        *
       ;
       manifest-src
         'self'
