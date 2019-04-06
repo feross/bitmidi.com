@@ -148,12 +148,8 @@ export default function init () {
     res.header('X-XSS-Protection', '1; mode=block')
 
     const devFeaturePolicy = !isProd && `
-      image-compression
+      oversized-images
         'none'
-      ;
-      legacy-image-formats
-        'none'
-      ;
       unsized-media
         'none'
       ;
