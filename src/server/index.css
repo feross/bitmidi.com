@@ -8,10 +8,6 @@
   padding-right: max(1rem, env(safe-area-inset-right));
 }
 
-.no-js .hide-no-js {
-  display: none;
-}
-
 .shadow-6 {
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.2);
 }

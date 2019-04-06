@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' class='no-js'>
+<html lang='en'>
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
@@ -32,8 +32,6 @@
     <link rel='search' href='/opensearch.xml' type='application/opensearchdescription+xml' title='<%= config.siteName %>'>
     <link rel='alternate' href='/feed.json' type='application/json' title='<%= config.siteName %>' />
     <link rel='alternate' href='/feed.xml' type='application/atom+xml' title='<%= config.siteName %>' />
-
-    <script nonce='<%= nonce %>'>document.documentElement.classList.remove('no-js')</script>
 
     <%_ if (config.isProd) { _%>
       <style><%- style %></style>

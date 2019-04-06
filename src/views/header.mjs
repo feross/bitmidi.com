@@ -54,7 +54,7 @@ const HeaderLogo = (_, { store }) => {
       <Image
         alt={siteName}
         class='dn db-m db-l'
-        lazyload={false}
+        loading='eager'
         src='/img/bitmidi.svg'
         style={{
           width: 152,
@@ -64,7 +64,7 @@ const HeaderLogo = (_, { store }) => {
       <Image
         alt={siteName}
         class='db dn-m dn-l'
-        lazyload={false}
+        loading='eager'
         src='/img/bitmidi-icon.svg'
         style={{
           width: 44,
