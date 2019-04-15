@@ -1,6 +1,3 @@
-// TODO: Rename 'load' attribute to 'loading' once Chrome is updated.
-//       Check ('loading' in HTMLImageElement.prototype)
-
 import { h } from 'preact' /** @jsx h */
 
 const Image = props => {
@@ -39,7 +36,7 @@ const Image = props => {
         alt={alt === null ? '' : alt}
         class={className}
         decoding='async'
-        load={loading}
+        loading={loading}
         role={alt === null && 'presentation'}
         src={src}
         style={style}
