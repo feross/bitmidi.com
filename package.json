@@ -57,7 +57,7 @@
     "url": "https://github.com/feross/bitmidi.com/issues"
   },
   "dependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.4.4",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
     "@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
