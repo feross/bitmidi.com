@@ -95,7 +95,7 @@
     "preact": "^8.3.0",
     "preact-context-provider": "^1.1.1",
     "rollbar": "^2.4.4",
-    "send": "^0.16.2",
+    "send": "^0.17.0",
     "serve-favicon": "^2.5.0",
     "simple-get": "^3.0.3",
     "tachyons": "^4.7.4",
