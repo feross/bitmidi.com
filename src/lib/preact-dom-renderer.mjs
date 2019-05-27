@@ -52,10 +52,18 @@ function serializeHtml (el) {
   if (el.nodeType === 3) return encXML(el.textContent)
 
   const nodeName = el.nodeName.toLowerCase()
-  const attributes = el.attributes.map(attr).join('')
-  const innerHTML = el.innerHTML || el.childNodes.map(serializeHtml).join('')
 
-  const styleProps = Object.keys(el.style).filter(k => el.style[k] !== '')
+  const attributes = el.attributes
+    .filter(a => a.name !== 'style')
+    .map(attr)
+    .join('')
+
+  const innerHTML = el.innerHTML != null
+    ? el.innerHTML
+    : el.childNodes.map(serializeHtml).join('')
+
+  const styleProps = Object.keys(el.style)
+    .filter(k => el.style[k] !== '')
 
   const style = styleProps.length
     ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${encAttr(el.style[k])}`).join('; ')}"`
