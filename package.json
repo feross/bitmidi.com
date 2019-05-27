@@ -123,6 +123,11 @@
     "watchify": "^3.11.0"
   },
   "homepage": "https://bitmidi.com",
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
+  },
   "license": "-",
   "main": "./src/server/start",
   "private": true,
@@ -135,7 +140,6 @@
     "build-css": "NODE_ENV=production node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
     "knex": "knex --knexfile tools/knexfile.js --cwd .",
-    "prepush": "npm test",
     "secret-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/secret/' secret/",
     "secret-upload": "rsync -a -O -v --delete secret/ future:'/home/feross/www/bitmidi.com/secret/'",
     "size": "npm run size-js && npm run size-css && npm run size-disc",
