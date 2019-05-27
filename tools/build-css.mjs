@@ -2,68 +2,76 @@
 
 import minimist from 'minimist'
 import oneLine from 'common-tags/lib/oneLine'
-import purifyCss from 'purify-css'
+import PurgeCss from 'purgecss'
 import rimraf from 'rimraf'
 import { join, basename, dirname } from 'path'
 import { writeFileSync } from 'fs'
 
-import { rootPath, theme, isProd } from '../src/config'
+import { rootPath, theme } from '../src/config'
+
+const startTime = Date.now()
 
 const argv = minimist(process.argv.slice(2), {
-  boolean: ['verbose']
+  boolean: ['debug', 'verbose']
 })
 
 const outputPath = join(rootPath, './static/bundle.css')
 
 rimraf.sync(outputPath)
 
-const content = [
-  './src/views/*.mjs',
-  './src/server/*.ejs'
-]
-
+// CSS files to concat, purge, and minify
 const css = [
   './node_modules/tachyons/css/tachyons.min.css',
   './src/server/index.css'
 ]
 
-const whitelist = [
-  // Theme colors
-  ...Object.values(theme).map(color => `*${color}*`)
+// Files to search for selectors within
+const content = [
+  './src/views/*.mjs',
+  './src/server/*.ejs'
 ]
 
-const opts = {
-  // Selectors to never remove
-  whitelist,
+// Selectors to never remove
+const whitelistPatternsChildren = [
+  // Theme colors
+  ...Object.values(theme).map(color => new RegExp(`.*?${color}.*?`))
+]
 
-  // Minify the CSS
-  minify: isProd,
-
-  // Logs stats on how much CSS was removed
-  info: argv.debug,
-
-  // Logs which CSS rules were removed
+const purgeCss = new PurgeCss({
+  css,
+  content,
+  whitelistPatternsChildren,
+  keyframes: true,
   rejected: argv.debug
+})
+
+const files = purgeCss.purge()
+
+const bundle = files.reduce((acc, file) => {
+  return acc + file.css
+}, '')
+
+// Write file
+writeFileSync(outputPath, bundle)
+
+if (argv.debug) {
+  files.forEach(file => {
+    console.log(`Removed from ${file.file}:`)
+    file.rejected.forEach(rejectedDecl => console.log(`  ${rejectedDecl}`))
+  })
 }
 
-const startTime = Date.now()
+if (argv.verbose) {
+  const shortOutputPath = join(
+    basename(dirname(outputPath)),
+    basename(outputPath)
+  )
+  const buildTime = ((Date.now() - startTime) / 1000).toFixed(2)
+  const currentTime = new Date().toLocaleTimeString()
 
-purifyCss(content, css, opts, bundle => {
-  // Write file
-  writeFileSync(outputPath, bundle)
-
-  if (argv.verbose) {
-    const shortOutputPath = join(
-      basename(dirname(outputPath)),
-      basename(outputPath)
-    )
-    const buildTime = ((Date.now() - startTime) / 1000).toFixed(2)
-    const currentTime = new Date().toLocaleTimeString()
-
-    // Print success message
-    console.log(oneLine`
-      ${bundle.length} bytes written to ${shortOutputPath}
-      (${buildTime} seconds) at ${currentTime}
-    `)
-  }
-})
+  // Print success message
+  console.log(oneLine`
+    ${bundle.length} bytes written to ${shortOutputPath}
+    (${buildTime} seconds) at ${currentTime}
+  `)
+}
