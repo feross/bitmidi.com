@@ -66,7 +66,7 @@ function serializeHtml (el) {
     .filter(k => el.style[k] !== '')
 
   const style = styleProps.length
-    ? ` style="${styleProps.map(k => `${hyphenate(k)}: ${encAttr(el.style[k])}`).join('; ')}"`
+    ? ` style="${styleProps.map(k => encCssDeclaration(k, el)).join(';')}"`
     : ''
 
   if (innerHTML === '' && selfClosingTags.includes(nodeName)) {
@@ -96,4 +96,8 @@ function encAttr (s) {
 function attr (a) {
   if (a.value === 'true') return ` ${a.name}` // boolean attribute
   return ` ${a.name}="${encAttr(a.value)}"`
+}
+
+function encCssDeclaration (k, el) {
+  return `${hyphenate(k)}:${encAttr(el.style[k])}`
 }
