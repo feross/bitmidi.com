@@ -4,8 +4,16 @@
 
 /* Padding for the iPhone X notch */
 .ph3-safe {
-  padding-left: max(1rem, env(safe-area-inset-left));
-  padding-right: max(1rem, env(safe-area-inset-right));
+  /*
+   * Remove fallback declarations and @supports once Chrome/Firefox supports max()
+   * See: https://caniuse.com/#feat=css-math-functions
+   */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  @supports(padding: max(0)) {
+    padding-left: max(1rem, env(safe-area-inset-left, 0));
+    padding-right: max(1rem, env(safe-area-inset-right, 0));
+  }
 }
 
 .shadow-6 {
