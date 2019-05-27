@@ -121,12 +121,26 @@ export async function search (query = {}) {
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
+// Pre-cache random queries because they're a bit slow
+const randomCacheMaxSize = 100
+const randomCache = []
+
 export async function random (query = {}) {
-  const result = await Midi
-    .query()
-    .orderByRaw('RAND()')
-    .findOne({})
-  return { query, result }
+  if (randomCache.length <= randomCacheMaxSize) {
+    random().then(result => randomCache.push(result))
+  }
+
+  return randomCache.length > 0
+    ? randomCache.shift()
+    : random()
+
+  async function random () {
+    const result = await Midi
+      .query()
+      .orderByRaw('RAND()')
+      .findOne({})
+    return { query, result }
+  }
 }
 
 function getPageTotal (total, pageSize) {
