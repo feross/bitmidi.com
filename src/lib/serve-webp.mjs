@@ -24,7 +24,7 @@ const convertWebp = ImageminWebp({
 
 const convertWebpLow = ImageminWebp({
   method: 6,
-  quality: 50
+  quality: 40
 })
 
 export default function serveWebp (root, opts = {}) {
