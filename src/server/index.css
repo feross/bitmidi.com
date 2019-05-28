@@ -10,7 +10,10 @@
    */
   padding-left: 1rem;
   padding-right: 1rem;
-  @supports(padding: max(0)) {
+}
+
+@supports(padding: max(0px)) {
+  .ph3-safe {
     padding-left: max(1rem, env(safe-area-inset-left, 0));
     padding-right: max(1rem, env(safe-area-inset-right, 0));
   }
