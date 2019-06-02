@@ -14,117 +14,182 @@ const POSTS = [
   stripIndent`
     🚨 NEW MIDI ALERT! 🚨
 
-    Get it while it's hot! 🔥 MIDI_NAME is soooo goood.
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    🎵 IT'S MIDI TIME 🎵
+    🔥 Get it while it's hot! 🔥
 
-    Today's MIDI is MIDI_NAME ✨
-
-    MIDI_URL
-  `,
-  stripIndent`
-    📬 YOU'VE GOT MAIL 📨
-
-    There's a fresh MIDI in your inbox! It's MIDI_NAME! 💌
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    📼 COMING SOON ON VIDEOCASSETTE 📼
+    🎺 IT'S MIDI TIME 🎺
 
-    BitMidi presents MIDI_NAME, now available to own on VHS ⭐️
+    🎵 MIDI_NAME
 
+    MIDI_URL
+  `,
+  stripIndent`
+    ✨ Today's MIDI is... ✨
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    📬 YOU'VE GOT MAIL 📬
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    💌 There's a fresh MIDI in your inbox! 💌
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    📼 Coming Soon On Videocassette 📼
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    📼 Now available to own on VHS 📼
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
     Be kind, please rewind. 📼
+
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
     📦 YOUR MIDI SHIPMENT HAS ARRIVED 📦
 
-    MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
     🐢💧 A WILD MIDI APPEARED! 🐸🔥
 
-    It's MIDI_NAME!
-
-    Listening to the MIDI was super effective! ✨
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    🎼 FRESH MIDI GOODNESS 🎹
+    ✨ Listening to this MIDI was super effective! ✨
 
-    This ish is so phat: MIDI_NAME
-
-    MIDI_URL
-  `,
-  stripIndent`
-    💽 💾 PARTY LIKE IT'S 1999 💿 📀
-
-    Don't be trippin' home skillet! 🍳 We got a MIDI for you that is all that and a bag of potato chips! 🥔
-
-    MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    📞 WE GOT THE 4-1-1 ☎️
+    🎹 Fresh MIDI Goodness 🎹
 
-    It's a new MIDI every day. Today's MIDI is MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    ⭐️ MIDI-CHLORIAN READINGS OFF THE CHART 📈
+    💿 Party Like It's 1999 💿
 
-    Even Master Yoda doesn't have a MIDI-chlorian count as high as this track:
+    🎵 MIDI_NAME
 
-    MIDI_NAME
+    MIDI_URL
+  `,
+  stripIndent`
+    🍳 Don't be trippin' home skillet! 🍳
 
-    It's a trap: MIDI_URL
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    🥔 This MIDI is all that and a bag of potato chips! 🥔
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    ☎️ WE GOT THE 4-1-1 ☎️
+
+    Today's MIDI is 🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    📅 A new MIDI every day. 📅
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    📈 MIDI CHLORIAN READINGS OFF THE CHART 📈
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    Impressed with the MIDI chlorian counts, yoda is. Hmmmmmm.
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
   `,
   stripIndent`
     🎺 🎸 PARTY TIME 🎷 🥁
 
-    The MIDI of the Day is MIDI_NAME
+    The MIDI of the Day is 🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
     🌟 MIDI of the Day™ 🌟
 
-    Listen to it here: MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    🌶🌶 THIS MIDI IS HOTTTT 🌶🌶
+    🌶 THIS MIDI IS HOTTTT 🌶
 
-    MIDI_NAME
-
-    MIDI_URL
-  `,
-  stripIndent`
-    🔥 THIS MIDI IS LIT 🔥
-
-    🚒 Someone call the firefighters! 👨‍🚒 👩‍🚒
-
-    MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    ✨ BRAND NEW MIDI ✨
+    🚒 Someone call the firefighters! 👨‍🚒
 
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    ✨ Brand New MIDI ✨
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
     This MIDI will make you go 🙌
 
-    MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `
