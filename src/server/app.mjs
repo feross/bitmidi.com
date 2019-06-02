@@ -77,13 +77,10 @@ export default function init () {
     // from cross-origin web pages.
     res.header('Cross-Origin-Resource-Policy', 'same-origin')
 
-    // TODO: Enable this once it has shippped
-    // https://github.com/mozilla/http-observatory/issues/359
-    // https://github.com/whatwg/html/issues/3740
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=1521808
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=922191
-    // https://bugs.webkit.org/show_bug.cgi?id=190081
-    // res.header('Cross-Origin-Opener-Policy', 'same-origin')
+    // Prevent cross-window attacks (window.opener, usage of postMessage) and
+    // process side-channel attacks by severing references to other browsing
+    // contexts. Browsers will use a separate OS process to load the site.
+    res.header('Cross-Origin-Opener-Policy', 'same-origin')
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
