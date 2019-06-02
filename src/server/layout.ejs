@@ -51,7 +51,7 @@
           : '{}'
         %>
 
-      // Google Analytics
+      <%# Google Analytics %>
       window.GoogleAnalyticsObject = 'ga'
       function ga () { window.ga.q.push(arguments) }
       window.ga.q = window.ga.q || []
@@ -59,7 +59,7 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
 
-      // Quantcast
+      <%# Quantcast %>
       window._qevents = window._qevents || []
       window._qevents.push({
         qacct:"p-69FZJwoXOxhpY"
