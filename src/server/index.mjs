@@ -15,7 +15,7 @@ export default async function init (port) {
   await listen(port)
   console.log('Listening on port %s', server.address().port)
 
-  scheduleInit()
+  scheduleInit(port)
 
   return server
 }
