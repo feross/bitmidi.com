@@ -51,7 +51,7 @@
           : '{}'
         %>
     </script>
-    <script>
+    <script nonce='<%= nonce %>'>
       <%# Google Analytics %>
       window.GoogleAnalyticsObject = 'ga'
       function ga () { window.ga.q.push(arguments) }
@@ -60,7 +60,7 @@
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script>
+    <script nonce='<%= nonce %>'>
       <%# Quantcast %>
       window._qevents = window._qevents || []
       window._qevents.push({
