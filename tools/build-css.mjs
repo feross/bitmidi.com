@@ -98,6 +98,12 @@ function purge (css) {
 }
 
 async function minify (css) {
-  const result = await postcss([cssnano]).process(css, { to: outputPath })
+  const result = await postcss([
+    cssnano({
+      preset: ['advanced', {
+        discardComments: { removeAll: true }
+      }]
+    })
+  ]).process(css, { from: css[0], to: outputPath })
   return result.css
 }
