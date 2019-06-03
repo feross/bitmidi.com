@@ -20,13 +20,13 @@ cd /home/feross/www/bitmidi.com-build && npm install --loglevel http
 cd /home/feross/www/bitmidi.com-build && npm run build
 cd /home/feross/www/bitmidi.com-build && npm prune --production
 
-sudo supervisorctl stop bitmidi
+sudo supervisorctl stop bitmidi:
 
 # Move build folder into place (while app is stopped)
 cd /home/feross/www && mv bitmidi.com bitmidi.com-old
 cd /home/feross/www && mv bitmidi.com-build bitmidi.com
 
-sudo supervisorctl start bitmidi
+sudo supervisorctl start bitmidi:
 
 # Remove old files (after app has started)
 cd /home/feross/www && rm -rf bitmidi.com-old
