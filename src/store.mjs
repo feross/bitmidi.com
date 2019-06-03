@@ -351,7 +351,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
       isUpdatePending = true
       return
     }
-    debugVerbose('update')
+    // debugVerbose('update')
 
     isUpdating = true
     _update()

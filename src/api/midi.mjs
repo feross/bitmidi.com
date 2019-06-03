@@ -1,5 +1,6 @@
 import Debug from 'debug'
 
+import { memo } from '../lib/memo'
 import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
@@ -44,6 +45,20 @@ function addImage (result) {
 }
 
 export async function get (query = {}) {
+  const result = await getRawMemo(query)
+
+  // Increment view count asynchronously
+  result.result
+    .$query()
+    .increment('views', 1)
+    .execute()
+
+  return result
+}
+
+const getRawMemo = memo(getRaw)
+
+async function getRaw (query = {}) {
   let { select: _, ...where } = query
   query.select = query.select || await getDefaultSelect()
   debug('get %o', query)
@@ -55,12 +70,6 @@ export async function get (query = {}) {
     .throwIfNotFound()
 
   addImage(result)
-
-  // Increment view count asynchronously
-  result
-    .$query()
-    .increment('views', 1)
-    .execute()
 
   const related = result.name &&
     await Midi
@@ -85,7 +94,9 @@ export async function play (query = {}) {
   return { query }
 }
 
-export async function all (query = {}) {
+export const all = memo(allRaw)
+
+async function allRaw (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
   query.orderBy = query.orderBy || 'plays'
@@ -103,7 +114,9 @@ export async function all (query = {}) {
   return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
 }
 
-export async function search (query = {}) {
+export const search = memo(searchRaw)
+
+async function searchRaw (query = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Number(query.pageSize) || PAGE_SIZE
   query.select = query.select || await getDefaultSelect()
