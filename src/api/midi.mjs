@@ -140,7 +140,12 @@ const randomCache = []
 
 export async function random (query = {}) {
   if (randomCache.length <= randomCacheMaxSize) {
-    random().then(result => randomCache.push(result))
+    random().then(result => {
+      randomCache.push(result)
+
+      // Optimistically cache the request for the full page
+      get({ slug: result.result.slug })
+    })
   }
 
   return randomCache.length > 0
