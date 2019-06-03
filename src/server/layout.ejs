@@ -50,7 +50,8 @@
           ? JSON.stringify(store).replace(/<\//ig, '<\\/') // Prevent XSS
           : '{}'
         %>
-
+    </script>
+    <script>
       <%# Google Analytics %>
       window.GoogleAnalyticsObject = 'ga'
       function ga () { window.ga.q.push(arguments) }
@@ -58,7 +59,8 @@
       window.ga.l = Date.now()
       window.ga('create', '<%= config.analyticsId %>', 'auto')
       window.ga('send', 'pageview')
-
+    </script>
+    <script>
       <%# Quantcast %>
       window._qevents = window._qevents || []
       window._qevents.push({
