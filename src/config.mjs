@@ -49,10 +49,6 @@ export const rootPath = isBrowser
   ? '/'
   : join(__dirname, '..')
 
-// Time (in ms) to wait before updating page component data. Page data will
-// be reloaded at least this often.
-export const loadInterval = 10 * 60 * 1000 // 10 minutes
-
 // Time (in ms) to cache static resources. This value is sent in the HTTP
 // "Cache-Control" header.
 export const maxAgeStatic = isProd
