@@ -29,8 +29,10 @@ update()
 console.timeEnd('render')
 
 // Register service worker
-navigator.serviceWorker
-  .register('/service-worker.mjs', { updateViaCache: 'none' })
+if (typeof navigator.serviceWorker === 'function') {
+  navigator.serviceWorker
+    .register('/service-worker.mjs', { updateViaCache: 'none' })
+}
 
 // Play drag-and-dropped MIDI files
 dragDrop('body', async files => {
