@@ -177,7 +177,7 @@ export default function init () {
         'none'
       ;
       connect-src
-        https:
+        *
       ;
       default-src
         'self'
@@ -186,14 +186,14 @@ export default function init () {
         'none'
       ;
       img-src
-        https:
+        *
       ;
       object-src
         'none'
       ;
       script-src
         'strict-dynamic' 'nonce-${res.locals.nonce}' 'unsafe-eval'
-        https: 'unsafe-inline'
+        * 'unsafe-inline'
       ;
       style-src
         'self'
