@@ -84,12 +84,10 @@ export default function init () {
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
-    if (isProd) {
-      res.header(
-        'Strict-Transport-Security',
-        `max-age=${config.maxAgeHSTS / 1000}; includeSubDomains; preload`
-      )
-    }
+    res.header(
+      'Strict-Transport-Security',
+      `max-age=${config.maxAgeHSTS / 1000}; includeSubDomains; preload`
+    )
 
     // Add per-request template variables
     res.locals.nonce = createNonce()
