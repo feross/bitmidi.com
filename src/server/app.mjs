@@ -176,35 +176,28 @@ export default function init () {
       base-uri
         'none'
       ;
+      connect-src
+        https:
+      ;
+      default-src
+        'self'
+      ;
       frame-ancestors
         'none'
       ;
-      default-src
+      img-src
+        https:
+      ;
+      object-src
         'none'
       ;
-      connect-src
-        'self'
-      ;
-      font-src
-        'self'
-      ;
-      img-src
-        *
-      ;
-      manifest-src
-        'self'
-      ;
       script-src
-        'strict-dynamic' *
-        'unsafe-eval'
-        'nonce-${res.locals.nonce}' 'unsafe-inline'
+        'strict-dynamic' 'nonce-${res.locals.nonce}' 'unsafe-eval'
+        https: 'unsafe-inline'
       ;
       style-src
         'self'
         'unsafe-inline'
-      ;
-      worker-src
-        'self'
       ;
     `)
 
