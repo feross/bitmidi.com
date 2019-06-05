@@ -89,6 +89,14 @@ export default function init () {
       `max-age=${config.maxAgeHSTS / 1000}; includeSubDomains; preload`
     )
 
+    // Prevent click-jacking attacks by forbidding site resources from being
+    // embedded using frames.
+    res.header('Content-Security-Policy', oneLine`
+      frame-ancestors
+        'none'
+      ;
+    `)
+
     // Add per-request template variables
     res.locals.nonce = createNonce()
 
