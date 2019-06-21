@@ -31,6 +31,11 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(async function () {
+    if ('navigationPreload' in self.registration) {
+      // Enable navigation preloads
+      // https://developers.google.com/web/updates/2017/02/navigation-preload
+      await self.registration.navigationPreload.enable()
+    }
 
     // Delete all caches that aren't named in CACHES
     const expectedNames = new Set(Object.values(CACHES))
@@ -56,6 +61,12 @@ self.addEventListener('fetch', event => {
   }
 
   event.respondWith(async function () {
+    // Use preloaded responses, if one exists
+    const response = await event.preloadResponse
+    if (response) {
+      return response
+    }
+
     try {
       await fetch(event.request)
     } catch (err) {
