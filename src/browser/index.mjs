@@ -29,7 +29,7 @@ update()
 console.timeEnd('render')
 
 // Register service worker
-if (typeof navigator.serviceWorker === 'function') {
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('/service-worker.mjs', { updateViaCache: 'none' })
 }
