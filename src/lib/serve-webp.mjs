@@ -45,7 +45,7 @@ export default function serveWebp (root, opts = {}) {
 
   // use a cache folder in /tmp, since that's guaranteed to be writable
   const cacheRoot = join(tmpdir(), randomBytes(16).toString('hex'))
-  debug('Cache root: %s', cacheRoot)
+  debug('Cache: %s', cacheRoot)
 
   return async (req, res, next) => {
     // decode the path
