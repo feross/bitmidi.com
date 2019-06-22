@@ -113,6 +113,7 @@
     "tachyons": "^4.7.4",
     "timidity": "^1.0.0",
     "undom": "^0.4.0",
+    "unmute-ios-audio": "^2.0.1",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

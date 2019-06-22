@@ -188,6 +188,7 @@ export default function init () {
       ;
       default-src
         'self'
+        data:
       ;
       frame-ancestors
         'none'

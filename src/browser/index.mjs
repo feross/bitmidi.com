@@ -1,6 +1,7 @@
 import { render } from 'preact'
 import dragDrop from 'drag-drop'
 import fileToArrayBuffer from 'file-to-array-buffer'
+import unmuteIosAudio from 'unmute-ios-audio'
 
 import createStore from '../store'
 import debug from '../lib/debug-helper'
@@ -27,6 +28,9 @@ update()
 
 // Measure time to first render
 console.timeEnd('render')
+
+// Enable/unmute WebAudio on iOS, even while mute switch is on
+unmuteIosAudio()
 
 // Register service worker
 if ('serviceWorker' in navigator) {
