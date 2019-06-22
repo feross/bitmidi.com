@@ -47,6 +47,12 @@ cd bitmidi.com
 npm install
 ```
 
+### System Dependencies
+
+- [GraphicsMagick](http://www.graphicsmagick.org/index.html)
+  - Ubuntu: `sudo apt install graphicsmagick`
+  - MacOS: `brew install graphicsmagick`
+
 ### Setup Database
 
 First, copy the sample secret file to a new file:
