@@ -165,7 +165,13 @@ export default function init () {
 
     const devFeaturePolicy = !isProd && `
       oversized-images
-        'none'
+        *(2.0)
+      ;
+      unoptimized-lossy-images
+        *(0.5)
+      ;
+      unoptimized-lossless-images-strict
+        *(1.0)
       ;
       unsized-media
         'none'
