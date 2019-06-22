@@ -9,7 +9,6 @@ const CACHE_VERSION = 1
 const CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 }
-const START_URL = '/'
 const OFFLINE_URL = './offline.html'
 
 async function cacheAdd (cache, url) {
@@ -20,12 +19,7 @@ async function cacheAdd (cache, url) {
 self.addEventListener('install', event => {
   event.waitUntil(async function () {
     const offlineCache = await caches.open(CACHES.offline)
-    return Promise.all([
-      // Note: START_URL is never actually served from cache by the service
-      // worker. This is a temporary hack to pass the audit in Lighthouse.
-      cacheAdd(offlineCache, START_URL),
-      cacheAdd(offlineCache, OFFLINE_URL)
-    ])
+    return cacheAdd(offlineCache, OFFLINE_URL)
   }())
 })
 
@@ -53,26 +47,29 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
-  if (event.request.mode !== 'navigate') {
-    // Only intercept navigation requests (i.e. top-level HTML pages). If
-    // neither this fetch handler nor any others call event.respondWith(), the
-    // request will be handled as if there were no service worker.
-    return
-  }
-
   event.respondWith(async function () {
-    // Use preloaded responses, if one exists
-    const response = await event.preloadResponse
-    if (response) {
-      return response
+    try {
+      // Use the preloaded response, if one exists
+      const preloadResponse = await event.preloadResponse
+      if (preloadResponse) return preloadResponse
+    } catch (err) {
+      // Ignore errors
     }
 
     try {
-      await fetch(event.request)
+      const response = await fetch(event.request)
+      return response
     } catch (err) {
       // fetch() throws an exception when the server is unreachable. If fetch()
       // returns a valid HTTP response with a status code in the 4xx or 5xx
       // range, then an exception will NOT be thrown.
+
+      if (event.request.mode !== 'navigate') {
+        // Only return the offline page for navigation requests (i.e. top-level
+        // HTML pages)
+        throw err
+      }
+
       const { url } = event.request
       console.log(`Return offline page because fetch failed for ${url}: `, err)
       return caches.match(OFFLINE_URL)
