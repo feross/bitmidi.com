@@ -2,6 +2,7 @@ import { render } from 'preact'
 import dragDrop from 'drag-drop'
 import fileToArrayBuffer from 'file-to-array-buffer'
 import unmuteIosAudio from 'unmute-ios-audio'
+import colorSchemeChange from 'color-scheme-change'
 
 import createStore from '../store'
 import debug from '../lib/debug-helper'
@@ -42,6 +43,14 @@ if ('serviceWorker' in navigator) {
 dragDrop('body', async files => {
   const buf = new Uint8Array(await fileToArrayBuffer(files[0]))
   dispatch('MIDI_PLAY_BUFFER', buf)
+})
+
+// Detect color scheme changes
+colorSchemeChange(colorScheme => {
+  // Ignore color scheme changes in browser that don't support 'color-scheme'
+  // TODO: Remove once Chrome supports 'color-scheme'
+  if (!window.CSS.supports('color-scheme: light dark')) return
+  dispatch('APP_COLOR_SCHEME', colorScheme)
 })
 
 function update () {

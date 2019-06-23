@@ -36,7 +36,8 @@ export default class MidiPage extends Page {
 
   render (props) {
     const { store } = this.context
-    const { data, views } = store
+    const { app, data, views } = store
+    const { colorScheme } = app
     const { midiSlug } = store.location.params
 
     if (!this.loaded) {
@@ -57,7 +58,10 @@ export default class MidiPage extends Page {
             <MidiMetadata midi={midi} />
           </div>
           <div class='fr w-10 tr'>
-            <ShareButton class='mt2' />
+            <ShareButton
+              class='mt2'
+              color={colorScheme === 'light' ? 'black' : 'white'}
+            />
           </div>
         </div>
 

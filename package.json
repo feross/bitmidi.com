@@ -73,6 +73,7 @@
     "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/register": "^7.4.4",
     "classnames": "^2.2.6",
+    "color-scheme-change": "^1.0.1",
     "common-tags": "^1.4.0",
     "cors": "^2.8.5",
     "dayjs": "^1.7.5",

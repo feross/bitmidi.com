@@ -33,7 +33,8 @@ export default function createStore (_update, onPendingChange = () => {}) {
       image: null, // Page image
       isLoaded: false, // Did window.onload() fire?
       isServerRendered: false, // Was the current page server rendered?
-      pending: 0 // How many outstanding load requests?
+      pending: 0, // How many outstanding load requests?
+      colorScheme: 'light' // Browser color scheme
     },
 
     fatalError: false,
@@ -187,6 +188,11 @@ export default function createStore (_update, onPendingChange = () => {}) {
           window.ga('send', 'event', 'share', 'navigator.share')
         } catch {}
         return
+      }
+
+      case 'APP_COLOR_SCHEME': {
+        store.app.colorScheme = data
+        return update()
       }
 
       /**

@@ -1,4 +1,12 @@
 /**
+ * Dark mode
+ */
+
+:root {
+  color-scheme: light dark;
+}
+
+/**
  * Single-purpose classes
  */
 
