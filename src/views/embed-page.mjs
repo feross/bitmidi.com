@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import oneLine from 'common-tags/lib/oneLine'
 
-import { siteName } from '../config'
+import { isBrowser, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
 import Loader from './loader'
@@ -28,6 +28,20 @@ export default class EmbedPage extends Page {
       `,
       image: midi.image
     })
+  }
+
+  componentDidMount () {
+    super.componentDidMount()
+
+    const { store, dispatch } = this.context
+    const { autoplay = '0' } = store.location.query
+    const { midiSlug } = store.location.params
+
+    const midi = store.data.midis[midiSlug]
+
+    if (isBrowser && (autoplay === '1' || autoplay === 'true')) {
+      dispatch('MIDI_PLAY_PAUSE', midi.slug)
+    }
   }
 
   render (props, _, { store }) {

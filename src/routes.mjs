@@ -49,6 +49,7 @@ export default [
   {
     name: 'embed',
     path: '/embed/:midiSlug',
+    query: { autoplay: '0' },
     page: EmbedPage,
     canonicalUrl: loc => `/${loc.params.midiSlug}`
   },
