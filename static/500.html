@@ -1,47 +1,31 @@
 <!doctype html>
 <html lang='en'>
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='refresh' content='10'>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+    <meta http-equiv='refresh' content='10' />
     <title>BitMidi is being updated</title>
-    <style>
-      html {
-        box-sizing: border-box;
-        font-size: 20px;
-        color: #666;
-        background: #eee;
-        font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-      }
-      body {
-        background: #fff;
-        border-radius: .25em;
-        border: 1px solid #ccc;
-        box-shadow: 0 1px 10px #aaa;
-        margin: 30px auto;
-        padding: 30px 40px;
-        width: 550px;
-        text-align: center;
-      }
-      h1 {
-        margin: 0;
-      }
-      p {
-        margin: 20px 0 10px 0;
-      }
-      img {
-        min-width: 75%;
-      }
-    </style>
+    <link rel='stylesheet' href='/error.css' />
   </head>
   <body>
-    <h1>BitMidi is being updated</h1>
-    <p>We'll be ready in <strong>10 seconds</strong>. While you wait, here's a cat:</p>
-    <p>
-      <script>
-        const catId = Math.floor(Math.random() * 46) + 1
-        document.write(`<img src='https://feross.net/s/cats/${catId}.gif'>`)
-      </script>
-    </p>
-    <p>If you see this page for more than a minute <a href='mailto:feross@feross.org?subject=BitMidi%20is%20down!'>send us an email</a> because something is broken.</p>
+    <main>
+      <h1>BitMidi is being updated</h1>
+      <p>We'll be back in <strong><span id='sec'>9</span> seconds</strong>.</p>
+      <p id='cat'></p>
+      <p>If you see this page for more than a minute <a href='mailto:feross@feross.org?subject=BitMidi%20is%20down!'>send us an email</a> because something is broken.</p>
+    </main>
+    <script>
+      const $cat = document.querySelector('#cat')
+      const $sec = document.querySelector('#sec')
+
+      const catNum = Math.floor(Math.random() * 46) + 1
+      $cat.innerHTML = `<img src='https://feross.net/s/cats/${catNum}.gif'>`
+
+      let sec = 9
+      setInterval(() => {
+        sec = Math.max(sec - 1, 0)
+        $sec.textContent = sec
+      }, 1000)
+    </script>
   </body>
 </html>

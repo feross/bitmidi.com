@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  background: #eee;
+  color: #666;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial,
+    sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+body {
+  margin: 20px;
+}
+main {
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 10px #aaa;
+  margin: 0 auto;
+  max-width: 550px;
+  padding: 20px;
+  width: 100%;
+}
+h1 {
+  margin: 10px 0;
+}
+img {
+  max-width: 100%
+}
