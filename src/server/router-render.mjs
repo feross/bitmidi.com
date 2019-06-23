@@ -1,8 +1,7 @@
 import Debug from 'debug'
 import Router from 'express-promise-router'
 
-import api from '../api'
-import { origin, isProd } from '../config'
+import { isProd } from '../config'
 import createRenderer from '../lib/preact-dom-renderer'
 import createStore from '../store'
 import getProvider from '../views/provider'
@@ -10,15 +9,6 @@ import getProvider from '../views/provider'
 const debug = Debug('bitmidi:router-render')
 
 const router = Router()
-
-// TODO: remove this once Google indexes the new /:midiSlug URLs
-// Redirect from /1 to /009count-mid
-router.get('/:midiId(\\d+)', async (req, res, next) => {
-  const midiId = Number(req.params.midiId)
-  if (midiId === 500) return next()
-  const { result } = await api.midi.get({ id: midiId })
-  res.redirect(301, `${origin}${result.url}`)
-})
 
 router.use((req, res, next) => {
   const renderer = createRenderer()
