@@ -64,11 +64,11 @@ self.addEventListener('fetch', event => {
       // returns a valid HTTP response with a status code in the 4xx or 5xx
       // range, then an exception will NOT be thrown.
 
-      if (event.request.mode !== 'navigate') {
-        // Only return the offline page for navigation requests (i.e. top-level
-        // HTML pages)
-        throw err
-      }
+      // if (event.request.mode !== 'navigate') {
+      //   // Only return the offline page for navigation requests (i.e. top-level
+      //   // HTML pages)
+      //   throw err
+      // }
 
       const { url } = event.request
       console.log(`Return offline page because fetch failed for ${url}: `, err)
