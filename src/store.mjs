@@ -31,6 +31,8 @@ export default function createStore (_update, onPendingChange = () => {}) {
       title: null, // Page title
       description: null, // Page meta description
       image: null, // Page image
+      meta: {}, // Custom meta tags
+
       isLoaded: false, // Did window.onload() fire?
       isServerRendered: false, // Was the current page server rendered?
       pending: 0, // How many outstanding load requests?
@@ -169,6 +171,10 @@ export default function createStore (_update, onPendingChange = () => {}) {
           : format([...parse(data.description), siteDesc])
 
         store.app.image = data.image || siteImage
+
+        store.app.meta = data.meta != null
+          ? { ...data.meta }
+          : {}
 
         return update()
       }

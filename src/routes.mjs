@@ -1,6 +1,7 @@
 import api from './api'
 
 import AboutPage from './views/about-page'
+import EmbedPage from './views/embed-page'
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
@@ -44,6 +45,12 @@ export default [
       })
       return results.map(result => result.url)
     }
+  },
+  {
+    name: 'embed',
+    path: '/embed/:midiSlug',
+    page: EmbedPage,
+    canonicalUrl: loc => `/${loc.params.midiSlug}`
   },
   {
     name: 'error',

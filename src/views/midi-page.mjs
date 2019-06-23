@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 import oneLine from 'common-tags/lib/oneLine'
 
-import { siteName } from '../config'
+import { origin, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
 import Button from './button'
@@ -30,7 +30,13 @@ export default class MidiPage extends Page {
       description: oneLine`
         Listen to ${midi.name}, a free MIDI file on ${siteName}. Play, download, or share the MIDI song ${midi.name} from your web browser.
       `,
-      image: midi.image
+      image: midi.image,
+      meta: {
+        'twitter:card': 'player',
+        'twitter:player': `${origin}/embed/${midiSlug}`,
+        'twitter:player:height': '480',
+        'twitter:player:width': '480'
+      }
     })
   }
 

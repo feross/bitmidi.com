@@ -65,9 +65,15 @@ router.use((req, res, next) => {
       store.errors.map(err => { delete err.stack })
       // Tell client to start first page with `this.loaded` set to true
       store.app.isServerRendered = true
+
+      const meta = {
+        'twitter:card': 'summary_large_image',
+        ...store.app.meta
+      }
+
       res
         .status(status)
-        .render('layout', { content: renderer.html(), store })
+        .render('layout', { content: renderer.html(), store, meta })
     }
   }
 })

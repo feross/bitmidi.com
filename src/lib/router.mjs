@@ -6,10 +6,10 @@ import fromEntries from 'fromentries'
 export default class Router {
   constructor (routes) {
     this._routes = routes.map(route => {
-      const { name, path, query = {} } = route
+      const { name, path, query = {}, canonicalUrl = null } = route
       const keys = []
       const regexp = pathToRegexp(path, keys)
-      return { name, path, query, keys, regexp }
+      return { name, path, query, canonicalUrl, keys, regexp }
     })
 
     this._compilers = {}
@@ -20,40 +20,50 @@ export default class Router {
   }
 
   match (rawUrl) {
-    const url = new URL(rawUrl, 'http://example.com')
-
-    const ret = {
-      name: null,
-      url: `${url.pathname}${url.search}`,
-      params: {},
-      query: null,
-      canonicalUrl: null
-    }
+    const urlObj = new URL(rawUrl, 'http://example.com')
 
     for (const route of this._routes) {
-      const matches = route.regexp.exec(url.pathname)
+      const matches = route.regexp.exec(urlObj.pathname)
       if (!matches) continue
 
       // Found a matching route
-      ret.name = route.name
+      const name = route.name
+      const url = `${urlObj.pathname}${urlObj.search}`
+
+      const params = {}
       matches.slice(1).forEach((paramValue, paramIndex) => {
         const param = route.keys[paramIndex].name
         // Remove URL encoding from the param values. Accommodates whitespace in
         // both x-www-form-urlencoded and regular percent-encoded form.
-        paramValue = decodeURIComponent(paramValue.replace(/\+/g, ' '))
-        ret.params[param] = paramValue
+        params[param] = decodeURIComponent(paramValue.replace(/\+/g, ' '))
       })
-      ret.query = { ...route.query, ...fromEntries(url.searchParams) }
+
+      const query = { ...route.query, ...fromEntries(urlObj.searchParams) }
 
       // Only include whitelisted query params in the canonical url
-      for (let key of url.searchParams.keys()) {
-        if (!route.query.hasOwnProperty(key)) url.searchParams.delete(key)
+      for (let key of urlObj.searchParams.keys()) {
+        if (!route.query.hasOwnProperty(key)) urlObj.searchParams.delete(key)
       }
-      ret.canonicalUrl = `${url.pathname}${url.search}`
 
-      break
+      let canonicalUrl = `${urlObj.pathname}${urlObj.search}`
+
+      const loc = {
+        name,
+        url,
+        params,
+        query,
+        canonicalUrl
+      }
+
+      if (route.canonicalUrl) {
+        loc.canonicalUrl = route.canonicalUrl(loc)
+      }
+
+      return loc
     }
-    return ret
+
+    // This should never be reached because the error route should always match
+    throw new Error('No matching route found. Missing an error route?')
   }
 
   toUrl (name, data) {
