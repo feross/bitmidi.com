@@ -80,7 +80,7 @@ export default function init () {
     // Prevent cross-window attacks (window.opener, usage of postMessage) and
     // process side-channel attacks by severing references to other browsing
     // contexts. Browsers will use a separate OS process to load the site.
-    // res.header('Cross-Origin-Opener-Policy', 'same-origin')
+    res.header('Cross-Origin-Opener-Policy', 'same-origin')
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
