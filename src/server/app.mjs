@@ -1,3 +1,4 @@
+import cors from 'cors'
 import crypto from 'crypto'
 import express from 'express'
 import favicon from 'serve-favicon'
@@ -120,7 +121,7 @@ export default function init () {
   app.use('/timidity', serveStatic(freepatsPath))
 
   const uploadsPath = join(rootPath, 'uploads')
-  app.use('/uploads', serveStatic(uploadsPath))
+  app.use('/uploads', cors(), serveStatic(uploadsPath))
 
   app.use('/webp/icons', serveWebp(iconsPath))
   app.use('/webp', serveWebp(staticPath))

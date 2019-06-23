@@ -74,6 +74,7 @@
     "@babel/register": "^7.4.4",
     "classnames": "^2.2.6",
     "common-tags": "^1.4.0",
+    "cors": "^2.8.5",
     "dayjs": "^1.7.5",
     "debug": "^4.0.0",
     "drag-drop": "^4.2.0",
