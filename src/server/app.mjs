@@ -70,17 +70,17 @@ export default function init () {
     // origin requests, send a full URL. For cross-origin HTTPS->HTTPS
     // navigation, send the document origin. For cross-origin HTTPS->HTTP
     // navigation, send nothing.
-    // res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
+    res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
 
     // Prevent cross-origin reads of site resources to mitigate side-channel
     // attacks. Reduces the risk of leaking sensitive data by keeping it further
     // from cross-origin web pages.
-    // res.header('Cross-Origin-Resource-Policy', 'same-origin')
+    res.header('Cross-Origin-Resource-Policy', 'same-origin')
 
     // Prevent cross-window attacks (window.opener, usage of postMessage) and
     // process side-channel attacks by severing references to other browsing
     // contexts. Browsers will use a separate OS process to load the site.
-    // res.header('Cross-Origin-Opener-Policy', 'same-origin')
+    res.header('Cross-Origin-Opener-Policy', 'same-origin')
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
@@ -91,11 +91,11 @@ export default function init () {
 
     // Prevent click-jacking attacks by forbidding site resources from being
     // embedded using frames.
-    // res.header('Content-Security-Policy', oneLine`
-    //   frame-ancestors
-    //     'none'
-    //   ;
-    // `)
+    res.header('Content-Security-Policy', oneLine`
+      frame-ancestors
+        'none'
+      ;
+    `)
 
     // Add per-request template variables
     res.locals.nonce = createNonce()
