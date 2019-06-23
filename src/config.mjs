@@ -33,8 +33,11 @@ export const siteTwitter = 'BitMidi'
 // Default image to represent the site on social networks
 export const siteImage = '/img/hero.jpg'
 
-// Google Analytics tracking ID
-export const analyticsId = 'UA-3898076-25'
+// Analytics IDs
+export const analytics = {
+  google: 'UA-3898076-25',
+  quantcast: 'p-69FZJwoXOxhpY'
+}
 
 // Website hostname + port
 export const host = isProd

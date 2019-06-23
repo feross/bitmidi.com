@@ -57,23 +57,21 @@
       function ga () { window.ga.q.push(arguments) }
       window.ga.q = window.ga.q || []
       window.ga.l = Date.now()
-      window.ga('create', '<%= config.analyticsId %>', 'auto')
+      window.ga('create', '<%= config.analytics.google %>', 'auto')
       window.ga('send', 'pageview')
     </script>
     <script nonce='<%= nonce %>'>
       <%# Quantcast %>
       window._qevents = window._qevents || []
-      window._qevents.push({
-        qacct:"p-69FZJwoXOxhpY"
-      })
+      window._qevents.push({ qacct: '<%= config.analytics.quantcast %>' })
+      function qc () {
+        const img = new window.Image()
+        img.decoding = 'async'
+        img.src = 'https://pixel.quantserve.com/pixel/<%= config.analytics.quantcast %>.gif'
+      }
     </script>
     <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
     <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
     <script async src='https://secure.quantserve.com/quant.js' nonce='<%= nonce %>'></script>
-    <noscript>
-      <div style='display: none;'>
-        <img src='https://pixel.quantserve.com/pixel/p-69FZJwoXOxhpY.gif' border='0' height='1' width='1' alt='' />
-      </div>
-    </noscript>
   </body>
 </html>

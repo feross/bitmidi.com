@@ -125,6 +125,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
         if (isBrowser) {
           if (source === 'push') window.scroll(0, 0)
           window.ga('send', 'pageview', location.url)
+          window.qc()
         }
         return update()
       }
