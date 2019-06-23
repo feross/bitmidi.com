@@ -75,7 +75,7 @@ export default function init () {
     // Prevent cross-origin reads of site resources to mitigate side-channel
     // attacks. Reduces the risk of leaking sensitive data by keeping it further
     // from cross-origin web pages.
-    // res.header('Cross-Origin-Resource-Policy', 'same-origin')
+    res.header('Cross-Origin-Resource-Policy', 'same-origin')
 
     // Prevent cross-window attacks (window.opener, usage of postMessage) and
     // process side-channel attacks by severing references to other browsing
