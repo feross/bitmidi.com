@@ -49,6 +49,7 @@ dragDrop('body', async files => {
 colorSchemeChange(colorScheme => {
   // Ignore color scheme changes in browser that don't support 'color-scheme'
   // TODO: Remove once Chrome supports 'color-scheme'
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=939811
   if (!window.CSS.supports('color-scheme: light dark')) return
   dispatch('APP_COLOR_SCHEME', colorScheme)
 })
