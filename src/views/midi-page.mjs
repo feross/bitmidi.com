@@ -40,10 +40,9 @@ export default class MidiPage extends Page {
     })
   }
 
-  render (props) {
-    const { store } = this.context
-    const { app, data, views } = store
-    const { colorScheme } = app
+  render (props, _, { store }) {
+    const { data, views } = store
+    const { colorScheme } = store.app
     const { midiSlug } = store.location.params
 
     if (!this.loaded) {

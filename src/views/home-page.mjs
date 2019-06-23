@@ -28,10 +28,9 @@ export default class HomePage extends Page {
     dispatch('APP_META', meta)
   }
 
-  render (props) {
+  render (props, _, { store }) {
     if (!this.loaded) return <Loader center />
 
-    const { store } = this.context
     const { data, views } = store
     const { page } = store.location.query
 

@@ -2,8 +2,7 @@ import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 export default class Link extends Component {
-  render (props) {
-    const { theme } = this.context
+  render (props, _, { theme }) {
     const {
       color = theme.mainColor,
       children,
