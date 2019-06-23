@@ -43,7 +43,7 @@ export default class EmbedPage extends Page {
 
     return (
       <div>
-        <Midi midi={midi} />
+        <Midi midi={midi} showImage={false} />
       </div>
     )
   }
