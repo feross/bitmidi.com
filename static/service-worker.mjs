@@ -10,7 +10,6 @@ const CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 }
 
-const HOME_URL = '/'
 const OFFLINE_URL = './offline.html'
 
 async function cacheAdd (cache, url) {
@@ -21,20 +20,17 @@ async function cacheAdd (cache, url) {
 self.addEventListener('install', event => {
   event.waitUntil(async function () {
     const offlineCache = await caches.open(CACHES.offline)
-    return Promise.all([
-      cacheAdd(offlineCache, HOME_URL),
-      cacheAdd(offlineCache, OFFLINE_URL)
-    ])
+    return cacheAdd(offlineCache, OFFLINE_URL)
   }())
 })
 
 self.addEventListener('activate', event => {
   event.waitUntil(async function () {
-    // if ('navigationPreload' in self.registration) {
-    //   // Enable navigation preloads
-    //   // https://developers.google.com/web/updates/2017/02/navigation-preload
-    //   await self.registration.navigationPreload.enable()
-    // }
+    if ('navigationPreload' in self.registration) {
+      // Enable navigation preloads
+      // https://developers.google.com/web/updates/2017/02/navigation-preload
+      await self.registration.navigationPreload.enable()
+    }
 
     // Delete all caches that aren't named in CACHES
     const expectedNames = new Set(Object.values(CACHES))
@@ -53,13 +49,13 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(async function () {
-    // try {
-    //   // Use the preloaded response, if one exists
-    //   const preloadResponse = await event.preloadResponse
-    //   if (preloadResponse) return preloadResponse
-    // } catch (err) {
-    //   // Ignore errors
-    // }
+    try {
+      // Use the preloaded response, if one exists
+      const preloadResponse = await event.preloadResponse
+      if (preloadResponse) return preloadResponse
+    } catch (err) {
+      // Ignore errors
+    }
 
     try {
       const response = await fetch(event.request)
@@ -69,11 +65,11 @@ self.addEventListener('fetch', event => {
       // returns a valid HTTP response with a status code in the 4xx or 5xx
       // range, then an exception will NOT be thrown.
 
-      // if (event.request.mode !== 'navigate') {
-      //   // Only return the offline page for navigation requests (i.e. top-level
-      //   // HTML pages)
-      //   throw err
-      // }
+      if (event.request.mode !== 'navigate') {
+        // Only return the offline page for navigation requests (i.e. top-level
+        // HTML pages)
+        throw err
+      }
 
       const { url } = event.request
       console.log(`Return offline page because fetch failed for ${url}: `, err)
