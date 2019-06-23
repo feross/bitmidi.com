@@ -22,11 +22,6 @@ const { isProd, rootPath } = config
 
 const staticPath = join(rootPath, 'static')
 
-// Set correct mime-type for streaming wasm compilation
-// See: https://github.com/expressjs/express/issues/3589
-// TODO: Remove when express 4.17.0 is released
-express.static.mime.types['wasm'] = 'application/wasm'
-
 // Set correct mime type for .pat (Gravis Ultrasound) files
 express.static.mime.types['pat'] = 'audio/pat'
 
