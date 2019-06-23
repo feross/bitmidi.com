@@ -77,7 +77,7 @@ export default function init () {
     // from cross-origin web pages.
     // TODO: Disabled until bug that breaks PWA 'add to homescreen' is fixed:
     // https://bugs.chromium.org/p/chromium/issues/detail?id=977829
-    // res.header('Cross-Origin-Resource-Policy', 'same-origin')
+    res.header('Cross-Origin-Resource-Policy', 'same-origin')
 
     // Prevent cross-window attacks (window.opener, usage of postMessage) and
     // process side-channel attacks by severing references to other browsing
