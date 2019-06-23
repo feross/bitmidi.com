@@ -1,40 +1,46 @@
 <!doctype html>
 <html lang='en'>
   <head>
-    <meta charset='utf-8'>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
     <title>You are offline</title>
 
     <style>
-      html {
+      * {
         box-sizing: border-box;
-        font-size: 20px;
-        color: #666;
+      }
+      html {
         background: #eee;
+        color: #666;
         font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+        font-size: 20px;
       }
       body {
+        margin: 20px;
+      }
+      main {
         background: #fff;
-        border-radius: .25em;
+        border-radius: 5px;
         border: 1px solid #ccc;
         box-shadow: 0 1px 10px #aaa;
-        margin: 30px auto;
-        padding: 30px 40px;
-        width: 550px;
+        margin: 0 auto;
+        max-width: 550px;
+        padding: 20px;
         text-align: center;
+        width: 100%;
       }
       h1 {
-        margin: 0;
-      }
-      p {
-        margin: 20px 0 10px 0;
+        margin: 10px 0;
       }
     </style>
   </head>
   <body>
-    <h1>You are offline</h1>
-    <p>
-      <span class='host'>This site</span> requires an internet connection.
-    </p>
+    <main>
+      <h1>You are offline</h1>
+      <p>
+        <span class='host'>This site</span> requires an internet connection.
+      </p>
+    </main>
     <script>
       document.querySelector('.host').textContent = window.location.host
     </script>
