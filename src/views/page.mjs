@@ -1,8 +1,7 @@
 import { Component } from 'preact'
 
 export default class Page extends Component {
-  static showHeader = true
-  static showFooter = true
+  static showAppShell = true
 
   constructor () {
     super()

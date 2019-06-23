@@ -9,8 +9,7 @@ import Midi from './midi'
 import Page from './page'
 
 export default class EmbedPage extends Page {
-  static showHeader = false
-  static showFooter = false
+  static showAppShell = false
 
   async load () {
     const { store, dispatch } = this.context
