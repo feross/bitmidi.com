@@ -30,11 +30,11 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
   event.waitUntil(async function () {
-    if ('navigationPreload' in self.registration) {
-      // Enable navigation preloads
-      // https://developers.google.com/web/updates/2017/02/navigation-preload
-      await self.registration.navigationPreload.enable()
-    }
+    // if ('navigationPreload' in self.registration) {
+    //   // Enable navigation preloads
+    //   // https://developers.google.com/web/updates/2017/02/navigation-preload
+    //   await self.registration.navigationPreload.enable()
+    // }
 
     // Delete all caches that aren't named in CACHES
     const expectedNames = new Set(Object.values(CACHES))
@@ -53,13 +53,13 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(async function () {
-    try {
-      // Use the preloaded response, if one exists
-      const preloadResponse = await event.preloadResponse
-      if (preloadResponse) return preloadResponse
-    } catch (err) {
-      // Ignore errors
-    }
+    // try {
+    //   // Use the preloaded response, if one exists
+    //   const preloadResponse = await event.preloadResponse
+    //   if (preloadResponse) return preloadResponse
+    // } catch (err) {
+    //   // Ignore errors
+    // }
 
     try {
       const response = await fetch(event.request)
