@@ -183,6 +183,13 @@ export default function init () {
     `)
 
     // Prevent XSS attacks by explicitly specifying sources of content
+    // Notes:
+    //   - frame-ancestors 'none' loosened to support Twitter Player Card
+    //   - TODO: Remove script-src 'unsafe-eval' once wasm-unsafe-eval ships
+    //     https://bugs.chromium.org/p/chromium/issues/detail?id=948834&can=1&q=wasm-eval
+    //   - TODO: Remove script-src * 'unsafe-inline' fallback once Safari
+    //     supports strict-dynamic
+    //     https://bugs.webkit.org/show_bug.cgi?id=184031
     res.header('Content-Security-Policy', oneLine`
       base-uri
         'none'
@@ -195,7 +202,7 @@ export default function init () {
         data:
       ;
       frame-ancestors
-        'none'
+        *
       ;
       img-src
         *
