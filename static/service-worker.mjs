@@ -9,6 +9,8 @@ const CACHE_VERSION = 1
 const CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 }
+
+const HOME_URL = '/'
 const OFFLINE_URL = './offline.html'
 
 async function cacheAdd (cache, url) {
@@ -19,7 +21,10 @@ async function cacheAdd (cache, url) {
 self.addEventListener('install', event => {
   event.waitUntil(async function () {
     const offlineCache = await caches.open(CACHES.offline)
-    return cacheAdd(offlineCache, OFFLINE_URL)
+    return Promise.all([
+      cacheAdd(offlineCache, HOME_URL),
+      cacheAdd(offlineCache, OFFLINE_URL)
+    ])
   }())
 })
 
