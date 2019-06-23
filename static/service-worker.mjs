@@ -2,8 +2,8 @@
 
 'use strict'
 
-// Incrementing CACHE_VERSION will kick off the 'install' event and force
-// previously cached resources to be cached again.
+// Increment the version to kick off the 'install' event and force previously
+// cached resources to be cached again.
 const CACHE_VERSION = 1
 
 const CACHES = {
