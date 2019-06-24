@@ -66,6 +66,12 @@ export default class EmbedPage extends Page {
             'mv3-m': false,
             'mv4-l': false
           }}
+          imageClass={{
+            h5: false
+          }}
+          imageStyle={{
+            height: 170
+          }}
         />
       </div>
     )

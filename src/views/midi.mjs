@@ -7,7 +7,14 @@ import Link from './link'
 
 export default class Midi extends Component {
   render (props, _, { theme, store }) {
-    const { class: className, midi, showImage = true, showPlay = true } = props
+    const {
+      class: className,
+      imageClass,
+      imageStyle,
+      midi,
+      showImage = true,
+      showPlay = true
+    } = props
     const { mainColor } = theme
     const { player } = store
 
@@ -25,9 +32,10 @@ export default class Midi extends Component {
         >
           { midi.image && showImage &&
             <Image
-              class='db midi-image w-100 br2 br--top h5 bg-center'
+              class={c('db midi-image w-100 br2 br--top h5 bg-center', imageClass)}
               style={{
-                objectFit: 'cover'
+                objectFit: 'cover',
+                ...imageStyle
               }}
               src={midi.image}
               alt={midi.name}

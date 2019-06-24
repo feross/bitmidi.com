@@ -34,8 +34,8 @@ export default class MidiPage extends Page {
       meta: {
         'twitter:card': 'player',
         'twitter:player': `${origin}/embed/${midiSlug}`,
-        'twitter:player:height': midi.image ? '300' : '50',
-        'twitter:player:width': '600'
+        'twitter:player:height': midi.image ? '220' : '50',
+        'twitter:player:width': '440'
       }
     })
   }
