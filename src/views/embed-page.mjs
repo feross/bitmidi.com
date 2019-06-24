@@ -26,7 +26,10 @@ export default class EmbedPage extends Page {
       description: oneLine`
         Listen to ${midi.name}, a free MIDI file on ${siteName}. Play, download, or share the MIDI song ${midi.name} from your web browser.
       `,
-      image: midi.image
+      image: midi.image,
+      meta: {
+        'robots': 'noindex' // Prevent embed page from being indexed
+      }
     })
   }
 
