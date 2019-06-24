@@ -207,7 +207,7 @@ export default function init () {
       frame-ancestors
         *
       ;
-      frame-src:
+      frame-src
         *
       ;
       img-src
