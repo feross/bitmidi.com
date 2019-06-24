@@ -45,14 +45,6 @@
     <%_ } else { _%>
       <link rel='stylesheet' href='/bundle.css?c=dev' />
     <%_ } _%>
-
-    <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' nonce='<%= nonce %>'></script>
-    <script nonce='<%= nonce %>'>
-         (adsbygoogle = window.adsbygoogle || []).push({
-              google_ad_client: 'ca-pub-7826623632932605',
-              enable_page_level_ads: true
-         });
-    </script>
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll'>
@@ -66,27 +58,38 @@
           : '{}'
         %>
     </script>
+    <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
+
+    <%# AdSense %>
     <script nonce='<%= nonce %>'>
-      <%# Google Analytics %>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: '<%= config.tokens.adsense %>',
+        enable_page_level_ads: true
+      })
+    </script>
+    <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' nonce='<%= nonce %>'></script>
+
+    <%# Google Analytics %>
+    <script nonce='<%= nonce %>'>
       window.GoogleAnalyticsObject = 'ga'
       function ga () { window.ga.q.push(arguments) }
       window.ga.q = window.ga.q || []
       window.ga.l = Date.now()
-      window.ga('create', '<%= config.analytics.google %>', 'auto')
+      window.ga('create', '<%= config.tokens.analytics %>', 'auto')
       window.ga('send', 'pageview')
     </script>
+    <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
+
+    <%# Quantcast %>
     <script nonce='<%= nonce %>'>
-      <%# Quantcast %>
       window._qevents = window._qevents || []
-      window._qevents.push({ qacct: '<%= config.analytics.quantcast %>' })
+      window._qevents.push({ qacct: '<%= config.tokens.quantcast %>' })
       function qc () {
         const img = new window.Image()
         img.decoding = 'async'
-        img.src = 'https://pixel.quantserve.com/pixel/<%= config.analytics.quantcast %>.gif'
+        img.src = 'https://pixel.quantserve.com/pixel/<%= config.tokens.quantcast %>.gif'
       }
     </script>
-    <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
-    <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
     <script async src='https://secure.quantserve.com/quant.js' nonce='<%= nonce %>'></script>
   </body>
 </html>

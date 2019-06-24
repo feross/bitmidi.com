@@ -33,9 +33,10 @@ export const siteTwitter = 'BitMidi'
 // Default image to represent the site on social networks
 export const siteImage = '/img/hero.jpg'
 
-// Analytics IDs
-export const analytics = {
-  google: 'UA-3898076-25',
+// Token ids
+export const tokens = {
+  adsense: 'ca-pub-7826623632932605',
+  analytics: 'UA-3898076-25',
   quantcast: 'p-69FZJwoXOxhpY'
 }
 
