@@ -66,19 +66,19 @@ export default function init () {
     // origin requests, send a full URL. For cross-origin HTTPS->HTTPS
     // navigation, send the document origin. For cross-origin HTTPS->HTTP
     // navigation, send nothing.
-    res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
+    // res.header('Referrer-Policy', 'strict-origin-when-cross-origin')
 
     // Prevent cross-origin reads of site resources to mitigate side-channel
     // attacks. Reduces the risk of leaking sensitive data by keeping it further
     // from cross-origin web pages.
     // TODO: Disabled until bug that breaks PWA 'add to homescreen' is fixed:
     // https://bugs.chromium.org/p/chromium/issues/detail?id=977829
-    res.header('Cross-Origin-Resource-Policy', 'same-origin')
+    // res.header('Cross-Origin-Resource-Policy', 'same-origin')
 
     // Prevent cross-window attacks (window.opener, usage of postMessage) and
     // process side-channel attacks by severing references to other browsing
     // contexts. Browsers will use a separate OS process to load the site.
-    res.header('Cross-Origin-Opener-Policy', 'same-origin')
+    // res.header('Cross-Origin-Opener-Policy', 'same-origin')
 
     // Use HTTP Strict Transport Security (HSTS), cached for 2 years,
     // including on subdomains, and allow browser preload.
@@ -161,26 +161,26 @@ export default function init () {
     // prevent rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
-    const devFeaturePolicy = !isProd && `
-      oversized-images
-        *(2.0)
-      ;
-      unoptimized-lossy-images
-        *(0.5)
-      ;
-      unoptimized-lossless-images-strict
-        *(1.0)
-      ;
-      unsized-media
-        'none'
-      ;
-    `
-    res.header('Feature-Policy', oneLine`
-      sync-xhr
-        'none'
-      ;
-      ${devFeaturePolicy || ''}
-    `)
+    // const devFeaturePolicy = !isProd && `
+    //   oversized-images
+    //     *(2.0)
+    //   ;
+    //   unoptimized-lossy-images
+    //     *(0.5)
+    //   ;
+    //   unoptimized-lossless-images-strict
+    //     *(1.0)
+    //   ;
+    //   unsized-media
+    //     'none'
+    //   ;
+    // `
+    // res.header('Feature-Policy', oneLine`
+    //   sync-xhr
+    //     'none'
+    //   ;
+    //   ${devFeaturePolicy || ''}
+    // `)
 
     // Prevent XSS attacks by explicitly specifying sources of content
     // Notes:
@@ -196,37 +196,37 @@ export default function init () {
     //   - TODO: Remove script-src * 'unsafe-inline' fallback once Safari
     //     supports strict-dynamic
     //     https://bugs.webkit.org/show_bug.cgi?id=184031
-    res.header('Content-Security-Policy', oneLine`
-      base-uri
-        'none'
-      ;
-      connect-src
-        *
-      ;
-      default-src
-        'self'
-        data:
-      ;
-      frame-ancestors
-        *
-      ;
-      frame-src
-        *
-      ;
-      img-src
-        *
-      ;
-      object-src
-        'none'
-      ;
-      script-src
-        'unsafe-eval' * 'unsafe-inline'
-      ;
-      style-src
-        'self'
-        'unsafe-inline'
-      ;
-    `)
+    // res.header('Content-Security-Policy', oneLine`
+    //   base-uri
+    //     'none'
+    //   ;
+    //   connect-src
+    //     *
+    //   ;
+    //   default-src
+    //     'self'
+    //     data:
+    //   ;
+    //   frame-ancestors
+    //     *
+    //   ;
+    //   frame-src
+    //     *
+    //   ;
+    //   img-src
+    //     *
+    //   ;
+    //   object-src
+    //     'none'
+    //   ;
+    //   script-src
+    //     'unsafe-eval' * 'unsafe-inline'
+    //   ;
+    //   style-src
+    //     'self'
+    //     'unsafe-inline'
+    //   ;
+    // `)
 
     next()
   })
