@@ -47,61 +47,6 @@ export default class EmbedPage extends Page {
     if (isBrowser && (autoplay === '1' || autoplay === 'true')) {
       dispatch('MIDI_PLAY_PAUSE', midi.slug)
     }
-
-    const AudioContext = typeof window !== 'undefined' &&
-      (window.AudioContext || window.webkitAudioContext)
-
-    const silentAudioFile = 'data:audio/mp3;base64,//MkxAAHiAICWABElBeKPL/RANb2w+yiT1g/gTok//lP/W/l3h8QO/OCdCqCW2Cw//MkxAQHkAIWUAhEmAQXWUOFW2dxPu//9mr60ElY5sseQ+xxesmHKtZr7bsqqX2L//MkxAgFwAYiQAhEAC2hq22d3///9FTV6tA36JdgBJoOGgc+7qvqej5Zu7/7uI9l//MkxBQHAAYi8AhEAO193vt9KGOq+6qcT7hhfN5FTInmwk8RkqKImTM55pRQHQSq//MkxBsGkgoIAABHhTACIJLf99nVI///yuW1uBqWfEu7CgNPWGpUadBmZ////4sL//MkxCMHMAH9iABEmAsKioqKigsLCwtVTEFNRTMuOTkuNVVVVVVVVVVVVVVVVVVV//MkxCkECAUYCAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV'
-
-    let isHtmlAudioEnabled = false
-    let isWebAudioEnabled = false
-
-    let audio
-    let source
-
-    if (isBrowser && (autoplay === '1' || autoplay === 'true')) {
-      audio = document.createElement('audio')
-      audio.preload = 'auto'
-      audio.src = silentAudioFile
-      audio.addEventListener('ended', handleAudioEnded)
-
-      handleMousedown()
-    }
-
-    function handleMousedown () {
-      if (!isHtmlAudioEnabled) {
-        audio.play().catch(() => {})
-      }
-      if (!isWebAudioEnabled) {
-        const context = new AudioContext()
-        source = context.createBufferSource()
-        source.buffer = context.createBuffer(1, 1, 22050) // .1 sec of silence
-        source.connect(context.destination)
-        source.addEventListener('ended', handleWebAudioEnded)
-        source.start()
-      }
-    }
-
-    function handleAudioEnded () {
-      if (isHtmlAudioEnabled) return
-      isHtmlAudioEnabled = true
-      audio.removeEventListener('ended', handleAudioEnded)
-      audio = null
-      maybeCleanup()
-    }
-
-    function handleWebAudioEnded () {
-      if (isWebAudioEnabled) return
-      isWebAudioEnabled = true
-      source.removeEventListener('ended', handleWebAudioEnded)
-      source = null
-      maybeCleanup()
-    }
-
-    function maybeCleanup () {
-      if (!isHtmlAudioEnabled || !isWebAudioEnabled) return
-      console.log('successfully activated audio')
-    }
   }
 
   render (props, _, { store }) {
@@ -115,7 +60,10 @@ export default class EmbedPage extends Page {
     const midi = data.midis[midiSlug]
 
     return (
-      <EmbedMidi midi={midi} />
+      <div>
+        <EmbedMidi midi={midi} />
+        <audio src='data:audio/mp3;base64,//MkxAAHiAICWABElBeKPL/RANb2w+yiT1g/gTok//lP/W/l3h8QO/OCdCqCW2Cw//MkxAQHkAIWUAhEmAQXWUOFW2dxPu//9mr60ElY5sseQ+xxesmHKtZr7bsqqX2L//MkxAgFwAYiQAhEAC2hq22d3///9FTV6tA36JdgBJoOGgc+7qvqej5Zu7/7uI9l//MkxBQHAAYi8AhEAO193vt9KGOq+6qcT7hhfN5FTInmwk8RkqKImTM55pRQHQSq//MkxBsGkgoIAABHhTACIJLf99nVI///yuW1uBqWfEu7CgNPWGpUadBmZ////4sL//MkxCMHMAH9iABEmAsKioqKigsLCwtVTEFNRTMuOTkuNVVVVVVVVVVVVVVVVVVV//MkxCkECAUYCAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV' preload='auto' autoplay />
+      </div>
     )
   }
 }
