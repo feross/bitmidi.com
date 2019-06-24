@@ -184,7 +184,10 @@ export default function init () {
 
     // Prevent XSS attacks by explicitly specifying sources of content
     // Notes:
-    //   - frame-ancestors 'none' loosened to support Twitter Player Card
+    //   - Before: frame-ancestors 'none'
+    //     Why changed: Allow Twitter to embed the Player Card in an iframe
+    //   - Before: frame-src inherited from the default-src policy
+    //     Why changed: AdSense embeds iframes
     //   - TODO: Remove script-src 'unsafe-eval' once wasm-unsafe-eval ships
     //     https://bugs.chromium.org/p/chromium/issues/detail?id=948834&can=1&q=wasm-eval
     //   - TODO: Remove script-src * 'unsafe-inline' fallback once Safari
@@ -202,6 +205,9 @@ export default function init () {
         data:
       ;
       frame-ancestors
+        *
+      ;
+      frame-src:
         *
       ;
       img-src
