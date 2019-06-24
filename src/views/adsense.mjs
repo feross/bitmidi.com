@@ -27,6 +27,11 @@ export default class Adsense extends Component {
           data-ad-format='auto'
           data-full-width-responsive='true'
         />
+        { !isBrowser &&
+          <script>
+            (window.adsbygoogle = window.adsbygoogle || []).push({})
+          </script>
+        }
       </div>
     )
   }
