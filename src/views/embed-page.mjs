@@ -44,7 +44,8 @@ export default class EmbedPage extends Page {
 
     const midi = store.data.midis[midiSlug]
 
-    if (isBrowser && (autoplay === '1' || autoplay === 'true')) {
+    if (isBrowser && (autoplay === '1' || autoplay === 'true') &&
+        'userActivation' in navigator && navigator.userActivation.isActive) {
       dispatch('MIDI_PLAY_PAUSE', midi.slug)
     }
   }
