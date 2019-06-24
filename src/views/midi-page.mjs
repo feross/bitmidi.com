@@ -4,6 +4,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import { origin, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
+import Adsense from './adsense'
 import Button from './button'
 import Heading from './heading'
 import Link from './link'
@@ -74,17 +75,24 @@ export default class MidiPage extends Page {
           <Midi midi={midi} />
         </div>
 
-        <h3>🎶 Play now</h3>
-        <p>
-          Tap the play button above! ☝️
-        </p>
+        <div class='cf'>
+          <div class='fn fl-ns w-50-ns'>
+            <h3>🎶 Play now</h3>
+            <p>
+              Tap the play button above! ☝️
+            </p>
 
-        <h3>💿 Download this MIDI file</h3>
-        <p>
-          <Link download={midi.name} href={midi.downloadUrl}>
-            Download {midi.name}
-          </Link>
-        </p>
+            <h3>💿 Download this MIDI file</h3>
+            <p>
+              <Link download={midi.name} href={midi.downloadUrl}>
+                Download {midi.name}
+              </Link>
+            </p>
+          </div>
+          <div class='fn fl-ns w-50-ns'>
+            <Adsense />
+          </div>
+        </div>
 
         { midi.alternateNames &&
           <div>
