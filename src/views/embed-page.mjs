@@ -82,7 +82,7 @@ class EmbedMidi extends Component {
     const image = midi.image || siteImage
 
     return (
-      <article class='relative absolute absolute--fill'>
+      <article class='absolute absolute--fill'>
         <Link
           color='white'
           title={`Play ${midi.name}`}
