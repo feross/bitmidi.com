@@ -1,5 +1,5 @@
 import { Component, h } from 'preact' /** @jsx h */
-import c from 'classnames/dedupe'
+import c from 'classnames'
 
 import Icon from './icon'
 import Image from './image'
@@ -9,8 +9,6 @@ export default class Midi extends Component {
   render (props, _, { theme, store }) {
     const {
       class: className,
-      imageClass,
-      imageStyle,
       midi,
       showImage = true,
       showPlay = true
@@ -32,10 +30,9 @@ export default class Midi extends Component {
         >
           { midi.image && showImage &&
             <Image
-              class={c('db midi-image w-100 br2 br--top h5 bg-center', imageClass)}
+              class='db midi-image w-100 br2 br--top h5 bg-center'
               style={{
-                objectFit: 'cover',
-                ...imageStyle
+                objectFit: 'cover'
               }}
               src={midi.image}
               alt={midi.name}
