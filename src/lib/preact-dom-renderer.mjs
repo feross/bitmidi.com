@@ -94,7 +94,9 @@ function encAttr (s) {
 }
 
 function attr (a) {
-  if (a.value === 'true') return ` ${a.name}` // boolean attribute
+  // boolean attribute
+  if (a.value === 'true' && !a.name.startsWith('data-')) return ` ${a.name}`
+  // normal attribute
   return ` ${a.name}="${encAttr(a.value)}"`
 }
 
