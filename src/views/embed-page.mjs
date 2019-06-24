@@ -44,11 +44,14 @@ export default class EmbedPage extends Page {
 
     const midi = store.data.midis[midiSlug]
 
-    if (isBrowser) {
-      // HACK: Autoplay does not work in Safari, but works in Chrome and Firefox
+    // Try to autoplay when autoplay=1 param is present
+    if (isBrowser && autoplay === '1') {
+      // HACK: Autoplay seems to always work in Firefox
       const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-      const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)
-      if ((autoplay === '1' || autoplay === 'true') && (isFirefox || isChrome)) {
+      const userActivation = 'userActivation' in navigator &&
+        navigator.userActivation.isActive
+
+      if (isFirefox || userActivation) {
         dispatch('MIDI_PLAY_PAUSE', midi.slug)
       }
     }
