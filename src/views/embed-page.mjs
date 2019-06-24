@@ -82,23 +82,25 @@ class EmbedMidi extends Component {
     const image = midi.image || siteImage
 
     return (
-      <article class='relative br2 absolute absolute--fill' >
+      <article class='relative absolute absolute--fill'>
         <Link
           color='white'
           title={`Play ${midi.name}`}
           onClick={this.onClick}
         >
           <Image
-            class='db midi-image w-100 br2 br--top bg-center'
+            class='db midi-image w-100 bg-center h-100'
             style={{
-              objectFit: 'cover',
-              height: 'calc(100% - 45px)'
+              objectFit: 'cover'
             }}
             src={image}
             alt={midi.name}
           />
           <div
-            class={`br2 bg-${mainColor} pv2 ph3 flex br--bottom`}
+            class={`bg-${mainColor} pv2 ph3 flex absolute w-100`}
+            style={{
+              bottom: 40
+            }}
           >
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
             <div class='flex-none grow-large'>
