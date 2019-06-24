@@ -188,6 +188,9 @@ export default function init () {
     //     Why changed: Allow Twitter to embed the Player Card in an iframe
     //   - Before: frame-src inherited from the default-src policy
     //     Why changed: AdSense embeds iframes
+    //   - Before: script-src 'strict-dynamic' 'nonce-${res.locals.nonce}'
+    //     Why changed: AdSense uses document.write() to write inline scripts
+    //     without nonce, which requires 'unsafe-inline'
     //   - TODO: Remove script-src 'unsafe-eval' once wasm-unsafe-eval ships
     //     https://bugs.chromium.org/p/chromium/issues/detail?id=948834&can=1&q=wasm-eval
     //   - TODO: Remove script-src * 'unsafe-inline' fallback once Safari
@@ -217,8 +220,7 @@ export default function init () {
         'none'
       ;
       script-src
-        'strict-dynamic' 'nonce-${res.locals.nonce}' 'unsafe-eval'
-        * 'unsafe-inline'
+        'unsafe-eval' * 'unsafe-inline'
       ;
       style-src
         'self'
