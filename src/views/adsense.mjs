@@ -4,12 +4,19 @@ import { isBrowser, tokens } from '../config'
 
 export default class Adsense extends Component {
   componentDidMount () {
+    console.log('Adsense componentDidMount')
     if (isBrowser) {
       (window.adsbygoogle = window.adsbygoogle || []).push({})
     }
   }
 
+  shouldComponentUpdate () {
+    console.log('Adsense shouldComponentUpdate')
+    return false
+  }
+
   render (props) {
+    console.log('Adsense render')
     return (
       <div {...props}>
         <ins
