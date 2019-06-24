@@ -56,7 +56,14 @@ export default class EmbedPage extends Page {
 
     return (
       <div>
-        <Midi midi={midi} showImage={false} />
+        <Midi
+          midi={midi}
+          class={{
+            'mv3': false,
+            'mv3-m': false,
+            'mv4-l': false
+          }}
+        />
       </div>
     )
   }

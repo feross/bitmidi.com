@@ -1,5 +1,5 @@
 import { Component, h } from 'preact' /** @jsx h */
-import c from 'classnames'
+import c from 'classnames/dedupe'
 
 import Icon from './icon'
 import Image from './image'
