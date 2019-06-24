@@ -88,20 +88,7 @@ class EmbedMidi extends Component {
           title={`Play ${midi.name}`}
           onClick={this.onClick}
         >
-          <Image
-            class='db midi-image w-100 bg-center h-100'
-            style={{
-              objectFit: 'cover'
-            }}
-            src={image}
-            alt={midi.name}
-          />
-          <div
-            class={`bg-${mainColor} pv2 ph3 flex absolute w-100`}
-            style={{
-              bottom: 40
-            }}
-          >
+          <div class={`bg-${mainColor} pv2 ph3 flex`} style={{ height: 45 }}>
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
             <div class='flex-none grow-large'>
               {isPlaying
@@ -110,6 +97,15 @@ class EmbedMidi extends Component {
               }
             </div>
           </div>
+          <Image
+            class='db midi-image w-100 bg-center'
+            style={{
+              objectFit: 'cover',
+              height: 'calc(100% - 45px)'
+            }}
+            src={image}
+            alt={midi.name}
+          />
         </Link>
       </article>
     )
