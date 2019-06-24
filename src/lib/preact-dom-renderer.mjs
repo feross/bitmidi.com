@@ -84,13 +84,16 @@ const charMap = {
   '>': '&gt;'
 }
 
+const xmlEscapeRe = /[&<>]/g
+const attrEscapeRe = /[&'"<>]/g
+
 function encXML (s) {
-  return s.replace(/[&<>]/g, a => charMap[a])
+  return s.replace(xmlEscapeRe, a => charMap[a])
 }
 
 function encAttr (s) {
   if (typeof s !== 'string') s = s.toString()
-  return s.replace(/[&'"<>]/g, a => charMap[a])
+  return s.replace(attrEscapeRe, a => charMap[a])
 }
 
 function attr (a) {
