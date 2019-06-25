@@ -16,7 +16,7 @@ export default class App extends Component {
 
     if (Page.showAppShell) {
       return (
-        <div id='root'>
+        <div>
           <Title title={app.title} />
           <Header />
           <main class='mt4 mb5 ph3 ph3-safe mw7 center break-word'>
@@ -30,7 +30,7 @@ export default class App extends Component {
       )
     } else {
       return (
-        <div id='root'>
+        <div>
           <Title title={app.title} />
           <Page url={location.url} isServerRendered={app.isServerRendered} />
           <div class='tc light-gray'>
