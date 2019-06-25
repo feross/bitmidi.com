@@ -114,7 +114,7 @@ export default class MidiPage extends Page {
                 return <Midi midi={midi} showImage={false} showPlay={false} />
               })
             }
-            <RelatedMidiAd class='mb3' />
+            <RelatedMidiAd class='mv3 mv3-m mv4-l' />
             <div class='tc'>
               <Button
                 class='center'
