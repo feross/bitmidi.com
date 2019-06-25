@@ -16,20 +16,30 @@ export default class Adsense extends Component {
     return false
   }
 
-  render (props, _, { store }) {
+  render (props) {
     console.log(`Adsense render, isBrowser: ${isBrowser}`)
+
+    const {
+      'data-ad-slot': adSlot,
+      'data-ad-format': adFormat
+    } = props
+
+    if (typeof adSlot !== 'string' || adSlot.length === 0) {
+      throw new Error('Prop `adSlot` must be a string of non-zero length')
+    }
+
+    if (typeof adFormat !== 'string' || adFormat.length === 0) {
+      throw new Error('Prop `adFormat` must be a string of non-zero length')
+    }
+
     return (
-      <div {...props}>
-        <ins
-          key={Math.random()}
-          class='adsbygoogle'
-          style={{ display: 'block' }}
-          data-ad-client={tokens.adsense}
-          data-ad-slot='2581488270'
-          data-ad-format='auto'
-          data-full-width-responsive='true'
-        />
-      </div>
+      <ins
+        key={Math.random()}
+        class='adsbygoogle'
+        style={{ display: 'block' }}
+        data-ad-client={tokens.adsense}
+        {...props}
+      />
     )
   }
 

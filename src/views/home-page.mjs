@@ -2,6 +2,7 @@ import { h } from 'preact' /** @jsx h */
 
 import { doMidiAll } from '../actions/midi'
 
+import { MidiFeedAd } from './ads'
 import Heading from './heading'
 import Image from './image'
 import Loader from './loader'
@@ -50,6 +51,7 @@ export default class HomePage extends Page {
         <Heading class='tc'>Popular MIDIs</Heading>
         <div class='mv4'>
           { midis.map(midi => <Midi midi={midi} showPlay={false} />) }
+          <MidiFeedAd />
         </div>
 
         <Pagination
