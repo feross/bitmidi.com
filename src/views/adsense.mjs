@@ -33,13 +33,15 @@ export default class Adsense extends Component {
     }
 
     return (
-      <ins
-        key={Math.random()}
-        class='adsbygoogle'
-        style={{ display: 'block' }}
-        data-ad-client={tokens.adsense}
-        {...props}
-      />
+      <div>
+        <ins
+          key={Math.random()}
+          class='adsbygoogle'
+          style={{ display: 'block' }}
+          data-ad-client={tokens.adsense}
+          {...props}
+        />
+      </div>
     )
   }
 
