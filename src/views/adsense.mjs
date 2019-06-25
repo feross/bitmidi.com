@@ -45,7 +45,7 @@ export default class Adsense extends Component {
           data-ad-client={tokens.adsense}
           data-ad-slot={adSlot}
           data-ad-format={adFormat}
-          {...props}
+          {...rest}
         />
       </div>
     )
