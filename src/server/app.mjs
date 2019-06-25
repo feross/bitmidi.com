@@ -89,11 +89,11 @@ export default function init () {
 
     // Prevent click-jacking attacks by forbidding site resources from being
     // embedded using frames.
-    res.header('Content-Security-Policy', oneLine`
-      frame-ancestors
-        'none'
-      ;
-    `)
+    // res.header('Content-Security-Policy', oneLine`
+    //   frame-ancestors
+    //     'none'
+    //   ;
+    // `)
 
     // Add per-request template variables
     res.locals.nonce = createNonce()
