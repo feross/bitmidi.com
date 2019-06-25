@@ -11,9 +11,9 @@ const debug = Debug('bitmidi:router-render')
 const router = Router()
 
 router.use((req, res, next) => {
-  const renderer = createRenderer()
   const { store, dispatch } = createStore(update, onPendingChange)
   const jsx = getProvider(store, dispatch)
+  const renderer = createRenderer(jsx)
 
   // For debugging – Disable SSR to debug JSX in the browser rather than Node
   if (!isProd && req.query.ssr === '0') {
@@ -33,7 +33,7 @@ router.use((req, res, next) => {
   }
 
   function update () {
-    renderer.render(jsx)
+    renderer.render()
   }
 
   let isDone = false
