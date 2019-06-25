@@ -4,7 +4,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import { origin, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
-import { MidiPageAd } from './ads'
+import { MidiPageAd, RelatedMidiAd } from './ads'
 import Button from './button'
 import Heading from './heading'
 import Link from './link'
@@ -89,7 +89,7 @@ export default class MidiPage extends Page {
               </Link>
             </p>
           </div>
-          <div class='fn fl-ns w-50-ns'>
+          <div class='fn fl-ns w-50-ns pl3'>
             <MidiPageAd />
           </div>
         </div>
@@ -107,13 +107,14 @@ export default class MidiPage extends Page {
         }
 
         { relatedMidis &&
-          <div class='mt5'>
+          <div class='mt4'>
             <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
             {
               relatedMidis.map(midi => {
                 return <Midi midi={midi} showImage={false} showPlay={false} />
               })
             }
+            <RelatedMidiAd class='mb3' />
             <div class='tc'>
               <Button
                 class='center'

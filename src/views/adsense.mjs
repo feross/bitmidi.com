@@ -1,28 +1,32 @@
 import { Component, h } from 'preact' /** @jsx h */
+import c from 'classnames'
 
-import { isBrowser, tokens } from '../config'
+import { isBrowser, isProd, tokens } from '../config'
 
 export default class Adsense extends Component {
   componentDidMount () {
-    console.log(`Adsense componentDidMount, isBrowser: ${isBrowser}`)
-    if (isBrowser) {
-      console.log('ad push')
+    if (isBrowser && isProd) {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     }
   }
 
   shouldComponentUpdate () {
-    console.log(`Adsense shouldComponentUpdate, isBrowser: ${isBrowser}`)
     return false
   }
 
   render (props) {
-    console.log(`Adsense render, isBrowser: ${isBrowser}`)
-
     const {
       'data-ad-slot': adSlot,
-      'data-ad-format': adFormat
+      'data-ad-format': adFormat,
+      class: className,
+      ...rest
     } = props
+
+    if (!isProd) {
+      return (
+        <div class={c('bg-washed-red h5', className)} {...rest} />
+      )
+    }
 
     if (typeof adSlot !== 'string' || adSlot.length === 0) {
       throw new Error('Prop `adSlot` must be a string of non-zero length')
@@ -36,9 +40,11 @@ export default class Adsense extends Component {
       <div>
         <ins
           key={Math.random()}
-          class='adsbygoogle'
+          class={c('adsbygoogle', className)}
           style={{ display: 'block' }}
           data-ad-client={tokens.adsense}
+          data-ad-slot={adSlot}
+          data-ad-format={adFormat}
           {...props}
         />
       </div>
