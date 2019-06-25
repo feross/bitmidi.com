@@ -78,8 +78,8 @@ async function getJsonFeed () {
       `,
       summary: midi.name,
       image: midi.image,
-      date_published: midi.createdAt.toISOString(),
-      date_modified: midi.updatedAt.toISOString(),
+      date_published: (new Date(midi.createdAt)).toISOString(),
+      date_modified: (new Date(midi.updatedAt).toISOString()),
       author: {
         name: siteName,
         url: `${origin}/`,
