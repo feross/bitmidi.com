@@ -3,20 +3,29 @@ import { Component, h } from 'preact' /** @jsx h */
 import { isBrowser, tokens } from '../config'
 
 export default class Adsense extends Component {
-  componentDidMount () {
-    console.log('Adsense componentDidMount')
+  // componentDidMount () {
+  //   const { store } = this.context
+  //   if (store.app.isServerRendered) return
+  //   if (isBrowser) {
+  //     console.log('ad push')
+  //     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+  //   }
+  // }
+
+  // shouldComponentUpdate () {
+  //   console.log('Adsense shouldComponentUpdate')
+  //   const { store } = this.context
+  //   if (store.app.isServerRendered) return false
+  //   return true
+  // }
+
+  render (props, _, { store }) {
+    console.log(`Adsense render, isBrowser: ${isBrowser}`)
+
     if (isBrowser) {
-      (window.adsbygoogle = window.adsbygoogle || []).push({})
+      return <div dangerouslySetInnerHTML={{ __html: '' }} />
     }
-  }
 
-  shouldComponentUpdate () {
-    console.log('Adsense shouldComponentUpdate')
-    return false
-  }
-
-  render (props) {
-    console.log('Adsense render')
     return (
       <div {...props}>
         <ins
@@ -27,13 +36,11 @@ export default class Adsense extends Component {
           data-ad-format='auto'
           data-full-width-responsive='true'
         />
-        { !isBrowser &&
-          <script
-            dangerouslySetInnerHTML={{
-              __html: '(adsbygoogle = window.adsbygoogle || []).push({})'
-            }}
-          />
-        }
+        <script
+          dangerouslySetInnerHTML={{
+            __html: 'console.log("ad push"); (adsbygoogle = window.adsbygoogle || []).push({})'
+          }}
+        />
       </div>
     )
   }
