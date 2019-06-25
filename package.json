@@ -113,7 +113,7 @@
     "serve-favicon": "^2.5.0",
     "simple-get": "^3.0.3",
     "tachyons": "^4.7.4",
-    "timidity": "^1.0.0",
+    "timidity": "^1.1.0",
     "undom": "^0.4.0",
     "unmute-ios-audio": "^2.0.1",
     "uuid": "^3.2.1"
