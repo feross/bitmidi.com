@@ -5,8 +5,8 @@ import Random from './random'
 
 export const MidiPageAd = props => (
   <Adsense
-    data-ad-slot='2581488270'
     data-ad-format='auto'
+    data-ad-slot='2581488270'
     data-full-width-responsive='true'
     {...props}
   />
@@ -14,18 +14,18 @@ export const MidiPageAd = props => (
 
 const MidiFeedAd1 = props => (
   <Adsense
-    data-ad-slot='8705178963'
     data-ad-format='fluid'
-    data-ad-layout-key='-i0+j-1k-55+f9'
+    data-ad-slot='8705178963'
+    data-ad-layout-key='-hw+i-1a-5c+ee'
     {...props}
   />
 )
 
 const MidiFeedAd2 = props => (
   <Adsense
-    data-ad-slot='7805609385'
     data-ad-format='fluid'
-    data-ad-layout-key='-7d+f1-x-5g+d5'
+    data-ad-slot='7805609385'
+    data-ad-layout-key='-79+f1-x-5g+d5'
     {...props}
   />
 )

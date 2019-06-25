@@ -16,8 +16,8 @@ export default class Adsense extends Component {
 
   render (props) {
     const {
-      'data-ad-slot': adSlot,
       'data-ad-format': adFormat,
+      'data-ad-slot': adSlot,
       class: className,
       ...rest
     } = props
@@ -28,12 +28,12 @@ export default class Adsense extends Component {
       )
     }
 
-    if (typeof adSlot !== 'string' || adSlot.length === 0) {
-      throw new Error('Prop `adSlot` must be a string of non-zero length')
-    }
-
     if (typeof adFormat !== 'string' || adFormat.length === 0) {
       throw new Error('Prop `adFormat` must be a string of non-zero length')
+    }
+
+    if (typeof adSlot !== 'string' || adSlot.length === 0) {
+      throw new Error('Prop `adSlot` must be a string of non-zero length')
     }
 
     return (
@@ -43,8 +43,8 @@ export default class Adsense extends Component {
           class={c('adsbygoogle', className)}
           style={{ display: 'block' }}
           data-ad-client={tokens.adsense}
-          data-ad-slot={adSlot}
           data-ad-format={adFormat}
+          data-ad-slot={adSlot}
           {...rest}
         />
       </div>
