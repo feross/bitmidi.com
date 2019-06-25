@@ -55,7 +55,13 @@ export default class BaseModel extends DbErrors(Model) {
 }
 
 // Create database connection
-const knex = Knex({ ...dbSecret, ...knexSnakeCaseMappers() })
+const opts = {
+  ...dbSecret,
+  ...knexSnakeCaseMappers()
+}
+opts.connection.dateStrings = true
+
+const knex = Knex(opts)
 
 // Use the connection for *all* models
 BaseModel.knex(knex)
