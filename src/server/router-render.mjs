@@ -17,7 +17,7 @@ router.use((req, res, next) => {
 
   // For debugging – Disable SSR to debug JSX in the browser rather than Node
   if (!isProd && req.query.ssr === '0') {
-    return res.render('layout', { content: '', store })
+    return res.render('layout', { content: '', store, meta: {} })
   }
 
   if (req.err) {
