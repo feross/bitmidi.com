@@ -1,7 +1,10 @@
 import { h } from 'preact' /** @jsx h */
 
 import Adsense from './adsense'
+import CarbonAd from './carbon-ad'
 import Random from './random'
+
+export { CarbonAd }
 
 export const MidiPageAd = props => (
   <Adsense
