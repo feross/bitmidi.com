@@ -45,17 +45,6 @@
     <%_ } else { _%>
       <link rel='stylesheet' href='/bundle.css?c=dev' />
     <%_ } _%>
-
-    <%_ if (config.isProd) { _%>
-      <%# AdSense %>
-      <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: '<%= config.tokens.adsense %>',
-          enable_page_level_ads: true
-        })
-      </script>
-    <%_ } _%>
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll'>
@@ -73,6 +62,16 @@
     </script>
     <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
 
+    <%_ if (config.isProd) { _%>
+      <%# AdSense %>
+      <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: '<%= config.tokens.adsense %>',
+          enable_page_level_ads: true
+        })
+      </script>
+    <%_ } _%>
     <%# Google Analytics %>
     <script nonce='<%= nonce %>'>
       window.GoogleAnalyticsObject = 'ga'
