@@ -4,7 +4,7 @@ import oneLine from 'common-tags/lib/oneLine'
 import { origin, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
-import { MidiPageAd, RelatedMidiAd } from './ads'
+import { CarbonAd, MidiPageAd, RelatedMidiAd } from './ads'
 import Button from './button'
 import Heading from './heading'
 import Link from './link'
@@ -89,8 +89,8 @@ export default class MidiPage extends Page {
               </Link>
             </p>
           </div>
-          <div class='fn fl-ns w-50-ns pl3'>
-            <MidiPageAd />
+          <div class='fn fl-ns w-50-ns pl3-ns'>
+            <CarbonAd class='center' />
           </div>
         </div>
 

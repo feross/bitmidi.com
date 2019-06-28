@@ -37,6 +37,7 @@ export const siteImage = '/img/hero.jpg'
 export const tokens = {
   adsense: 'ca-pub-7826623632932605',
   analytics: 'UA-3898076-25',
+  carbon: 'CE7DT2Q7&placement=bitmidicom',
   quantcast: 'p-69FZJwoXOxhpY'
 }
 

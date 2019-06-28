@@ -1,11 +1,15 @@
 import { Component, h } from 'preact' /** @jsx h */
-// import c from 'classnames'
+import c from 'classnames'
+import loadScript from 'load-script2'
 
-// import { isBrowser, isProd } from '../config'
+import { isBrowser, isProd, tokens } from '../config'
 
 export default class CarbonAd extends Component {
   componentDidMount () {
-    // if (!isBrowser || !isProd) return
+    if (!isBrowser || !isProd) return
+    loadScript(`https://cdn.carbonads.com/carbon.js?serve=${tokens.carbon}`, {
+      id: '_carbonads_js'
+    }, this.elem)
   }
 
   shouldComponentUpdate () {
@@ -13,21 +17,22 @@ export default class CarbonAd extends Component {
   }
 
   render (props) {
-    // if (!isProd) {
-    //   return (
-    //     <div class={c('bg-washed-red h5', className)} {...rest} />
-    //   )
-    // }
+    const { class: className, ...rest } = props
+
+    if (!isProd) {
+      return (
+        <div
+          class={c('bg-washed-red h4', className)}
+          style={{ maxWidth: 330 }}
+          {...rest}
+        />
+      )
+    }
 
     return (
       <div>
-        <div id='_carbonads_js' />
+        <div ref={this.ref} class={className} {...rest} />
         <style dangerouslySetInnerHTML={{ __html: `
-          #carbonads {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
-            Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
-          }
-
           #carbonads {
             display: flex;
             max-width: 330px;
@@ -85,5 +90,9 @@ export default class CarbonAd extends Component {
         ` }} />
       </div>
     )
+  }
+
+  ref = (elem) => {
+    this.elem = elem
   }
 }
