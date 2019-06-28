@@ -5,9 +5,8 @@ import { isBrowser, isProd, tokens } from '../config'
 
 export default class Adsense extends Component {
   componentDidMount () {
-    if (isBrowser && isProd) {
-      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-    }
+    if (!isBrowser || !isProd) return
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }
 
   shouldComponentUpdate () {
@@ -18,22 +17,27 @@ export default class Adsense extends Component {
     const {
       'data-ad-format': adFormat,
       'data-ad-slot': adSlot,
+      'data-ad-client': adClient,
       class: className,
       ...rest
     } = props
+
+    if (typeof adFormat !== 'string' || adFormat.length === 0) {
+      throw new Error('Prop `data-ad-format` must be a string of non-zero length')
+    }
+
+    if (typeof adSlot !== 'string' || adSlot.length === 0) {
+      throw new Error('Prop `data-ad-slot` must be a string of non-zero length')
+    }
+
+    if (adClient != null) {
+      throw new Error('Prop `data-ad-client` must not be present')
+    }
 
     if (!isProd) {
       return (
         <div class={c('bg-washed-red h5', className)} {...rest} />
       )
-    }
-
-    if (typeof adFormat !== 'string' || adFormat.length === 0) {
-      throw new Error('Prop `adFormat` must be a string of non-zero length')
-    }
-
-    if (typeof adSlot !== 'string' || adSlot.length === 0) {
-      throw new Error('Prop `adSlot` must be a string of non-zero length')
     }
 
     return (
