@@ -1,11 +1,11 @@
 import { Component, h } from 'preact' /** @jsx h */
-import c from 'classnames'
+// import c from 'classnames'
 
-import { isBrowser, isProd } from '../config'
+// import { isBrowser, isProd } from '../config'
 
 export default class CarbonAd extends Component {
   componentDidMount () {
-    if (!isBrowser || !isProd) return
+    // if (!isBrowser || !isProd) return
   }
 
   shouldComponentUpdate () {
