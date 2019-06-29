@@ -87,6 +87,11 @@ export default class CarbonAd extends Component {
             font-size: 9px;
             line-height: 1;
           }
+          @media (prefers-color-scheme: dark) {
+            #carbonads {
+              background-color: hsl(0, 0%, 20%);
+            }
+          }
         ` }} />
       </div>
     )
