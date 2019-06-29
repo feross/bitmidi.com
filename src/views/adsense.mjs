@@ -5,9 +5,8 @@ import { isBrowser, isProd, tokens } from '../config'
 
 export default class Adsense extends Component {
   componentDidMount () {
-    if (isBrowser && isProd) {
-      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-    }
+    if (!isBrowser || !isProd) return
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }
 
   shouldComponentUpdate () {
@@ -18,22 +17,27 @@ export default class Adsense extends Component {
     const {
       'data-ad-format': adFormat,
       'data-ad-slot': adSlot,
+      'data-ad-client': adClient,
       class: className,
       ...rest
     } = props
+
+    if (typeof adFormat !== 'string' || adFormat.length === 0) {
+      throw new Error('Prop `data-ad-format` must be a string of non-zero length')
+    }
+
+    if (typeof adSlot !== 'string' || adSlot.length === 0) {
+      throw new Error('Prop `data-ad-slot` must be a string of non-zero length')
+    }
+
+    if (adClient != null) {
+      throw new Error('Prop `data-ad-client` must not be present')
+    }
 
     if (!isProd) {
       return (
         <div class={c('bg-washed-red h5', className)} {...rest} />
       )
-    }
-
-    if (typeof adFormat !== 'string' || adFormat.length === 0) {
-      throw new Error('Prop `adFormat` must be a string of non-zero length')
-    }
-
-    if (typeof adSlot !== 'string' || adSlot.length === 0) {
-      throw new Error('Prop `adSlot` must be a string of non-zero length')
     }
 
     return (
@@ -50,51 +54,4 @@ export default class Adsense extends Component {
       </div>
     )
   }
-
-  // componentDidMount () {
-  //   const { store } = this.context
-  //   if (store.app.isServerRendered) return
-  //   if (isBrowser) {
-  //     console.log('ad push')
-  //     ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-  //   }
-  // }
-
-  // shouldComponentUpdate () {
-  //   console.log('Adsense shouldComponentUpdate')
-  //   const { store } = this.context
-  //   if (store.app.isServerRendered) return false
-  //   return true
-  // }
-
-  // shouldComponentUpdate () {
-  //   console.log(`Adsense shouldComponentUpdate, isBrowser: ${isBrowser}`)
-  //   return false
-  // }
-
-  // render (props, _, { store }) {
-  //   console.log(`Adsense render, isBrowser: ${isBrowser}`)
-
-  //   if (isBrowser) {
-  //     return <div dangerouslySetInnerHTML={{ __html: '' }} />
-  //   }
-
-  //   return (
-  //     <div {...props}>
-  //       <ins
-  //         class='adsbygoogle'
-  //         style={{ display: 'block' }}
-  //         data-ad-client={tokens.adsense}
-  //         data-ad-slot='2581488270'
-  //         data-ad-format='auto'
-  //         data-full-width-responsive='true'
-  //       />
-  //       <script
-  //         dangerouslySetInnerHTML={{
-  //           __html: 'console.log("ad push"); (adsbygoogle = window.adsbygoogle || []).push({})'
-  //         }}
-  //       />
-  //     </div>
-  //   )
-  // }
 }
