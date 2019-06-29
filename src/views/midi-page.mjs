@@ -90,7 +90,7 @@ export default class MidiPage extends Page {
             </p>
           </div>
           <div class='fn fl-ns w-50-ns pl3-ns'>
-            <CarbonAd class='center' />
+            <CarbonAd />
           </div>
         </div>
 
