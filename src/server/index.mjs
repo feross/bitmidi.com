@@ -1,5 +1,4 @@
 import './rollbar'
-import './polyfill'
 
 import http from 'http'
 import util from 'util'
