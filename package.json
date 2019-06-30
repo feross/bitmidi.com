@@ -157,7 +157,7 @@
     "build-css": "NODE_ENV=production node -r @babel/register ./tools/build-css",
     "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
     "deploy": "git push",
-    "knex": "knex --knexfile tools/knexfile.js --cwd .",
+    "knex": "npx --node-arg '-r @babel/register' knex --knexfile tools/knexfile.js --cwd .",
     "secret-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/secret/' secret/",
     "secret-upload": "rsync -a -O -v --delete secret/ future:'/home/feross/www/bitmidi.com/secret/'",
     "size": "npm run size-js && npm run size-css && npm run size-disc",

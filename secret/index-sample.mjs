@@ -18,6 +18,9 @@ export const db = {
     user: 'TODO',
     password: 'TODO',
     database: 'TODO'
+  },
+  migrations: {
+    directory: '../migrations'
   }
 }
 
