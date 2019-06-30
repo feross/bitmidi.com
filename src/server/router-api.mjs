@@ -34,7 +34,7 @@ router.get('/midi/random', async (req, res) => {
   res.json({ result: await api.midi.random(req.query) })
 })
 
-router.get('*', async (req, res) => {
+router.all('*', async (req, res) => {
   const err = new Error('404 Not Found')
   err.status = 404
   throw err
