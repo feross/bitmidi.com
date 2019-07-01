@@ -6,6 +6,12 @@
   color-scheme: light dark;
 }
 
+@media (prefers-color-scheme: dark) {
+  img:not([src*=".svg"]) {
+    filter: grayscale(15%);
+  }
+}
+
 /**
  * Single-purpose classes
  */
