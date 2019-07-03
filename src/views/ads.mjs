@@ -40,10 +40,19 @@ const AdsenseFeed2 = props => (
 //   />
 // )
 
+// Carbon does not allow other ads on the same page, so when <Random> selects
+// index 1 (i.e. Carbon), ensure that an empty <div> is shown in the second unit
 export const MidiPageAd = props => (
   <Random>
     <AdsenseDisplay1 {...props} />
     <CarbonAd {...props} />
+  </Random>
+)
+
+export const MidiPageAd2 = props => (
+  <Random>
+    <AdsenseDisplay1 {...props} />
+    <div />
   </Random>
 )
 
