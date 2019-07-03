@@ -82,3 +82,6 @@ export const theme = {
   headerColor: 'hot-pink',
   headerColorHex: '#ff41b4'
 }
+
+// Number of results on pages with lists
+export const pageSize = 10

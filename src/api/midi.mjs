@@ -1,11 +1,10 @@
 import Debug from 'debug'
 
+import { pageSize } from '../config'
 import { memo } from '../lib/memo'
 import Midi from '../models/midi'
 
 const debug = Debug('bitmidi:api:midi')
-
-const PAGE_SIZE = 10
 
 async function getDefaultSelect () {
   const { columns } = await Midi.fetchTableMetadata()
@@ -98,7 +97,7 @@ export const all = memo(allRaw)
 
 async function allRaw (query = {}) {
   query.page = Number(query.page) || 0
-  query.pageSize = Number(query.pageSize) || PAGE_SIZE
+  query.pageSize = Number(query.pageSize) || pageSize
   query.orderBy = query.orderBy || 'plays'
   query.select = query.select || await getDefaultSelect()
   debug('all %o', query)
@@ -118,7 +117,7 @@ export const search = memo(searchRaw)
 
 async function searchRaw (query = {}) {
   query.page = Number(query.page) || 0
-  query.pageSize = Number(query.pageSize) || PAGE_SIZE
+  query.pageSize = Number(query.pageSize) || pageSize
   query.select = query.select || await getDefaultSelect()
   debug('search %o', query)
 
