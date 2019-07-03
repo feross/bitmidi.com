@@ -4,9 +4,7 @@ import Adsense from './adsense'
 import CarbonAd from './carbon-ad'
 import Random from './random'
 
-export { CarbonAd }
-
-export const MidiPageAd = props => (
+const AdsenseDisplay1 = props => (
   <Adsense
     data-ad-format='auto'
     data-ad-slot='2581488270'
@@ -15,16 +13,16 @@ export const MidiPageAd = props => (
   />
 )
 
-const MidiFeedAd1 = props => (
-  <Adsense
-    data-ad-format='fluid'
-    data-ad-slot='8705178963'
-    data-ad-layout-key='-hw+i-1a-5c+ee'
-    {...props}
-  />
-)
+// const AdsenseFeed1 = props => (
+//   <Adsense
+//     data-ad-format='fluid'
+//     data-ad-slot='8705178963'
+//     data-ad-layout-key='-hw+i-1a-5c+ee'
+//     {...props}
+//   />
+// )
 
-const MidiFeedAd2 = props => (
+const AdsenseFeed2 = props => (
   <Adsense
     data-ad-format='fluid'
     data-ad-slot='7805609385'
@@ -33,18 +31,25 @@ const MidiFeedAd2 = props => (
   />
 )
 
-export const MidiFeedAd = props => (
+// export const AdsenseLink1 = props => (
+//   <Adsense
+//     data-ad-slot='3309382058'
+//     data-ad-format='link'
+//     data-full-width-responsive='true'
+//     {...props}
+//   />
+// )
+
+export const MidiPageAd = props => (
   <Random>
-    <MidiFeedAd1 {...props} />
-    <MidiFeedAd2 {...props} />
+    <AdsenseDisplay1 {...props} />
+    <CarbonAd {...props} />
   </Random>
 )
 
-export const RelatedMidiAd = props => (
-  <Adsense
-    data-ad-slot='3309382058'
-    data-ad-format='link'
-    data-full-width-responsive='true'
-    {...props}
-  />
+export const MidiFeedAd = props => (
+  <Random>
+    <AdsenseDisplay1 {...props} />
+    <AdsenseFeed2 {...props} />
+  </Random>
 )
