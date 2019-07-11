@@ -196,7 +196,7 @@ const POSTS = [
 ]
 
 export default async function shareTwitter () {
-  let midi = await Midi
+  const midi = await Midi
     .query()
     .orderBy('plays', 'desc')
     .findOne({ sharedTwitter: false })
@@ -213,7 +213,7 @@ export default async function shareTwitter () {
 
 function getPostText (midi) {
   const postIndex = Math.floor(Math.random() * POSTS.length)
-  let post = POSTS[postIndex]
+  const post = POSTS[postIndex]
   return post
     .replace(/MIDI_NAME/g, midi.name)
     .replace(/MIDI_URL/g, `${origin}${midi.url}`)

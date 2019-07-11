@@ -41,11 +41,13 @@ export default class Router {
       const query = { ...route.query, ...fromEntries(urlObj.searchParams) }
 
       // Only include whitelisted query params in the canonical url
-      for (let key of urlObj.searchParams.keys()) {
-        if (!route.query.hasOwnProperty(key)) urlObj.searchParams.delete(key)
+      for (const key of urlObj.searchParams.keys()) {
+        if (!Object.prototype.hasOwnProperty.call(route.query, key)) {
+          urlObj.searchParams.delete(key)
+        }
       }
 
-      let canonicalUrl = `${urlObj.pathname}${urlObj.search}`
+      const canonicalUrl = `${urlObj.pathname}${urlObj.search}`
 
       const loc = {
         name,

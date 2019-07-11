@@ -163,7 +163,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
 
         store.app.title = format([...parse(data.title), siteName])
 
-        let description = format(parse(data.description))
+        const description = format(parse(data.description))
 
         // If description is too short, include site description at end
         store.app.description = description.length >= 50

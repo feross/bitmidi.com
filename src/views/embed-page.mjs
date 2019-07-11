@@ -30,7 +30,7 @@ export default class EmbedPage extends Page {
       `,
       image: midi.image,
       meta: {
-        'robots': 'noindex' // Prevent embed page from being indexed
+        robots: 'noindex' // Prevent embed page from being indexed
       }
     })
   }

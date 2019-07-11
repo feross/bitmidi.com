@@ -37,7 +37,7 @@ async function sendRequest (method, apiUrl, params) {
 
   const { body } = res
   if (body.error) {
-    let err = new Error(body.error.message)
+    const err = new Error(body.error.message)
     err.code = body.error.code || null
     throw err
   }

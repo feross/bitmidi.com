@@ -13,6 +13,7 @@ export default class RandomPage extends Page {
     })
     await dispatch(doGoMidiRandom())
   }
+
   render (props) {
     return <Loader center label='Finding random MIDI' />
   }

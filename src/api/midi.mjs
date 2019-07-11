@@ -58,7 +58,7 @@ export async function get (query = {}) {
 const getRawMemo = memo(getRaw)
 
 async function getRaw (query = {}) {
-  let { select: _, ...where } = query
+  const { select: _, ...where } = query
   query.select = query.select || await getDefaultSelect()
   debug('get %o', query)
 

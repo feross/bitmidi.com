@@ -1,4 +1,4 @@
-/* global self, Request, URL, fetch, caches */
+/* global self, Request, fetch, caches */
 
 'use strict'
 

@@ -42,7 +42,7 @@ async function init () {
   let filePaths = await globAsync('**/*.mid', { cwd: midiPath, nocase: true })
   filePaths = filePaths.map(filePath => join(midiPath, filePath))
 
-  for (let [i, filePath] of filePaths.entries()) {
+  for (const [i, filePath] of filePaths.entries()) {
     spinner.text = `Processing file ${i} / ${filePaths.length}...`
 
     const fileName = basename(filePath)
@@ -90,7 +90,7 @@ async function init () {
 
   if (duplicates.length > 0) {
     console.log(`Skipped ${duplicates.length} duplicates:`)
-    for (let duplicate of duplicates) {
+    for (const duplicate of duplicates) {
       console.log(`  - ${duplicate[1]} (exists as ${duplicate[0]})`)
     }
   }
