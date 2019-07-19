@@ -111,10 +111,10 @@ export default function init () {
   app.use('/icons', serveStatic(iconsPath))
 
   const timidityPath = dirname(require.resolve('timidity'))
-  app.use('/timidity', serveStatic(timidityPath))
+  app.use('/timidity', cors(), serveStatic(timidityPath))
 
   const freepatsPath = dirname(require.resolve('freepats'))
-  app.use('/timidity', serveStatic(freepatsPath))
+  app.use('/timidity', cors(), serveStatic(freepatsPath))
 
   const uploadsPath = join(rootPath, 'uploads')
   app.use('/uploads', cors(), serveStatic(uploadsPath))
