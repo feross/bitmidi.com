@@ -56,6 +56,10 @@ export const MidiPageAd2 = props => (
   </Random>
 )
 
+export const MidiFeedTopAd = props => (
+  <AdsenseDisplay1 {...props} />
+)
+
 export const MidiFeedAd = props => (
   <Random>
     <AdsenseDisplay1 {...props} />
