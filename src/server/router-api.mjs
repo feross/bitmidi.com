@@ -1,3 +1,4 @@
+import cors from 'cors'
 import Router from 'express-promise-router'
 import { NotFoundError, ValidationError } from 'objection'
 import {
@@ -14,7 +15,7 @@ import api from '../api'
 
 const router = Router()
 
-router.get('/midi/get', async (req, res) => {
+router.get('/midi/get', cors(), async (req, res) => {
   res.json({ result: await api.midi.get(req.query) })
 })
 
@@ -26,7 +27,7 @@ router.get('/midi/all', async (req, res) => {
   res.json({ result: await api.midi.all(req.query) })
 })
 
-router.get('/midi/search', async (req, res) => {
+router.get('/midi/search', cors(), async (req, res) => {
   res.json({ result: await api.midi.search(req.query) })
 })
 
