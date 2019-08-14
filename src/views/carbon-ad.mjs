@@ -32,7 +32,8 @@ export default class CarbonAd extends Component {
     return (
       <div>
         <div ref={this.ref} class={className} {...rest} />
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style dangerouslySetInnerHTML={{
+          __html: `
           #carbonads {
             display: flex;
             max-width: 330px;
@@ -93,7 +94,8 @@ export default class CarbonAd extends Component {
               background-color: hsl(0, 0%, 20%);
             }
           }
-        ` }} />
+        `
+        }} />
       </div>
     )
   }
