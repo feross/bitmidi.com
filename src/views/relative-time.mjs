@@ -17,7 +17,7 @@ const RelativeTime = (props, context) => {
 
   return (
     <time
-      class={c(`b--black`, className)}
+      class={c('b--black', className)}
       style={{
         borderWidth: '0.05em',
         borderBottomStyle: 'dotted',

@@ -23,7 +23,7 @@ const { isProd, rootPath } = config
 const staticPath = join(rootPath, 'static')
 
 // Set correct mime type for .pat (Gravis Ultrasound) files
-express.static.mime.types['pat'] = 'audio/pat'
+express.static.mime.types.pat = 'audio/pat'
 
 export default function init () {
   const app = express()
