@@ -81,7 +81,8 @@ const HomePageHero = ({ numFiles }) => {
       <div
         class='white pv5 ph3' style={{
           height: 450
-        }}>
+        }}
+      >
         <h1 class='f2 f1-l measure lh-title fw9'>
           Listen to your favorite MIDI files on BitMidi
         </h1>

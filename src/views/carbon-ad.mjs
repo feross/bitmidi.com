@@ -95,7 +95,8 @@ export default class CarbonAd extends Component {
             }
           }
         `
-        }} />
+        }}
+        />
       </div>
     )
   }
