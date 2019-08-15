@@ -28,7 +28,7 @@ export default class Midi extends Component {
           onClick={showPlay && this.onClick}
           href={!showPlay && midi.url}
         >
-          { midi.image && showImage &&
+          {midi.image && showImage &&
             <Image
               class='db midi-image w-100 br2 br--top h5 bg-center'
               style={{
@@ -36,22 +36,19 @@ export default class Midi extends Component {
               }}
               src={midi.image}
               alt={midi.name}
-            />
-          }
+            />}
           <div
             class={c(`br2 bg-${mainColor} pv2 ph3 flex`, {
               'br--bottom': midi.image && showImage
             })}
           >
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
-            { showPlay &&
+            {showPlay &&
               <div class='flex-none grow-large'>
                 {isPlaying
                   ? <Icon color='#fff' name='av/stop' />
-                  : <Icon color='#fff' name='av/play_arrow' />
-                }
-              </div>
-            }
+                  : <Icon color='#fff' name='av/play_arrow' />}
+              </div>}
           </div>
         </Link>
       </article>

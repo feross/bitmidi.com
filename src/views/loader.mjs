@@ -30,13 +30,12 @@ const Loader = props => {
       style={style}
       {...rest}
     >
-      { label &&
+      {label &&
         <Heading
           class='animate-pulse animate--normal animate--infinite'
         >
           {label}…
-        </Heading>
-      }
+        </Heading>}
       <Image src='/img/icon-loader.svg' alt='Loading…' />
     </div>
   )

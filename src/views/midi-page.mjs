@@ -94,19 +94,18 @@ export default class MidiPage extends Page {
           </div>
         </div>
 
-        { midi.alternateNames &&
+        {midi.alternateNames &&
           <div>
             <h3>This MIDI file has alternate names</h3>
             <p>
               <ul>
-                { midi.alternateNames.map(name => <li>{name}</li>) }
+                {midi.alternateNames.map(name => <li>{name}</li>)}
                 <li>{midi.name}</li>
               </ul>
             </p>
-          </div>
-        }
+          </div>}
 
-        { relatedMidis &&
+        {relatedMidis &&
           <div class='mt4'>
             <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
             {
@@ -123,8 +122,7 @@ export default class MidiPage extends Page {
                 More Related
               </Button>
             </div>
-          </div>
-        }
+          </div>}
       </div>
     )
   }

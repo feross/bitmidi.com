@@ -46,12 +46,12 @@ export default class HomePage extends Page {
 
     return (
       <div>
-        { page === '0' && <HomePageHero numFiles={numFiles} /> }
+        {page === '0' && <HomePageHero numFiles={numFiles} />}
 
         <Heading class='tc'>Popular MIDIs</Heading>
         <div class='mv4'>
           <MidiFeedTopAd />
-          { midis.map(midi => <Midi midi={midi} showPlay={false} />) }
+          {midis.map(midi => <Midi midi={midi} showPlay={false} />)}
           <MidiFeedAd />
         </div>
 

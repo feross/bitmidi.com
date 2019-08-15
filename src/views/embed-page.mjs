@@ -93,8 +93,7 @@ class EmbedMidi extends Component {
             <div class='flex-none grow-large'>
               {isPlaying
                 ? <Icon color='#fff' name='av/stop' />
-                : <Icon color='#fff' name='av/play_arrow' />
-              }
+                : <Icon color='#fff' name='av/play_arrow' />}
             </div>
           </div>
           <Image
