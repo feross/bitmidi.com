@@ -86,7 +86,7 @@ class EmbedMidi extends Component {
         <Link
           color='white'
           title={`Play ${midi.name}`}
-          onClick={this.onClick}
+          onClick={this.handleClick}
         >
           <div class={`bg-${mainColor} pv2 ph3 flex`} style={{ height: 45 }}>
             <h2 class='flex-auto f4 mv0 lh-copy truncate underline-hover'>{midi.name}</h2>
@@ -110,7 +110,7 @@ class EmbedMidi extends Component {
     )
   }
 
-  onClick = () => {
+  handleClick = () => {
     const { dispatch } = this.context
     const { midi } = this.props
     dispatch('MIDI_PLAY_PAUSE', midi.slug)

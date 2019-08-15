@@ -46,8 +46,8 @@ export default class Input extends Component {
           pillClass,
           className
         )}
-        onBlur={this.onBlur}
-        onFocus={this.onFocus}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         placeholder={placeholder}
         spellCheck='false'
         type={type}
@@ -60,13 +60,13 @@ export default class Input extends Component {
     this.elem = elem
   }
 
-  onFocus = (event) => {
+  handleFocus = (event) => {
     const { onFocus } = this.props
     this.setState({ focused: true })
     if (onFocus) onFocus(event)
   }
 
-  onBlur = (event) => {
+  handleBlur = (event) => {
     const { onBlur } = this.props
     this.setState({ focused: false })
     if (onBlur) onBlur(event)

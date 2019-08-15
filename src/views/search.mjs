@@ -24,10 +24,10 @@ export default class Search extends Component {
           'o-90': !focused
         }, 'grow-subtle', className)}
         pill
-        onInput={this.onInput}
-        onKeyPress={this.onKeyPress}
-        onFocus={this.onFocus}
-        onBlur={this.onBlur}
+        onInput={this.handleInput}
+        onKeyPress={this.handleKeyPress}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
         placeholder='Search'
         value={lastSearch}
         {...rest}
@@ -40,12 +40,12 @@ export default class Search extends Component {
     dispatch('SEARCH_INPUT', value)
   }
 
-  onInput = event => {
+  handleInput = event => {
     const value = event.target.value
     this.dispatch(value)
   }
 
-  onKeyPress = event => {
+  handleKeyPress = event => {
     event.stopPropagation()
     if (event.key === 'Enter') {
       const value = event.target.value
@@ -53,11 +53,11 @@ export default class Search extends Component {
     }
   }
 
-  onFocus = () => {
+  handleFocus = () => {
     this.setState({ focused: true })
   }
 
-  onBlur = () => {
+  handleBlur = () => {
     this.setState({ focused: false })
   }
 }
