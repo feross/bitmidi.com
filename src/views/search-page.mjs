@@ -52,9 +52,9 @@ export default class SearchPage extends Page {
         }
         {
           results.length === 0 &&
-          <div class='mt4'>
-            No results with your search terms were found.
-          </div>
+            <div class='mt4'>
+              No results with your search terms were found.
+            </div>
         }
         <Pagination page={page} pageTotal={pageTotal} total={total} />
       </div>
