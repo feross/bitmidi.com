@@ -18,13 +18,13 @@ const RelativeTime = (props, context) => {
   return (
     <time
       class={c('b--black', className)}
+      datetime={dt.toISOString()}
       style={{
         borderWidth: '0.05em',
         borderBottomStyle: 'dotted',
         ...style
       }}
       title={dt.toString()}
-      datetime={dt.toISOString()}
       {...rest}
     >
       {dt.fromNow()}

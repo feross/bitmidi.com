@@ -13,8 +13,8 @@ const ShareButton = (props, context) => {
 
   return (
     <Icon
-      name='social/share'
       class={c('pointer', className)}
+      name='social/share'
       size={size}
       onClick={() => dispatch('APP_SHARE')}
       {...rest}

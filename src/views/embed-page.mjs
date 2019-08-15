@@ -97,13 +97,13 @@ class EmbedMidi extends Component {
             </div>
           </div>
           <Image
+            alt={midi.name}
             class='db midi-image w-100 bg-center'
+            src={image}
             style={{
               objectFit: 'cover',
               height: 'calc(100% - 45px)'
             }}
-            src={image}
-            alt={midi.name}
           />
         </Link>
       </article>

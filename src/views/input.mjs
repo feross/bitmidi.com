@@ -46,11 +46,11 @@ export default class Input extends Component {
           pillClass,
           className
         )}
-        onBlur={this.handleBlur}
-        onFocus={this.handleFocus}
         placeholder={placeholder}
         spellCheck='false'
         type={type}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
         {...rest}
       />
     )

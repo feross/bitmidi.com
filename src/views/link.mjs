@@ -25,9 +25,9 @@ export default class Link extends Component {
       <a
         class={c('pointer no-underline fw4', color, cls, className)}
         href={href}
-        onClick={onClick && this.onClick}
         rel={c(external && 'external', newtab && 'noopener') || null}
         target={newtab ? '_blank' : null}
+        onClick={onClick && this.onClick}
         {...rest}
       >
         {children}

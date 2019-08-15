@@ -33,7 +33,7 @@ const Footer = (_, { store }) => {
         <HorizListDivider />
 
         <HorizListItem>
-          <Link href={`https://twitter.com/${siteTwitter}`} newtab>
+          <Link newtab href={`https://twitter.com/${siteTwitter}`}>
             @BitMidi
           </Link>
         </HorizListItem>
@@ -56,11 +56,11 @@ const RandomTip = () => {
         <span>You can drag-and-drop a MIDI file onto this page to play it!</span>
         <span>
           This project is open source on{' '}
-          <Link href='https://github.com/feross/bitmidi.com' newtab>GitHub</Link>!
+          <Link newtab href='https://github.com/feross/bitmidi.com'>GitHub</Link>!
         </span>
         <span>
           We tweet a new MIDI every day.{' '}
-          <Link href={`https://twitter.com/${siteTwitter}`} newtab>
+          <Link newtab href={`https://twitter.com/${siteTwitter}`}>
             Follow @{siteTwitter}
           </Link>{' '}
           on Twitter!

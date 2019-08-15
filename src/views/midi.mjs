@@ -24,18 +24,18 @@ export default class Midi extends Component {
       >
         <Link
           color='white'
+          href={!showPlay && midi.url}
           title={showPlay ? `Play ${midi.name}` : midi.name}
           onClick={showPlay && this.onClick}
-          href={!showPlay && midi.url}
         >
           {midi.image && showImage &&
             <Image
+              alt={midi.name}
               class='db midi-image w-100 br2 br--top h5 bg-center'
+              src={midi.image}
               style={{
                 objectFit: 'cover'
               }}
-              src={midi.image}
-              alt={midi.name}
             />}
           <div
             class={c(`br2 bg-${mainColor} pv2 ph3 flex`, {

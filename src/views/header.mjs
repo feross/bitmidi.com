@@ -47,8 +47,8 @@ const HeaderLogo = (_, { store }) => {
 
   return (
     <Link
-      color='white'
       class={c(cls, 'dib lh-copy white f3')}
+      color='white'
       href='/'
     >
       <Image
@@ -78,10 +78,10 @@ const HeaderLogo = (_, { store }) => {
 const RandomMidiButton = () => {
   return (
     <Button
-      class='mh1'
       fill
-      size='medium'
+      class='mh1'
       href='/random'
+      size='medium'
     >
       Random <span class='dn di-l'>MIDI ✨</span>
     </Button>

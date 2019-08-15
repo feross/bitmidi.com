@@ -36,7 +36,7 @@ const Loader = props => {
         >
           {label}…
         </Heading>}
-      <Image src='/img/icon-loader.svg' alt='Loading…' />
+      <Image alt='Loading…' src='/img/icon-loader.svg' />
     </div>
   )
 }

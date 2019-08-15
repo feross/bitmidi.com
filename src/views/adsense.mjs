@@ -45,10 +45,10 @@ export default class Adsense extends Component {
         <ins
           key={Math.random()}
           class={c('adsbygoogle', className)}
-          style={{ display: 'block' }}
           data-ad-client={tokens.adsense}
           data-ad-format={adFormat}
           data-ad-slot={adSlot}
+          style={{ display: 'block' }}
           {...rest}
         />
       </div>

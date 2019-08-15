@@ -53,8 +53,8 @@ const Button = (props, { theme }) => {
     <ButtonElement
       class={c(...cls, className)}
       href={href}
-      onClick={onClick}
       style={style}
+      onClick={onClick}
       {...elemProps}
       {...rest}
     >

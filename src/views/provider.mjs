@@ -7,7 +7,7 @@ import App from '../views/app'
 
 export default function getProvider (store, dispatch) {
   return (
-    <Provider store={store} dispatch={dispatch} theme={theme}>
+    <Provider dispatch={dispatch} store={store} theme={theme}>
       <App />
     </Provider>
   )

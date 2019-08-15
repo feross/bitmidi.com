@@ -25,8 +25,8 @@ const AdsenseDisplay1 = props => (
 const AdsenseFeed2 = props => (
   <Adsense
     data-ad-format='fluid'
-    data-ad-slot='7805609385'
     data-ad-layout-key='-79+f1-x-5g+d5'
+    data-ad-slot='7805609385'
     {...props}
   />
 )

@@ -27,8 +27,8 @@ const Icon = props => {
     const src = `/icons/${categoryName}/2x_web/ic_${iconName}_${color}_48dp.png`
     return (
       <Image
-        class={c('lh-solid v-btm', className)}
         alt={null}
+        class={c('lh-solid v-btm', className)}
         src={src}
         style={{
           width: size,

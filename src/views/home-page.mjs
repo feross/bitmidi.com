@@ -69,9 +69,9 @@ const HomePageHero = ({ numFiles }) => {
   return (
     <div>
       <Image
-        src='/img/hero.jpg'
         alt='BitMidi hero image - MIDI vaporwave landscape'
         class='absolute top-0 left-0 w-100 bg-black-50'
+        src='/img/hero.jpg'
         style={{
           zIndex: -1,
           objectFit: 'cover',

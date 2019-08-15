@@ -19,10 +19,10 @@ const Pagination = (props, { store }) => {
   for (let pageNum = firstPage; pageNum < lastPage; pageNum += 1) {
     buttons.push(
       <Button
-        size='medium'
         class='mr1'
-        href={getPageUrl(pageNum)}
         fill={pageNum === page}
+        href={getPageUrl(pageNum)}
+        size='medium'
       >
         {pageNum + 1}
       </Button>
@@ -31,12 +31,12 @@ const Pagination = (props, { store }) => {
 
   if (page !== 0) {
     buttons.unshift(
-      <Button size='medium' class='mh1' href={getPageUrl(page - 1)}>‹ Prev</Button>
+      <Button class='mh1' href={getPageUrl(page - 1)} size='medium'>‹ Prev</Button>
     )
   }
   if (page !== pageTotal - 1) {
     buttons.push(
-      <Button size='medium' class='mr1' href={getPageUrl(page + 1)}>Next ›</Button>
+      <Button class='mr1' href={getPageUrl(page + 1)} size='medium'>Next ›</Button>
     )
   }
 

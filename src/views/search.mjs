@@ -19,17 +19,17 @@ export default class Search extends Component {
 
     return (
       <Input
+        pill
         borderColor={headerColor}
         class={c({
           'o-90': !focused
         }, 'grow-subtle', className)}
-        pill
-        onInput={this.handleInput}
-        onKeyPress={this.handleKeyPress}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
         placeholder='Search'
         value={lastSearch}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+        onInput={this.handleInput}
+        onKeyPress={this.handleKeyPress}
         {...rest}
       />
     )
