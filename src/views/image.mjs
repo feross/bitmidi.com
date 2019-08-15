@@ -19,11 +19,13 @@ const Image = props => {
   // (i.e. /img/test.png)
   const $sources = isAbsolutePath(src) && isConvertibleToWebp(src) && [
     <source
+      key='low'
       media='(max-width: 480px)'
       srcset={`/webp${src}.low.webp`}
       type='image/webp'
     />,
     <source
+      key='regular'
       srcset={`/webp${src}.webp`}
       type='image/webp'
     />

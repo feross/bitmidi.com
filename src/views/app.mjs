@@ -22,7 +22,7 @@ export default class App extends Component {
           <main class='mt4 mb5 ph3 ph3-safe mw7 center break-word'>
             <Page url={location.url} isServerRendered={app.isServerRendered} />
             <div class='tc light-gray'>
-              {errors.map(err => <div><small>{err.message}</small></div>)}
+              {errors.map(err => <div key={err.message}><small>{err.message}</small></div>)}
             </div>
           </main>
           <Footer />
@@ -34,7 +34,7 @@ export default class App extends Component {
           <Title title={app.title} />
           <Page url={location.url} isServerRendered={app.isServerRendered} />
           <div class='tc light-gray'>
-            {errors.map(err => <div><small>{err.message}</small></div>)}
+            {errors.map(err => <div key={err.message}><small>{err.message}</small></div>)}
           </div>
         </div>
       )

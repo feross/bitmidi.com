@@ -47,7 +47,7 @@ export default class SearchPage extends Page {
         <Heading><span class='mid-gray'>Search for</span> '{q}'</Heading>
         {
           results.map(midi => {
-            return <Midi midi={midi} showImage={false} showPlay={false} />
+            return <Midi key={midi.slug} midi={midi} showImage={false} showPlay={false} />
           })
         }
         {

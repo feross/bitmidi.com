@@ -99,7 +99,7 @@ export default class MidiPage extends Page {
             <h3>This MIDI file has alternate names</h3>
             <p>
               <ul>
-                {midi.alternateNames.map(name => <li>{name}</li>)}
+                {midi.alternateNames.map(name => <li key={name}>{name}</li>)}
                 <li>{midi.name}</li>
               </ul>
             </p>
@@ -110,7 +110,7 @@ export default class MidiPage extends Page {
             <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
             {
               relatedMidis.map(midi => {
-                return <Midi midi={midi} showImage={false} showPlay={false} />
+                return <Midi key={midi.slug} midi={midi} showImage={false} showPlay={false} />
               })
             }
             <MidiPageAd2 class='mv3 mv3-m mv4-l' />

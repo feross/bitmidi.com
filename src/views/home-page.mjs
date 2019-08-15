@@ -51,7 +51,7 @@ export default class HomePage extends Page {
         <Heading class='tc'>Popular MIDIs</Heading>
         <div class='mv4'>
           <MidiFeedTopAd />
-          {midis.map(midi => <Midi midi={midi} showPlay={false} />)}
+          {midis.map(midi => <Midi key={midi.slug} midi={midi} showPlay={false} />)}
           <MidiFeedAd />
         </div>
 
