@@ -22,14 +22,14 @@ const AdsenseDisplay1 = props => (
 //   />
 // )
 
-const AdsenseFeed2 = props => (
-  <Adsense
-    data-ad-format='fluid'
-    data-ad-layout-key='-79+f1-x-5g+d5'
-    data-ad-slot='7805609385'
-    {...props}
-  />
-)
+// const AdsenseFeed2 = props => (
+//   <Adsense
+//     data-ad-format='fluid'
+//     data-ad-layout-key='-79+f1-x-5g+d5'
+//     data-ad-slot='7805609385'
+//     {...props}
+//   />
+// )
 
 // export const AdsenseLink1 = props => (
 //   <Adsense
@@ -61,8 +61,5 @@ export const MidiFeedTopAd = props => (
 )
 
 export const MidiFeedAd = props => (
-  <Random>
-    <AdsenseDisplay1 {...props} />
-    <AdsenseFeed2 {...props} />
-  </Random>
+  <AdsenseDisplay1 {...props} />
 )
