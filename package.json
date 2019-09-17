@@ -88,7 +88,7 @@
     "file-to-array-buffer": "^1.0.0",
     "freepats": "^1.0.2",
     "fromentries": "^1.0.2",
-    "image-size": "^0.7.4",
+    "image-size": "^0.8.0",
     "imagemin-gm": "^2.0.1",
     "imagemin-webp": "^5.0.0",
     "jsonfeed-to-atom": "^1.1.2",
