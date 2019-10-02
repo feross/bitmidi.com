@@ -1,4 +1,7 @@
-import { render } from 'preact'
+/* eslint-disable import/first */
+if (process.env.NODE_ENV !== 'production') require('preact/debug')
+
+import { hydrate, render } from 'preact'
 import dragDrop from 'drag-drop'
 import fileToArrayBuffer from 'file-to-array-buffer'
 import unmuteIosAudio from 'unmute-ios-audio'
@@ -8,12 +11,11 @@ import createStore from '../store'
 import debug from '../lib/debug-helper'
 import getProvider from '../views/provider'
 
-let root = document.getElementById('root')
+const root = document.getElementById('root')
 const { store, dispatch } = createStore(update)
 
 // Expose for debugging
 Object.assign(window, { store, dispatch, update, debug })
-if (process.env.NODE_ENV !== 'production') require('preact/devtools')
 
 // Use server-initialized store
 Object.assign(store, window.initStore)
@@ -24,8 +26,9 @@ dispatch('LOCATION_REPLACE', pathname + search + hash)
 dispatch('PENDING_DISPATCH')
 window.addEventListener('load', () => dispatch('APP_IS_LOADED'))
 
-// Render the UI
-update()
+// Hydrate the UI
+const jsx = getProvider(store, dispatch)
+hydrate(jsx, root)
 
 // Measure time to first render
 console.timeEnd('render')
@@ -56,5 +59,5 @@ colorSchemeChange(colorScheme => {
 
 function update () {
   const jsx = getProvider(store, dispatch)
-  root = render(jsx, document.body, root)
+  render(jsx, root)
 }

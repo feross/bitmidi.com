@@ -13,15 +13,17 @@ export default function createRenderer (jsx) {
   const parent = doc.createElement('x-root')
   doc.body.appendChild(parent)
 
-  let root = null
-
+  let renderWasCalled = false
   return {
     render: function () {
-      root = render(jsx, parent, root)
+      renderWasCalled = true
+      render(jsx, parent)
       return this
     },
     html: function () {
-      if (root == null) throw new Error('render() was not called before html()')
+      if (!renderWasCalled) {
+        throw new Error('render() was not called before html()')
+      }
       return renderToString(jsx)
     }
   }
