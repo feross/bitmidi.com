@@ -295,7 +295,6 @@ export default function createStore (_update, onPendingChange = () => {}) {
             location.params.midiSlug === currentSlug) {
           const timeSinceLastAutoplay = Date.now() - player.lastAutoplay
           if (timeSinceLastAutoplay > AUTOPLAY_MIN_TIMEOUT) {
-
             player.lastAutoplay = Date.now()
             dispatch('LOCATION_PUSH', `/${nextMidiSlug}`)
             dispatch('MIDI_PLAY_PAUSE', nextMidiSlug)
