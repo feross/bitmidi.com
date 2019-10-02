@@ -282,7 +282,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
       }
 
       case 'MIDI_ENDED': {
-        const AUTOPLAY_MIN_TIMEOUT = 2 * 60 * 1000 // 2 minutes
+        const AUTOPLAY_MIN_TIMEOUT = 1 * 60 * 1000 // 1 minute
 
         const { currentSlug } = store.player
         const { location, player, views } = store
@@ -294,7 +294,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
         if (nextMidiSlug && location.name === 'midi' &&
             location.params.midiSlug === currentSlug) {
           const timeSinceLastAutoplay = Date.now() - player.lastAutoplay
-          if (timeSinceLastAutoplay > AUTOPLAY_MIN_TIMEOUT) {
+          if (timeSinceLastAutoplay >= AUTOPLAY_MIN_TIMEOUT) {
             player.lastAutoplay = Date.now()
             dispatch('LOCATION_PUSH', `/${nextMidiSlug}`)
             dispatch('MIDI_PLAY_PAUSE', nextMidiSlug)
@@ -302,7 +302,7 @@ export default function createStore (_update, onPendingChange = () => {}) {
             // Wait at least AUTOPLAY_MIN_TIMEOUT between autoplays
             setTimeout(
               () => dispatch('MIDI_ENDED'),
-              (AUTOPLAY_MIN_TIMEOUT - timeSinceLastAutoplay) + 1000
+              AUTOPLAY_MIN_TIMEOUT - timeSinceLastAutoplay
             )
           }
         } else {
