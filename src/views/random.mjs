@@ -1,6 +1,6 @@
 import { toChildArray } from 'preact'
 
-const ROTATE_INTERVAL = 60 * 1000 // 60 secs
+const ROTATE_INTERVAL = 10 * 60 * 1000 // 10 minutes
 
 const Random = ({ children }) => {
   children = toChildArray(children)

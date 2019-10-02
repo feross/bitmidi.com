@@ -36,7 +36,9 @@ export default class Adsense extends Component {
 
     if (!isProd) {
       return (
-        <div class={c('bg-washed-red h5', className)} {...rest} />
+        <div class={c('bg-washed-red h5', className)} {...rest}>
+          Adsense
+        </div>
       )
     }
 
