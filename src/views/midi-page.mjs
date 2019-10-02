@@ -89,9 +89,7 @@ export default class MidiPage extends Page {
               </Link>
             </p>
           </div>
-          <div class='fn fl-ns w-50-ns pl3-ns'>
-            <MidiPageAd />
-          </div>
+          <MidiPageAd class='fn fl-ns w-50-ns pl3-ns' />
         </div>
 
         {midi.alternateNames &&
