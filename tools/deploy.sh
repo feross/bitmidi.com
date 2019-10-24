@@ -1,32 +1,29 @@
 #!/bin/sh
-# Update code and restart server (run from app server)
+# Update code and restart server (run on server)
 set -e
 
-if [ -d "/home/feross/www/bitmidi.com-build" ]; then
+if [ -d "/home/feross/www/build-bitmidi.com" ]; then
   echo "ERROR: Build folder exists. Is another build in progress?"
   exit 1
 fi
 
-if [ -d "/home/feross/www/bitmidi.com-old" ]; then
+if [ -d "/home/feross/www/old-bitmidi.com" ]; then
   echo "ERROR: Old folder exists. Did a previous build crash?"
   exit 1
 fi
 
-cp -R /home/feross/www/bitmidi.com /home/feross/www/bitmidi.com-build
+cp -R /home/feross/www/bitmidi.com /home/feross/www/build-bitmidi.com
 
-cd /home/feross/www/bitmidi.com-build && git pull
-cd /home/feross/www/bitmidi.com-build && rm -rf node_modules
-cd /home/feross/www/bitmidi.com-build && npm install --no-progress
-cd /home/feross/www/bitmidi.com-build && npm run build
-cd /home/feross/www/bitmidi.com-build && npm prune --production
+cd /home/feross/www/build-bitmidi.com && git pull
+cd /home/feross/www/build-bitmidi.com && npm install --no-progress
+cd /home/feross/www/build-bitmidi.com && npm run build
+cd /home/feross/www/build-bitmidi.com && npm prune --production --no-progress
 
 sudo supervisorctl stop bitmidi:
 
-# Move build folder into place (while app is stopped)
-cd /home/feross/www && mv bitmidi.com bitmidi.com-old
-cd /home/feross/www && mv bitmidi.com-build bitmidi.com
+cd /home/feross/www && mv bitmidi.com old-bitmidi.com
+cd /home/feross/www && mv build-bitmidi.com bitmidi.com
 
 sudo supervisorctl start bitmidi:
 
-# Remove old files (after app has started)
-cd /home/feross/www && rm -rf bitmidi.com-old
+cd /home/feross/www && rm -rf old-bitmidi.com
