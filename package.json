@@ -131,7 +131,7 @@
     "minimist": "^1.2.0",
     "nodemon": "^1.19.3",
     "ora": "^4.0.2",
-    "puppeteer": "^1.20.0",
+    "puppeteer": "^2.0.0",
     "purgecss": "^1.4.0",
     "rimraf": "^3.0.0",
     "simple-sha256": "^1.0.0",
