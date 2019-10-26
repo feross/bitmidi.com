@@ -24,9 +24,9 @@ export default class Midi extends Component {
       >
         <Link
           color='white'
-          href={!showPlay && midi.url}
+          href={showPlay ? null : midi.url}
           title={showPlay ? `Play ${midi.name}` : midi.name}
-          onClick={showPlay && this.onClick}
+          onClick={showPlay ? this.onClick : null}
         >
           {midi.image && showImage &&
             <Image
