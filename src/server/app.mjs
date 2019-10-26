@@ -249,7 +249,10 @@ export default function init () {
     handler: (req, res, next) => {
       rateLimitLogger(req, res, (err) => {
         if (err) return next(err)
-        res.status(503).send('Too many requests')
+        if (global.rollbar) {
+          global.rollbar.info(`Blocked for too many requests - ${req.ip}`)
+        }
+        res.status(503).send('Blocked for too many requests')
       })
     }
   })
