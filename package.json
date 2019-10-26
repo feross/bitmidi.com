@@ -83,6 +83,7 @@
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.0",
     "express-promise-router": "^3.0.3",
+    "express-rate-limit": "^5.0.0",
     "express-session": "^1.17.0",
     "express-sitemap-xml": "^1.1.0",
     "file-to-array-buffer": "^1.0.0",

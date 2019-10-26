@@ -5,6 +5,7 @@ import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
+import rateLimit from 'express-rate-limit'
 import session from 'express-session'
 import uuid from 'uuid/v4'
 import { join, dirname } from 'path'
@@ -147,6 +148,22 @@ export default function init () {
       secure: isProd
     }
   }))
+
+  // Block bots
+  const rateLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 50,
+    statusCode: 503,
+    headers: false,
+    onLimitReached: (req, res, opts) => {
+      const { headers, ip } = req
+      const { 'user-agent': userAgent } = headers
+      const log = `Blocked for too many requests - ${ip} - ${userAgent}`
+      if (global.rollbar) global.rollbar.info(log)
+      console.log(log)
+    }
+  })
+  app.use(rateLimiter)
 
   // Log HTTP requests
   app.use(morgan(isProd ? 'combined' : 'dev', { immediate: !isProd }))
