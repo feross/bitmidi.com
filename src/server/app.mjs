@@ -149,24 +149,9 @@ export default function init () {
     }
   }))
 
-  // Block bots
-  const rateLimiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: 50,
-    statusCode: 503,
-    headers: false,
-    onLimitReached: (req, res, opts) => {
-      const { headers, ip } = req
-      const { 'user-agent': userAgent } = headers
-      const log = `Blocked for too many requests - ${ip} - ${userAgent}`
-      if (global.rollbar) global.rollbar.info(log)
-      console.log(log)
-    }
-  })
-  app.use(rateLimiter)
-
   // Log HTTP requests
-  app.use(morgan(isProd ? 'combined' : 'dev', { immediate: !isProd }))
+  const logger = morgan(isProd ? 'combined' : 'dev', { immediate: !isProd })
+  app.use(logger)
 
   // Serve API routes
   app.use('/api', routerApi)
@@ -250,6 +235,25 @@ export default function init () {
   })
 
   app.get('/500', () => { throw new Error('Manually visited /500') })
+
+  // Rate limit HTTP requests
+  morgan.format(
+    'rate-limit',
+    'Blocked for too many requests - :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'
+  )
+  const rateLimitLogger = morgan('rate-limit', { immediate: !isProd })
+  const rateLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 50,
+    headers: false,
+    handler: (req, res, next) => {
+      rateLimitLogger(req, res, (err) => {
+        if (err) return next(err)
+        res.status(503).send('Too many requests')
+      })
+    }
+  })
+  app.use(rateLimiter)
 
   // Serve routes with server-side rendering
   app.get('*', routerRender)
