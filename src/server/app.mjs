@@ -244,16 +244,14 @@ export default function init () {
   const rateLimitLogger = morgan('rate-limit', { immediate: !isProd })
   const rateLimiter = rateLimit({
     windowMs: 60 * 1000,
-    max: 50,
+    max: 30,
     headers: false,
     handler: (req, res, next) => {
-      rateLimitLogger(req, res, (err) => {
-        if (err) return next(err)
-        if (global.rollbar) {
-          global.rollbar.info(`Blocked for too many requests - ${req.ip}`)
-        }
-        res.status(503).send('Blocked for too many requests')
-      })
+      rateLimitLogger(req, res, () => {})
+      if (global.rollbar) {
+        global.rollbar.info(`Blocked for too many requests - ${req.ip}`)
+      }
+      res.status(503).send('Blocked for too many requests')
     }
   })
   app.use(rateLimiter)
