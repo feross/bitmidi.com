@@ -9,12 +9,17 @@ export default class History {
   }
 
   push (url) {
-    if (IS_BROWSER) window.history.pushState(undefined, undefined, url)
+    if (IS_BROWSER) {
+      // User may specify invalid/unparseable URL (e.g. //?page=1)
+      try { window.history.pushState(undefined, undefined, url) } catch {}
+    }
     this._onChange(url, 'push')
   }
 
   replace (url) {
-    if (IS_BROWSER) window.history.replaceState(undefined, undefined, url)
+    if (IS_BROWSER) {
+      try { window.history.replaceState(undefined, undefined, url) } catch {}
+    }
     this._onChange(url, 'replace')
   }
 
