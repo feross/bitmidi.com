@@ -105,7 +105,7 @@
     "objection-slug": "^1.0.0",
     "p-memoize": "^3.1.0",
     "parseurl": "^1.3.3",
-    "path-to-regexp": "^3.1.0",
+    "path-to-regexp": "^4.0.0",
     "preact": "^10.0.1",
     "preact-context-provider": "^2.0.0-preactx.2",
     "preact-render-to-string": "^5.1.0",
