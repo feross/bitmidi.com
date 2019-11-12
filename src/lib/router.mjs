@@ -1,6 +1,6 @@
 // TODO: publish to npm
 
-import pathToRegexp from 'path-to-regexp'
+import { pathToRegexp, compile } from 'path-to-regexp'
 import fromEntries from 'fromentries'
 
 export default class Router {
@@ -15,7 +15,7 @@ export default class Router {
     this._compilers = {}
     routes.forEach(route => {
       const { name, path } = route
-      this._compilers[name] = pathToRegexp.compile(path)
+      this._compilers[name] = compile(path)
     })
   }
 
