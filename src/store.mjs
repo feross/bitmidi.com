@@ -287,26 +287,29 @@ export default function createStore (_update, onPendingChange = () => {}) {
         const { currentSlug } = store.player
         const { location, player, views } = store
 
-        const related = views.related[currentSlug]
-        const nextMidiSlug = related[Math.floor(Math.random() * related.length)]
+        if (currentSlug != null) {
+          const related = views.related[currentSlug]
+          const nextMidiSlug =
+            related[Math.floor(Math.random() * related.length)]
 
-        // Try to autoplay
-        if (nextMidiSlug && location.name === 'midi' &&
-            location.params.midiSlug === currentSlug) {
-          const timeSinceLastAutoplay = Date.now() - player.lastAutoplay
-          if (timeSinceLastAutoplay >= AUTOPLAY_MIN_TIMEOUT) {
-            player.lastAutoplay = Date.now()
-            dispatch('LOCATION_PUSH', `/${nextMidiSlug}`)
-            dispatch('MIDI_PLAY_PAUSE', nextMidiSlug)
+          // Try to autoplay
+          if (nextMidiSlug && location.name === 'midi' &&
+              location.params.midiSlug === currentSlug) {
+            const timeSinceLastAutoplay = Date.now() - player.lastAutoplay
+            if (timeSinceLastAutoplay >= AUTOPLAY_MIN_TIMEOUT) {
+              player.lastAutoplay = Date.now()
+              dispatch('LOCATION_PUSH', `/${nextMidiSlug}`)
+              dispatch('MIDI_PLAY_PAUSE', nextMidiSlug)
+            } else {
+              // Wait at least AUTOPLAY_MIN_TIMEOUT between autoplays
+              setTimeout(
+                () => dispatch('MIDI_ENDED'),
+                AUTOPLAY_MIN_TIMEOUT - timeSinceLastAutoplay
+              )
+            }
           } else {
-            // Wait at least AUTOPLAY_MIN_TIMEOUT between autoplays
-            setTimeout(
-              () => dispatch('MIDI_ENDED'),
-              AUTOPLAY_MIN_TIMEOUT - timeSinceLastAutoplay
-            )
+            store.player.currentSlug = null
           }
-        } else {
-          store.player.currentSlug = null
         }
 
         return update()
