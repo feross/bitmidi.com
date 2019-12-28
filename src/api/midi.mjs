@@ -125,7 +125,7 @@ async function searchRaw (query = {}) {
     .query()
     .skipUndefined()
     .select(query.select)
-    .whereRaw('MATCH(name) AGAINST(? IN NATURAL LANGUAGE MODE)', query.q)
+    .where('name', 'like', `%${query.q}%`)
     .page(query.page, query.pageSize)
 
   results.forEach(addImage)
