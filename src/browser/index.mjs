@@ -39,7 +39,7 @@ unmuteIosAudio()
 // Register service worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/service-worker.mjs', { updateViaCache: 'none' })
+    .register('/service-worker.js', { updateViaCache: 'none' })
 }
 
 // Play drag-and-dropped MIDI files

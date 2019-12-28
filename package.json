@@ -10,10 +10,6 @@
     "require": [
       "@babel/register"
     ],
-    "extensions": [
-      "mjs",
-      "js"
-    ],
     "babel": false,
     "compileEnhancements": false
   },
@@ -45,8 +41,8 @@
   },
   "browser": {
     "./secret/index.js": false,
-    "./src/api/index.mjs": "./src/browser/api.mjs",
-    "./src/server/start.mjs": "./src/browser/index.mjs"
+    "./src/api/index.js": "./src/browser/api.js",
+    "./src/server/start.js": "./src/browser/index.js"
   },
   "browserify": {
     "transform": [
@@ -155,14 +151,14 @@
   "scripts": {
     "build": "npm run build-css && npm run build-js",
     "build-css": "NODE_ENV=production node -r @babel/register ./tools/build-css",
-    "build-js": "NODE_ENV=production browserify --no-detect-globals --extension mjs --plugin tinyify . > static/bundle.js",
+    "build-js": "NODE_ENV=production browserify --no-detect-globals --plugin tinyify . > static/bundle.js",
     "deploy": "./tools/trigger-deploy.sh",
     "knex": "npx --node-arg '-r @babel/register' knex --knexfile tools/knexfile.js --cwd .",
     "secret-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/secret/' secret/",
     "secret-upload": "rsync -a -O -v --delete secret/ future:'/home/feross/www/bitmidi.com/secret/'",
     "size": "npm run size-js && npm run size-css && npm run size-disc",
     "size-css": "npm run build-css && cat static/bundle.css | gzip | wc -c",
-    "size-disc": "browserify --no-detect-globals --extension mjs --plugin tinyify --full-paths . | discify --open",
+    "size-disc": "browserify --no-detect-globals --plugin tinyify --full-paths . | discify --open",
     "size-js": "npm run build-js && cat static/bundle.js | gzip | wc -c",
     "start": "node -r @babel/register src/server/start",
     "test": "npm run test-lint && npm run test-ava",
@@ -172,9 +168,9 @@
     "uploads-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/uploads/' uploads/",
     "uploads-upload": "rsync -a -O -v --delete uploads/ future:'/home/feross/www/bitmidi.com/uploads/'",
     "watch": "npm run tunnel & npm run watch-css & npm run watch-js & npm run watch-server",
-    "watch-css": "nodemon -r @babel/register --watch src/views --watch config.js --watch src/server --ext js,ejs,mjs,css ./tools/build-css -- --verbose",
-    "watch-js": "watchify --extension mjs . --debug --verbose --outfile static/bundle.js",
-    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,mjs,json,ejs --ignore static --ignore src/browser"
+    "watch-css": "nodemon -r @babel/register --ext js,ejs,css --watch src/views --watch config.js --watch src/server ./tools/build-css -- --verbose",
+    "watch-js": "watchify . --debug --verbose --outfile static/bundle.js",
+    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,ejs,json --ignore static --ignore src/browser"
   },
   "standard": {
     "parser": "babel-eslint"

@@ -66,7 +66,7 @@ async function run () {
 function purge (css) {
   // Files to search for used selectors. Used selectors will not be purged.
   const content = [
-    './src/views/*.mjs',
+    './src/views/*.js',
     './src/server/*.ejs'
   ]
 

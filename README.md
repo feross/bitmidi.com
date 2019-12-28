@@ -61,12 +61,12 @@ npm install
 First, copy the sample secret file to a new file:
 
 ```bash
-cp secret/index-sample.mjs secret/index.mjs
+cp secret/index-sample.js secret/index.js
 ```
 
 Second, run a local MySQL Server on port 3306 and create a database called `bitmidi.com`.
 
-**Don't forget to change the credentials in `secret/index.mjs` to match what you
+**Don't forget to change the credentials in `secret/index.js` to match what you
 configured!** If you use a different MySQL version than what is specified, then
 remember to change that, too. If you're running an older version of MySQL, you
 may need to add a `insecureAuth: true` option under `db.connection`.
@@ -89,7 +89,7 @@ or some smaller ones [here](http://www.jsbach.net/midi/).
 Then, in the project root, run this:
 
 ```bash
-node -r @babel/register tools/import.mjs <path-to-folder-with-midis>
+node -r @babel/register tools/import.js <path-to-folder-with-midis>
 ```
 
 ### Run the server

@@ -2,7 +2,7 @@ node_modules/
 uploads/
 
 secret/*
-!secret/index-sample.mjs
+!secret/index-sample.js
 
 static/bundle.css
 static/bundle.js
