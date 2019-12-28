@@ -168,9 +168,9 @@
     "uploads-download": "rsync -a -O -v --delete future:'/home/feross/www/bitmidi.com/uploads/' uploads/",
     "uploads-upload": "rsync -a -O -v --delete uploads/ future:'/home/feross/www/bitmidi.com/uploads/'",
     "watch": "npm run tunnel & npm run watch-css & npm run watch-js & npm run watch-server",
-    "watch-css": "nodemon -r @babel/register --ext js,ejs,css --watch src/views --watch config.js --watch src/server ./tools/build-css -- --verbose",
+    "watch-css": "nodemon -r @babel/register --ext js,ejs,css --watch src/views --watch src/config.js --watch src/css ./tools/build-css -- --verbose",
     "watch-js": "watchify . --debug --verbose --outfile static/bundle.js",
-    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,ejs,json --ignore static --ignore src/browser"
+    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,ejs,json --watch src --watch secret ."
   },
   "standard": {
     "parser": "babel-eslint"

@@ -33,7 +33,7 @@ async function run () {
   // CSS files to purge, concat, and minify
   const css = [
     './node_modules/tachyons/css/tachyons.min.css',
-    './src/server/index.css'
+    './src/css/*.css'
   ]
 
   const files = purge(css)
