@@ -38,9 +38,22 @@ export default class SearchPage extends Page {
     const search = views.search[q]
     const pageTotal = search && search.pageTotal
     const total = search && search.total
-    const results = search && search[page]
+
+    const sortByPopularity = (midi1, midi2) => {
+      if (midi1.plays < midi2.plays) {
+        return 1;
+      } else if (midi1.plays === midi2.plays) {
+        return midi1.views === midi2.views ?
+          0 : midi1.views < midi2.views ? 1 : -1
+      } else {
+        return -1;
+      }
+    }
+
+    const results = (search && search[page]
       ? search[page].map(midiSlug => data.midis[midiSlug])
-      : []
+      : [])
+        .sort(sortByPopularity)
 
     return (
       <div>

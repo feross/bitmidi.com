@@ -35,10 +35,22 @@ export default class HomePage extends Page {
     const { data, views } = store
     const { page } = store.location.query
 
+    const sortByPopularity = (midi1, midi2) => {
+      if (midi1.plays < midi2.plays) {
+        return 1;
+      } else if (midi1.plays === midi2.plays) {
+        return midi1.views === midi2.views ?
+          0 : midi1.views < midi2.views ? 1 : -1
+      } else {
+        return -1;
+      }
+    }
+
     const midiSlugs = views.all[page]
-    const midis = midiSlugs
+    const midis = (midiSlugs
       ? midiSlugs.map(midiSlug => data.midis[midiSlug])
-      : []
+      : [])
+        .sort(sortByPopularity);
 
     const numFiles = views.all.total
       ? views.all.total.toLocaleString()
