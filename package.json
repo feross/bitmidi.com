@@ -129,7 +129,7 @@
     "glob": "^7.1.5",
     "husky": "^3.0.9",
     "minimist": "^1.2.0",
-    "nodemon": "^1.19.4",
+    "nodemon": "^2.0.0",
     "ora": "^4.0.2",
     "puppeteer": "^2.0.0",
     "purgecss": "^1.4.0",
