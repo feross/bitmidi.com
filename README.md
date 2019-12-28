@@ -52,6 +52,9 @@ npm install
 - [GraphicsMagick](http://www.graphicsmagick.org/index.html)
   - Ubuntu: `sudo apt install graphicsmagick`
   - MacOS: `brew install graphicsmagick`
+- `imagemin-webp > cwebp-bin`
+  - Ubuntu: `sudo apt install libxi6 libglu1`
+  - MacOS: n/a
 
 ### Setup Database
 
