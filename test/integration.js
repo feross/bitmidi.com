@@ -1,8 +1,3 @@
-/*
- * TODO: Rename to .mjs file extension once this issue is fixed:
- * https://github.com/avajs/ava/issues/631#issuecomment-357733734
- */
-
 import puppeteer from 'puppeteer'
 import test from 'ava'
 import util from 'util'

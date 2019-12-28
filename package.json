@@ -160,7 +160,7 @@
     "size-css": "npm run build-css && cat static/bundle.css | gzip | wc -c",
     "size-disc": "browserify --no-detect-globals --plugin tinyify --full-paths . | discify --open",
     "size-js": "npm run build-js && cat static/bundle.js | gzip | wc -c",
-    "start": "node -r @babel/register src/server/start",
+    "start": "node -r @babel/register .",
     "test": "npm run test-lint && npm run test-ava",
     "test-ava": "echo \"skipping -- npm run build && ava 'test/**/*.js'\"",
     "test-lint": "standard",
