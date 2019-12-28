@@ -1,6 +1,5 @@
 import Debug from 'debug'
 import Knex from 'knex'
-import { DbErrors } from 'objection-db-errors'
 import { join } from 'path'
 import { knexSnakeCaseMappers, Model, QueryBuilder } from 'objection'
 
@@ -18,7 +17,7 @@ class BaseQueryBuilder extends QueryBuilder {
   }
 }
 
-export default class BaseModel extends DbErrors(Model) {
+export default class BaseModel extends Model {
   // Use a custom query builder
   static QueryBuilder = BaseQueryBuilder
 
@@ -40,7 +39,7 @@ export default class BaseModel extends DbErrors(Model) {
   static query (...args) {
     return super.query(...args)
       .runAfter((models, query) => {
-        debug(query.toString())
+        debug(query.toKnexQuery().toString())
         return models
       })
   }
