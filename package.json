@@ -142,7 +142,7 @@
     }
   },
   "license": "-",
-  "main": "./src/server/start",
+  "main": "./src/server/start.js",
   "private": true,
   "repository": {
     "type": "git",
