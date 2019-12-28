@@ -1,15 +1,16 @@
 import cors from 'cors'
 import Router from 'express-promise-router'
-import { NotFoundError, ValidationError } from 'objection'
 import {
-  CheckViolationError,
-  ConstraintViolationError,
-  DataError,
+  ValidationError,
+  NotFoundError,
   DBError,
-  ForeignKeyViolationError,
+  ConstraintViolationError,
+  UniqueViolationError,
   NotNullViolationError,
-  UniqueViolationError
-} from 'objection-db-errors'
+  ForeignKeyViolationError,
+  CheckViolationError,
+  DataError
+} from 'objection'
 
 import api from '../api'
 
@@ -82,6 +83,9 @@ function augmentObjectionError (err, res) {
   } else if (err instanceof DBError) {
     err.status = 500
     err.code = 'UNKNOWN_DB_ERROR'
+  } else {
+    err.status = 500
+    err.code = 'UNKNOWN_ERROR'
   }
 }
 
