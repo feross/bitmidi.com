@@ -37,11 +37,15 @@ export default class BaseModel extends Model {
 
   // Log raw SQL queries
   static query (...args) {
+    if (debug.enabled) {
+      return super.query(...args)
+        .runAfter((models, query) => {
+          debug(query.toKnexQuery().toString())
+          return models
+        })
+    }
+
     return super.query(...args)
-      .runAfter((models, query) => {
-        debug(query.toKnexQuery().toString())
-        return models
-      })
   }
 
   $beforeInsert () {
