@@ -31,7 +31,7 @@ async function queueReddit (title, url) {
     sr: 'BitMidi',
     kind: 'link',
     resubmit: true,
-    title: title,
+    title: `MIDI file – ${title}`,
     url: url
   }
   await reddit.post('/api/submit', opts)
