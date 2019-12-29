@@ -219,7 +219,7 @@ function getPostText (midi) {
     .replace(/MIDI_URL/g, `${origin}${midi.url}`)
 }
 
-function queueTweet (text) {
+async function queueTweet (text) {
   return new Promise((resolve, reject) => {
     get.concat({
       url: BUFFER_API,

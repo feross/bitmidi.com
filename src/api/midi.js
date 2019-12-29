@@ -11,6 +11,7 @@ async function getDefaultSelect () {
   const set = new Set(columns)
   set.delete('hash')
   set.delete('sharedTwitter')
+  set.delete('sharedReddit')
   return [...set]
 }
 

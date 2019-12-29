@@ -27,3 +27,10 @@ export const db = {
 export const rollbar = {
   accessToken: 'TODO'
 }
+
+export const reddit = {
+  username: 'TODO',
+  password: 'TODO',
+  appId: 'TODO',
+  appSecret: 'TODO'
+}
