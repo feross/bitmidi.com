@@ -29,7 +29,7 @@ export default async function shareReddit () {
 async function queueReddit (title, url) {
   const opts = {
     sr: 'bitmidi',
-    kind: 'link2',
+    kind: 'link',
     resubmit: true,
     title: title,
     url: url
