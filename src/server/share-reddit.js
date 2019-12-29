@@ -1,6 +1,6 @@
 import Debug from 'debug'
 
-import Reddit from '../lib/reddit'
+import Reddit from 'reddit'
 import Midi from '../models/midi'
 import { origin, apiUserAgent } from '../config'
 import { reddit as redditSecret } from '../../secret'
@@ -28,7 +28,7 @@ export default async function shareReddit () {
 
 async function queueReddit (title, url) {
   const opts = {
-    sr: 'bitmidi',
+    sr: 'BitMidi',
     kind: 'link',
     resubmit: true,
     title: title,
