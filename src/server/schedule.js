@@ -5,7 +5,7 @@ import shareTwitter from './share-twitter'
 import { isProd } from '../config'
 
 const DAILY_12AM = '0 0 * * *'
-const DAILY_5PM = '37 18 * * *' // TEMP TEST
+const DAILY_5PM = '37 53 * * *' // TEMP TEST
 
 export default function init (port) {
   const isMainProcess = port % 10 === 0
