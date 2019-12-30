@@ -53,7 +53,9 @@ const RandomTip = () => {
     <span>
       <strong>Pro Tip</strong>:{' '}
       <Random>
-        <span>You can drag-and-drop a MIDI file onto this page to play it!</span>
+        <span>
+          You can drag-and-drop a MIDI file onto this page to play it!
+        </span>
         <span>
           This project is open source on{' '}
           <Link newtab href='https://github.com/feross/bitmidi.com'>GitHub</Link>!
@@ -64,6 +66,12 @@ const RandomTip = () => {
             Follow @{siteTwitter}
           </Link>{' '}
           on Twitter!
+        </span>
+        <span>
+          We are on Reddit at <Link newtab href='https://www.reddit.com/r/BitMidi'>r/BitMidi</Link>!
+        </span>
+        <span>
+          Chat with other MIDI fans on our <Link newtab href='https://discord.gg/5uD9Ktf'>Discord server</Link>!
         </span>
       </Random>
     </span>
