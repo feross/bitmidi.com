@@ -1,12 +1,14 @@
-import { h } from 'preact' /** @jsx h */
+/** @jsx h */
+import { h, Fragment } from 'preact'
 
 import { doMidiSearch } from '../actions/midi'
 
 import Heading from './heading'
 import Loader from './loader'
+import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import Midi from './midi'
+import { MidiFeedTopAd, MidiFeedAd } from './ads'
 
 export default class SearchPage extends Page {
   async load () {
@@ -44,18 +46,26 @@ export default class SearchPage extends Page {
 
     return (
       <div>
+
         <Heading><span class='mid-gray'>Search for</span> '{q}'</Heading>
-        {
-          results.map(midi => {
-            return <Midi key={midi.slug} midi={midi} showImage={false} showPlay={false} />
-          })
-        }
-        {
-          results.length === 0 &&
-            <div class='mt4'>
-              No results with your search terms were found.
-            </div>
-        }
+
+        <div class='mv4'>
+          {results.map((midi, i) =>
+            <Fragment key={midi.slug}>
+              <Midi midi={midi} showImage={false} showPlay={false} />
+              {i === 2 && page !== '0' && <MidiFeedTopAd class='center' />}
+              {i === 10 && page !== '0' && <MidiFeedAd />}
+              {i === 19 && page !== '0' && <MidiFeedAd />}
+            </Fragment>
+          )}
+          {
+            results.length === 0 &&
+              <span>
+                No results with your search terms were found.
+              </span>
+          }
+        </div>
+
         <Pagination page={page} pageTotal={pageTotal} total={total} />
       </div>
     )
