@@ -11,7 +11,7 @@ export default async function init (port) {
   const server = http.createServer(app)
 
   const listen = util.promisify(server.listen.bind(server))
-  await listen(port)
+  await listen(port, '127.0.0.1')
   console.log('Listening on port %s', server.address().port)
 
   scheduleInit(port)
