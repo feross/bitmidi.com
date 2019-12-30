@@ -44,18 +44,6 @@ function addImage (result) {
   }
 }
 
-export async function get (query = {}) {
-  const result = await getRawMemo(query)
-
-  // Increment view count asynchronously
-  result.result
-    .$query()
-    .increment('views', 1)
-    .execute()
-
-  return result
-}
-
 const getRawMemo = memo(getRaw)
 
 async function getRaw (query = {}) {
@@ -82,6 +70,18 @@ async function getRaw (query = {}) {
   related.forEach(addImage)
 
   return { query, result, related }
+}
+
+export async function get (query = {}) {
+  const result = await getRawMemo(query)
+
+  // Increment view count asynchronously
+  result.result
+    .$query()
+    .increment('views', 1)
+    .execute()
+
+  return result
 }
 
 export async function play (query = {}) {
