@@ -29,7 +29,11 @@ router.use((req, res, next) => {
   onPendingChange()
 
   function onPendingChange () {
-    if (store.app.pending === 0) process.nextTick(done)
+    if (store.app.pending !== 0) return
+
+    process.nextTick(() => {
+      if (store.app.pending === 0) done()
+    })
   }
 
   function update () {

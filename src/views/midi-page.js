@@ -114,7 +114,7 @@ export default class MidiPage extends Page {
             <div class='tc'>
               <Button
                 class='center'
-                href={`/search?q=${encodeURIComponent(midi.name)}`}
+                href={`/${midi.slug}/related`}
               >
                 More Related
               </Button>

@@ -6,6 +6,7 @@ import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
 import RandomPage from './views/random-page'
+import RelatedPage from './views/related-page'
 import SearchPage from './views/search-page'
 
 export default [
@@ -45,6 +46,12 @@ export default [
       })
       return results.map(result => result.url)
     }
+  },
+  {
+    name: 'related',
+    path: '/:midiSlug/related',
+    page: RelatedPage,
+    query: { page: '0' }
   },
   {
     name: 'embed',
