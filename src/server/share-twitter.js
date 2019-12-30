@@ -47,7 +47,7 @@ const POSTS = [
     MIDI_URL
   `,
   stripIndent`
-    💌 There's a fresh MIDI in your inbox! 💌
+    💌 Fresh MIDI in your inbox! 💌
 
     🎵 MIDI_NAME
 
@@ -61,14 +61,7 @@ const POSTS = [
     MIDI_URL
   `,
   stripIndent`
-    📼 Now available to own on VHS 📼
-
-    🎵 MIDI_NAME
-
-    MIDI_URL
-  `,
-  stripIndent`
-    Be kind, please rewind. 📼
+    📼 Be kind, please rewind. 📼
 
     🎵 MIDI_NAME
 
@@ -126,12 +119,12 @@ const POSTS = [
   stripIndent`
     ☎️ WE GOT THE 4-1-1 ☎️
 
-    Today's MIDI is 🎵 MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    📅 A new MIDI every day. 📅
+    📅 A new MIDI every day 📅
 
     🎵 MIDI_NAME
 
@@ -154,12 +147,47 @@ const POSTS = [
   stripIndent`
     🎺 🎸 PARTY TIME 🎷 🥁
 
-    The MIDI of the Day is 🎵 MIDI_NAME
+    🎵 MIDI_NAME
 
     MIDI_URL
   `,
   stripIndent`
-    🌟 MIDI of the Day™ 🌟
+    🌟 MIDI of the Day 🌟
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    🤩 MIDI of the Day 🤩
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    😍 MIDI of the Day 😍
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    🥳 MIDI of the Day 🥳
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    🎉 MIDI of the Day 🎉
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    🎶 A new MIDI every day 🎶
 
     🎵 MIDI_NAME
 
@@ -187,7 +215,21 @@ const POSTS = [
     MIDI_URL
   `,
   stripIndent`
-    This MIDI will make you go 🙌
+    🙌 This MIDI will make you go wild 🙌
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    👀 This MIDI starts out good but you won't believe what happens next 👀
+
+    🎵 MIDI_NAME
+
+    MIDI_URL
+  `,
+  stripIndent`
+    💰 One weird MIDI file trick – MP3 files HATE this file! 💰
 
     🎵 MIDI_NAME
 
