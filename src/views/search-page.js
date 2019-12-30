@@ -53,7 +53,7 @@ export default class SearchPage extends Page {
           {results.map((midi, i) =>
             <Fragment key={midi.slug}>
               <Midi midi={midi} showImage={false} showPlay={false} />
-              {i === 2 && page !== '0' && <MidiFeedTopAd class='center' />}
+              {i === 2 && page !== '0' && <MidiFeedTopAd />}
               {i === 10 && page !== '0' && <MidiFeedAd />}
               {i === 19 && page !== '0' && <MidiFeedAd />}
             </Fragment>

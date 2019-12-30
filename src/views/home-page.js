@@ -53,7 +53,7 @@ export default class HomePage extends Page {
           {midis.map((midi, i) =>
             <Fragment key={midi.slug}>
               <Midi midi={midi} showPlay={false} />
-              {i === 2 && <MidiFeedTopAd class='center' />}
+              {i === 2 && <MidiFeedTopAd />}
               {i === 10 && <MidiFeedAd />}
             </Fragment>
           )}
