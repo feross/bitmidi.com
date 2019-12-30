@@ -1,14 +1,14 @@
-import { h } from 'preact' /** @jsx h */
+import { h, Fragment } from 'preact' /** @jsx h */
 
 import { doMidiAll } from '../actions/midi'
 
-import { MidiFeedTopAd, MidiFeedAd } from './ads'
 import Heading from './heading'
 import Image from './image'
 import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
+import { MidiFeedTopAd, MidiFeedAd } from './ads'
 
 export default class HomePage extends Page {
   async load () {
@@ -48,11 +48,15 @@ export default class HomePage extends Page {
       <div>
         {page === '0' && <HomePageHero numFiles={numFiles} />}
 
-        <MidiFeedTopAd class='center' />
-
         <Heading class='tc mv4'>Popular MIDIs</Heading>
         <div class='mv4'>
-          {midis.map(midi => <Midi key={midi.slug} midi={midi} showPlay={false} />)}
+          {midis.map((midi, i) =>
+            <Fragment key={midi.slug}>
+              <Midi midi={midi} showPlay={false} />
+              {i === 2 && <MidiFeedTopAd class='center' />}
+              {i === 10 && <MidiFeedAd />}
+            </Fragment>
+          )}
           <MidiFeedAd />
         </div>
 

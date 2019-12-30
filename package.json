@@ -21,7 +21,7 @@
         "@babel/plugin-transform-react-jsx",
         {
           "pragma": "h",
-          "pragmaFrag": "\"span\"",
+          "pragmaFrag": "Fragment",
           "useBuiltIns": true
         }
       ],
