@@ -24,7 +24,7 @@ export default class Search extends Component {
         class={c({
           'o-90': !focused
         }, 'grow-subtle', className)}
-        placeholder='Search'
+        placeholder='Search for MIDI files'
         value={lastSearch}
         onBlur={this.handleBlur}
         onFocus={this.handleFocus}
