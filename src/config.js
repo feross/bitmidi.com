@@ -84,4 +84,4 @@ export const theme = {
 }
 
 // Number of results on pages with lists
-export const pageSize = 20
+export const pageSize = 10
