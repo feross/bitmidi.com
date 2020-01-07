@@ -54,7 +54,7 @@ export default class HomePage extends Page {
             <Fragment key={midi.slug}>
               <Midi midi={midi} showPlay={false} />
               {i === 2 && <MidiFeedTopAd />}
-              {i === 10 && <MidiFeedAd />}
+              {i % 9 === 0 && <MidiFeedAd />}
             </Fragment>
           )}
           <MidiFeedAd />
