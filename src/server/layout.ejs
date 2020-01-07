@@ -62,8 +62,9 @@
     </script>
     <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
 
-    <%_ if (config.isProd) { _%>
+    <%_ if (true || config.isProd) { _%>
       <%# AdSense %>
+      <!--
       <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>
       <script>
         (adsbygoogle = window.adsbygoogle || []).push({
@@ -71,6 +72,7 @@
           enable_page_level_ads: true
         })
       </script>
+      -->
     <%_ } _%>
 
     <%# Google Analytics %>

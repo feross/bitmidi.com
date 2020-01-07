@@ -1,17 +1,17 @@
 import { h } from 'preact' /** @jsx h */
 
-import Adsense from './adsense'
+// import Adsense from './adsense'
 import CarbonAd from './carbon-ad'
-import Random from './random'
+// import Random from './random'
 
-const AdsenseDisplay1 = props => (
-  <Adsense
-    data-ad-format='auto'
-    data-ad-slot='2581488270'
-    data-full-width-responsive='true'
-    {...props}
-  />
-)
+// const AdsenseDisplay1 = props => (
+//   <Adsense
+//     data-ad-format='auto'
+//     data-ad-slot='2581488270'
+//     data-full-width-responsive='true'
+//     {...props}
+//   />
+// )
 
 // const AdsenseFeed1 = props => (
 //   <Adsense
@@ -44,18 +44,26 @@ export const MidiPageAd = props => (
   <CarbonAd {...props} />
 )
 
-// Carbon does not allow other ads on the same page, so when <Random> selects
-// index 1 (i.e. Carbon), ensure that an empty <div> is shown in the second unit
 export const MidiFeedTopAd = props => (
-  <Random>
-    <AdsenseDisplay1 {...props} />
-    <CarbonAd {...props} />
-  </Random>
+  <CarbonAd {...props} />
 )
 
+// Carbon does not allow other ads on the same page, so when <Random> selects
+// index 1 (i.e. Carbon), ensure that an empty <div> is shown in the second unit
+// export const MidiFeedTopAd = props => (
+//   <Random>
+//     <AdsenseDisplay1 {...props} />
+//     <CarbonAd {...props} />
+//   </Random>
+// )
+
 export const MidiFeedAd = props => (
-  <Random>
-    <AdsenseDisplay1 {...props} />
-    <div />
-  </Random>
+  null
 )
+
+// export const MidiFeedAd = props => (
+//   <Random>
+//     <AdsenseDisplay1 {...props} />
+//     <div />
+//   </Random>
+// )
