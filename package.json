@@ -104,7 +104,7 @@
     "preact": "^10.0.1",
     "preact-context-provider": "^2.0.0-preactx.2",
     "preact-render-to-string": "^5.1.0",
-    "quick-lru": "^4.0.1",
+    "quick-lru": "^5.0.0",
     "reddit": "^1.0.0",
     "rollbar": "^2.13.0",
     "send": "^0.17.1",
