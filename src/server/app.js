@@ -7,7 +7,7 @@ import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
 import rateLimit from 'express-rate-limit'
 import session from 'express-session'
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 import { join, dirname } from 'path'
 import { readFileSync } from 'fs'
 
