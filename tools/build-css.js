@@ -36,7 +36,7 @@ async function run () {
     './src/css/*.css'
   ]
 
-  const files = purge(css)
+  const files = await purge(css)
 
   // Concat all CSS files
   let bundle = files.reduce((acc, file) => {
@@ -63,7 +63,7 @@ async function run () {
 /**
  * Removes unused CSS declarations from CSS files
  */
-function purge (css) {
+async function purge (css) {
   // Files to search for used selectors. Used selectors will not be purged.
   const content = [
     './src/views/*.js',
@@ -76,15 +76,14 @@ function purge (css) {
     ...Object.values(theme).map(color => new RegExp(`.*?${color}.*?`))
   ]
 
-  const purgeCss = new PurgeCss({
+  const files = await new PurgeCss().purge({
     css,
     content,
     whitelistPatternsChildren,
     keyframes: true,
+    variables: true,
     rejected: argv.debug
   })
-
-  const files = purgeCss.purge()
 
   // Print removed CSS selectors
   if (argv.debug) {
