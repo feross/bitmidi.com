@@ -1,15 +1,15 @@
 import glob from 'glob'
 import minimist from 'minimist'
-import mkdirp from 'mkdirp'
 import ora from 'ora'
 import sha256 from 'simple-sha256'
 import { promisify } from 'util'
 import { join, basename } from 'path'
 import {
-  copyFileSync,
   chmodSync,
-  readFile,
-  constants as fsConstants
+  constants as fsConstants,
+  copyFileSync,
+  mkdirSync,
+  readFile
 } from 'fs'
 
 import { rootPath } from '../src/config'
@@ -35,7 +35,7 @@ async function init () {
 
   const spinner = ora('Starting...').start()
 
-  mkdirp.sync(UPLOAD_PATH)
+  mkdirSync(UPLOAD_PATH, { recursive: true })
 
   spinner.text = `Finding MIDI files in ${midiPath}...`
 

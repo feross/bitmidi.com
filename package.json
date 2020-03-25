@@ -92,7 +92,6 @@
     "knex": "^0.20.0",
     "load-script2": "^2.0.2",
     "material-design-icons": "^3.0.1",
-    "mkdirp": "^0.5.1",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "node-schedule": "^1.3.2",

@@ -4,21 +4,15 @@ import Debug from 'debug'
 import ImageminGm from 'imagemin-gm'
 import ImageminWebp from 'imagemin-webp'
 import imageSize from 'image-size'
-import mkdirp from 'mkdirp'
 import parseUrl from 'parseurl'
 import send from 'send'
-import { access, readFile, writeFile } from 'fs'
 import { dirname, extname, join, normalize, relative, resolve, sep } from 'path'
-import { promisify } from 'util'
+import { promises as fs } from 'fs'
 import { randomBytes } from 'crypto'
 import { tmpdir } from 'os'
 
+const { access, readFile, writeFile, mkdir } = fs
 const debug = Debug('bitmidi:serve-webp')
-
-const accessAsync = promisify(access)
-const mkdirpAsync = promisify(mkdirp)
-const readFileAsync = promisify(readFile)
-const writeFileAsync = promisify(writeFile)
 
 const UP_PATH_REGEXP = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -99,7 +93,7 @@ export default function serveWebp (root, opts = {}) {
         // webp file was not in cache folder
         try {
           // ensure that original image file exists
-          await accessAsync(path)
+          await access(path)
         } catch {
           // if original image file is missing, then skip running imagemin
           return next()
@@ -121,7 +115,7 @@ export default function serveWebp (root, opts = {}) {
       .pipe(res)
 
     async function convertToWebp () {
-      let file = await readFileAsync(path)
+      let file = await readFile(path)
       if (isLow) {
         const { width } = imageSize(file)
         if (width > 960) {
@@ -132,8 +126,8 @@ export default function serveWebp (root, opts = {}) {
         file = await convertWebp(file)
       }
       const outputPath = join(cacheRoot, relativeWebpPath)
-      await mkdirpAsync(dirname(outputPath))
-      await writeFileAsync(outputPath, file)
+      await mkdir(dirname(outputPath), { recursive: true })
+      await writeFile(outputPath, file)
     }
   }
 }
