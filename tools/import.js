@@ -2,21 +2,17 @@ import glob from 'glob'
 import minimist from 'minimist'
 import ora from 'ora'
 import sha256 from 'simple-sha256'
-import { promisify } from 'util'
 import { join, basename } from 'path'
 import {
   chmodSync,
   constants as fsConstants,
   copyFileSync,
   mkdirSync,
-  readFile
+  readFileSync
 } from 'fs'
 
 import { rootPath } from '../src/config'
 import Midi from '../src/models/midi'
-
-const globAsync = promisify(glob)
-const readFileAsync = promisify(readFile)
 
 const UPLOAD_PATH = join(rootPath, 'uploads')
 
@@ -39,14 +35,14 @@ async function init () {
 
   spinner.text = `Finding MIDI files in ${midiPath}...`
 
-  let filePaths = await globAsync('**/*.mid', { cwd: midiPath, nocase: true })
+  let filePaths = glob.sync('**/*.mid', { cwd: midiPath, nocase: true })
   filePaths = filePaths.map(filePath => join(midiPath, filePath))
 
   for (const [i, filePath] of filePaths.entries()) {
     spinner.text = `Processing file ${i} / ${filePaths.length}...`
 
     const fileName = basename(filePath)
-    const fileData = await readFileAsync(filePath)
+    const fileData = readFileSync(filePath)
     const hash = sha256.sync(fileData)
 
     let midi = await Midi
