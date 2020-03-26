@@ -62,8 +62,8 @@ export default class RelatedPage extends Page {
           {results.map((midi, i) =>
             <Fragment key={midi.slug}>
               <Midi midi={midi} showImage={false} showPlay={false} />
-              {i === 2 && <MidiFeedTopAd />}
-              {i % 9 === 0 && <MidiFeedAd />}
+              {i === 2 && <MidiFeedTopAd class='center' />}
+              {i % 9 === 0 && <MidiFeedAd class='center' />}
             </Fragment>
           )}
         </div>

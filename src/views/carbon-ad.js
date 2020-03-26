@@ -23,7 +23,7 @@ export default class CarbonAd extends Component {
       return (
         <div
           class={c('bg-washed-red h4', className)}
-          style={{ maxWidth: 330, margin: '0 auto' }}
+          style={{ maxWidth: 330 }}
           {...rest}
         >
           Carbon
