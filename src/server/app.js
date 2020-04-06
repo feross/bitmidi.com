@@ -199,6 +199,11 @@ export default function init () {
     //   - Before: script-src 'strict-dynamic' 'nonce-${res.locals.nonce}'
     //     Why changed: AdSense uses document.write() to write inline scripts
     //     without nonce, which requires 'unsafe-inline'
+    //   - Before: default-src 'self' data:; connect-src *; frame-ancestors *;
+    //             frame-src *; img-src *;
+    //     Why changed: Optimize prefetches from a random URL and rather than
+    //     add yet another execption (prefetch-src *;) let's just keep things
+    //     simple.
     //   - TODO: Remove script-src 'unsafe-eval' once wasm-unsafe-eval ships
     //     https://bugs.chromium.org/p/chromium/issues/detail?id=948834&can=1&q=wasm-eval
     //   - TODO: Remove script-src * 'unsafe-inline' fallback once Safari
@@ -208,20 +213,7 @@ export default function init () {
       base-uri
         'none'
       ;
-      connect-src
-        *
-      ;
       default-src
-        'self'
-        data:
-      ;
-      frame-ancestors
-        *
-      ;
-      frame-src
-        *
-      ;
-      img-src
         *
       ;
       object-src
