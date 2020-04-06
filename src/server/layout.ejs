@@ -45,6 +45,9 @@
     <%_ } else { _%>
       <link rel='stylesheet' href='/bundle.css?c=dev' />
     <%_ } _%>
+
+    <%# Optimize %>
+    <script type="text/javascript">(function(){var bsa_optimize=document.createElement('script');bsa_optimize.type='text/javascript';bsa_optimize.async=true;bsa_optimize.src='https://cdn-s2s.buysellads.net/pub/bitmidi.js?'+(new Date()-new Date()%3600000);(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);})();</script>
   </head>
 
   <body class='sans-serif f5 fw3 ma0 pa0 overflow-y-scroll'>
@@ -62,7 +65,7 @@
     </script>
     <script async src='/bundle.js?c=<%= scriptHash %>' nonce='<%= nonce %>'></script>
 
-    <%_ if (true || config.isProd) { _%>
+    <%_ if (config.isProd) { _%>
       <%# AdSense %>
       <!--
       <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>

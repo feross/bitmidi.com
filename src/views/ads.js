@@ -4,6 +4,23 @@ import { h } from 'preact' /** @jsx h */
 import CarbonAd from './carbon-ad'
 // import Random from './random'
 
+// /8691100/BitMidi_S2S_Leaderboard_ATF
+export const OptimizeLeaderboardATF = props => (
+  <div id='bsa-zone_1579198275278-0_123456' />
+)
+
+export const MidiPageAd = props => (
+  <CarbonAd {...props} />
+)
+
+export const MidiFeedTopAd = props => (
+  <CarbonAd {...props} />
+)
+
+export const MidiFeedAd = props => (
+  null
+)
+
 // const AdsenseDisplay1 = props => (
 //   <Adsense
 //     data-ad-format='auto'
@@ -40,14 +57,6 @@ import CarbonAd from './carbon-ad'
 //   />
 // )
 
-export const MidiPageAd = props => (
-  <CarbonAd {...props} />
-)
-
-export const MidiFeedTopAd = props => (
-  <CarbonAd {...props} />
-)
-
 // Carbon does not allow other ads on the same page, so when <Random> selects
 // index 1 (i.e. Carbon), ensure that an empty <div> is shown in the second unit
 // export const MidiFeedTopAd = props => (
@@ -56,10 +65,6 @@ export const MidiFeedTopAd = props => (
 //     <CarbonAd {...props} />
 //   </Random>
 // )
-
-export const MidiFeedAd = props => (
-  null
-)
 
 // export const MidiFeedAd = props => (
 //   <Random>
