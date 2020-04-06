@@ -107,6 +107,11 @@ export default function init () {
   const faviconPath = join(rootPath, 'static', 'favicon.ico')
   app.use(favicon(faviconPath, { maxAge: config.maxAgeStatic }))
 
+  // Serve ads.txt redirect
+  app.get('/ads.txt', (req, res) => {
+    res.redirect(301, 'https://cdn4.buysellads.net/ads.txt')
+  })
+
   // Serve static files
   const iconsPath = dirname(require.resolve('material-design-icons'))
   app.use('/icons', serveStatic(iconsPath))
