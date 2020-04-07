@@ -5,7 +5,9 @@ import { isBrowser, isProd } from '../config'
 
 export default class OptimizeAd extends Component {
   componentDidMount () {
-    if (!isBrowser || !isProd) return
+    const { store } = this.context
+    if (!isBrowser || !isProd || store.app.isServerRendered) return
+
     const { id } = this.props
     window.optimize = window.optimize || { queue: [] }
     window.optimize.queue.push(() => {
