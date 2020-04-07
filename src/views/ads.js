@@ -1,24 +1,42 @@
 import { h } from 'preact' /** @jsx h */
 
 // import Adsense from './adsense'
-import CarbonAd from './carbon-ad'
+// import CarbonAd from './carbon-ad'
+import OptimizeAd from './optimize-ad'
 // import Random from './random'
 
-// /8691100/BitMidi_S2S_Leaderboard_ATF
 export const OptimizeLeaderboardATF = props => (
-  <div id='bsa-zone_1579198275278-0_123456' />
+  <OptimizeAd id='bsa-zone_1579198275278-0_123456' {...props} />
+)
+
+export const OptimizeLeaderboardMid = props => (
+  <OptimizeAd id='bsa-zone_1579198330476-0_123456' {...props} />
+)
+
+export const OptimizeLeaderboardBTF = props => (
+  <OptimizeAd id='bsa-zone_1579198373191-8_123456' {...props} />
+)
+
+export const OptimizeLeftRailATF = props => (
+  <OptimizeAd id='bsa-zone_1579198421810-5_123456' {...props} />
+)
+
+export const OptimizeRightRailATF = props => (
+  <OptimizeAd id='bsa-zone_1579198463316-9_123456' {...props} />
 )
 
 export const MidiPageAd = props => (
-  <CarbonAd {...props} />
+  <OptimizeRightRailATF {...props} />
+  // <CarbonAd {...props} />
 )
 
 export const MidiFeedTopAd = props => (
-  <CarbonAd {...props} />
+  <OptimizeLeaderboardATF {...props} />
+  // <CarbonAd {...props} />
 )
 
 export const MidiFeedAd = props => (
-  null
+  <OptimizeLeaderboardMid {...props} />
 )
 
 // const AdsenseDisplay1 = props => (
