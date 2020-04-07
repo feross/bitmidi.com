@@ -41,6 +41,14 @@ const Footer = (_, { store }) => {
         <HorizListDivider />
 
         <HorizListItem>
+          <Link href='/privacy'>
+            Privacy
+          </Link>
+        </HorizListItem>
+
+        <HorizListDivider />
+
+        <HorizListItem>
           Built by Feross
         </HorizListItem>
       </div>

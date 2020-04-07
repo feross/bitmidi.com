@@ -5,6 +5,7 @@ import EmbedPage from './views/embed-page'
 import ErrorPage from './views/error-page'
 import HomePage from './views/home-page'
 import MidiPage from './views/midi-page'
+import PrivacyPage from './views/privacy-page'
 import RandomPage from './views/random-page'
 import RelatedPage from './views/related-page'
 import SearchPage from './views/search-page'
@@ -22,6 +23,11 @@ export default [
     path: '/about',
     page: AboutPage,
     sitemap: true
+  },
+  {
+    name: 'privacy',
+    path: '/privacy',
+    page: PrivacyPage
   },
   {
     name: 'search',

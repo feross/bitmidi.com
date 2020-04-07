@@ -11,8 +11,10 @@ const Heading = props => {
 
   const HeadingElement = `h${level}`
 
+  const fontSizes = ['f3', 'f4', 'f5', 'f6', 'f6']
+
   return (
-    <HeadingElement class={c('mv2 f3', className)} {...rest}>
+    <HeadingElement class={c('mv3', fontSizes[level - 1], className)} {...rest}>
       {children}
     </HeadingElement>
   )
