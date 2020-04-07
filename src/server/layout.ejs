@@ -48,7 +48,7 @@
 
     <%_ if (config.isProd) { _%>
       <%# Optimize %>
-      <script async src='https://cdn-s2s.buysellads.net/pub/bitmidi.js'></script>
+      <script async src='https://cdn-s2s.buysellads.net/pub/bitmidi.js?<%= new Date()-new Date()%600000 %>'></script>
     <%_ } _%>
 
   </head>
