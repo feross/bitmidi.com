@@ -200,7 +200,7 @@ export default function init () {
     //     Why changed: AdSense uses document.write() to write inline scripts
     //     without nonce, which requires 'unsafe-inline'
     //   - Before: default-src 'self' data:; connect-src *; frame-ancestors *;
-    //             frame-src *; img-src *;
+    //             frame-src *; img-src *; object-src 'none'; script-src 'unsafe-eval' * 'unsafe-inline'; style-src 'self' 'unsafe-inline';
     //     Why changed: Optimize prefetches from a random URL and rather than
     //     add yet another execption (prefetch-src *;) let's just keep things
     //     simple.
@@ -212,19 +212,6 @@ export default function init () {
     res.header('Content-Security-Policy', oneLine`
       base-uri
         'none'
-      ;
-      default-src
-        *
-      ;
-      object-src
-        'none'
-      ;
-      script-src
-        'unsafe-eval' * 'unsafe-inline'
-      ;
-      style-src
-        'self'
-        'unsafe-inline'
       ;
     `)
 
