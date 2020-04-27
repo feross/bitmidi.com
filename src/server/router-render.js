@@ -37,7 +37,11 @@ router.use((req, res, next) => {
   }
 
   function update () {
-    renderer.render()
+    try {
+      renderer.render()
+    } catch (err) {
+      next(err)
+    }
   }
 
   let isDone = false
@@ -75,9 +79,16 @@ router.use((req, res, next) => {
         ...store.app.meta
       }
 
+      let content
+      try {
+        content = renderer.html()
+      } catch (err) {
+        return next(err)
+      }
+
       res
         .status(status)
-        .render('layout', { content: renderer.html(), store, meta })
+        .render('layout', { content, store, meta })
     }
   }
 })
