@@ -4,7 +4,7 @@ import { h } from 'preact' /** @jsx h */
 // import CarbonAd from './carbon-ad'
 import NeworAd from './newor-ad'
 import OptimizeAd from './optimize-ad'
-import Random from './random'
+// import Random from './random'
 
 export const OptimizeLeaderboardATF = props => (
   <OptimizeAd id='bsa-zone_1579198275278-0_123456' {...props} />
@@ -47,33 +47,25 @@ export const NeworStickyFooter = props => (
 )
 
 export const MidiPageAd = props => (
-  <Random>
-    <OptimizeRightRailATF {...props} />
-    <NeworSquare {...props} />
-  </Random>
+  // <OptimizeRightRailATF {...props} />
+  <NeworSquare {...props} />
   // <CarbonAd {...props} />
 )
 
 export const MidiFeedTopAd = props => (
-  <Random>
-    <OptimizeLeaderboardATF {...props} />
-    <NeworLeaderboard {...props} />
-  </Random>
+  // <OptimizeLeaderboardATF {...props} />
+  <NeworLeaderboard {...props} />
   // <CarbonAd {...props} />
 )
 
 export const MidiFeedAd = props => (
-  <Random>
-    <OptimizeLeaderboardMid {...props} />
-    <NeworLeaderboardLarge {...props} />
-  </Random>
+  // <OptimizeLeaderboardMid {...props} />
+  <NeworLeaderboardLarge {...props} />
 )
 
 export const PageLevelAd = props => (
-  <Random>
-    <div />
-    <NeworStickyFooter {...props} />
-  </Random>
+  // <div />
+  <NeworStickyFooter {...props} />
 )
 
 // const AdsenseDisplay1 = props => (
