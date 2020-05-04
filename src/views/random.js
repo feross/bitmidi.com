@@ -1,7 +1,7 @@
 import { toChildArray } from 'preact'
 import { useState } from 'preact/hooks'
 
-const ROTATE_INTERVAL = 10 * 60 * 1000 // 10 minutes
+const ROTATE_INTERVAL = 60 * 1000 // 1 minute
 
 const Random = ({ children }) => {
   children = toChildArray(children)

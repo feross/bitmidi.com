@@ -1,11 +1,22 @@
 import { Component, h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
-import { isProd } from '../config'
+import { isBrowser, isProd } from '../config'
 
 export default class NeworAd extends Component {
   shouldComponentUpdate () {
     return false
+  }
+
+  ref = elem => {
+    const { store } = this.context
+    const { id } = this.props
+    if (!isBrowser || !isProd || store.app.isServerRendered) return
+
+    if (elem && !elem.getAttribute('data-processed')) {
+      console.log('WALDO REFRESH TAG')
+      window.waldo.refreshTag(id)
+    }
   }
 
   render (props) {
@@ -23,7 +34,7 @@ export default class NeworAd extends Component {
     }
 
     return (
-      <div {...props} />
+      <div ref={this.ref} {...props} />
     )
   }
 }
