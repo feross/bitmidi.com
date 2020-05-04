@@ -16,7 +16,7 @@ cp -R /home/feross/www/bitmidi.com /home/feross/www/build-bitmidi.com
 
 cd /home/feross/www/build-bitmidi.com && git pull
 cd /home/feross/www/build-bitmidi.com && rm -rf node_modules
-cd /home/feross/www/build-bitmidi.com && npm install --no-progress
+cd /home/feross/www/build-bitmidi.com && npm ci --no-progress
 cd /home/feross/www/build-bitmidi.com && npm run build
 cd /home/feross/www/build-bitmidi.com && npm prune --production --no-progress
 
