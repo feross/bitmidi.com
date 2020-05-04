@@ -5,6 +5,7 @@ import routes from '../routes'
 import Header from './header'
 import Footer from './footer'
 import Title from './title'
+import { PageLevelAd } from './ads'
 
 export default class App extends Component {
   render (props, _, { store }) {
@@ -24,6 +25,7 @@ export default class App extends Component {
             <div class='tc light-gray'>
               {errors.map(err => <div key={err.message}><small>{err.message}</small></div>)}
             </div>
+            <PageLevelAd />
           </main>
           <Footer />
         </div>

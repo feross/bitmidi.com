@@ -3,7 +3,7 @@ import { h } from 'preact' /** @jsx h */
 // import Adsense from './adsense'
 // import CarbonAd from './carbon-ad'
 import OptimizeAd from './optimize-ad'
-// import Random from './random'
+import Random from './random'
 
 export const OptimizeLeaderboardATF = props => (
   <OptimizeAd id='bsa-zone_1579198275278-0_123456' {...props} />
@@ -25,18 +25,54 @@ export const OptimizeRightRailATF = props => (
   <OptimizeAd id='bsa-zone_1579198463316-9_123456' {...props} />
 )
 
+// 728x90/970x90/320x50
+export const NeworLeaderboard = props => (
+  <div id='waldo-tag-7780' {...props} />
+)
+
+// 728x90/970x90/970x250/320x50
+export const NeworLeaderboardLarge = props => (
+  <div id='waldo-tag-7782' {...props} />
+)
+
+// 300x250/300x600
+export const NeworSquare = props => (
+  <div id='waldo-tag-7781' {...props} />
+)
+
+// 728x90/320x50 sticky footer
+export const NeworStickyFooter = props => (
+  <div id='waldo-tag-7783' {...props} />
+)
+
 export const MidiPageAd = props => (
-  <OptimizeRightRailATF {...props} />
+  <Random>
+    <OptimizeRightRailATF {...props} />
+    <NeworSquare {...props} />
+  </Random>
   // <CarbonAd {...props} />
 )
 
 export const MidiFeedTopAd = props => (
-  <OptimizeLeaderboardATF {...props} />
+  <Random>
+    <OptimizeLeaderboardATF {...props} />
+    <NeworLeaderboard {...props} />
+  </Random>
   // <CarbonAd {...props} />
 )
 
 export const MidiFeedAd = props => (
-  <OptimizeLeaderboardMid {...props} />
+  <Random>
+    <OptimizeLeaderboardMid {...props} />
+    <NeworLeaderboardLarge {...props} />
+  </Random>
+)
+
+export const PageLevelAd = props => (
+  <Random>
+    <div />
+    <NeworStickyFooter {...props} />
+  </Random>
 )
 
 // const AdsenseDisplay1 = props => (

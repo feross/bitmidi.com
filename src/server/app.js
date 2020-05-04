@@ -7,14 +7,15 @@ import MySQLSession from 'express-mysql-session'
 import oneLine from 'common-tags/lib/oneLine'
 import rateLimit from 'express-rate-limit'
 import session from 'express-session'
-import { v4 as uuid } from 'uuid'
 import { join, dirname } from 'path'
 import { readFileSync } from 'fs'
+import { v4 as uuid } from 'uuid'
 
 import serveWebp from '../lib/serve-webp'
 import * as config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
 
+import routerAds from './router-ads'
 import routerApi from './router-api'
 import routerFeed from './router-feed'
 import routerRender from './router-render'
@@ -107,11 +108,6 @@ export default function init () {
   const faviconPath = join(rootPath, 'static', 'favicon.ico')
   app.use(favicon(faviconPath, { maxAge: config.maxAgeStatic }))
 
-  // Serve ads.txt redirect
-  app.get('/ads.txt', (req, res) => {
-    res.redirect(301, 'https://cdn4.buysellads.net/ads.txt')
-  })
-
   // Serve static files
   const iconsPath = dirname(require.resolve('material-design-icons'))
   app.use('/icons', serveStatic(iconsPath))
@@ -160,7 +156,12 @@ export default function init () {
 
   // Serve API routes
   app.use('/api', routerApi)
+
+  // Server feed routes
   app.use(routerFeed)
+
+  // Serve ads.txt route
+  app.use(routerAds)
 
   // Headers to send with HTML responses
   app.use((req, res, next) => {
