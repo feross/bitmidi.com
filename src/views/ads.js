@@ -2,6 +2,7 @@ import { h } from 'preact' /** @jsx h */
 
 // import Adsense from './adsense'
 // import CarbonAd from './carbon-ad'
+import NeworAd from './newor-ad'
 import OptimizeAd from './optimize-ad'
 import Random from './random'
 
@@ -27,22 +28,22 @@ export const OptimizeRightRailATF = props => (
 
 // 728x90/970x90/320x50
 export const NeworLeaderboard = props => (
-  <div id='waldo-tag-7780' {...props} />
+  <NeworAd id='waldo-tag-7780' {...props} />
 )
 
 // 728x90/970x90/970x250/320x50
 export const NeworLeaderboardLarge = props => (
-  <div id='waldo-tag-7782' {...props} />
+  <NeworAd id='waldo-tag-7782' {...props} />
 )
 
 // 300x250/300x600
 export const NeworSquare = props => (
-  <div id='waldo-tag-7781' {...props} />
+  <NeworAd id='waldo-tag-7781' {...props} />
 )
 
 // 728x90/320x50 sticky footer
 export const NeworStickyFooter = props => (
-  <div id='waldo-tag-7783' {...props} />
+  <NeworAd id='waldo-tag-7783' {...props} />
 )
 
 export const MidiPageAd = props => (
