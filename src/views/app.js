@@ -25,9 +25,9 @@ export default class App extends Component {
             <div class='tc light-gray'>
               {errors.map(err => <div key={err.message}><small>{err.message}</small></div>)}
             </div>
-            <PageLevelAd />
           </main>
           <Footer />
+          <PageLevelAd />
         </div>
       )
     } else {
