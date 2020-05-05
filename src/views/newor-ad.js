@@ -8,12 +8,12 @@ export default class NeworAd extends Component {
     return false
   }
 
-  ref = elem => {
+  componentDidMount () {
     const { store } = this.context
     const { id } = this.props
     if (!isBrowser || !isProd || store.app.isServerRendered) return
 
-    if (elem && !elem.getAttribute('data-processed')) {
+    if (window.waldo && window.waldo.refreshTag) {
       console.log('WALDO REFRESH TAG')
       window.waldo.refreshTag(id)
     }
@@ -34,7 +34,7 @@ export default class NeworAd extends Component {
     }
 
     return (
-      <div ref={this.ref} {...props} />
+      <div {...props} />
     )
   }
 }
