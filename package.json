@@ -131,7 +131,7 @@
     "purgecss": "^2.1.2",
     "rimraf": "^3.0.2",
     "simple-sha256": "^1.0.0",
-    "standard": "*",
+    "standard": ">=14.3.4",
     "tinyify": "^2.5.2",
     "watchify": "^3.11.1"
   },
