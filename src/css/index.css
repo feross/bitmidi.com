@@ -155,6 +155,11 @@
  * Ad-specific styles
  */
 
+body {
+  /* sometimes the sidebar ad causes the page to have horizontal scroll */
+  overflow-x: hidden;
+}
+
 .newor-ad iframe {
   /* center oversized ads when they overflow */
   margin-left: 50%;

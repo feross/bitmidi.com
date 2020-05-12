@@ -4,6 +4,7 @@ import { h } from 'preact' /** @jsx h */
 // import CarbonAd from './carbon-ad'
 import NeworAd from './newor-ad'
 import OptimizeAd from './optimize-ad'
+import c from 'classnames'
 // import Random from './random'
 
 /**
@@ -120,8 +121,8 @@ export const MidiFeedAd = props => (
   <NeworLeaderboardLarge {...props} />
 )
 
-export const MidiFeedSidebarAd = props => (
-  <div style={{ position: 'absolute', marginLeft: 'calc(50% + 20px)' }} {...props}>
+export const MidiFeedSidebarAd = ({ class: className, rest }) => (
+  <div class={c('dn db-l absolute', className)} style={{ marginLeft: '48rem' }} {...rest}>
     <NeworSquare />
   </div>
 )

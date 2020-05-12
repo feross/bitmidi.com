@@ -34,7 +34,7 @@ export default class NeworAd extends Component {
     }
 
     return (
-      <div class={c('newor-ad', className)} {...props} />
+      <div class={c('newor-ad', className)} {...rest} />
     )
   }
 }
