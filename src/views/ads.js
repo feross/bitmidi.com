@@ -63,7 +63,7 @@ export const MidiPageBottomAd = props => (
 
 export const MidiFeedTopAd = props => (
   // <OptimizeLeaderboardATF {...props} />
-  <NeworSquare {...props} />
+  <NeworSquare class='tc' {...props} />
   // <CarbonAd {...props} />
 )
 
