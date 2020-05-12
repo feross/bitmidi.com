@@ -74,7 +74,7 @@ async function purge (css) {
   const whitelistPatternsChildren = [
     // Theme colors
     ...Object.values(theme).map(color => new RegExp(`.*${color}.*`)),
-    /newor-ad/
+    /.*newor-ad.*/
   ]
 
   const files = await new PurgeCss().purge({

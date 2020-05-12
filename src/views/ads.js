@@ -31,19 +31,19 @@ export const OptimizeRightRailATF = props => (
   <OptimizeAd id='bsa-zone_1579198463316-9_123456' {...props} />
 )
 
-export const NeworLeaderboard = props => (
+export const NeworLeaderboard = ({ class: className, rest }) => (
   // 728x90/970x90/320x50
-  <NeworAd id='waldo-tag-7780' {...props} />
+  <NeworAd id='waldo-tag-7780' class={c('newor-ad-overflow-fix', className)} {...rest} />
 )
 
-export const NeworLeaderboardLarge = props => (
+export const NeworLeaderboardLarge = ({ class: className, rest }) => (
   // 728x90/970x90/970x250/320x50
-  <NeworAd id='waldo-tag-7782' {...props} />
+  <NeworAd id='waldo-tag-7782' class={c('newor-ad-overflow-fix', className)} {...rest} />
 )
 
-export const NeworSquare = props => (
+export const NeworSquare = ({ class: className, rest }) => (
   // 300x250/300x600
-  <NeworAd id='waldo-tag-7781' {...props} />
+  <NeworAd id='waldo-tag-7781' class={c('newor-ad-overflow-fix', className)} {...rest} />
 )
 
 export const NeworStickyFooter = props => (

@@ -160,8 +160,8 @@ body {
   overflow-x: hidden;
 }
 
-.newor-ad iframe {
+.newor-ad-overflow-fix iframe {
   /* center oversized ads when they overflow */
-  margin-left: 50% !important;
-  transform: translateX(-50%) !important;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
