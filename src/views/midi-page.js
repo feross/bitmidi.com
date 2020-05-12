@@ -60,7 +60,7 @@ export default class MidiPage extends Page {
 
     return (
       <div>
-        <div>
+        <div class='mv4'>
           <div class='dib w-90'>
             <Heading>{midi.name}</Heading>
             <MidiMetadata midi={midi} />
@@ -74,6 +74,7 @@ export default class MidiPage extends Page {
         </div>
 
         <SidebarAd />
+
         <div class='mv4'>
           <Midi midi={midi} />
         </div>
@@ -115,10 +116,12 @@ export default class MidiPage extends Page {
           </div>
         </div>
 
-        <MidiPageTopAd class='center tc' />
+        <div class='mv4'>
+          <MidiPageTopAd class='center tc' />
+        </div>
 
         {midi.alternateNames &&
-          <div>
+          <div class='mv4'>
             <h3>This MIDI file has alternate names</h3>
             <p>
               <ul>
