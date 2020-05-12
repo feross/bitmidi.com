@@ -4,7 +4,6 @@ import oneLine from 'common-tags/lib/oneLine'
 import { origin, siteName } from '../config'
 import { doMidiGet } from '../actions/midi'
 
-import { MidiPageSquareAd, MidiPageBottomAd, PageLevelAd } from './ads'
 import Button from './button'
 import Heading from './heading'
 import Link from './link'
@@ -14,6 +13,7 @@ import Page from './page'
 import RelativeTime from './relative-time'
 import ShareButton from './share-button'
 import { HorizListItem, HorizListDivider } from './horiz-list'
+import { MidiPageTopAd, MidiPageAd, PageLevelAd, SidebarAd } from './ads'
 
 export default class MidiPage extends Page {
   async load () {
@@ -42,7 +42,7 @@ export default class MidiPage extends Page {
   }
 
   render (props, _, { store }) {
-    const { data, views } = store
+    const { data, player, views } = store
     const { colorScheme } = store.app
     const { midiSlug } = store.location.params
 
@@ -55,6 +55,8 @@ export default class MidiPage extends Page {
     const relatedMidis = views.related[midi.slug] &&
       views.related[midi.slug]
         .map(relatedMidiSlug => data.midis[relatedMidiSlug])
+
+    const isPlaying = player.currentSlug === midi.slug
 
     return (
       <div>
@@ -71,15 +73,19 @@ export default class MidiPage extends Page {
           </div>
         </div>
 
+        <SidebarAd />
         <div class='mv4'>
           <Midi midi={midi} />
         </div>
 
-        <div class='cf'>
+        <div class='mv4 cf'>
+          {/*
           <div class='fn fl-ns w-50-ns'>
-            <h3>🎶 Play now</h3>
+            <h3>🎶 Play this MIDI file</h3>
             <p>
-              Tap the play button above! ☝️
+              <Link title={`Play ${midi.name}`} onClick={this.handlePlayClick}>
+                {isPlaying ? 'Pause' : 'Play'} {midi.name}
+              </Link>
             </p>
 
             <h3>💿 Download this MIDI file</h3>
@@ -89,8 +95,27 @@ export default class MidiPage extends Page {
               </Link>
             </p>
           </div>
-          <MidiPageSquareAd class='fn fl-ns w-50-ns pl3-ns' />
+          <MidiPageTopAd class='fn fl-ns w-50-ns pl3-ns' />
+          */}
+          <div class='fn fl-ns w-50-ns'>
+            <h3>🎶 Play this MIDI file</h3>
+            <p>
+              <Link title={`Play ${midi.name}`} onClick={this.handlePlayClick}>
+                {isPlaying ? 'Pause' : 'Play'} {midi.name}
+              </Link>
+            </p>
+          </div>
+          <div class='fn fl-ns w-50-ns'>
+            <h3>💿 Download this MIDI file</h3>
+            <p>
+              <Link download={midi.name} href={midi.downloadUrl}>
+                Download {midi.name}
+              </Link>
+            </p>
+          </div>
         </div>
+
+        <MidiPageTopAd class='center tc' />
 
         {midi.alternateNames &&
           <div>
@@ -105,7 +130,7 @@ export default class MidiPage extends Page {
 
         {relatedMidis &&
           <div class='mv4'>
-            <Heading>Related MIDI Files <small>(they will blow your mind! 😳💥😵)</small></Heading>
+            <Heading>Related MIDI Files <small>(that will blow your mind 😳💥😵)</small></Heading>
             {
               relatedMidis.map(midi => {
                 return <Midi key={midi.slug} midi={midi} showImage={false} showPlay={false} />
@@ -121,10 +146,16 @@ export default class MidiPage extends Page {
             </div>
           </div>}
 
-        <MidiPageBottomAd />
+        <MidiPageAd />
         <PageLevelAd />
       </div>
     )
+  }
+
+  handlePlayClick = () => {
+    const { dispatch, store } = this.context
+    const { midiSlug } = store.location.params
+    dispatch('MIDI_PLAY_PAUSE', midiSlug)
   }
 }
 

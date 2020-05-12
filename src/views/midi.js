@@ -26,7 +26,7 @@ export default class Midi extends Component {
           color='white'
           href={showPlay ? null : midi.url}
           title={showPlay ? `Play ${midi.name}` : midi.name}
-          onClick={showPlay ? this.onClick : null}
+          onClick={showPlay ? this.handleClick : null}
         >
           {midi.image && showImage &&
             <Image
@@ -55,7 +55,7 @@ export default class Midi extends Component {
     )
   }
 
-  onClick = () => {
+  handleClick = () => {
     const { dispatch } = this.context
     const { midi } = this.props
     dispatch('MIDI_PLAY_PAUSE', midi.slug)

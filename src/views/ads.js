@@ -95,13 +95,13 @@ export const NeworStickyFooter = props => (
  * Midi page ads
  */
 
-export const MidiPageSquareAd = props => (
+export const MidiPageTopAd = props => (
   // <OptimizeRightRailATF {...props} />
-  <NeworSquare {...props} />
+  <NeworLeaderboard {...props} />
   // <CarbonAd {...props} />
 )
 
-export const MidiPageBottomAd = props => (
+export const MidiPageAd = props => (
   // <OptimizeLeaderboardBTF {...props} />
   <NeworLeaderboardLarge {...props} />
 )
@@ -121,15 +121,15 @@ export const MidiFeedAd = props => (
   <NeworLeaderboardLarge {...props} />
 )
 
-export const MidiFeedSidebarAd = ({ class: className, rest }) => (
+/**
+ * Page level ads
+ */
+
+export const SidebarAd = ({ class: className, rest }) => (
   <div class={c('dn db-l absolute', className)} style={{ marginLeft: '48rem' }} {...rest}>
     <NeworSquare />
   </div>
 )
-
-/**
- * Page level ads
- */
 
 export const PageLevelAd = props => (
   // <div />
