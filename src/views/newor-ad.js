@@ -25,7 +25,7 @@ export default class NeworAd extends Component {
     if (!isProd) {
       return (
         <div
-          class={c('bg-washed-red h4', className)}
+          class={c('newor-ad bg-washed-red h4', className)}
           {...rest}
         >
           Newor
