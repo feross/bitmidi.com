@@ -8,7 +8,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import { MidiFeedTopAd, MidiFeedAd, PageLevelAd } from './ads'
+import { MidiFeedTopAd, MidiFeedAd, PageLevelAd, MidiFeedSidebarAd } from './ads'
 
 export default class SearchPage extends Page {
   async load () {
@@ -49,11 +49,12 @@ export default class SearchPage extends Page {
 
         <Heading><span class='mid-gray'>Search for</span> '{q}'</Heading>
 
+        {page !== '0' && <MidiFeedSidebarAd />}
         <div class='mv4'>
           {results.map((midi, i) =>
             <Fragment key={midi.slug}>
               <Midi midi={midi} showImage={false} showPlay={false} />
-              {i === 2 && page !== '0' && <MidiFeedTopAd class='center' />}
+              {i === 4 && page !== '0' && <MidiFeedTopAd class='center' />}
               {i > 0 && i % 9 === 0 && page !== '0' && <MidiFeedAd class='center' />}
             </Fragment>
           )}

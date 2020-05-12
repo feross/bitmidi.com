@@ -150,3 +150,13 @@
 .midi-image:hover {
   opacity: 1;
 }
+
+/**
+ * Ad-specific styles
+ */
+
+.newor-ad iframe {
+  /* center oversized ads when they overflow */
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

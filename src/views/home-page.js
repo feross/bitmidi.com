@@ -8,7 +8,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import { MidiFeedTopAd, MidiFeedAd, PageLevelAd } from './ads'
+import { MidiFeedTopAd, MidiFeedAd, PageLevelAd, MidiFeedSidebarAd } from './ads'
 
 export default class HomePage extends Page {
   async load () {
@@ -49,11 +49,13 @@ export default class HomePage extends Page {
         {page === '0' && <HomePageHero numFiles={numFiles} />}
 
         <Heading class='tc mv4'>Popular MIDIs</Heading>
+
+        <MidiFeedSidebarAd />
         <div class='mv4'>
           {midis.map((midi, i) =>
             <Fragment key={midi.slug}>
               <Midi midi={midi} showPlay={false} />
-              {i === 2 && <MidiFeedTopAd class='center' />}
+              {i === 4 && <MidiFeedTopAd class='center' />}
               {i > 0 && i % 9 === 0 && <MidiFeedAd class='center' />}
             </Fragment>
           )}

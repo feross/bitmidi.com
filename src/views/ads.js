@@ -6,6 +6,10 @@ import NeworAd from './newor-ad'
 import OptimizeAd from './optimize-ad'
 // import Random from './random'
 
+/**
+ * Ad-network specific ads
+ */
+
 export const OptimizeLeaderboardATF = props => (
   <OptimizeAd id='bsa-zone_1579198275278-0_123456' {...props} />
 )
@@ -26,55 +30,28 @@ export const OptimizeRightRailATF = props => (
   <OptimizeAd id='bsa-zone_1579198463316-9_123456' {...props} />
 )
 
-// 728x90/970x90/320x50
 export const NeworLeaderboard = props => (
+  // 728x90/970x90/320x50
   <NeworAd id='waldo-tag-7780' {...props} />
 )
 
-// 728x90/970x90/970x250/320x50
 export const NeworLeaderboardLarge = props => (
+  // 728x90/970x90/970x250/320x50
   <NeworAd id='waldo-tag-7782' {...props} />
 )
 
-// 300x250/300x600
 export const NeworSquare = props => (
+  // 300x250/300x600
   <NeworAd id='waldo-tag-7781' {...props} />
 )
 
-// 728x90/320x50 sticky footer
 export const NeworStickyFooter = props => (
+  // 728x90/320x50 sticky footer
   <div id='waldo-sticky-footer-wrapper'>
     <div id='waldo-sticky-footer-inner'>
       <NeworAd id='waldo-tag-7783' {...props} />
     </div>
   </div>
-)
-
-export const MidiPageSquareAd = props => (
-  // <OptimizeRightRailATF {...props} />
-  <NeworSquare {...props} />
-  // <CarbonAd {...props} />
-)
-
-export const MidiPageBottomAd = props => (
-  // <OptimizeLeaderboardBTF {...props} />
-  <NeworLeaderboardLarge {...props} />
-)
-
-export const MidiFeedTopAd = props => (
-  // <OptimizeLeaderboardATF {...props} />
-  <NeworSquare class='tc' {...props} />
-  // <CarbonAd {...props} />
-)
-
-export const MidiFeedAd = props => (
-  // <OptimizeLeaderboardMid {...props} />
-  <NeworLeaderboardLarge {...props} />
-)
-
-export const PageLevelAd = props => (
-  // <div />
-  <NeworStickyFooter {...props} />
 )
 
 // const AdsenseDisplay1 = props => (
@@ -112,6 +89,51 @@ export const PageLevelAd = props => (
 //     {...props}
 //   />
 // )
+
+/**
+ * Midi page ads
+ */
+
+export const MidiPageSquareAd = props => (
+  // <OptimizeRightRailATF {...props} />
+  <NeworSquare {...props} />
+  // <CarbonAd {...props} />
+)
+
+export const MidiPageBottomAd = props => (
+  // <OptimizeLeaderboardBTF {...props} />
+  <NeworLeaderboardLarge {...props} />
+)
+
+/**
+ * Midi feed ads
+ */
+
+export const MidiFeedTopAd = props => (
+  // <OptimizeLeaderboardATF {...props} />
+  <NeworLeaderboard {...props} />
+  // <CarbonAd {...props} />
+)
+
+export const MidiFeedAd = props => (
+  // <OptimizeLeaderboardMid {...props} />
+  <NeworLeaderboardLarge {...props} />
+)
+
+export const MidiFeedSidebarAd = props => (
+  <div style={{ position: 'absolute', marginLeft: 'calc(50% + 20px)' }} {...props}>
+    <NeworSquare />
+  </div>
+)
+
+/**
+ * Page level ads
+ */
+
+export const PageLevelAd = props => (
+  // <div />
+  <NeworStickyFooter {...props} />
+)
 
 // Carbon does not allow other ads on the same page, so when <Random> selects
 // index 1 (i.e. Carbon), ensure that an empty <div> is shown in the second unit
