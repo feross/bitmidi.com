@@ -43,7 +43,11 @@ export const NeworSquare = props => (
 
 // 728x90/320x50 sticky footer
 export const NeworStickyFooter = props => (
-  <NeworAd id='waldo-tag-7783' {...props} />
+  <div id='waldo-sticky-footer-wrapper'>
+    <div id='waldo-sticky-footer-inner'>
+      <NeworAd id='waldo-tag-7783' {...props} />
+    </div>
+  </div>
 )
 
 export const MidiPageAd = props => (
