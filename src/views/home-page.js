@@ -8,7 +8,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import { MidiFeedTopAd, MidiFeedAd } from './ads'
+import { MidiFeedTopAd, MidiFeedAd, PageLevelAd } from './ads'
 
 export default class HomePage extends Page {
   async load () {
@@ -64,6 +64,7 @@ export default class HomePage extends Page {
           pageTotal={views.all.pageTotal}
           total={views.all.total}
         />
+        <PageLevelAd />
       </div>
     )
   }

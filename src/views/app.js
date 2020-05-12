@@ -5,7 +5,6 @@ import routes from '../routes'
 import Header from './header'
 import Footer from './footer'
 import Title from './title'
-import { PageLevelAd } from './ads'
 
 export default class App extends Component {
   render (props, _, { store }) {
@@ -27,7 +26,6 @@ export default class App extends Component {
             </div>
           </main>
           <Footer />
-          <PageLevelAd />
         </div>
       )
     } else {

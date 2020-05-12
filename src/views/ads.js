@@ -50,15 +50,20 @@ export const NeworStickyFooter = props => (
   </div>
 )
 
-export const MidiPageAd = props => (
+export const MidiPageSquareAd = props => (
   // <OptimizeRightRailATF {...props} />
   <NeworSquare {...props} />
   // <CarbonAd {...props} />
 )
 
+export const MidiPageBottomAd = props => (
+  // <OptimizeLeaderboardBTF {...props} />
+  <NeworLeaderboardLarge {...props} />
+)
+
 export const MidiFeedTopAd = props => (
   // <OptimizeLeaderboardATF {...props} />
-  <NeworLeaderboard {...props} />
+  <NeworSquare {...props} />
   // <CarbonAd {...props} />
 )
 

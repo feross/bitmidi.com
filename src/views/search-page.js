@@ -8,7 +8,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import { MidiFeedTopAd, MidiFeedAd } from './ads'
+import { MidiFeedTopAd, MidiFeedAd, PageLevelAd } from './ads'
 
 export default class SearchPage extends Page {
   async load () {
@@ -66,6 +66,7 @@ export default class SearchPage extends Page {
         </div>
 
         <Pagination page={page} pageTotal={pageTotal} total={total} />
+        {page !== '0' && <PageLevelAd />}
       </div>
     )
   }
