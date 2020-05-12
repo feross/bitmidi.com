@@ -162,6 +162,6 @@ body {
 
 .newor-ad iframe {
   /* center oversized ads when they overflow */
-  margin-left: 50%;
-  transform: translateX(-50%);
+  margin-left: 50% !important;
+  transform: translateX(-50%) !important;
 }
