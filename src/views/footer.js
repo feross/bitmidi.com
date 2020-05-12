@@ -13,7 +13,7 @@ const Footer = (_, { store }) => {
   if (app.pending > 0) return null
 
   return (
-    <footer class='f6 lh-copy mid-gray mv4 ph3 ph3-safe mw7 center tc'>
+    <footer class='f6 lh-copy mid-gray mt4 mb6 ph3 ph3-safe mw7 center tc'>
       <div class='mv3'>
         <RandomTip />
       </div>
