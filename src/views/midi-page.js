@@ -98,7 +98,7 @@ export default class MidiPage extends Page {
           </div>
           <MidiPageTopAd class='fn fl-ns w-50-ns pl3-ns' />
           */}
-          <div class='fn fl-ns w-50-ns'>
+          <div class='fn fl-ns w-50-ns pr3'>
             <h3>🎶 Play this MIDI file</h3>
             <p>
               <Link title={`Play ${midi.name}`} onClick={this.handlePlayClick}>
