@@ -85,3 +85,4 @@ export const theme = {
 
 // Number of results on pages with lists
 export const pageSize = 15
+export const maxPageSize = 50
