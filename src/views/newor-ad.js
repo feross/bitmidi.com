@@ -14,7 +14,6 @@ export default class NeworAd extends Component {
     if (!isBrowser || !isProd || store.app.isServerRendered) return
 
     if (window.waldo && window.waldo.refreshTag) {
-      console.log('WALDO REFRESH TAG')
       window.waldo.refreshTag(id)
     }
   }

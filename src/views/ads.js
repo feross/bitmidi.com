@@ -117,7 +117,11 @@ export const MidiPageAd = props => (
 
 export const MidiPageSidebarAd = ({ class: className, rest }) => (
   // <NeworSquare {...rest} />
-  <div class={c('dn db-l absolute', className)} style={{ marginLeft: '48rem' }} {...rest}>
+  <div
+    class={c('dn db-l absolute', className)}
+    style={{ marginLeft: '48rem', width: 336 }}
+    {...rest}
+  >
     <Random>
       <div {...rest} />
       <AdsenseDisplay1 {...rest} />
@@ -151,7 +155,11 @@ export const MidiFeedAd = props => (
 )
 
 export const MidiFeedSidebarAd = ({ class: className, rest }) => (
-  <div class={c('dn db-l absolute', className)} style={{ marginLeft: '48rem' }} {...rest}>
+  <div
+    class={c('dn db-l absolute', className)}
+    style={{ marginLeft: '48rem', width: 336 }}
+    {...rest}
+  >
     {/* <NeworSquare {...rest} /> */}
     <Random>
       <div {...rest} />
