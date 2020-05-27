@@ -98,8 +98,8 @@ const AdsenseLink1 = props => (
 export const MidiPageTopAd = props => (
   // <OptimizeRightRailATF {...props} />
   // <NeworLeaderboard {...props} />
+  // <CarbonAd {...props} />
   <Random>
-    <CarbonAd {...props} />
     <AdsenseDisplay1 {...props} />
     <AdsenseLink1 {...props} />
   </Random>
@@ -109,7 +109,6 @@ export const MidiPageAd = props => (
   // <OptimizeLeaderboardBTF {...props} />
   // <NeworLeaderboardLarge {...props} />
   <Random>
-    <div {...props} />
     <AdsenseDisplay1 {...props} />
     <AdsenseDisplay1 {...props} />
   </Random>
@@ -123,7 +122,6 @@ export const MidiPageSidebarAd = ({ class: className, rest }) => (
     {...rest}
   >
     <Random>
-      <div {...rest} />
       <AdsenseDisplay1 {...rest} />
       <AdsenseDisplay1 {...rest} />
     </Random>
@@ -137,8 +135,8 @@ export const MidiPageSidebarAd = ({ class: className, rest }) => (
 export const MidiFeedTopAd = props => (
   // <OptimizeLeaderboardATF {...props} />
   // <NeworLeaderboard {...props} />
+  // <CarbonAd {...props} />
   <Random>
-    <CarbonAd {...props} />
     <AdsenseFeed1 {...props} />
     <AdsenseDisplay1 {...props} />
   </Random>
@@ -148,7 +146,6 @@ export const MidiFeedAd = props => (
   // <OptimizeLeaderboardMid {...props} />
   // <NeworLeaderboardLarge {...props} />
   <Random>
-    <div {...props} />
     <AdsenseFeed2 {...props} />
     <AdsenseDisplay1 {...props} />
   </Random>
@@ -162,7 +159,6 @@ export const MidiFeedSidebarAd = ({ class: className, rest }) => (
   >
     {/* <NeworSquare {...rest} /> */}
     <Random>
-      <div {...rest} />
       <AdsenseDisplay1 {...rest} />
       <AdsenseDisplay1 {...rest} />
     </Random>
