@@ -13,7 +13,7 @@ import Page from './page'
 import RelativeTime from './relative-time'
 import ShareButton from './share-button'
 import { HorizListItem, HorizListDivider } from './horiz-list'
-import { MidiPageTopAd, MidiPageAd, PageLevelAd, SidebarAd } from './ads'
+import { MidiPageTopAd, MidiPageAd, MidiPageSidebarAd, PageLevelAd } from './ads'
 
 export default class MidiPage extends Page {
   async load () {
@@ -73,7 +73,7 @@ export default class MidiPage extends Page {
           </div>
         </div>
 
-        <SidebarAd />
+        <MidiPageSidebarAd />
 
         <div class='mv4'>
           <Midi midi={midi} />

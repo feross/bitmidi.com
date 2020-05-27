@@ -8,7 +8,7 @@ import Loader from './loader'
 import Midi from './midi'
 import Page from './page'
 import Pagination from './pagination'
-import { MidiFeedTopAd, MidiFeedAd, PageLevelAd, SidebarAd } from './ads'
+import { MidiFeedTopAd, MidiFeedAd, MidiFeedSidebarAd, PageLevelAd } from './ads'
 
 export default class RelatedPage extends Page {
   async load () {
@@ -58,7 +58,7 @@ export default class RelatedPage extends Page {
       <div>
         <Heading><span class='mid-gray'>MIDIs related to</span> {midi.name}</Heading>
 
-        <SidebarAd />
+        <MidiFeedSidebarAd />
         <div class='mv4'>
           {results.map((midi, i) =>
             <Fragment key={midi.slug}>
