@@ -1,7 +1,7 @@
 import { h } from 'preact' /** @jsx h */
 
 import Adsense from './adsense'
-import CarbonAd from './carbon-ad'
+// import CarbonAd from './carbon-ad'
 // import NeworAd from './newor-ad'
 // import OptimizeAd from './optimize-ad'
 import c from 'classnames'
