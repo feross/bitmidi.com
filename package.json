@@ -103,7 +103,7 @@
     "preact": "^10.4.1",
     "preact-context-provider": "^2.0.0-preactx.2",
     "preact-render-to-string": "^5.1.7",
-    "quick-lru": "^5.1.0",
+    "quick-lru": "^5.1.1",
     "reddit": "^1.0.3",
     "rollbar": "^2.15.2",
     "send": "^0.17.1",
