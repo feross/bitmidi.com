@@ -219,7 +219,7 @@ export default function init () {
     next()
   })
 
-  app.get('/500', () => { throw new Error('Manually visited /500') })
+  // app.get('/500', () => { throw new Error('Manually visited /500') })
 
   // Rate limit HTTP requests
   morgan.format(
