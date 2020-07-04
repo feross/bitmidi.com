@@ -20,11 +20,11 @@ cd /home/feross/www/build-bitmidi.com && npm ci --no-progress
 cd /home/feross/www/build-bitmidi.com && npm run build
 cd /home/feross/www/build-bitmidi.com && npm prune --production --no-progress
 
-sudo supervisorctl stop bitmidi:
+sudo supervisorctl stop bitmidi.com
 
 cd /home/feross/www && mv bitmidi.com old-bitmidi.com
 cd /home/feross/www && mv build-bitmidi.com bitmidi.com
 
-sudo supervisorctl start bitmidi:
+sudo supervisorctl start bitmidi.com
 
 cd /home/feross/www && rm -rf old-bitmidi.com
