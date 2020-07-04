@@ -1,0 +1,5 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target" : { "namespace": "android_app", "package_name": "com.bitmidi.twa",
+                   "sha256_cert_fingerprints": ["30:FD:7C:26:9A:EC:99:84:41:D6:60:37:86:B5:49:75:11:AD:55:A1:D0:45:D5:68:0C:21:6A:8C:7E:E1:62:B6"] }
+    }]

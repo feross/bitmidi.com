@@ -1,3 +1,4 @@
+android/
 node_modules/
 uploads/
 
@@ -6,3 +7,4 @@ secret/*
 
 static/bundle.css
 static/bundle.js
+
