@@ -7,6 +7,7 @@ const MEMO_MAX_SIZE = 50 * 1000
 export function memo (fn) {
   return pMemoize(fn, {
     maxAge: MEMO_MAX_AGE,
-    cache: new QuickLRU({ maxSize: MEMO_MAX_SIZE })
+    cache: new QuickLRU({ maxSize: MEMO_MAX_SIZE }),
+    cacheKey: JSON.stringify
   })
 }
