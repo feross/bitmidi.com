@@ -6,7 +6,9 @@ import { isBrowser, isProd, tokens } from '../config'
 export default class Adsense extends Component {
   componentDidMount () {
     if (!isBrowser || !isProd) return
-    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    try {
+      ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    } catch (err) {}
   }
 
   shouldComponentUpdate () {

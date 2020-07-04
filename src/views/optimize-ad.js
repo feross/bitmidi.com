@@ -10,9 +10,11 @@ export default class OptimizeAd extends Component {
 
     const { id } = this.props
     window.optimize = window.optimize || { queue: [] }
-    window.optimize.queue.push(() => {
-      window.optimize.push(id)
-    })
+    try {
+      window.optimize.queue.push(() => {
+        window.optimize.push(id)
+      })
+    } catch (err) {}
   }
 
   shouldComponentUpdate () {
