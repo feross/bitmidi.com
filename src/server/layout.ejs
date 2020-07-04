@@ -92,18 +92,23 @@
       window.ga('create', '<%= config.tokens.analytics %>', 'auto')
       window.ga('send', 'pageview')
     </script>
-    <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
 
-    <%# Quantcast %>
-    <script nonce='<%= nonce %>'>
-      window._qevents = window._qevents || []
-      window._qevents.push({ qacct: '<%= config.tokens.quantcast %>' })
-      function qc () {
-        const img = new window.Image()
-        img.decoding = 'async'
-        img.src = 'https://pixel.quantserve.com/pixel/<%= config.tokens.quantcast %>.gif'
-      }
-    </script>
-    <script async src='https://secure.quantserve.com/quant.js' nonce='<%= nonce %>'></script>
+    <%_ if (config.isProd) { _%>
+      <%# Google Analytics %>
+      <script async src='https://www.google-analytics.com/analytics.js' nonce='<%= nonce %>'></script>
+
+      <%# Quantcast %>
+      <script nonce='<%= nonce %>'>
+        window._qevents = window._qevents || []
+        window._qevents.push({ qacct: '<%= config.tokens.quantcast %>' })
+        function qc () {
+          const img = new window.Image()
+          img.decoding = 'async'
+          img.src = 'https://pixel.quantserve.com/pixel/<%= config.tokens.quantcast %>.gif'
+        }
+      </script>
+      <script async src='https://secure.quantserve.com/quant.js' nonce='<%= nonce %>'></script>
+    <%_ } _%>
+
   </body>
 </html>
