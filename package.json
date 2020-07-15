@@ -171,7 +171,10 @@
     "watch": "npm run tunnel & npm run watch-css & npm run watch-js & npm run watch-server",
     "watch-css": "nodemon -r @babel/register --ext js,ejs,css --watch src/views --watch src/config.js --watch src/css ./tools/build-css -- --verbose",
     "watch-js": "watchify . --debug --verbose --outfile static/bundle.js",
-    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,ejs,json --watch src --watch secret ."
+    "watch-server": "DEBUG=bitmidi* DEBUG_DEPTH=1 nodemon -r @babel/register --ext js,ejs,json --watch src --watch secret .",
+    "build-android-init": "bubblewrap init --manifest https://bitmidi.com/manifest.webmanifest",
+    "build-android-build": "bubblewrap build",
+    "build-android-install": "bubblewrap install"
   },
   "standard": {
     "parser": "babel-eslint"
