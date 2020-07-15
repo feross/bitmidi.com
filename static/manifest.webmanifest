@@ -17,6 +17,6 @@
   ],
   "name": "BitMidi",
   "short_name": "BitMidi",
-  "start_url": "/",
+  "start_url": "/?utm_source=homescreen",
   "theme_color": "#ff41b4"
 }
