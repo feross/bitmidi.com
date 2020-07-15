@@ -1,5 +1,11 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "com.bitmidi.twa",
-                   "sha256_cert_fingerprints": ["30:FD:7C:26:9A:EC:99:84:41:D6:60:37:86:B5:49:75:11:AD:55:A1:D0:45:D5:68:0C:21:6A:8C:7E:E1:62:B6","06:68:51:FB:FA:A7:B0:D4:B0:58:86:EC:61:2F:03:37:18:BF:D7:D0:04:4D:9C:55:31:B2:87:DD:E9:C0:02:22"] }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.bitmidi.twa",
+    "sha256_cert_fingerprints": [
+      "30:FD:7C:26:9A:EC:99:84:41:D6:60:37:86:B5:49:75:11:AD:55:A1:D0:45:D5:68:0C:21:6A:8C:7E:E1:62:B6",
+      "06:68:51:FB:FA:A7:B0:D4:B0:58:86:EC:61:2F:03:37:18:BF:D7:D0:04:4D:9C:55:31:B2:87:DD:E9:C0:02:22"
+    ]
+  }
+}]
