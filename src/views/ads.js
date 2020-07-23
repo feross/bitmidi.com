@@ -1,7 +1,6 @@
 import { h } from 'preact' /** @jsx h */
 
 import Adsense from './adsense'
-import Button from './button'
 // import CarbonAd from './carbon-ad'
 // import NeworAd from './newor-ad'
 // import OptimizeAd from './optimize-ad'
@@ -65,14 +64,14 @@ const AdsenseDisplay1 = props => (
   />
 )
 
-// const AdsenseFeed1 = props => (
-//   <Adsense
-//     data-ad-format='fluid'
-//     data-ad-slot='8705178963'
-//     data-ad-layout-key='-hw+i-1a-5c+ee'
-//     {...props}
-//   />
-// )
+const AdsenseFeed1 = props => (
+  <Adsense
+    data-ad-format='fluid'
+    data-ad-slot='8705178963'
+    data-ad-layout-key='-hw+i-1a-5c+ee'
+    {...props}
+  />
+)
 
 const AdsenseFeed2 = props => (
   <Adsense
@@ -83,14 +82,14 @@ const AdsenseFeed2 = props => (
   />
 )
 
-// const AdsenseLink1 = props => (
-//   <Adsense
-//     data-ad-slot='3309382058'
-//     data-ad-format='link'
-//     data-full-width-responsive='true'
-//     {...props}
-//   />
-// )
+const AdsenseLink1 = props => (
+  <Adsense
+    data-ad-slot='3309382058'
+    data-ad-format='link'
+    data-full-width-responsive='true'
+    {...props}
+  />
+)
 
 /**
  * Midi page ads
@@ -100,23 +99,10 @@ export const MidiPageTopAd = props => (
   // <OptimizeRightRailATF {...props} />
   // <NeworLeaderboard {...props} />
   // <CarbonAd {...props} />
-  <div>
-    <center>
-      <Button
-        fill
-        class='mh1'
-        href='https://virus.cafe/r/bitmidi'
-        size='large'
-        color='hot-pink'
-      >
-        Join the BitMidi Happy Hour! 🚨 LIVE 🚨 (Jul 22, 7pm PT)
-      </Button>
-    </center>
-  </div>
-  // <Random>
-  //   <AdsenseDisplay1 {...props} />
-  //   <AdsenseLink1 {...props} />
-  // </Random>
+  <Random>
+    <AdsenseDisplay1 {...props} />
+    <AdsenseLink1 {...props} />
+  </Random>
 )
 
 export const MidiPageAd = props => (
@@ -135,14 +121,11 @@ export const MidiPageSidebarAd = ({ class: className, rest }) => (
     style={{ marginLeft: '48rem', width: 336 }}
     {...rest}
   >
-    <a href='https://virus.cafe/r/bitmidi'>
-      <img src='https://virus.cafe/social-share2.png' />
-    </a>
+    <Random>
+      <AdsenseDisplay1 {...rest} />
+      <AdsenseDisplay1 {...rest} />
+    </Random>
   </div>
-  // <Random>
-  //   <AdsenseDisplay1 {...rest} />
-  //   <AdsenseDisplay1 {...rest} />
-  // </Random>
 )
 
 /**
@@ -153,26 +136,10 @@ export const MidiFeedTopAd = props => (
   // <OptimizeLeaderboardATF {...props} />
   // <NeworLeaderboard {...props} />
   // <CarbonAd {...props} />
-  <div>
-    <center>
-      <Button
-        fill
-        class='mh1'
-        href='https://virus.cafe/r/bitmidi'
-        size='large'
-        color='hot-pink'
-      >
-        Join the BitMidi Happy Hour! 🚨 LIVE 🚨 (Jul 22, 7pm PT)
-      </Button>
-    </center>
-    <a href='https://virus.cafe/r/bitmidi'>
-      <img src='https://virus.cafe/social-share.png' />
-    </a>
-  </div>
-  // <Random>
-  //   <AdsenseFeed1 {...props} />
-  //   <AdsenseDisplay1 {...props} />
-  // </Random>
+  <Random>
+    <AdsenseFeed1 {...props} />
+    <AdsenseDisplay1 {...props} />
+  </Random>
 )
 
 export const MidiFeedAd = props => (
@@ -191,14 +158,11 @@ export const MidiFeedSidebarAd = ({ class: className, rest }) => (
     style={{ marginLeft: '48rem', width: 336 }}
     {...rest}
   >
-    <a href='https://virus.cafe/r/bitmidi'>
-      <img src='https://virus.cafe/social-share2.png' />
-    </a>
+    <Random>
+      <AdsenseDisplay1 {...rest} />
+      <AdsenseDisplay1 {...rest} />
+    </Random>
   </div>
-  // <Random>
-  //   <AdsenseDisplay1 {...rest} />
-  //   <AdsenseDisplay1 {...rest} />
-  // </Random>
 )
 
 /**
