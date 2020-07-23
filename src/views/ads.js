@@ -91,6 +91,14 @@ const AdsenseLink1 = props => (
   />
 )
 
+const VirusCafeAd = props => (
+  <div {...props}>
+    <a href='https://virus.cafe/r/bitmidi'>
+      <img src='https://virus.cafe/social-share2.png' />
+    </a>
+  </div>
+)
+
 /**
  * Midi page ads
  */
@@ -121,9 +129,10 @@ export const MidiPageSidebarAd = ({ class: className, rest }) => (
     style={{ marginLeft: '48rem', width: 336 }}
     {...rest}
   >
+    <AdsenseDisplay1 {...rest} />
     <Random>
-      <AdsenseDisplay1 {...rest} />
-      <AdsenseDisplay1 {...rest} />
+      <VirusCafeAd class='mt4' />
+      <div />
     </Random>
   </div>
 )
@@ -158,9 +167,10 @@ export const MidiFeedSidebarAd = ({ class: className, rest }) => (
     style={{ marginLeft: '48rem', width: 336 }}
     {...rest}
   >
+    <AdsenseDisplay1 {...rest} />
     <Random>
-      <AdsenseDisplay1 {...rest} />
-      <AdsenseDisplay1 {...rest} />
+      <div />
+      <VirusCafeAd class='mt4' />
     </Random>
   </div>
 )
