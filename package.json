@@ -133,7 +133,7 @@
     "rimraf": "^3.0.2",
     "simple-sha256": "^1.0.0",
     "standard": "*",
-    "tinyify": "^2.5.2",
+    "tinyify": "^3.0.0",
     "watchify": "^3.11.1"
   },
   "homepage": "https://bitmidi.com",
