@@ -280,10 +280,10 @@ async function queueTweet (text) {
     }, (err, res, body) => {
       if (err) return reject(new Error(`Failed to queue tweet: ${err.message}`))
       if (res.statusCode !== 200) {
-        return reject(new Error(`Non-200 status code: ${res.statusCode}. ${body.message}`))
+        return reject(new Error(`Non-200 status code: ${res.statusCode}. ${body.error || body.message}`))
       }
       if (!body.success) {
-        return reject(new Error(`Buffer API error: ${body.message}`))
+        return reject(new Error(`Buffer API error: ${body.error || body.message}`))
       }
       resolve()
     })
