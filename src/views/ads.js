@@ -91,13 +91,13 @@ const AdsenseLink1 = props => (
   />
 )
 
-const VirusCafeAd = props => (
-  <div {...props}>
-    <a href='https://virus.cafe/r/bitmidi'>
-      <img src='https://virus.cafe/social-share2.png' />
-    </a>
-  </div>
-)
+// const VirusCafeAd = props => (
+//   <div {...props}>
+//     <a href='https://virus.cafe/r/bitmidi'>
+//       <img src='https://virus.cafe/social-share2.png' />
+//     </a>
+//   </div>
+// )
 
 /**
  * Midi page ads
@@ -130,10 +130,6 @@ export const MidiPageSidebarAd = ({ class: className, rest }) => (
     {...rest}
   >
     <AdsenseDisplay1 {...rest} />
-    <Random>
-      <VirusCafeAd class='mt4' />
-      <div />
-    </Random>
   </div>
 )
 
@@ -148,6 +144,7 @@ export const MidiFeedTopAd = props => (
   <Random>
     <AdsenseFeed1 {...props} />
     <AdsenseDisplay1 {...props} />
+    <AdsenseDisplay1 {...props} />
   </Random>
 )
 
@@ -155,8 +152,9 @@ export const MidiFeedAd = props => (
   // <OptimizeLeaderboardMid {...props} />
   // <NeworLeaderboardLarge {...props} />
   <Random>
-    <AdsenseFeed2 {...props} />
     <AdsenseDisplay1 {...props} />
+    <AdsenseDisplay1 {...props} />
+    <AdsenseFeed2 {...props} />
   </Random>
 )
 
@@ -168,10 +166,6 @@ export const MidiFeedSidebarAd = ({ class: className, rest }) => (
     {...rest}
   >
     <AdsenseDisplay1 {...rest} />
-    <Random>
-      <div />
-      <VirusCafeAd class='mt4' />
-    </Random>
   </div>
 )
 
