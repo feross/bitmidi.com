@@ -15,7 +15,7 @@ export default class Page extends Component {
     if (!isServerRendered) this._load()
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     // If the user navigates, then the url prop of <Page /> will change.
     // Call _load() since new data may need to be fetched.
     if (this.props.url !== nextProps.url ||

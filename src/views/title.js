@@ -6,7 +6,7 @@ export default class Title extends Component {
     this.setTitle(title)
   }
 
-  componentWillReceiveProps (nextProps) {
+  UNSAFE_componentWillReceiveProps (nextProps) {
     const { title } = this.props
     if (title !== nextProps.title) this.setTitle(nextProps.title)
   }
