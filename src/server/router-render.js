@@ -70,7 +70,7 @@ router.use((req, res, next) => {
     }
 
     function sendPage (status) {
-      store.errors.map(err => { delete err.stack })
+      store.errors.forEach(err => { delete err.stack })
       // Tell client to start first page with `this.loaded` set to true
       store.app.isServerRendered = true
 
