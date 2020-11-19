@@ -4,7 +4,7 @@ import c from 'classnames'
 export default class Link extends Component {
   render (props, _, { theme }) {
     const {
-      color = theme.mainColor,
+      color = theme.headerColor,
       children,
       class: className,
       href,
