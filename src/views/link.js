@@ -4,7 +4,7 @@ import c from 'classnames'
 export default class Link extends Component {
   render (props, _, { theme }) {
     const {
-      color = theme.headerColor,
+      color = window.matchMedia('(prefers-color-scheme: dark)').matches ? theme.headerColor : theme.mainColor,
       children,
       class: className,
       href,
