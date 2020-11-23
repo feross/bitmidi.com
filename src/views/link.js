@@ -3,8 +3,10 @@ import c from 'classnames'
 
 export default class Link extends Component {
   render (props, _, { theme }) {
+    const { store } = this.context
+
     const {
-      color = window.matchMedia('(prefers-color-scheme: dark)').matches ? theme.headerColor : theme.mainColor,
+      color = store.app.colorScheme === 'light' ? theme.mainColor : theme.headerColor,
       children,
       class: className,
       href,
