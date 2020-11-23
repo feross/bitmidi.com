@@ -116,8 +116,8 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.12.1",
     "@bubblewrap/cli": "^1.6.1",
-    "babel-eslint": "^10.1.0",
     "babelify": "^10.0.0",
     "browserify": "^16.5.2",
     "cssnano": "^4.1.10",
@@ -177,6 +177,6 @@
     "build-android-install": "cd android/app && bubblewrap install"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
