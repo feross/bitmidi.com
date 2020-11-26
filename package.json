@@ -16,6 +16,7 @@
   "babel": {
     "plugins": [
       "@babel/plugin-transform-modules-commonjs",
+      "@babel/plugin-proposal-optional-catch-binding",
       [
         "@babel/plugin-transform-react-jsx",
         {
@@ -55,6 +56,7 @@
   "dependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-optional-catch-binding": "^7.12.1",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/plugin-transform-react-jsx": "^7.12.7",
     "@babel/register": "^7.12.1",
