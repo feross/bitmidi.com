@@ -71,7 +71,7 @@ async function purge (css) {
   ]
 
   // Whitelist of selectors to never purge
-  const whitelistPatternsChildren = [
+  const safelistDeep = [
     // Theme colors
     ...Object.values(theme).map(color => new RegExp(color))
   ]
@@ -79,7 +79,9 @@ async function purge (css) {
   const files = await new PurgeCss().purge({
     css,
     content,
-    whitelistPatternsChildren,
+    safelist: {
+      deep: safelistDeep
+    },
     keyframes: true,
     variables: true,
     rejected: argv.debug
