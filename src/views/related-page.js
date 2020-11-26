@@ -1,5 +1,4 @@
-/** @jsx h */
-import { h, Fragment } from 'preact'
+import { Fragment } from 'preact'
 
 import { doMidiGet, doMidiSearch } from '../actions/midi'
 

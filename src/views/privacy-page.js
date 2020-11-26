@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 
 import { siteName } from '../config'
 import { doMidiAll } from '../actions/midi'

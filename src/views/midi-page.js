@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 import oneLine from 'common-tags/lib/oneLine'
 
 import { origin, siteName } from '../config'

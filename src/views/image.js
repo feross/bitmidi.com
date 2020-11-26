@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 
 const Image = props => {
   const { alt, class: className, loading = 'lazy', src, style, ...rest } = props

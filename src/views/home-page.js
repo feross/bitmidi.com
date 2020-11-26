@@ -1,4 +1,4 @@
-import { h, Fragment } from 'preact' /** @jsx h */
+import { Fragment } from 'preact'
 
 import { doMidiAll } from '../actions/midi'
 

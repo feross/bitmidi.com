@@ -1,4 +1,4 @@
-import { Component, h } from 'preact' /** @jsx h */
+import { Component } from 'preact'
 
 import routes from '../routes'
 

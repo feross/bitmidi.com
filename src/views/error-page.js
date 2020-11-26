@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 
 import Heading from './heading'
 import Random from './random'

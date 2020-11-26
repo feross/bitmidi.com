@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 import Provider from 'preact-context-provider'
 
 import { theme } from '../config'

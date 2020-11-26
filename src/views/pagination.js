@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 
 import Button from './button'
 

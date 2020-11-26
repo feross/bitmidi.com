@@ -1,4 +1,4 @@
-import { Component, h } from 'preact' /** @jsx h */
+import { Component } from 'preact'
 import oneLine from 'common-tags/lib/oneLine'
 
 import { isBrowser, siteName, siteImage } from '../config'

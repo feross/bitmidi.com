@@ -1,4 +1,3 @@
-import { h } from 'preact' /** @jsx h */
 import c from 'classnames'
 
 import { isBrowser } from '../config'
