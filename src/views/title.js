@@ -6,7 +6,7 @@ export default class Title extends Component {
     this.setTitle(title)
   }
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps (nextProps) { // eslint-disable-line react/no-deprecated
     const { title } = this.props
     if (title !== nextProps.title) this.setTitle(nextProps.title)
   }
