@@ -170,26 +170,29 @@ export default function init () {
     // prevent rendering of the page if an attack is detected.
     res.header('X-XSS-Protection', '1; mode=block')
 
-    const devFeaturePolicy = !isProd && `
-      oversized-images
-        *(2.0)
-      ;
-      unoptimized-lossy-images
-        *(0.5)
-      ;
-      unoptimized-lossless-images-strict
-        *(1.0)
-      ;
-      unsized-media
-        'none'
-      ;
-    `
-    res.header('Feature-Policy', oneLine`
-      sync-xhr
-        'none'
-      ;
-      ${devFeaturePolicy || ''}
-    `)
+    res.header('Permissions-Policy',
+      isProd
+        ? oneLine`
+          vertical-scroll=(),
+        `
+        : oneLine`
+          vertical-scroll=(),
+          sync-xhr=()
+        `
+    )
+
+    res.header('Document-Policy',
+      isProd
+        ? oneLine`
+        `
+        : oneLine`
+          oversized-images=2.0,
+          unoptimized-lossy-images=1.0,
+          unoptimized-lossless-images=1.0,
+          unoptimized-lossless-images-strict=1.0,
+          unsized-media=?0
+        `
+    )
 
     // Prevent XSS attacks by explicitly specifying sources of content
     // Notes:
