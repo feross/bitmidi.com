@@ -116,7 +116,7 @@ async function allRaw (query = {}, settings = {}) {
 
 export const search = memo(searchRaw)
 
-async function searchRaw (query = {}, settings) {
+async function searchRaw (query = {}, settings = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Math.min(Number(query.pageSize), settings.maxPageSize || maxPageSize) || pageSize
   query.select = query.select || await getDefaultSelect()
