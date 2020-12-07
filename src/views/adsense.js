@@ -52,7 +52,7 @@ export default class Adsense extends Component {
           data-ad-client={tokens.adsense}
           data-ad-format={adFormat}
           data-ad-slot={adSlot}
-          style={{ display: 'block' }}
+          style={{ display: 'block', minHeight: 90 }}
           {...rest}
         />
       </div>
