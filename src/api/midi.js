@@ -96,9 +96,9 @@ export async function play (query = {}) {
 
 export const all = memo(allRaw)
 
-async function allRaw (query = {}) {
+async function allRaw (query = {}, settings = {}) {
   query.page = Number(query.page) || 0
-  query.pageSize = Math.min(Number(query.pageSize), maxPageSize) || pageSize
+  query.pageSize = Math.min(Number(query.pageSize), settings.maxPageSize || maxPageSize) || pageSize
   query.orderBy = query.orderBy || 'plays'
   query.select = query.select || await getDefaultSelect()
   debug('all %o', query)
@@ -116,9 +116,9 @@ async function allRaw (query = {}) {
 
 export const search = memo(searchRaw)
 
-async function searchRaw (query = {}) {
+async function searchRaw (query = {}, settings) {
   query.page = Number(query.page) || 0
-  query.pageSize = Math.min(Number(query.pageSize), maxPageSize) || pageSize
+  query.pageSize = Math.min(Number(query.pageSize), settings.maxPageSize || maxPageSize) || pageSize
   query.select = query.select || await getDefaultSelect()
   debug('search %o', query)
 

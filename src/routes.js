@@ -49,6 +49,8 @@ export default [
         select: ['slug'],
         orderBy: 'views',
         pageSize: Infinity
+      }, {
+        maxPageSize: Infinity
       })
       return results.map(result => result.url)
     }
