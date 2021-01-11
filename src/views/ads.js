@@ -81,23 +81,6 @@ const AdsenseFeed2 = props => (
   />
 )
 
-const AdsenseLink1 = props => (
-  <Adsense
-    data-ad-slot='3309382058'
-    data-ad-format='link'
-    data-full-width-responsive='true'
-    {...props}
-  />
-)
-
-// const VirusCafeAd = props => (
-//   <div {...props}>
-//     <a href='https://virus.cafe/r/bitmidi'>
-//       <img src='https://virus.cafe/social-share2.png' />
-//     </a>
-//   </div>
-// )
-
 /**
  * Midi page ads
  */
@@ -106,10 +89,7 @@ export const MidiPageTopAd = props => (
   // <OptimizeRightRailATF {...props} />
   // <NeworLeaderboard {...props} />
   // <CarbonAd {...props} />
-  <Random>
-    <AdsenseDisplay1 {...props} />
-    <AdsenseLink1 {...props} />
-  </Random>
+  <AdsenseDisplay1 {...props} />
 )
 
 export const MidiPageAd = props => (
