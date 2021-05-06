@@ -1,8 +1,8 @@
 import pMemoize from 'p-memoize'
 import QuickLRU from 'quick-lru'
 
-const MEMO_MAX_AGE = 24 * 60 * 60 * 1000 // 24 hours
-const MEMO_MAX_SIZE = 25 * 1000
+const MEMO_MAX_AGE = 7 * 24 * 60 * 60 * 1000 // 7 days
+const MEMO_MAX_SIZE = 50 * 1000
 
 export function memo (fn) {
   return pMemoize(fn, {
