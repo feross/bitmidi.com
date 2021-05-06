@@ -2,9 +2,15 @@ User-agent: *
 Disallow: /uploads/
 
 User-agent: AhrefsBot
-Crawl-Delay: 60
+Crawl-Delay: 300
 
 User-agent: SemrushBot
-Crawl-Delay: 60
+Crawl-Delay: 300
+
+User-agent: DotBot
+Crawl-Delay: 300
+
+User-agent: RogetBot
+Crawl-Delay: 300
 
 Sitemap: https://bitmidi.com/sitemap.xml
