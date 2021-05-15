@@ -4,9 +4,6 @@ Disallow: /uploads/
 User-agent: AhrefsBot
 Crawl-Delay: 300
 
-User-agent: SemrushBot
-Crawl-Delay: 300
-
 User-agent: DotBot
 Crawl-Delay: 300
 
