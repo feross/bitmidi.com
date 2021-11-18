@@ -235,6 +235,11 @@ export default function init () {
     max: 30,
     headers: false,
     handler: (req, res, next) => {
+      // Don't rate limit Googlebot
+      if (req.headers['user-agent']?.toLowerCase().includes('google')) {
+        next()
+        return
+      }
       rateLimitLogger(req, res, () => {})
       res.status(503).send('Blocked for too many requests')
     }
