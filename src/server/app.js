@@ -241,7 +241,10 @@ export default function init () {
         return
       }
       rateLimitLogger(req, res, () => {})
-      res.status(503).send('Blocked for too many requests')
+      res.status(429).send('Blocked for too many requests')
+    },
+    onLimitReached: (req, res, options) => {
+      console.log(`Blocked for too many requests: ${req.ip}`)
     }
   })
   app.use(rateLimiter)
