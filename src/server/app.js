@@ -228,14 +228,20 @@ export default async function init () {
   // app.get('/500', () => { throw new Error('Manually visited /500') })
 
   // Rate limit HTTP requests
+  const maxRequestsPerSecond = 1
+
   morgan.format(
     'rate-limit',
     'Blocked for too many requests - :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"'
   )
   const rateLimitLogger = morgan('rate-limit', { immediate: !isProd })
+
+  const windowMs = 60 * 1000
+  const max = 60 * maxRequestsPerSecond
+
   const rateLimiter = rateLimit({
-    windowMs: 60 * 1000,
-    max: 30,
+    windowMs,
+    max,
     headers: false,
     handler: (req, res, next) => {
       // Don't rate limit Googlebot
