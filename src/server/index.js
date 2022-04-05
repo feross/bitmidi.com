@@ -7,7 +7,7 @@ import appInit from './app'
 import scheduleInit from './schedule'
 
 export default async function init (port) {
-  const app = appInit()
+  const app = await appInit()
   const server = http.createServer(app)
 
   const listen = util.promisify(server.listen.bind(server))

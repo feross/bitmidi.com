@@ -14,6 +14,7 @@ import { v4 as uuid } from 'uuid'
 import serveWebp from '../lib/serve-webp'
 import * as config from '../config'
 import { cookie as cookieSecret, db as dbSecret } from '../../secret'
+import { getTrustedNetworks } from './proxy-trust'
 
 import routerAds from './router-ads'
 import routerApi from './router-api'
@@ -27,7 +28,7 @@ const staticPath = join(rootPath, 'static')
 // Set correct mime type for .pat (Gravis Ultrasound) files
 express.static.mime.types.pat = 'audio/pat'
 
-export default function init () {
+export default async function init () {
   const app = express()
 
   // Styles are inlined in page
@@ -48,7 +49,9 @@ export default function init () {
   app.locals.rmWhitespace = isProd
   app.locals.compileDebug = !isProd
 
-  app.set('trust proxy', true) // Trust the nginx reverse proxy
+  const trustedIpRanges = await getTrustedNetworks()
+
+  app.set('trust proxy', trustedIpRanges) // Trust the nginx reverse proxy
   app.set('json spaces', isProd ? 0 : 2) // Pretty JSON (in dev)
   app.set('x-powered-by', false) // Prevent server fingerprinting
 
