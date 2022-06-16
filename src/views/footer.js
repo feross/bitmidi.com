@@ -48,6 +48,14 @@ const Footer = (_, { store }) => {
         <HorizListDivider />
 
         <HorizListItem>
+          <Link href='https://socket.dev'>
+            Protected by Socket
+          </Link>
+        </HorizListItem>
+
+        <HorizListDivider />
+
+        <HorizListItem>
           Built by Feross
         </HorizListItem>
       </div>
