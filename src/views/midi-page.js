@@ -26,7 +26,7 @@ export default class MidiPage extends Page {
     }
 
     dispatch('APP_META', {
-      title: midi.name,
+      title: [midi.name, 'Free MIDI'],
       description: oneLine`
         Listen to ${midi.name}, a free MIDI file on ${siteName}. Play, download, or share the MIDI song ${midi.name} from your web browser.
       `,
