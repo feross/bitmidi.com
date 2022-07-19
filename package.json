@@ -74,7 +74,7 @@
     "dayjs": "^1.9.6",
     "debug": "^4.3.1",
     "drag-drop": "^6.1.0",
-    "ejs": "^3.1.5",
+    "ejs": "^3.1.7",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
     "express-promise-router": "^4.0.1",
