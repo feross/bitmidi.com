@@ -88,7 +88,7 @@
     "imagemin-gm": "^2.0.2",
     "imagemin-webp": "^6.0.0",
     "jsonfeed-to-atom": "^1.2.2",
-    "knex": "^0.21.12",
+    "knex": "^2.4.0",
     "load-script2": "^2.0.6",
     "material-design-icons": "^3.0.1",
     "morgan": "^1.10.0",
