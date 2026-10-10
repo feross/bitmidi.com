@@ -44,7 +44,7 @@ export default class AboutPage extends Page {
             <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
           </li>
           <li>
-            <p><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Study Notes LLC, PO Box 19678, Stanford CA 94309.</p>
+            <p><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Study Notes LLC, 548 Market St., Suite 97248, San Francisco, CA 94104.</p>
           </li>
           <li>
             <p><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</p>
@@ -257,7 +257,7 @@ export default class AboutPage extends Page {
 
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
-          <li>By mail: Study Notes LLC, PO Box 19678, Stanford CA 94309</li>
+          <li>By mail: Study Notes LLC, 548 Market St., Suite 97248, San Francisco, CA 94104</li>
         </ul>
       </div>
     )
