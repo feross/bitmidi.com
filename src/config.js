@@ -86,3 +86,8 @@ export const theme = {
 // Number of results on pages with lists
 export const pageSize = 15
 export const maxPageSize = 50
+
+// Number of search result pages served (also used for /related pages). Real
+// visitors rarely go past the first few, but crawlers walked thousands of
+// pages deep, and every page runs a slow FULLTEXT search and count.
+export const maxSearchPages = 10

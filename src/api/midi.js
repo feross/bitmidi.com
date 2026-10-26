@@ -1,6 +1,6 @@
 import Debug from 'debug'
 
-import { pageSize, maxPageSize } from '../config'
+import { pageSize, maxPageSize, maxSearchPages } from '../config'
 import { memo } from '../lib/memo'
 import Midi from '../models/midi'
 
@@ -119,6 +119,10 @@ export const search = memo(searchRaw)
 async function searchRaw (query = {}, settings = {}) {
   query.page = Number(query.page) || 0
   query.pageSize = Math.min(Number(query.pageSize), settings.maxPageSize || maxPageSize) || pageSize
+
+  // Refuse pages past the cap before running any query
+  if (query.page >= maxSearchPages) throw Midi.createNotFoundError()
+
   query.select = query.select || await getDefaultSelect()
   debug('search %o', query)
 
@@ -131,7 +135,8 @@ async function searchRaw (query = {}, settings = {}) {
 
   results.forEach(addImage)
 
-  return { query, results, total, pageTotal: getPageTotal(total, query.pageSize) }
+  const pageTotal = Math.min(getPageTotal(total, query.pageSize), maxSearchPages)
+  return { query, results, total, pageTotal }
 }
 
 // Pre-cache random queries because they're a bit slow
