@@ -10,8 +10,8 @@ export const cookie = {
 }
 
 export const db = {
-  client: 'mysql',
-  version: '5.7',
+  client: 'mysql2',
+  version: '8.0',
   connection: {
     host: isProd ? 'TODO' : 'localhost',
     port: 3306,
