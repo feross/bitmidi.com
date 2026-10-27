@@ -4,6 +4,7 @@ import express from 'express'
 import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import MySQLSession from 'express-mysql-session'
+import mysql from 'mysql2/promise'
 import oneLine from 'common-tags/lib/oneLine'
 import rateLimit from 'express-rate-limit'
 import session from 'express-session'
@@ -128,9 +129,12 @@ export default async function init () {
   app.use('/webp', serveWebp(staticPath))
   app.use(serveStatic(staticPath))
 
-  // Set up session store
+  // Set up session store, with its own mysql2 pool: express-mysql-session
+  // copies only a few connection options into a pool it creates, and drops `ssl`
   const MySQLStore = MySQLSession(session)
-  const sessionStore = new MySQLStore(dbSecret.connection)
+  const { host, port, user, password, database, ssl } = dbSecret.connection
+  const sessionPool = mysql.createPool({ host, port, user, password, database, ssl })
+  const sessionStore = new MySQLStore({}, sessionPool)
   app.use(session({
     store: sessionStore,
     // Secret used to sign the session ID cookie
